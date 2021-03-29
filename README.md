@@ -16,7 +16,7 @@ El servidor de la aplicación es configurado con Back4app (https://www.back4app.
 Android Studio: Ide de uso gratuito orientado para el desarrollo de app nativas andorid
 
 Kotlin: Lenguaje de programacion multiplataforma impulsado por Google, compatible 100% con Java que incorpora ventajas como son el manejo 
-de las NullExepcions(Errores común en la programación), biblioteca de corrutinas para las tareas en background, permite la programación reactiva y utiliza
+de las Null Pointer Exeptions(Errores común en la programación), biblioteca de corrutinas para las tareas en background, permite la programación reactiva y utiliza
 pocas lineas de código con respecto a otros.
 
 Back4app es uno de los proveedores de servicios de backend de código abiertoque ayuda a los desarrolladores a crear aplicaciones web y móviles extensibles y 
