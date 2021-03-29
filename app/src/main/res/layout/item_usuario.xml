@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="?selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<LinearLayout android:orientation="horizontal"
+    android:id="@+id/lyt_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/spacing_large"
+    android:layout_marginBottom="@dimen/spacing_large"
+    >
+
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/item_imageusuario"
+                android:layout_width="50.0dip"
+                android:layout_height="50.0dip"
+                android:layout_marginLeft="@dimen/spacing_large"
+                app:civ_border="false"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_gravity="center"
+                android:src="@drawable/male"
+
+                 />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_toLeftOf="@id/add_fav_butt"
+                        >
+
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_90"
+                            android:id="@+id/item_nombre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre"
+                            />
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/red_300"
+                            android:id="@+id/item_admin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/administrador"
+                            android:visibility="gone"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/add_fav_butt"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginEnd="@dimen/spacing_large"
+                        app:srcCompat="@drawable/xml_expand_less"
+                        android:visibility="visible"
+
+                        >
+                    </ImageView>
+                </RelativeLayout>
+        </LinearLayout>
+
+</LinearLayout>
+
+

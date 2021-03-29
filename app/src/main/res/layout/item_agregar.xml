@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="?selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <ImageView
+            android:id="@+id/imageVOtrapregunta"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/xml_expand_less"
+            >
+
+        </ImageView>
+
+
+
+</LinearLayout>
+
+

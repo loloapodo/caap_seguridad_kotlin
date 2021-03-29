@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">Kotlin Seguridad</string>
+    <string name="boton_logearse">Logearse</string>
+    <string name="logueado_seccion_adm">Sección de administrador</string>
+    <string name="query_not_found">Usuario y o Contraseña incorrecto</string>
+    <string name="error_loguin">Error</string>
+    <string name="title_activity_drawer1">drawer1</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+
+
+    <string name="editarusuario_nombreapell">"Nombre "</string>
+    <string name="hint_cedula">No Cedula</string>
+    <string name="hint_contrase">Contraseña</string>
+    <string name="hint_usuario">Usuario</string>
+    <string name="hint_apellido">Apellidos</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="error_foto">Error</string>
+    <string name="error_editar_usuario">Error</string>
+    <string name="guardado_editar_usuario">Guardado</string>
+
+    <string name="MasInfo">Más</string>
+    <string name="un_usuario_nombreusuario">Nombre de usuario</string>
+    <string name="un_usuario_contrasena">Contraseña</string>
+    <string name="un_usuario_cedula">Numero de cédula</string>
+    <string name="un_usuario_createdAt">Fecha de creación</string>
+    <string name="una_activiad_createdAt">Fecha de Creación</string>
+    <string name="una_actividad_fecha">Fecha</string>
+    <string name="una_actividad_fechaexpir">Fecha de expiración</string>
+    <string name="una_actividad_descripci">Esta tarea conciste en ir a buscar a casa de Pepe las comidas preparadas para la boda</string>
+    <string name="menu_eliminar">Eliminar</string>
+    <string name="usuario_borrado">Eliminado</string>
+    <string name="hint_descripc">Descripción de Actividad</string>
+    <string name="hint_nombre_actividad">Nombre de Actividad</string>
+
+    <string name="editarActNotOk">Error</string>
+    <string name="menu_editar">Editar</string>
+
+    <string name="editarActOk">Actividad Modificada</string>
+    <string name="crearActOk">Actividad Creada</string>
+    <string name="hint_nombre_formulario">Nombre de Formulario</string>
+    <string name="hint_nombre_tarea">Pregunta</string>
+    <string name="hint_preguntaNo">Pregunta ..</string>
+    <string name="formulario_creado">Formulario Creado</string>
+    <string name="formulario_creado_error">Error</string>
+    <string name="fecha_exp">Fecha límite</string>
+    <string name="Preguntas">Preguntas</string>
+    <string name="formulario_eliminado">Formulario eliminado</string>
+    <string name="error_eliminar_form">Error</string>
+    <string name="formulario_editado">Editado</string>
+    <string name="Personas">Personal</string>
+         <string name="SeleccionaFecha">Seleccionar Fecha Entrega</string>
+    <string name="SeleccionaHoraLimite">Seleccionar Hora Límite  </string>
+    <string name="complete_fechas">Complete la fecha de entrega</string>
+    <string name="SeleccionaDiaActividad">Selecciona el día</string>
+
+
+
+    <string name="menu_home">Usuarios</string>
+    <string name="menu_gallery">Formularios</string>
+    <string name="menu_slideshow">Actividades</string>
+
+    <string name="menu_str_usuario">Usuarios</string>
+    <string name="menu_str_actividades">Actividades</string>
+    <string name="menu_str_formularios">Formularios</string>
+
+    <string name="titleEactiv">Editar Actividad</string>
+    <string name="titleEusuario">Editar Usuario</string>
+    <string name="titleEformulario">Editar Formulario</string>
+
+    <string name="titleCactiv">Crear Actividad </string>
+    <string name="titleCusuario">Crear Usuario</string>
+    <string name="titleCformulario">Crear Formulario</string>
+
+    <string name="titleactiv">Actividad </string>
+    <string name="titleusuario">Usuario</string>
+    <string name="titleformulario">Formulario</string>
+    <string name="administrador">Administrador</string>
+    <string name="toast_campos_mal">Rectifique los campos</string>
+
+
+</resources>
