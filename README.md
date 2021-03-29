@@ -1,15 +1,16 @@
 # caap_seguridad_kotlin
 
-Herramientas de Desarrollo:
+# Herramientas de Desarrollo:
 
 Ide utilizado: Android Studio
 Lenguaje utilizado: Kotlin. 
+Servidor: Parse Server
 El servidor de la aplicación es configurado con Back4app (https://www.back4app.com/).
 
 
 
-Notas:
 
+# Notas:
 Android Studio: Ide de uso gratuito orientado para el desarrollo de app nativas andorid
 
 Kotlin: Lenguaje de programacion multiplataforma impulsado por Google, compatible 100% con Java que incorpora ventajas como son el manejo 
@@ -28,8 +29,7 @@ En GitHub aparecen varias SDK(software development kit) de Parse para diversas p
 (https://github.com/parse-community/Parse-SDK-Android) 
 
 
-Más
-
+# Más:
 El proyecto se rige por la estructura estandarizada MVVM (Model-View-ViewModel).
 El servidor es alojado en back4app y para la database local de la app se utiliza el SDK de Parse para Android anteriormente mencionado.
 
