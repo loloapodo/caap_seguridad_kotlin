@@ -1,10 +1,12 @@
-# caap_seguridad_kotlin
 
 # Herramientas de Desarrollo:
 
 Ide utilizado: Android Studio
+
 Lenguaje utilizado: Kotlin. 
+
 Servidor: Parse Server
+
 El servidor de la aplicación es configurado con Back4app (https://www.back4app.com/).
 
 
