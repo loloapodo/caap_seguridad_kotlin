@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.CheckAdapter
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.databinding.ActivityEditarActividadBinding
+import com.ello.kotlinseguridad.databinding.ActivityEActBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
 class EActiv : AppCompatActivity() {
 
-    private lateinit var mBind: ActivityEditarActividadBinding
+    private lateinit var mBind: ActivityEActBinding
     private lateinit var vm: EActivVM
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter:CheckAdapter
@@ -46,7 +46,7 @@ class EActiv : AppCompatActivity() {
     }
 
     private fun Init() {
-        mBind= ActivityEditarActividadBinding.inflate(layoutInflater)
+        mBind= ActivityEActBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleEactiv)
         vm= EActivVM(this)
 

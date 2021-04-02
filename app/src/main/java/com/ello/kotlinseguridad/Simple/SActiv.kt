@@ -12,18 +12,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.*
-import com.ello.kotlinseguridad.Adapter.VerActiviAdapter
+import com.ello.kotlinseguridad.Adapter.VerUsDeActAdapter
 import com.ello.kotlinseguridad.Editar.EActiv
 import com.ello.kotlinseguridad.Editar.EUsuario
+import com.ello.kotlinseguridad.databinding.ActivitySActBinding
 
-import com.ello.kotlinseguridad.databinding.ActivitySimpleActividadBinding
+
 import kotlinx.coroutines.launch
 
 class SActiv : AppCompatActivity() {
 
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: VerActiviAdapter
-    private lateinit var mBind: ActivitySimpleActividadBinding
+    private lateinit var mAdapter: VerUsDeActAdapter
+    private lateinit var mBind: ActivitySActBinding
     private  var vm: SActivVM = SActivVM()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +63,7 @@ class SActiv : AppCompatActivity() {
 
     private fun Init() {
 
-        mBind= ActivitySimpleActividadBinding.inflate(layoutInflater)
+        mBind= ActivitySActBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleactiv)
         setContentView(mBind.root)
         val id= intent.getStringExtra("id");
@@ -74,7 +75,7 @@ class SActiv : AppCompatActivity() {
         val llm = LinearLayoutManager(this);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= VerActiviAdapter(this,{}) ;
+        mAdapter= VerUsDeActAdapter(this,{}) ;
         mRecyclerView.adapter=mAdapter;
     }
 

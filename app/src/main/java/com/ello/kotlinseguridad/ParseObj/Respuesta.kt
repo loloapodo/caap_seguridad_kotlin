@@ -19,6 +19,7 @@ class Respuesta : ParseObject() {
         var field_updated = "updatedAt"
         var field_respuesta = "respuesta"
         var field_foto = "foto"
+        var field_checked="checked"
 		var field_ubicacion = "ubicacion"
 		var field_fecha = "fecha"
         var field_ref_formulario = "ref_formulario"
@@ -37,6 +38,14 @@ class Respuesta : ParseObject() {
         get() = getString(field_respuesta)
         set(arg) { put(field_respuesta, arg!!) }
 
+    var checked: Boolean
+        get() {
+            val b:Boolean?=getBoolean(field_checked)
+            if (b==null){return false}
+            return b
+        }
+        set(arg) { put(field_checked, arg) }
+
 
     var foto: ParseFile?
         get() = getParseFile(field_foto)
@@ -48,8 +57,8 @@ var ubicacion: ParseGeoPoint?
         set(arg) { put(field_ubicacion, arg!!) }
 
 
-var fecha: String?
-        get() = getString(field_fecha)
+var fecha: Long?
+        get() = getLong(field_fecha)
         set(arg) { put(field_fecha, arg!!) }
 
 

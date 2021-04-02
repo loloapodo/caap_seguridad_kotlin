@@ -12,14 +12,17 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ello.kotlinseguridad.*
-import com.ello.kotlinseguridad.databinding.ActivityEditarUsuarioBinding
+import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.BIN.Snippetk
+import com.ello.kotlinseguridad.BIN.Snippets
+import com.ello.kotlinseguridad.databinding.ActivityEUsBinding
 import java.io.IOException
 
 class EUsuario : AppCompatActivity() {
 
 
 
-    private lateinit var mBind: ActivityEditarUsuarioBinding
+    private lateinit var mBind: ActivityEUsBinding
     private lateinit var vm: EUsuarioVM
     private  var mFoto: Bitmap? = null
 
@@ -33,7 +36,7 @@ class EUsuario : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         vm= EUsuarioVM(this)
-        mBind= ActivityEditarUsuarioBinding.inflate(layoutInflater)
+        mBind= ActivityEUsBinding.inflate(layoutInflater)
         setContentView(mBind.root)
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
     }
@@ -122,11 +125,6 @@ class EUsuario : AppCompatActivity() {
             } else if (requestCode == BIN.REQUEST_TAKE_PHOTO) {
                 Log.d("Tomada", " de la camara")
                 mFoto = data?.extras!!["data"] as Bitmap
-                if (mFoto != null) {
-                    mBind.imageView.setImageBitmap(mFoto)
-                } else {
-                    Log.e("Error", "al tomar imagen")
-                }
             }
         }
 

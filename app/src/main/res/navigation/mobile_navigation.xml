@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_usuarios"
-        android:name="com.ello.kotlinseguridad.ui.adm_usuarios.AdmUsuariosFrag"
+        android:name="com.ello.kotlinseguridad.ui.adm_us.AdmUsFrag"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/frag_adm_us" />
 
     <fragment
         android:id="@+id/nav_formularios"
-        android:name="com.ello.kotlinseguridad.ui.AdmFormulario.AdmFormularioFrag"
+        android:name="com.ello.kotlinseguridad.ui.adm_form.AdmFormFrag"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/frag_adm_form" />
 
     <fragment
         android:id="@+id/nav_actividads"
-        android:name="com.ello.kotlinseguridad.ui.AdmActividades.AdmActividadFrag"
+        android:name="com.ello.kotlinseguridad.ui.adm_act.AdmActFrag"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_adm_actividad" />
+        tools:layout="@layout/frag_adm_act" />
 </navigation>

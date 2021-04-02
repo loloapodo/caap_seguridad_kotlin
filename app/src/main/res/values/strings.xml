@@ -13,8 +13,6 @@
     <string name="action_settings">Settings</string>
 
 
-
-
     <string name="editarusuario_nombreapell">"Nombre "</string>
     <string name="hint_cedula">No Cedula</string>
     <string name="hint_contrase">Contraseña</string>
@@ -51,16 +49,15 @@
     <string name="formulario_creado">Formulario Creado</string>
     <string name="formulario_creado_error">Error</string>
     <string name="fecha_exp">Fecha límite</string>
-    <string name="Preguntas">Preguntas</string>
+    <string name="preguntas">Preguntas</string>
     <string name="formulario_eliminado">Formulario eliminado</string>
     <string name="error_eliminar_form">Error</string>
     <string name="formulario_editado">Editado</string>
     <string name="Personas">Personal</string>
-         <string name="SeleccionaFecha">Seleccionar Fecha Entrega</string>
+    <string name="SeleccionaFecha">Seleccionar Fecha Entrega</string>
     <string name="SeleccionaHoraLimite">Seleccionar Hora Límite  </string>
     <string name="complete_fechas">Complete la fecha de entrega</string>
     <string name="SeleccionaDiaActividad">Selecciona el día</string>
-
 
 
     <string name="menu_home">Usuarios</string>
@@ -70,6 +67,12 @@
     <string name="menu_str_usuario">Usuarios</string>
     <string name="menu_str_actividades">Actividades</string>
     <string name="menu_str_formularios">Formularios</string>
+
+
+    <string name="menu_home2">Actividades</string>
+    <string name="menu_gallery2">Formularios Enviados</string>
+    <string name="menu_slideshow2">Pendiente</string>
+
 
     <string name="titleEactiv">Editar Actividad</string>
     <string name="titleEusuario">Editar Usuario</string>
@@ -84,6 +87,25 @@
     <string name="titleformulario">Formulario</string>
     <string name="administrador">Administrador</string>
     <string name="toast_campos_mal">Rectifique los campos</string>
+    <string name="title_activity_drawer2">drawer2</string>
+    <string name="deslog">Salir</string>
+    <string name="actividades">Actividades</string>
+    <string name="menu_str_formularios_entrgados">Formularios Enviados</string>
+    <string name="menu_str_formularios_por_entregar">Pendiente</string>
+    <string name="responder_boton">Responder</string>
+    <string name="hint_respuesta_de_acti">Respuesta…</string>
+    <string name="enviar_boton">Enviar</string>
+    <string name="respuesta_ok">Enviado</string>
+    <string name="respuesta_ko">Error</string>
+    <string name="location_denied">Requiere permisos de Ubicación</string>
+    <string name="nav_header_textv_nombre">Nombre Apellido</string>
+    <string name="nav_header_textv_usuario">Usuario</string>
+    <string name="en_progreso">"Cargando…"</string>
+    <string name="bu_ver_estados_del_formulario">Revisar Entregas</string>
+    <string name="fecha">Fecha</string>
+    <string name="cumplimiento">Enviado!</string>
+    <string name="estado_formularios">Estado de Formularios</string>
+    <string name="bu_ver_preguntas_del_formulario">Volver a preguntas</string>
 
 
 </resources>

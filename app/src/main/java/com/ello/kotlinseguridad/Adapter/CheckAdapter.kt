@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.CheckBox
 import android.widget.CompoundButton
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.R
 
@@ -21,7 +19,7 @@ class CheckAdapter(mContext: Context, val iClick:(str:String)->Unit): RecyclerVi
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = layoutInflater.inflate(R.layout.item_check_usuario, parent, false)
+        val view = layoutInflater.inflate(R.layout.i_check_us, parent, false)
         return CheckH(view)
     }
 

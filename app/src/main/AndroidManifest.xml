@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".AppClass"
@@ -13,19 +16,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinSeguridad">
-        <activity android:name=".Editar.EForm" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".Editar.EActiv" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Editar.EUsuario" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-        <activity android:name=".Simple.SActiv" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Simple.SForm" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Simple.SUsuario" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".drawer2"
+            android:label="@string/title_activity_drawer2"
+            android:theme="@style/Theme.KotlinSeguridad.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".Editar.EForm"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Editar.EActiv"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Editar.EUsuario"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Simple.SActiv"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Simple.SForm"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Simple.SUsuario"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".responder.RForm"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+        </activity>
+
 
         <activity
             android:name=".drawer1"
             android:label="@string/title_activity_drawer1"
             android:theme="@style/Theme.KotlinSeguridad.NoActionBar" />
-        <activity android:name=".U.UsuarAct" />
+
         <activity android:name=".Activ.Login.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash" />
+        <activity android:name=".Simple.Splash" />
     </application>
 
 </manifest>

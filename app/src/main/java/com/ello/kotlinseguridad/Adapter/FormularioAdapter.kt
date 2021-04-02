@@ -19,7 +19,7 @@ class FormularioAdapter( mContext: Context,val iClick:(str:String)->Unit): Recyc
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = layoutInflater.inflate(R.layout.item_formulario, parent, false)
+        val view = layoutInflater.inflate(R.layout.i_form, parent, false)
         return FormularioH(view)
     }
 
@@ -29,6 +29,7 @@ class FormularioAdapter( mContext: Context,val iClick:(str:String)->Unit): Recyc
 
     override fun onBindViewHolder(holderT: RecyclerView.ViewHolder, position: Int) {
         val holder = holderT as FormularioH
+
 
         holder.nombre.text=list[position].nombre
         holder.itemView.setOnClickListener{iClick(list[position].objectId)}

@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.AnadirPregAdapter
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.databinding.ActivityEditarFormularioBinding
+import com.ello.kotlinseguridad.databinding.ActivityEFormBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ import kotlin.math.min
 class EForm : AppCompatActivity() {
 
 
-    private lateinit var mBind: ActivityEditarFormularioBinding
+    private lateinit var mBind: ActivityEFormBinding
     private lateinit var vm: EFormVM
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AnadirPregAdapter
@@ -110,7 +110,7 @@ class EForm : AppCompatActivity() {
 
 
     private fun Init() {
-        mBind= ActivityEditarFormularioBinding.inflate(layoutInflater)
+        mBind= ActivityEFormBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleEformulario)
         vm= EFormVM(this)
         setContentView(mBind.root)
@@ -209,6 +209,8 @@ class EForm : AppCompatActivity() {
 
         }
     }
+
+
 
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/nav2_act">
+
+    <fragment
+        android:id="@+id/nav2_act"
+        android:name="com.ello.kotlinseguridad.ui.us_act.UsActFrag"
+        android:label="@string/menu_home2"
+        tools:layout="@layout/frag_us_act" />
+
+    <fragment
+        android:id="@+id/nav2_form_done"
+        android:name="com.ello.kotlinseguridad.ui.us_form_done.UsFormDoneFrag"
+        android:label="@string/menu_gallery2"
+        tools:layout="@layout/frag_us_encu_done" />
+
+    <fragment
+        android:id="@+id/nav2_form"
+        android:name="com.ello.kotlinseguridad.ui.us_form.UsFormUndoneFrag"
+        android:label="@string/menu_slideshow2"
+        tools:layout="@layout/frag_us_encu" />
+</navigation>

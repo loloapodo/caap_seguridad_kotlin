@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.R
+import java.util.*
 
 class ActividadAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -17,7 +19,7 @@ class ActividadAdapter(mContext: Context,val iClick:(str:String)->Unit): Recycle
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = layoutInflater.inflate(R.layout.item_actividad, parent, false)
+        val view = layoutInflater.inflate(R.layout.i_actividad, parent, false)
         return ActividadH(view)
     }
 
@@ -28,13 +30,23 @@ class ActividadAdapter(mContext: Context,val iClick:(str:String)->Unit): Recycle
     override fun onBindViewHolder(holderT: RecyclerView.ViewHolder, position: Int) {
         val holder = holderT as ActividadH
         holder.nombre.text=list[position].nombre
+       var fecha= list[position].LeerFechaR()
+       var hoy=Snippetk.LeerFechaR(Calendar.getInstance().timeInMillis)
+
+        if (hoy.isNotEmpty() && hoy == fecha){holder.fecha.text="Hoy"}
+        else { holder.fecha.text=fecha }
+
+
+
         holder.itemView.setOnClickListener{iClick(list[position].objectId)}
+
 
 
     }
 
     inner class ActividadH(view: View) : RecyclerView.ViewHolder(view) {
         var nombre:TextView = view.findViewById(R.id.item_nombre)
+        var fecha:TextView = view.findViewById(R.id.item_fecha_activ)
     }
 
 }

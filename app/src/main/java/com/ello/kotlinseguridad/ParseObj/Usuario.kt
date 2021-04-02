@@ -39,9 +39,9 @@ class Usuario : ParseObject() {
         get() = getString(field_cedula)
         set(arg) { put(field_cedula, arg!!)}
 
-    var adm: Boolean?
+    var adm: Boolean
         get() = getBoolean(field_adm)
-        set(arg) { put(field_adm, arg!!) }
+        set(arg) { put(field_adm, arg) }
 
     var foto: ParseFile?
         get() = getParseFile(field_foto)

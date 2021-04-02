@@ -4,15 +4,10 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.CheckBox
-import android.widget.CompoundButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
-import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.ParseObj.Pregunta
-import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.R
 import com.google.android.material.textfield.TextInputEditText
 
@@ -24,7 +19,7 @@ class AnadirPregAdapter(mContext: Context, val iClick:(str:String)->Unit): Recyc
 
     override fun getItemViewType(position: Int): Int {
 
-        return R.layout.item_preguntantdo;
+        return R.layout.i_preguntantdo;
 
 
     }

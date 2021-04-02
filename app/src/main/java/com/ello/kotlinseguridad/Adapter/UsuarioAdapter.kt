@@ -1,9 +1,6 @@
 package com.ello.kotlinseguridad.Adapter
 
-import android.R.attr.bitmap
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Snippetk
+import com.ello.kotlinseguridad.BIN.Snippetk
 import com.mikhaellopez.circularimageview.CircularImageView
-import com.parse.ParseFile
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
 
 class UsuarioAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -31,7 +24,7 @@ class UsuarioAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerV
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = layoutInflater.inflate(R.layout.item_usuario, parent, false)
+        val view = layoutInflater.inflate(R.layout.i_usuario, parent, false)
         return UsuarioH(view)
     }
 
@@ -45,7 +38,7 @@ class UsuarioAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerV
 
 
             holder.nombre.text=nom_apell
-            if (adm!=null&&adm!!){holder.adm.visibility=View.VISIBLE }
+            if (adm!=null&&adm){holder.adm.visibility=View.VISIBLE }
             else{holder.adm.visibility=View.GONE}
 
 

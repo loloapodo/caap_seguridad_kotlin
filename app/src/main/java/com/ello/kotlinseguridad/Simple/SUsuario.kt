@@ -4,19 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ello.kotlinseguridad.Editar.EUsuario
-import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Snippetk
-import com.ello.kotlinseguridad.databinding.ActivitySimpleUsuarioBinding
-import com.parse.ParseQuery
-import kotlinx.coroutines.GlobalScope
+import com.ello.kotlinseguridad.BIN.Snippetk
+import com.ello.kotlinseguridad.databinding.ActivitySUsBinding
 import kotlinx.coroutines.launch
 
 
@@ -24,7 +19,7 @@ class SUsuario : AppCompatActivity() {
 
     private  var vm: SUsuarioVM = SUsuarioVM()
 
-    private lateinit var mBind: ActivitySimpleUsuarioBinding
+    private lateinit var mBind: ActivitySUsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,7 +57,7 @@ class SUsuario : AppCompatActivity() {
     }
 
     private fun Init() {
-        mBind = ActivitySimpleUsuarioBinding.inflate(layoutInflater)
+        mBind = ActivitySUsBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleusuario)
         val id= intent.getStringExtra("id");
         vm.id_usuario=id!!;

@@ -1,5 +1,6 @@
 package com.ello.kotlinseguridad.ParseObj
 
+import android.util.Log
 import com.parse.ParseClassName
 import com.parse.ParseObject
 import com.parse.ParseRelation
@@ -13,6 +14,11 @@ class Actividad : ParseObject() {
 
 
     companion object {
+
+
+
+
+
         var class_name = "tabla_actividad"
         var field_created = "createdAt"
         var field_updated = "updatedAt"
@@ -57,12 +63,12 @@ class Actividad : ParseObject() {
     fun LeerFechaR():String{
 
         var lo= getNumber(field_fecha)?.toLong();
-        if (lo==null){return "null"}
+        if (lo==null){ return "";}
 
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = lo
         val mYear = calendar[Calendar.YEAR]
-        val mMonth = calendar[Calendar.MONTH]
+        val mMonth = calendar[Calendar.MONTH]+1
         val mDay = calendar[Calendar.DAY_OF_MONTH]
         return "$mDay/$mMonth/$mYear"
     }

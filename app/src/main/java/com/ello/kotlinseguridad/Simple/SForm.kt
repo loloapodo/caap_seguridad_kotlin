@@ -4,26 +4,40 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ello.kotlinseguridad.Adapter.VerFormulAdapter
+import com.ello.kotlinseguridad.Adapter.VerEstDelFormAdapter
+import com.ello.kotlinseguridad.Adapter.VerPreDelFormAdapter
+import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.BIN.BIN.Companion.REQ_LLENAR_FORMULARIO
 import com.ello.kotlinseguridad.Editar.EForm
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Snippetk
-import com.ello.kotlinseguridad.databinding.ActivitySimpleFormularioBinding
+import com.ello.kotlinseguridad.BIN.Snippetk
+import com.ello.kotlinseguridad.Estado
+import com.ello.kotlinseguridad.databinding.ActivitySFormBinding
+import com.ello.kotlinseguridad.responder.RForm
+
 import kotlinx.coroutines.launch
 
 class SForm : AppCompatActivity() {
 
 
+
     private lateinit var vm: SFormVM
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: VerFormulAdapter
-    private  lateinit var mBind: ActivitySimpleFormularioBinding
+    private lateinit var mAdapterPreguntas: VerPreDelFormAdapter
+    private lateinit var mAdapterEstados: VerEstDelFormAdapter
+
+    private  lateinit var mBind: ActivitySFormBinding
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +55,14 @@ class SForm : AppCompatActivity() {
 
 
             mBind.unaFormularioNombre.text=form.nombre
-            mBind.unFormulFecha.text=Snippetk.LeerFechaR(form.fecha)
-            mBind.unFormulFechaExp.text=Snippetk.LeerFechaR(form.fecha_limite)
+            mBind.unFormulFecha.text= Snippetk.LeerFechaR(form.fecha)
+            mBind.unFormulFechaExp.text= Snippetk.LeerFechaR(form.fecha_limite)
 
 
 
                 vm.CargarTodasPreguntasDelFormulario(form,{
-                mAdapter.setPreguntas(it)
-                mAdapter.notifyDataSetChanged()
+                mAdapterPreguntas.setPreguntas(it)
+                mAdapterPreguntas.notifyDataSetChanged()
 
 
 
@@ -65,16 +79,23 @@ class SForm : AppCompatActivity() {
         val llm = LinearLayoutManager(this);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= VerFormulAdapter(this,{}) ;
-        mRecyclerView.adapter=mAdapter;
+        mAdapterPreguntas= VerPreDelFormAdapter(this,{}) ;
+        mAdapterEstados= VerEstDelFormAdapter(this,{}) ;
+        mRecyclerView.adapter=mAdapterPreguntas;
     }
 
     private fun Init() {
-        mBind= ActivitySimpleFormularioBinding.inflate(layoutInflater)
+        mBind= ActivitySFormBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleformulario)
         setContentView(mBind.root)
         vm= SFormVM()
-        vm.id_formulario= intent.getStringExtra("id")!!;
+        vm.id_formulario= intent.getStringExtra("id")!!
+
+        if (BIN.ES_ADMIN()){ mBind.buAbrirParaResponder.visibility=View.GONE;mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE}
+        else                {mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE;mBind.buAbrirParaResponder.visibility=View.VISIBLE}
+
+
+
     }
 
     private fun CreateMyOptionMenu() {
@@ -106,4 +127,57 @@ class SForm : AppCompatActivity() {
     }
 
     private fun getThis(): Context =this
+
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+        if (requestCode==REQ_LLENAR_FORMULARIO){
+            setResult(resultCode)
+            finish()
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
+
+
+
+    fun AbrirEnuestaParaResponderClick(view: View) {
+
+        val i=Intent(this, RForm::class.java)
+        i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
+        i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
+        startActivityForResult(i,REQ_LLENAR_FORMULARIO)
+    }
+
+    fun MostrarEstadoEnvio_O_Preguntas(view: View) {
+
+        if (mRecyclerView.adapter==mAdapterPreguntas&&vm.estado.value==Estado.Idle){
+
+            vm.DeterminarListadoEnvios({list ->
+                mRecyclerView.adapter=mAdapterEstados
+                mAdapterEstados.setRespuestas(list)
+                mAdapterEstados.notifyDataSetChanged()
+                mBind.sformAdapctertitle.text=resources.getText(R.string.estado_formularios)
+                mBind.buAbrirEstadoDeEnviosDelForm.text=resources.getText(R.string.bu_ver_preguntas_del_formulario)
+
+
+            },{ Log.e("Error","MostrarEstadoEnvio_O_Preguntas")})
+        }
+        else
+        {
+        mRecyclerView.adapter=mAdapterPreguntas
+            mBind.sformAdapctertitle.text=resources.getText(R.string.preguntas)
+            mBind.buAbrirEstadoDeEnviosDelForm.text=resources.getText(R.string.bu_ver_estados_del_formulario)
+        }
+
+
+
+
+
+
+    }
 }

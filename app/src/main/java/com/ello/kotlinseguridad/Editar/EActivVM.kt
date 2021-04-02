@@ -1,11 +1,13 @@
 package com.ello.kotlinseguridad.Editar
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
 import com.ello.kotlinseguridad.ParseObj.Usuario
-import com.ello.kotlinseguridad.CRUD
+import com.ello.kotlinseguridad.BIN.CRUD
+import com.ello.kotlinseguridad.Estado
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,22 +22,27 @@ lateinit var id_actividad: String
     var month: Int? = null
     var year: Int? = null
 
+    var estado = MutableLiveData<Estado>()
+
+    init {
+        estado.value= Estado.Idle
+    }
 
 
      fun CrearActividad(usuarios:List<Usuario> , str_nombre: String,str_desc: String,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit) {
          val Fecha=getFechaDeActividad()
-         viewModelScope.launch{withContext(Dispatchers.IO){CRUD.CrearActividad(usuarios,str_nombre,str_desc,Fecha,fg,fb) }}
+         viewModelScope.launch{withContext(Dispatchers.IO){ CRUD.CrearActividad(usuarios,str_nombre,str_desc,Fecha,fg,fb) }}
     }
 
 
      fun EditarActividad(str_ObjectId: String,usuarios:List<Usuario> ,str_nombre: String,str_desc: String,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit){
          val Fecha=getFechaDeActividad()
-        viewModelScope.launch { withContext(Dispatchers.IO){CRUD.EditarActividad(str_ObjectId,usuarios,str_nombre,str_desc,Fecha,fg,fb)}  }
+        viewModelScope.launch { withContext(Dispatchers.IO){ CRUD.EditarActividad(str_ObjectId,usuarios,str_nombre,str_desc,Fecha,fg,fb)}  }
     }
 
 
     fun CargarTodosUsuariosLocal(fg: (list:List<Usuario>) -> Unit,fb: () -> Unit) {
-        viewModelScope.launch { withContext(Dispatchers.IO){CRUD.CargarTodosUsuarioLocal(fg,fb)} }
+        viewModelScope.launch { withContext(Dispatchers.IO){ CRUD.CargarTodosUsuarioLocal(fg,fb)} }
     }
 
     /*
@@ -44,11 +51,7 @@ lateinit var id_actividad: String
     }
 */
 
-    fun EstaListoParaCrear():Boolean
-    {
 
-        return day!=null
-    }
     private fun getFechaDeActividad(): Long {
 
         val c= Calendar.getInstance()
@@ -58,9 +61,7 @@ lateinit var id_actividad: String
         c.set(Calendar.YEAR,year!!)
         c.set(Calendar.MONTH,month!!)
         c.set(Calendar.DAY_OF_MONTH,day!!)
-
         return c.time.time
-
     }
 
     fun CamposEstanMal(checkedList: ArrayList<Usuario>, t1: TextInputEditText, t2: TextInputEditText): Boolean {
