@@ -13,6 +13,7 @@ import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.drawer1
 import com.ello.kotlinseguridad.drawer2
 import com.parse.ParseQuery
+import java.util.*
 
 class LoginVM(var cxt: Context) : ViewModel() {
 
@@ -27,7 +28,7 @@ class LoginVM(var cxt: Context) : ViewModel() {
         {
             estado.value=Estado.Network
             val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
-            query.whereEqualTo(Usuario.field_usuario,str_usuario)
+            query.whereEqualTo(Usuario.field_usuario, str_usuario.toLowerCase(Locale.ROOT))
             query.whereEqualTo(Usuario.field_contrasena,str_contrasena)
             query.getFirstInBackground {usuario, e ->
                 estado.value=Estado.Idle

@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BIN.BIN
 
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Estado
+import com.ello.kotlinseguridad.R
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,15 +31,17 @@ lateinit var id_actividad: String
     }
 
 
-     fun CrearActividad(usuarios:List<Usuario> , str_nombre: String,str_desc: String,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit) {
-         val Fecha=getFechaDeActividad()
-         viewModelScope.launch{withContext(Dispatchers.IO){ CRUD.CrearActividad(usuarios,str_nombre,str_desc,Fecha,fg,fb) }}
+     fun CrearActividad(usuarios:List<Usuario> , str_nombre: String,str_desc: String,long_fecha:Long ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
+         val fecha=getFechaDeActividad()
+         if (!FechaEsCorrectaParaAct(fecha)){fvalidate(cxt.resources.getString(R.string.fecha_imposible));return}
+         viewModelScope.launch{withContext(Dispatchers.IO){ CRUD.CrearActividad(usuarios,str_nombre,str_desc,fecha,fg,fb) }}
     }
 
 
-     fun EditarActividad(str_ObjectId: String,usuarios:List<Usuario> ,str_nombre: String,str_desc: String,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit){
-         val Fecha=getFechaDeActividad()
-        viewModelScope.launch { withContext(Dispatchers.IO){ CRUD.EditarActividad(str_ObjectId,usuarios,str_nombre,str_desc,Fecha,fg,fb)}  }
+     fun EditarActividad(str_ObjectId: String,usuarios:List<Usuario> ,str_nombre: String,str_desc: String,long_fecha:Long ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit){
+         val fecha=getFechaDeActividad()
+         if (!FechaEsCorrectaParaAct(fecha)){fvalidate(cxt.resources.getString(R.string.fecha_imposible));return}
+        viewModelScope.launch { withContext(Dispatchers.IO){ CRUD.EditarActividad(str_ObjectId,usuarios,str_nombre,str_desc,fecha,fg,fb)}  }
     }
 
 
@@ -73,5 +77,15 @@ lateinit var id_actividad: String
         return false
     }
 
-
+    /**
+     * La actividad solo puedes ser programada para hoy o en el futuro.
+     */
+    fun FechaEsCorrectaParaAct(fecha: Long): Boolean {
+        val now= Calendar.getInstance()
+        now.set(Calendar.HOUR_OF_DAY,0)
+        if (now.timeInMillis<fecha){
+            return true
+        }
+        return false
+    }
 }

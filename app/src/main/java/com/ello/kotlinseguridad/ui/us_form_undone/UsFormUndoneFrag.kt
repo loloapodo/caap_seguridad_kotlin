@@ -1,4 +1,4 @@
-package com.ello.kotlinseguridad.ui.us_form
+package com.ello.kotlinseguridad.ui.us_form_undone
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +15,6 @@ import com.ello.kotlinseguridad.Adapter.FormularioAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SForm
-import com.ello.kotlinseguridad.ui.us_form_done.UsFormDoneVM
 
 class UsFormUndoneFrag : Fragment() {
 
@@ -47,8 +46,9 @@ class UsFormUndoneFrag : Fragment() {
         mRecyclerView.layoutManager = llm;
         mAdapter=
                 FormularioAdapter(root.context){
-                    startActivityForResult(Intent(activity,
-                        SForm::class.java).putExtra("id",it), BIN.REQ_LLENAR_FORMULARIO)}
+                    startActivityForResult(
+                            Intent(activity, SForm::class.java).putExtra("id",it).putExtra(SForm.EXTRA_RESUELTO,false),
+                            BIN.REQ_LLENAR_FORMULARIO)}
         mRecyclerView.adapter=mAdapter;
     }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462389221598",
+    "project_id": "kotlin-seguridad-pushnotif",
+    "storage_bucket": "kotlin-seguridad-pushnotif.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462389221598:android:989c43a88cfcfa805d4a4f",
+        "android_client_info": {
+          "package_name": "com.ello.kotlinseguridad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462389221598-lvrapj2l7bpevvpk40d8652fgqheegso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAHUT1Ny8SycE_8mTlJnZdsn4p2S2Uniw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462389221598-lvrapj2l7bpevvpk40d8652fgqheegso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

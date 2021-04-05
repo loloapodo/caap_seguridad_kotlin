@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav2_form"
-        android:name="com.ello.kotlinseguridad.ui.us_form.UsFormUndoneFrag"
+        android:name="com.ello.kotlinseguridad.ui.us_form_undone.UsFormUndoneFrag"
         android:label="@string/menu_slideshow2"
         tools:layout="@layout/frag_us_encu" />
 </navigation>

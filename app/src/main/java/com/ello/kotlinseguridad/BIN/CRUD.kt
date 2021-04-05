@@ -479,26 +479,21 @@ companion object{
         query.orderByDescending(Actividad.field_fecha)
         query.whereEqualTo(Actividad.field_rel_usuarios,U)
         query.whereGreaterThanOrEqualTo(Actividad.field_fecha,time_mls)
-        query.findInBackground(FindCallback { list, e ->
-            if (e==null){ParseObject.pinAll(list);Log.e("Tamano lista",list.size.toString());fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Actividades") }
-        })
+        query.findInBackground { list, e ->
+            if (e==null){
+                ParseObject.unpinAll(BIN.PIN_ACTIVIDADES_USUARIO,list)
+                ParseObject.fetchAllIfNeeded(list)
+                ParseObject.pinAll(BIN.PIN_ACTIVIDADES_USUARIO,list);Log.e("Tamano lista",list.size.toString());fg(list) } else { fb();Log.e("Error","Buscar All Actividades") }
+        }
     }
 
     suspend fun CargarTodasActividadesDelUsuarioLocal(U: Usuario,time_mls:Long,fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
-        query.fromLocalDatastore()
-
-        query.orderByDescending(Actividad.field_fecha)
-        query.whereEqualTo(Actividad.field_rel_usuarios,U)
-        query.whereGreaterThanOrEqualTo(Actividad.field_fecha,time_mls)
-        query.findInBackground(FindCallback { list, e ->
-            if (e==null){Log.e("Tamano lista local",list.size.toString());fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Actividades") }
-        })
+        query.fromPin(BIN.PIN_ACTIVIDADES_USUARIO)
+        query.findInBackground { list, e ->
+            if (e==null){Log.e("Tamano lista local",list.size.toString());fg(list) } else { fb();Log.e("Error","Buscar All Actividades") }
+        }
     }
 
     suspend fun CargarTodasActividadesDelUsuario(str_ObjectId: String,time_mls:Long,fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
@@ -588,13 +583,31 @@ companion object{
            val formRespondidos = mutableListOf<Formulario>()
            for (r in respuestasDelUsuario) {
                if (!formRespondidos.contains(r.ref_formulario)) {
-                   formRespondidos.add(r.ref_formulario!!.fetchIfNeeded())//todo Fetch if needed
+                   formRespondidos.add(r.ref_formulario!!.fetchIfNeeded())
                }
            }
+           ParseObject.unpinAll(BIN.PIN_FORMULARIO_RESPONDIDOS)
+           ParseObject.pinAll(BIN.PIN_FORMULARIO_RESPONDIDOS,formRespondidos)
            fg(formRespondidos)
 
        }, fb)
    }
+
+    fun CargarTodosFormulariosRespondidosLocal(u:Usuario,fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
+
+        val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
+        query.fromPin(BIN.PIN_FORMULARIO_RESPONDIDOS)
+        try {
+            fg(query.find())
+        }
+        catch (e:ParseException){
+            e.printStackTrace()
+        }
+
+
+
+    }
+
 
 
 
@@ -615,13 +628,24 @@ companion object{
             GlobalScope.launch (Dispatchers.IO){
                 CargarTodosFormularios({todos->
                     val sinResponder= BIN.RESTAR_LISTAS(todos,respondidos)
+                    ParseObject.unpinAll(BIN.PIN_FORMULARIO_RESPONDIDOS)
+                    ParseObject.pinAll(BIN.PIN_FORMULARIO_SIN_RESPONDER,sinResponder)
                     fg(sinResponder)
                 }, fb)
             }
 
 
         },fb)
+    }
+    fun CargarTodosFormulariosNoRespondidosLocal(u:Usuario,fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
 
+        val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
+        query.fromPin(BIN.PIN_FORMULARIO_SIN_RESPONDER)
+        try {
+            fg(query.find())
+        }catch (e:ParseException){
+            e.printStackTrace()
+        }
 
 
     }

@@ -1,15 +1,13 @@
 package com.ello.kotlinseguridad
 
 import android.app.Application
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
+import android.util.Log
 import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.ParseObj.Respuesta
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.twelveseconds.Formulario
-import com.parse.Parse
-import com.parse.ParseObject
+import com.parse.*
 
 
 class AppClass : Application() {
@@ -29,6 +27,25 @@ class AppClass : Application() {
                 .enableLocalDataStore()
                 .build()
         )
+
+
+        Log.e("Parse install", "init")
+        val installation = ParseInstallation.getCurrentInstallation()
+        installation.put("GCMSenderId", "462389221598")
+        installation.saveInBackground { e ->
+            if (e == null) {
+                Log.e("Parse install", "OK")
+            } else {
+                Log.e("Parse install", "ERROR")
+            }
+        }
+
+
+
+
+
+
+
         super.onCreate()
     }
    public fun setVM(){}

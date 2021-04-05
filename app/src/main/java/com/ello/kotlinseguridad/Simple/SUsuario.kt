@@ -34,8 +34,8 @@ class SUsuario : AppCompatActivity() {
 
             //mBind.included.toolbar.title = Snippetk.CortarTitle(o.nom_apell)
 
-            mBind.included.toolbar.setTitleTextColor(Color.BLACK)
-            mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
+            //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
+            //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
 
 
             mBind.unaPersonaName.text=o.nom_apell

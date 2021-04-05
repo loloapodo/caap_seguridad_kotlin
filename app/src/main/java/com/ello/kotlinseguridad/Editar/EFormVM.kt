@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BIN.BIN
 
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Estado
+import com.ello.kotlinseguridad.R
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,15 +33,21 @@ lateinit var id_formulario: String
 
 
 
-    fun CrearFormulario(str_nombre: String, str_fecha: Long,str_fecha_limite:Long,listPreg: ArrayList<String> ,fg: () -> Unit,fb: () -> Unit) {
-        val Fecha_Limite= getFechaLimite()
-        viewModelScope.launch(Dispatchers.IO){ CRUD.CrearFormulario(str_nombre,str_fecha,Fecha_Limite,listPreg,fg,fb)}
+    fun CrearFormulario(str_nombre: String, str_fecha: Long,str_fecha_limite:Long,listPreg: ArrayList<String> ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
+        val fecha_limite= getFechaLimite()
+        if (!EstaListoParaCrear()){fvalidate(cxt.resources.getString(R.string.complete_fechas));return}
+        if (!BIN.FechaEsCorrecta(fecha_limite)){fvalidate(cxt.resources.getString(R.string.fecha_imposible));return}
+        viewModelScope.launch(Dispatchers.IO){ CRUD.CrearFormulario(str_nombre,str_fecha,fecha_limite,listPreg,fg,fb)}
     }
 
-    fun EditarFormulario(str_ObjectId: String,str_nombre: String, long_fecha: Long,long_fecha_limite:Long,listPreg: ArrayList<String> ,fg: () -> Unit,fb: () -> Unit) {
-        val Fecha_Limite= getFechaLimite()
-        viewModelScope.launch(Dispatchers.IO) { CRUD.EditarFormulario(str_ObjectId,str_nombre,long_fecha,Fecha_Limite,listPreg,fg,fb)}
+    fun EditarFormulario(str_ObjectId: String,str_nombre: String, long_fecha: Long,long_fecha_limite:Long,listPreg: ArrayList<String> ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
+        val fecha_limite= getFechaLimite()
+        if (!EstaListoParaCrear()){fvalidate(cxt.resources.getString(R.string.complete_fechas));return}
+        if (!BIN.FechaEsCorrecta(fecha_limite)){fvalidate(cxt.resources.getString(R.string.fecha_imposible));return}
+        viewModelScope.launch(Dispatchers.IO) { CRUD.EditarFormulario(str_ObjectId,str_nombre,long_fecha,fecha_limite,listPreg,fg,fb)}
     }
+
+
 
     private fun getFechaLimite(): Long {
 

@@ -41,6 +41,20 @@ class CheckAdapter(mContext: Context, val iClick:(str:String)->Unit): RecyclerVi
 
     }
 
+    fun setListado(listad: List<Usuario>) {
+
+       val arr=ArrayList<Usuario>()
+
+        for (i in listad.size-1 downTo 0){ if (!listad[i].adm){ arr.add(listad[i])} }//Eliminar los admins de aqui
+
+        list=arr
+        notifyDataSetChanged()
+
+
+
+
+    }
+
     inner class CheckH(view: View) : RecyclerView.ViewHolder(view) {
         var check: CheckBox = view.findViewById(R.id.item_check)
     }

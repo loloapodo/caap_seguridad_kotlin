@@ -24,9 +24,18 @@ import com.ello.kotlinseguridad.responder.RForm
 
 import kotlinx.coroutines.launch
 
+
+/**
+ * Muestra un formulario simple.
+ * Si es admin puede ver las preguntas del formulario y el estado de envio para todos sus usuarios boton1
+ * Si es user puede responder o ver el formulario respondido boton2
+ */
 class SForm : AppCompatActivity() {
 
 
+
+
+    companion object{ val EXTRA_RESUELTO="extra_resuelto"}
 
     private lateinit var vm: SFormVM
     private lateinit var mRecyclerView: RecyclerView
@@ -57,6 +66,7 @@ class SForm : AppCompatActivity() {
             mBind.unaFormularioNombre.text=form.nombre
             mBind.unFormulFecha.text= Snippetk.LeerFechaR(form.fecha)
             mBind.unFormulFechaExp.text= Snippetk.LeerFechaR(form.fecha_limite)
+            mBind.unFormulHora.text= Snippetk.LeerHoraR(form.fecha_limite)
 
 
 
@@ -91,8 +101,13 @@ class SForm : AppCompatActivity() {
         vm= SFormVM()
         vm.id_formulario= intent.getStringExtra("id")!!
 
-        if (BIN.ES_ADMIN()){ mBind.buAbrirParaResponder.visibility=View.GONE;mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE}
-        else                {mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE;mBind.buAbrirParaResponder.visibility=View.VISIBLE}
+        if (BIN.ES_ADMIN()){ mBind.buResponderOVerrespuestas.visibility=View.GONE;mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE}
+        else                {
+            mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE;mBind.buResponderOVerrespuestas.visibility=View.VISIBLE
+            if (intent.getBooleanExtra(EXTRA_RESUELTO,false)){
+                mBind.buResponderOVerrespuestas.text=resources.getString(R.string.ver_mi_respuesta)
+            }
+        }
 
 
 
@@ -145,13 +160,22 @@ class SForm : AppCompatActivity() {
 
 
 
-    fun AbrirEnuestaParaResponderClick(view: View) {
+    fun Responder_O_VerRespuestaClick(view: View) {
 
-        val i=Intent(this, RForm::class.java)
-        i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
-        i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
-        startActivityForResult(i,REQ_LLENAR_FORMULARIO)
+        if (intent.getBooleanExtra(EXTRA_RESUELTO,false))
+        {
+            //todo
+            Toast.makeText(getThis(),"TODO",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            val i=Intent(this, RForm::class.java)
+            i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
+            i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
+            startActivityForResult(i,REQ_LLENAR_FORMULARIO)
+        }
+
     }
+
 
     fun MostrarEstadoEnvio_O_Preguntas(view: View) {
 

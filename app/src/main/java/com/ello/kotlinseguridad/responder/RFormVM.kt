@@ -2,6 +2,7 @@ package com.ello.kotlinseguridad.responder
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.hardware.usb.UsbInterface
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,11 +12,17 @@ import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.ParseObj.Respuesta
+import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.twelveseconds.Formulario
+import com.parse.ParseObject
+import com.parse.ParsePush
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
+
 
 class RFormVM : ViewModel() {
 
@@ -78,12 +85,12 @@ class RFormVM : ViewModel() {
                             {
                                 good++
                                 Log.e("EnviarRespuesta","good->$good +  bad->$bad")
-                                EsperandoFinal(good, bad, size,fg,fb)
+                                EsperandoFinal(u,good, bad, size,fg,fb)
 
                             },{
                         bad++
                         Log.e("EnviarRespuesta","good->$good +  bad->$bad")
-                        EsperandoFinal(good, bad, size,fg,fb)
+                        EsperandoFinal(u,good, bad, size,fg,fb)
                     })
                 }
 
@@ -110,13 +117,41 @@ class RFormVM : ViewModel() {
 return ""
     }
 
-    private fun EsperandoFinal(good: Int, bad: Int, size:Int,fg: () -> Unit,fb: () -> Unit) {
+    private fun EsperandoFinal(u:Usuario,good: Int, bad: Int, size:Int,fg: () -> Unit,fb: () -> Unit) {
         if (good+bad==size)
         {
             estado.value= Estado.Idle
-        if (good>bad){fg()}
+        if (good>bad){fg();EnviarNotificacion(u)}
         else {fb()}
         }
+    }
+
+    private fun EnviarNotificacion(u:Usuario) {
+
+
+        val data = JSONObject()
+// Put data in the JSON object
+// Put data in the JSON object
+        try {
+            data.put(Usuario.field_nom_apell, u.nom_apell)
+            data.put(Formulario.field_nombre, form.nombre)
+        } catch (e: JSONException) {
+            // should not happen
+            throw IllegalArgumentException("unexpected parsing error", e)
+        }
+// Configure the push
+// Configure the push
+        val push = ParsePush()
+        push.setData(data)
+        push.sendInBackground {e->
+            if (e==null){Log.e("Notificacion","SENT")}
+            else{Log.e("Notificacion","NOT SENT")}
+
+        }
+
+
+
+
     }
 
     fun isNotIdle(): Boolean {

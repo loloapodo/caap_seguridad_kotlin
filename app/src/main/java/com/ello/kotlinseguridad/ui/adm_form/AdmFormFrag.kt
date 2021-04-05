@@ -1,5 +1,6 @@
 package com.ello.kotlinseguridad.ui.adm_form
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.FormularioAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SForm
 
@@ -45,15 +47,23 @@ class AdmFormFrag : Fragment() {
 
         return root
     }
-
+    public fun Cargar(){ vm.Cargar()}
     private fun InitRecycler(root:View) {
         mRecyclerView=root.findViewById(R.id.recycler)
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
         mAdapter=
-                FormularioAdapter(root.context){activity?.startActivity(Intent(activity,
+                FormularioAdapter(root.context){startActivity(Intent(activity,
                         SForm::class.java).putExtra("id",it))}
         mRecyclerView.adapter=mAdapter;
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode== Activity.RESULT_OK){
+            vm.CargarDelServidor()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+
+
     }
 }

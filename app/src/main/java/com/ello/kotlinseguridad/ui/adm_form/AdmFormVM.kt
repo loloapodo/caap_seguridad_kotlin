@@ -20,21 +20,25 @@ class AdmFormVM : ViewModel() {
     val _listado = MutableLiveData<List<Formulario>>()
 
 
+    init {
+        viewModelScope.launch(Dispatchers.Main) {
+            CRUD.CargarTodosFormulariosLocal({ _listado.value = it;Log.e("CargarTodosForm done", "ss"); }, {})
+        }
+    }
+
     fun Cargar()
         {
         viewModelScope.launch(Dispatchers.IO) {
-            CRUD.CargarTodosFormulariosLocal({_listado.value=it;Log.e("CargarTodosForm done","ss");},{})
-            delay(4000)
             CRUD.CargarTodosFormularios({_listado.value=it;Log.e("CargarTodosForm done","ss")},{})
         }
 
     }
 
-
-
-
-
-
+    fun CargarDelServidor() {
+        viewModelScope.launch(Dispatchers.IO) {
+            CRUD.CargarTodosFormularios({_listado.value=it;Log.e("CargarTodosForm done","ss")},{})
+        }
+    }
 
 
 }

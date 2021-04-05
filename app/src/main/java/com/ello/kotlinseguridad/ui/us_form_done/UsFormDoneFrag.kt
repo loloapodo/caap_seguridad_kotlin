@@ -53,7 +53,7 @@ class UsFormDoneFrag : Fragment() {
         mRecyclerView.layoutManager = llm;
         mAdapter=
                 FormularioAdapter(root.context){activity?.startActivity(Intent(activity,
-                        SForm::class.java).putExtra("id",it))}
+                        SForm::class.java).putExtra("id",it).putExtra(SForm.EXTRA_RESUELTO,true))}
         mRecyclerView.adapter=mAdapter;
     }
 }

@@ -37,10 +37,9 @@ class SActiv : AppCompatActivity() {
 
         vm.CargarLaActividad({ o->
 
-            //mBind.included.toolbar.title = Snippetk.CortarTitle(o.nombre)
 
-            mBind.included.toolbar.setTitleTextColor(Color.BLACK)
-            mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
+            //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
+            //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
 
             mBind.unaActividadName.text=o.nombre
             mBind.unaActividadFecha.text=o.LeerFechaR()

@@ -14,6 +14,7 @@ import com.parse.ParseException
 import com.parse.ParseGeoPoint
 import com.parse.ParseObject
 import com.parse.ParseQuery
+import java.util.*
 
 
 class BIN {
@@ -62,7 +63,13 @@ companion object{
 
     val REQUEST_MY_PERMISSIONS_LOCATION=22
     val REQ_LLENAR_FORMULARIO=10
-     val PIN_FORMULARIO_RESPONDER="formulario_a_responder"
+
+
+    val PIN_FORMULARIO_RESPONDIDOS="formulario_a_respondido"
+     val PIN_FORMULARIO_SIN_RESPONDER="formulario_a_responder"
+    val PIN_ACTIVIDADES_USUARIO= "actividades_usuario"
+
+
     val EXTRA_SHOW_BOTON_RESPONDER="show_boton"
     val EXTRA_NOMBRE="name"
     val EXTRA_ID="id"
@@ -127,8 +134,13 @@ companion object{
 
 
 
-
-
+    fun FechaEsCorrecta(fechaLimite: Long): Boolean {
+        val now= Calendar.getInstance().timeInMillis
+        if ((now+120000L)<fechaLimite){
+            return true
+        }
+        return false
+    }
 
 
 

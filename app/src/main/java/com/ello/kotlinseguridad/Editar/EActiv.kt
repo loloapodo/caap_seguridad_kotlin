@@ -1,5 +1,6 @@
 package com.ello.kotlinseguridad.Editar
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.CheckAdapter
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityEActBinding
+import com.ello.kotlinseguridad.drawer1
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -47,17 +49,18 @@ class EActiv : AppCompatActivity() {
 
     private fun Init() {
         mBind= ActivityEActBinding.inflate(layoutInflater)
-        mBind.included.toolbar.title = resources.getString(R.string.titleEactiv)
         vm= EActivVM(this)
 
         setContentView(mBind.root)
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
+        if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCactiv)}
+        else{ mBind.included.toolbar.title = resources.getString(R.string.titleEactiv) }
+
     }
 
     private fun CargarUsuariosQueRealizanLaActividad() {
         vm.CargarTodosUsuariosLocal({
-            mAdapter.list=it
-            mAdapter.notifyDataSetChanged()
+            mAdapter.setListado(it)
         },{});
     }
 
@@ -68,17 +71,12 @@ class EActiv : AppCompatActivity() {
             with(mBind){
 
 
-                if (vm.CamposEstanMal(mAdapter.checked_list,editactivNombre,editactivDescrip))
-                {
-                    Toast.makeText(getThis(),resources.getString(R.string.toast_campos_mal),Toast.LENGTH_SHORT).show();
-                    return
-                }
-
 
                 if (mObjId_toEdit.isNullOrEmpty())//Crear
                 {
                     vm.CrearActividad(mAdapter.checked_list,editactivNombre.text.toString(),mBind.editactivDescrip.text.toString(),Calendar.getInstance().time.time,
-                        {Toast.makeText(getThis(),resources.getString(R.string.crearActOk),Toast.LENGTH_SHORT).show();finish()},
+                        {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
+                        {Toast.makeText(getThis(),resources.getString(R.string.crearActOk),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_ACTIVIDAD);finish()},
                         {Toast.makeText(getThis(),resources.getString(R.string.editarActNotOk),Toast.LENGTH_SHORT).show()}
 
                         )
@@ -88,7 +86,8 @@ class EActiv : AppCompatActivity() {
                 {
                     Log.e("Editar","Editar")
                     vm.EditarActividad(mObjId_toEdit!!,mAdapter.checked_list,editactivNombre.text.toString(),mBind.editactivDescrip.text.toString(),Calendar.getInstance().time.time,
-                        {Toast.makeText(getThis(),resources.getString(R.string.editarActOk),Toast.LENGTH_SHORT).show();finish()},
+                        {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
+                        {Toast.makeText(getThis(),resources.getString(R.string.editarActOk),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_ACTIVIDAD);finish()},
                         {Toast.makeText(getThis(),resources.getString(R.string.editarActNotOk),Toast.LENGTH_SHORT).show()}
 
                     )

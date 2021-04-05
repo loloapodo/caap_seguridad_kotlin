@@ -16,12 +16,13 @@ class Formulario : ParseObject() {
 
 
  companion object {
-        var class_name = "tabla_formulario"
-        var field_created = "createdAt"
-        var field_updated = "updatedAt"
-        var field_nombre = "nombre"
-        var field_fecha = "fecha"
-        var field_fecha_limite = "fecha_limite"
+        val class_name = "tabla_formulario"
+        val field_created = "createdAt"
+        val field_updated = "updatedAt"
+        val field_nombre = "nombre"
+
+        val field_fecha = "fecha"
+        val field_fecha_limite = "fecha_limite"
     }
 
 

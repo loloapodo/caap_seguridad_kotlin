@@ -19,20 +19,26 @@ class AdmActVM : ViewModel() {
     val _listado = MutableLiveData<List<Actividad>>()
     val text: LiveData<String> = _text
 
+    init {
+        viewModelScope.launch(Dispatchers.Main) {
+            CRUD.CargarTodasActividadesLocal({ _listado.value = it }, {})
+        }
+    }
+
     fun Cargar()
     {
 
         viewModelScope.launch(Dispatchers.IO) {
-            CRUD.CargarTodasActividadesLocal({_listado.value=it},{})
-            delay(4000)
             CRUD.CargarTodasActividades({_listado.value=it},{})
         }
 
     }
 
-
-
-
+    fun CargarDelServidor() {
+        viewModelScope.launch(Dispatchers.IO) {
+        CRUD.CargarTodasActividades({_listado.value=it},{})
+        }
+    }
 
 
 }

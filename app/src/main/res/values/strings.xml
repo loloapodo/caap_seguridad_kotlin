@@ -106,6 +106,9 @@
     <string name="cumplimiento">Enviado!</string>
     <string name="estado_formularios">Estado de Formularios</string>
     <string name="bu_ver_preguntas_del_formulario">Volver a preguntas</string>
+    <string name="fecha_imposible">Seleccione una fecha válida</string>
+    <string name="una_actividad_hora">Hora</string>
+    <string name="ver_mi_respuesta">Revisar</string>
 
 
 </resources>

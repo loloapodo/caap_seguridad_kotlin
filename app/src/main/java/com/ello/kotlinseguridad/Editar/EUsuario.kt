@@ -35,10 +35,22 @@ class EUsuario : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Init()
+
+    }
+
+    private fun Init() {
         vm= EUsuarioVM(this)
         mBind= ActivityEUsBinding.inflate(layoutInflater)
+
         setContentView(mBind.root)
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
+
+        if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCusuario)}
+        else{ mBind.included.toolbar.title = resources.getString(R.string.titleEusuario) }
+
+
+
     }
 
     fun AcpetarClick(view: View) {
@@ -64,7 +76,7 @@ class EUsuario : AppCompatActivity() {
                         editusuarioNombre.text.toString()+" "+editusuarioApellido.text.toString(),
                         editusuarioCedula.text.toString(),
                         mFoto,
-                        {Toast.makeText(getThis(),resources.getString(R.string.guardado_editar_usuario),Toast.LENGTH_SHORT).show();finish()},
+                        {Toast.makeText(getThis(),resources.getString(R.string.guardado_editar_usuario),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_USUARIO);finish()},
                         {Toast.makeText(getThis(),resources.getString(R.string.error_editar_usuario),Toast.LENGTH_SHORT).show()}
                     )
 
@@ -80,7 +92,7 @@ class EUsuario : AppCompatActivity() {
                     editusuarioNombreL.editText?.text.toString()+" "+editusuarioApellidoL.editText?.text.toString(),
                     editusuarioCedulaL.editText?.text.toString(),
                     mFoto,
-                    {Toast.makeText(getThis(),resources.getString(R.string.guardado_editar_usuario),Toast.LENGTH_SHORT).show();finish()},
+                    {Toast.makeText(getThis(),resources.getString(R.string.guardado_editar_usuario),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_USUARIO);finish()},
                     {Toast.makeText(getThis(),resources.getString(R.string.error_editar_usuario),Toast.LENGTH_SHORT).show()}
                 )
             }

@@ -1,5 +1,6 @@
 package com.ello.kotlinseguridad.ui.adm_us
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -36,7 +37,7 @@ class AdmUsFrag : Fragment() {
                 mAdapter.list=it
                 mAdapter.notifyDataSetChanged()
             })
-            vm.CargarUsuarios()
+            vm.Cargar()
 
 
 
@@ -49,15 +50,24 @@ class AdmUsFrag : Fragment() {
 
         return root
     }
+    public fun Cargar(){ vm.Cargar()}
 
     private fun InitRecycler(root: View) {
         mRecyclerView=root.findViewById(R.id.recycler)
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= UsuarioAdapter(root.context) {activity?.startActivity(Intent(activity,
+        mAdapter= UsuarioAdapter(root.context) {startActivity(Intent(activity,
                 SUsuario::class.java).putExtra("id",it))}
         mRecyclerView.adapter=mAdapter;
+
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode== Activity.RESULT_OK){
+            vm.CargarDelServidor()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+
 
     }
 }

@@ -12,29 +12,32 @@ import kotlinx.coroutines.*
 class AdmUsVM : ViewModel() {
 
 
+    init {
+        viewModelScope.launch (Dispatchers.Main) {
+            CRUD.CargarTodosUsuarioLocal({ _listado.value = it;Log.e("local", "usuario"); }, {})
+        }
+    }
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
     public val _listado = MutableLiveData<List<Usuario>>()
 
-   fun CargarUsuarios()
+   fun Cargar()
    {
        viewModelScope.launch (Dispatchers.IO){
-
-              CRUD.CargarTodosUsuarioLocal({_listado.value=it;Log.e("local","usuario"); },{})
-                delay(4000)
               CRUD.CargarTodosUsuario({_listado.value=it;Log.e("server","usuario");}, {})
 
        }
 
    }
 
-
-
-
-
-
+    fun CargarDelServidor() {
+        viewModelScope.launch (Dispatchers.IO) {
+            CRUD.CargarTodosUsuario({ _listado.value = it;Log.e("server", "usuario"); }, {})
+        }
+    }
 
 
 }

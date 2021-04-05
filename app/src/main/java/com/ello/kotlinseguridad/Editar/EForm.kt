@@ -1,5 +1,6 @@
 package com.ello.kotlinseguridad.Editar
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.AnadirPregAdapter
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityEFormBinding
+import com.ello.kotlinseguridad.drawer1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -67,10 +69,6 @@ class EForm : AppCompatActivity() {
 
 
 
-        if (!vm.EstaListoParaCrear()){
-            Toast.makeText(getThis(),resources.getString(R.string.complete_fechas),Toast.LENGTH_SHORT).show()
-            return
-        }
 
         with(mBind){
 
@@ -87,7 +85,8 @@ class EForm : AppCompatActivity() {
                    vm.CrearFormulario(
                            editFormularNombre.text.toString(),
                            Calendar.getInstance().timeInMillis,Calendar.getInstance().timeInMillis,mAdapter.list,
-                           {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado),Toast.LENGTH_SHORT).show();finish()},
+                           {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
+                           {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_FORMULARIO);finish()},
                            {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado_error),Toast.LENGTH_SHORT).show()}
                            )
 
@@ -99,7 +98,8 @@ class EForm : AppCompatActivity() {
                  vm.EditarFormulario(mObjIdForm_toEdit!!,
                          mBind.editFormularNombre.text.toString(),
                          Calendar.getInstance().timeInMillis,Calendar.getInstance().timeInMillis,mAdapter.list,
-                         {Toast.makeText(getThis(),resources.getString(R.string.formulario_editado),Toast.LENGTH_SHORT).show();finish()},
+                         {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
+                         {Toast.makeText(getThis(),resources.getString(R.string.formulario_editado),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_FORMULARIO);finish()},
                          {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado_error),Toast.LENGTH_SHORT).show()}
                          )
 
@@ -111,10 +111,12 @@ class EForm : AppCompatActivity() {
 
     private fun Init() {
         mBind= ActivityEFormBinding.inflate(layoutInflater)
-        mBind.included.toolbar.title = resources.getString(R.string.titleEformulario)
+
         vm= EFormVM(this)
         setContentView(mBind.root)
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjIdForm_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
+        if (mObjIdForm_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCformulario)}
+        else{ mBind.included.toolbar.title = resources.getString(R.string.titleEformulario) }
 
     }
 

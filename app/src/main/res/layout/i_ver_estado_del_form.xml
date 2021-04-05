@@ -48,6 +48,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fecha"
+        >
+    </TextView>
+
+    <TextView
+
+        app:layout_constraintTop_toBottomOf="@id/item_fecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/item_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/una_actividad_hora"
 
         >
     </TextView>
