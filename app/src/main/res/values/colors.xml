@@ -805,5 +805,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorfondo1">#BEB5B4</color>
-    <color name="toolbarcolor">#FFCA45</color>
+    <color name="toolbarcolor">#858177</color>
+    <color name="colorNuevo1" >#AC7C05</color>
+    <color name="ColorNuevo2" >#AC7C05</color>
 </resources>

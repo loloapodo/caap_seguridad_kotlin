@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorfondo1"
+    android:background="@color/colorChipViewBackground"
     tools:context=".Activ.Login.Login">
 
 
@@ -12,13 +12,13 @@
         android:id="@+id/imageView2"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/casco"
+        app:srcCompat="@drawable/ic_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.16"
-        tools:srcCompat="@tools:sample/avatars" />
+         />
 
     <LinearLayout
         android:layout_width="match_parent"

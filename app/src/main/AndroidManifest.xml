@@ -30,7 +30,7 @@
         <activity
             android:name=".drawer2"
             android:label="@string/title_activity_drawer2"
-            android:theme="@style/Theme.KotlinSeguridad.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
         <activity
@@ -61,9 +61,11 @@
         <activity
             android:name=".drawer1"
             android:label="@string/title_activity_drawer1"
-            android:theme="@style/Theme.KotlinSeguridad.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <activity android:name=".Activ.Login.Login">
+        <activity android:name=".Activ.Login.Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

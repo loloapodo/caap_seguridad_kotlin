@@ -26,7 +26,10 @@
         android:layout_marginBottom="@dimen/editarusuariomargin"
         android:layout_gravity="center"
         android:layout_width="140dp"
-        android:layout_height="140dp">
+        android:layout_height="140dp"
+        android:src="@drawable/male"
+
+        >
     </ImageView>
 
     <com.google.android.material.textfield.TextInputLayout
