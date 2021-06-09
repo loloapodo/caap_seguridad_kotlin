@@ -1,6 +1,7 @@
 package com.ello.kotlinseguridad.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.ello.twelveseconds.Formulario
 import java.util.*
 import kotlin.collections.ArrayList
 
-class VerEstDelFormAdapter(mContext: Context, val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class VerEstDelFormAdapter(mContext: Context, val iClick:(usuario: Usuario,f: Formulario)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater = LayoutInflater.from(mContext)
      var list: ArrayList<Respuesta> = ArrayList()
@@ -41,6 +42,13 @@ class VerEstDelFormAdapter(mContext: Context, val iClick:(str:String)->Unit): Re
 
         if (holderT is EstadoH){
             val holder = holderT
+
+            Log.e("VerEstDelFormAdapter",position.toString())
+
+
+
+
+
             with(list[position]){
 
                val u= ref_usuario as Usuario
@@ -53,11 +61,21 @@ class VerEstDelFormAdapter(mContext: Context, val iClick:(str:String)->Unit): Re
                     if (EstaATiempo(f)){holder.EstadoEnvio.text= BIN.STR_POR_LLENAR}
                     else               {holder.EstadoEnvio.text= BIN.STR_EXPIRADO}
                     holder.Fecha_Entrega.text=""
+                    holder.HoraEntrega.text=""
+                    holder.itemView.setOnClickListener {}
+
                 }
                 else{
 
 
                     holder.Fecha_Entrega.text=Snippetk.LeerFechaR(fecha)
+                    holder.HoraEntrega.text=Snippetk.LeerHoraR(fecha)
+                    holder.itemView.setOnClickListener {
+                        iClick(u,f)
+                    }
+
+
+
                     if (FueATiempo(f, fecha!!)){holder.EstadoEnvio.text= BIN.STR_ENVIADO}
                     else               {holder.EstadoEnvio.text= BIN.STR_EXPIRADO}
 
@@ -95,6 +113,7 @@ class VerEstDelFormAdapter(mContext: Context, val iClick:(str:String)->Unit): Re
         val Nombre=view.itemNombreUsuario
         val Fecha_Entrega=view.itemFecha
         val EstadoEnvio=view.itemEstado
+        val HoraEntrega=view.itemHora
 
     }
 

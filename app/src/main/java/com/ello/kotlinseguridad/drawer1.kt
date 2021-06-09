@@ -1,6 +1,5 @@
 package com.ello.kotlinseguridad
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,15 +17,13 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.ello.kotlinseguridad.Activ.Login.Login
 import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.Editar.EActiv
-import com.ello.kotlinseguridad.Editar.EForm
-import com.ello.kotlinseguridad.Editar.EUsuario
+import com.ello.kotlinseguridad.Editar.*
 import com.ello.kotlinseguridad.ui.adm_act.AdmActFrag
+import com.ello.kotlinseguridad.ui.adm_equip.AdmEquipFrag
+import com.ello.kotlinseguridad.ui.adm_equip.AdmRolesFrag
 import com.ello.kotlinseguridad.ui.adm_form.AdmFormFrag
 import com.ello.kotlinseguridad.ui.adm_us.AdmUsFrag
 
@@ -40,6 +37,8 @@ class drawer1 : AppCompatActivity() {
         val RES_OK_CREAR_ACTIVIDAD=10
         val RES_OK_CREAR_FORMULARIO=11
         val RES_OK_CREAR_USUARIO=12
+        val RES_OK_CREAR_EQUIP=13
+        val RES_OK_CREAR_ROL=14
 
     }
 
@@ -60,6 +59,9 @@ class drawer1 : AppCompatActivity() {
             R.id.nav_usuarios -> Intent(this, EUsuario::class.java)
             R.id.nav_actividads-> Intent(this, EActiv::class.java)
             R.id.nav_formularios-> Intent(this, EForm::class.java)
+                 R.id.nav_equipamentos-> Intent(this, EEquip::class.java)
+                 R.id.nav_roles-> Intent(this, ERol::class.java)
+
                  else->Intent(this, EUsuario::class.java)
 
                  }
@@ -80,7 +82,7 @@ class drawer1 : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_usuarios, R.id.nav_formularios, R.id.nav_actividads
+                R.id.nav_usuarios, R.id.nav_formularios, R.id.nav_actividads,R.id.nav_equipamentos,R.id.nav_roles
             ), drawerLayout
         )
 
@@ -144,6 +146,16 @@ class drawer1 : AppCompatActivity() {
         if (resultCode== RES_OK_CREAR_USUARIO) {
 
             val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmUsFrag
+            I.Cargar()
+        }
+        if (resultCode== RES_OK_CREAR_EQUIP) {
+
+            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmEquipFrag
+            I.Cargar()
+        }
+        if (resultCode== RES_OK_CREAR_ROL) {
+
+            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmRolesFrag
             I.Cargar()
         }
 

@@ -20,6 +20,7 @@ import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.databinding.ActivitySFormBinding
+import com.ello.kotlinseguridad.responder.RDone
 import com.ello.kotlinseguridad.responder.RForm
 
 import kotlinx.coroutines.launch
@@ -90,7 +91,16 @@ class SForm : AppCompatActivity() {
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
         mAdapterPreguntas= VerPreDelFormAdapter(this,{}) ;
-        mAdapterEstados= VerEstDelFormAdapter(this,{}) ;
+        mAdapterEstados= VerEstDelFormAdapter(this) {
+            u,f->
+
+            val i=Intent(this, RDone::class.java)
+            i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
+            i.putExtra(BIN.EXTRA_USUARIO,u.objectId)
+            i.putExtra(BIN.EXTRA_NOMBRE,f.nombre)
+            startActivityForResult(i,BIN.REQ_VER_RESPUESTAS_FORMULARIO)
+        };
+
         mRecyclerView.adapter=mAdapterPreguntas;
     }
 
@@ -164,8 +174,12 @@ class SForm : AppCompatActivity() {
 
         if (intent.getBooleanExtra(EXTRA_RESUELTO,false))
         {
-            //todo
-            Toast.makeText(getThis(),"TODO",Toast.LENGTH_SHORT).show();
+            val i=Intent(this, RDone::class.java)
+            i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
+            i.putExtra(BIN.EXTRA_USUARIO,BIN.CARGAR_USUARIO_LOGED()!!.objectId)
+            i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
+            startActivityForResult(i,BIN.REQ_VER_RESPUESTAS_FORMULARIO)
+
         }
         else{
             val i=Intent(this, RForm::class.java)

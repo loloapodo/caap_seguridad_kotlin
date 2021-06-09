@@ -3,10 +3,7 @@ package com.ello.kotlinseguridad.BIN
 import android.graphics.Bitmap
 import android.util.Log
 import android.widget.ImageView
-import com.ello.kotlinseguridad.ParseObj.Actividad
-import com.ello.kotlinseguridad.ParseObj.Pregunta
-import com.ello.kotlinseguridad.ParseObj.Respuesta
-import com.ello.kotlinseguridad.ParseObj.Usuario
+import com.ello.kotlinseguridad.ParseObj.*
 import com.ello.twelveseconds.Formulario
 import com.parse.*
 import kotlinx.coroutines.Dispatchers
@@ -128,7 +125,7 @@ companion object{
     suspend fun CargarTodosUsuario(fg: (list:List<Usuario>) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
-        query.orderByAscending(Usuario.field_nom_apell)
+        query.orderByAscending(Usuario.field_nom)
        query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list);ParseObject.pinAll(list) }
             else
@@ -139,7 +136,7 @@ companion object{
 
     suspend fun CargarTodosUsuarioLocal(fg: (list:List<Usuario>) -> Unit,fb: () -> Unit) {
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
-        query.orderByAscending(Usuario.field_nom_apell)
+        query.orderByAscending(Usuario.field_nom)
         query.fromLocalDatastore()
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list) }
@@ -154,7 +151,7 @@ companion object{
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
         query.getInBackground(str_ObjectId, GetCallback { objeto, e ->
             if (e==null){fg(objeto) }
-            else { fb();Log.e("Error","Buscar un usuario") }
+            else { fb();Log.e("Error","Buscar un usuario ${e.message}"); }
         })
 
     }
@@ -357,6 +354,7 @@ companion object{
     }
 
 
+
     /**
      * Borra el formulario, tambien las preguntas que pertencen a este
      */
@@ -445,7 +443,7 @@ companion object{
     suspend fun CargarTodosUsuariosdeActividad(act: Actividad,fg: (list:List<Usuario>) -> Unit,fb: () -> Unit){
 
         val query = act.getRelation<Usuario>(Actividad.field_rel_usuarios).query
-        query.orderByAscending(Usuario.field_nom_apell)
+        query.orderByAscending(Usuario.field_nom)
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list) }
             else
@@ -457,7 +455,7 @@ companion object{
 
         CargarUnActividad(act_ObjectId, { act ->
             val query = act.getRelation<Usuario>(Actividad.field_rel_usuarios).query
-            query.orderByAscending(Usuario.field_nom_apell)
+            query.orderByAscending(Usuario.field_nom)
             query.findInBackground(FindCallback { list, e ->
                 if (e == null) {
                     fg(act, list)
@@ -764,11 +762,262 @@ companion object{
         })
     }
 
+    fun CargarTodosRoles(fg: (r:List<Rol>) -> Unit,fb : () -> Unit) {
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.findInBackground { list_roles, e ->
+            if (e==null){fg(list_roles) }
+            else { fb();Log.e("Error","Buscar roles") }
+        }
+    }
 
+    fun CargarTodasEquipamiento(fg: (list: List<Equip>) -> Unit, fb: () -> Unit) {
+
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list) }
+            else
+            { fb();Log.e("Error","Buscar All Equipamiento") }
+        })
+
+    }
+    fun CargarTodasRol(fg: (list: List<Rol>) -> Unit, fb: () -> Unit) {
+
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list) }
+            else
+            { fb();Log.e("Error","Buscar All Equipamiento") }
+        })
+
+    }
+
+    fun CargarUnEquipamiento(idEquipa: String, fg: (activ: Equip) -> Unit, fb: () -> Unit) {
+
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name)
+        query.getInBackground(idEquipa, GetCallback { objeto, e ->
+            if (e==null){fg(objeto) }
+            else { fb();Log.e("Error","Buscar un equipamiento") }
+        })
+    }
+    fun CargarUnRol(idEquipa: String, fg: (activ: Rol) -> Unit, fb: () -> Unit) {
+
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.getInBackground(idEquipa, GetCallback { objeto, e ->
+            if (e==null){fg(objeto) }
+            else { fb();Log.e("Error","Buscar un rol") }
+        })
+
+    }
+
+    suspend fun BorrarEquipamiento(str_ObjectId: String,fg: () -> Unit,fb: () -> Unit){
+
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name)
+        query.getInBackground(str_ObjectId, GetCallback { u, e ->
+
+            if (e == null) {
+                u.deleteInBackground() { e2 ->
+                    if (e2 == null) {
+                        fg();Log.e("Borrado del serv","Borrado del Serv")
+                    } else {
+                        Log.e("Error","Al borrar del servidior")
+                        fb();
+                    }
+                }
+            } else {
+                fb()
+                Log.e("Error borrar","Al buscar en el servidior")
+            }
+        })
+
+    }
+
+    suspend fun BorrarRol(str_ObjectId: String,fg: () -> Unit,fb: () -> Unit){
+
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.getInBackground(str_ObjectId, GetCallback { u, e ->
+
+            if (e == null) {
+                u.deleteInBackground() { e2 ->
+                    if (e2 == null) {
+                        fg();Log.e("Borrado del serv","Borrado del Serv")
+                    } else {
+                        Log.e("Error","Al borrar del servidior")
+                        fb();
+                    }
+                }
+            } else {
+                fb()
+                Log.e("Error borrar","Al buscar en el servidior")
+            }
+        })
+
+    }
+
+
+    fun CrearEquipamiento(nombre: String,str_uso: String,str_desc: String, foto: Bitmap?, fg: () -> Unit, fb: () -> Unit) {
+
+        fun innerSave(u:Equip,fg: () -> kotlin.Unit,fb: () -> Unit){
+            u.saveInBackground { e2 ->
+                if (e2 == null) {
+                    fg();Log.e("Modificado en serv","guardado equip con imagen")
+
+                } else {
+                    fb();Log.e("Error","modificado equip con imagen")
+                }
+            }
+        }
+
+        val u=Equip()
+        u.nombre=nombre
+        u.descripcion=str_desc
+        u.uso=str_uso
+
+        if (foto != null) {
+            val file= Snippetk.BitmapToParseFile(foto);
+            file.saveInBackground(SaveCallback { e ->
+                if (e==null){
+
+                    u.foto=file
+                    innerSave(u,fg,fb)
+
+
+                }else{
+                    fb()
+                    Log.e("Error",e.message)
+                    Log.e("Error","33w")
+                }
+            })
+        }
+        else{
+            innerSave(u,fg,fb)
+        }
+
+    }
+
+
+    fun CrearRol(nombre: String, fg: () -> Unit, fb: () -> Unit) {
+
+        val u=Rol()
+        u.nombre_rol=nombre
+
+            u.saveInBackground { e2 ->
+                if (e2 == null) { fg(); } else { fb(); }
+            }
+
+
+
+
+    }
+
+
+    fun EditarEquipamiento(str_ObjectId: String, nombre: String,str_uso: String,str_desc: String, foto: Bitmap?, fg: () -> Unit, fb: () -> Unit)
+    {
+        Log.e("Pasos","22")
+        fun innerSave(u:Equip,fg: () -> kotlin.Unit,fb: () -> Unit){
+            u.saveInBackground { e2 ->
+                if (e2 == null) {
+                    fg();Log.e("Modificado en serv","guardado equip con imagen")
+
+                } else {
+                    fb();Log.e("Error","modificado equip con imagen")
+                }
+            }
+        }
+
+        Log.e("Pasos","23")
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name)
+        query.getInBackground(str_ObjectId, GetCallback { u, e ->
+            Log.e("Pasos","23")
+            if (e == null) {
+                Log.e("Pasos","24")
+                // Update the fields we want to
+                u.nombre=nombre
+                u.descripcion=str_desc
+                u.uso=str_uso
+                if (foto != null) {
+                    Log.e("Pasos","25")
+                    val file= Snippetk.BitmapToParseFile(foto);
+                    file.saveInBackground(SaveCallback { e2 ->
+                        if (e2==null){
+                            u.foto=file
+                            innerSave(u,fg, fb)
+
+                        }else{
+                            fb()
+                            Log.e("Error",e2.message)
+                            Log.e("Error","33")
+                        }
+                    })
+                }
+                else{
+                    innerSave(u,fg, fb)
+                }
+
+
+            } else {
+                Log.e("Pasos","26")
+                fb()
+
+            }
+        })
+    }
+    fun EditarRol(str_ObjectId: String,nombre:String,fg: () -> Unit,fb: () -> Unit)
+    {
+
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.getInBackground(str_ObjectId, GetCallback { u, e ->
+            Log.e("Pasos","23")
+            if (e == null) {
+                Log.e("Pasos","24")
+                // Update the fields we want to
+                u.nombre_rol=nombre
+
+                u.saveInBackground { e2 ->
+                    if (e2 == null) {
+                        fg();
+
+                    } else {
+                        fb();
+                    }
+                }
+
+
+            } else {
+                fb()
+            }
+        })
+
+
+
+
+    }
+
+    fun CargarTodasEquipamientoLocal(fg: (list: List<Equip>) -> Unit, fb: () -> Unit){
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name).fromLocalDatastore()
+
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list) }
+            else
+            { fb();Log.e("Error","Buscar All Equipamiento") }
+        })
+    }
+
+    fun CargarTodasRolLocal(fg: (list: List<Rol>) -> Unit, fb: () -> Unit) {
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name).fromLocalDatastore()
+
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list) }
+            else
+            { fb();Log.e("Error","Buscar All Equipamiento") }
+        })
+
+
+    }
 
 
 
 }
+
 
 }
 

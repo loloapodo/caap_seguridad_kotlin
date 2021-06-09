@@ -32,7 +32,7 @@
     <string name="una_activiad_createdAt">Fecha de Creación</string>
     <string name="una_actividad_fecha">Fecha</string>
     <string name="una_actividad_fechaexpir">Fecha de expiración</string>
-    <string name="una_actividad_descripci">Esta tarea conciste en ir a buscar a casa de Pepe las comidas preparadas para la boda</string>
+    <string name="una_actividad_descripci">Descripción de la Actividad</string>
     <string name="menu_eliminar">Eliminar</string>
     <string name="usuario_borrado">Eliminado</string>
     <string name="hint_descripc">Descripción de Actividad</string>
@@ -60,9 +60,10 @@
     <string name="SeleccionaDiaActividad">Selecciona el día</string>
 
 
-    <string name="menu_home">Usuarios</string>
-    <string name="menu_gallery">Formularios</string>
-    <string name="menu_slideshow">Actividades</string>
+    <string name="menu_usuar">Usuarios</string>
+    <string name="menu_formul">Formularios</string>
+    <string name="menu_act">Actividades</string>
+    <string name="menu_equip">Equipamiento</string>
 
     <string name="menu_str_usuario">Usuarios</string>
     <string name="menu_str_actividades">Actividades</string>
@@ -109,6 +110,32 @@
     <string name="fecha_imposible">Seleccione una fecha válida</string>
     <string name="una_actividad_hora">Hora</string>
     <string name="ver_mi_respuesta">Revisar</string>
+    <string name="atras">Atrás</string>
+    <string name="preguntas_respuesta">Preguntas contestadas</string>
+    <string name="hint_rol">Rol asignado</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="regresar">Regresar</string>
+
+    <string name="titleequip">Equipamientos</string>
+    <string name="editarbut">Editar</string>
+    <string name="hint_nombre_eq">Equipamiento</string>
+    <string name="titleCequipamiento">Nuevo equipamiento</string>
+    <string name="titleEequipamiento">Editar Equipamiento</string>
+    <string name="menu_str_equipamietos">Equipamientos</string>
+    <string name="equipamiento_eliminado">Equipamiento Eliminado</string>
+    <string name="equipamiento_error_eliminado">Error al eliminar</string>
+    <string name="eliminarbut">Eliminar</string>
+    <string name="menu_str_roles">Roles</string>
+    <string name="hint_nombre_rol">Rol</string>
+    <string name="titlerol">Rol</string>
+    <string name="titleErol">Editar rol</string>
+    <string name="rol_eliminado">Eliminado</string>
+    <string name="rol_error_eliminado">Error al eliminar</string>
+    <string name="titleCRol">Nuevo Rol</string>
+    <string name="una_equipamiento_uso">Uso</string>
+    <string name="una_equipamiento_descripcion">Descripción</string>
+    <string name="hint_descr_eq">Descripción</string>
+    <string name="hint_uso_eq">Uso</string>
 
 
 </resources>

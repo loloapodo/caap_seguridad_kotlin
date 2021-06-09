@@ -9,24 +9,22 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.ello.kotlinseguridad.*
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.BIN.Snippets
-import com.ello.kotlinseguridad.databinding.ActivityEUsBinding
+import com.ello.kotlinseguridad.databinding.ActivityEEqBinding
 import java.io.IOException
 
 
-class EUsuario : AppCompatActivity() {
+class EEquip : AppCompatActivity() {
 
 
 
-    private lateinit var mBind: ActivityEUsBinding
-    private lateinit var vm: EUsuarioVM
+    private lateinit var mBind: ActivityEEqBinding
+    private lateinit var vm: EEquipVM
     private  var mFoto: Bitmap? = null
 
     var mObjId_toEdit:String? = "" // Editar, 1 Crear
@@ -43,43 +41,14 @@ class EUsuario : AppCompatActivity() {
     }
 
     private fun Init() {
-        vm= EUsuarioVM(this)
-        mBind= ActivityEUsBinding.inflate(layoutInflater)
+        vm= EEquipVM()
+        mBind= ActivityEEqBinding.inflate(layoutInflater)
 
         setContentView(mBind.root)
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
 
-        if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCusuario)}
-        else{
-            mBind.included.toolbar.title = resources.getString(R.string.titleEusuario)
-            vm.CargarDatosUsuario(mObjId_toEdit!!)
-
-        }
-
-
-
-        vm._roles.observe(this, Observer {
-
-            val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, it)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            mBind.editarusuarioSpinnerRoles.adapter = adapter
-        })
-
-        vm._cedula.observe(this, Observer {
-
-            mBind.editusuarioNombre.setText(vm.nombre)
-            mBind.editusuarioApellido.setText(vm.apellido)
-            mBind.editusuarioCedula.setText(vm._cedula.value)
-            mBind.editusuarioUsuario.setText(vm.usuario)
-            mBind.editusuarioContrase.setText(vm.contrasena)
-
-
-        })
-
-
-
-        vm.CargarTodosRoles()
-
+        if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCequipamiento)}
+        else{ mBind.included.toolbar.title = resources.getString(R.string.titleEequipamiento) }
 
 
 
@@ -89,41 +58,29 @@ class EUsuario : AppCompatActivity() {
     fun AcpetarClick(view: View) {
 
 
-            with(mBind){
+            with(mBind) {
 
-               if (vm.CamposEstanMal(
-                       editusuarioUsuario,
-                       editusuarioContrase,
-                       editusuarioNombre,
-                       editusuarioApellido,
-                       editusuarioCedula,
-                       editarusuarioSpinnerRoles
-                   ))
-               {
-                   Toast.makeText(
-                       getThis(),
-                       resources.getString(R.string.toast_campos_mal),
-                       Toast.LENGTH_SHORT
-                   ).show();
-                   return
-               }
+                if (vm.CamposEstanMal(editusuarioNombre,editusuarioUso,editusuarioDescripcion)) {
+                    Toast.makeText(
+                        getThis(),
+                        resources.getString(R.string.toast_campos_mal),
+                        Toast.LENGTH_SHORT
+                    ).show();
+                    return
+                }
+            }
 
 
                 if (mObjId_toEdit.isNullOrEmpty())//Crear
                 {
                 Log.e("Crear", "Crear")
-                    vm.CrearUsuario(
-                        editusuarioUsuario.text.toString(),
-                        editusuarioContrase.text.toString(),
-                        editusuarioNombre.text.toString() + " " + editusuarioApellido.text.toString(),
-                        editusuarioCedula.text.toString(),
-                        mFoto,
+                    vm.CrearEquipamiento(mBind.editusuarioNombre.text.toString(),mBind.editusuarioUso.text.toString(),mBind.editusuarioDescripcion.text.toString(), mFoto,
                         {
                             Toast.makeText(
                                 getThis(),
                                 resources.getString(R.string.guardado_editar_usuario),
                                 Toast.LENGTH_SHORT
-                            ).show();setResult(drawer1.RES_OK_CREAR_USUARIO);finish()
+                            ).show();setResult(drawer1.RES_OK_CREAR_EQUIP);finish()
                         },
                         {
                             Toast.makeText(
@@ -139,19 +96,14 @@ class EUsuario : AppCompatActivity() {
             }else //Editar
             {
                 Log.e("Editar", "Editar")
-                vm.EditarUsuario(
-                    mObjId_toEdit!!,
-                    editusuarioUsuarioL.editText?.text.toString(),
-                    editusuarioContraseL.editText?.text.toString(),
-                    editusuarioNombreL.editText?.text.toString() + " " + editusuarioApellidoL.editText?.text.toString(),
-                    editusuarioCedulaL.editText?.text.toString(),
-                    mFoto,
+                vm.EditarEquipamiento(
+                    mObjId_toEdit!!,mBind.editusuarioNombre.text.toString(),mBind.editusuarioUso.text.toString(),mBind.editusuarioDescripcion.text.toString(),mFoto,
                     {
                         Toast.makeText(
                             getThis(),
                             resources.getString(R.string.guardado_editar_usuario),
                             Toast.LENGTH_SHORT
-                        ).show();setResult(drawer1.RES_OK_CREAR_USUARIO);finish()
+                        ).show();setResult(drawer1.RES_OK_CREAR_EQUIP);finish()
                     },
                     {
                         Toast.makeText(
@@ -166,7 +118,7 @@ class EUsuario : AppCompatActivity() {
 
 
         }
-    }
+
 
     fun getThis():Context{return this}
     fun LoadFoto(view: View) {
@@ -212,8 +164,11 @@ class EUsuario : AppCompatActivity() {
     }
 
     fun CancelarClick(view: View) {
-        //TODO
         finish();
     }
+
+
+
+
 
 }

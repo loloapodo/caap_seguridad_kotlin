@@ -1,4 +1,4 @@
-package com.ello.kotlinseguridad.ui.adm_form
+package com.ello.kotlinseguridad.ui.adm_equip
 
 import android.app.Activity
 import android.content.Intent
@@ -12,41 +12,33 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ello.kotlinseguridad.Adapter.FormularioAdapter
-import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.Adapter.EquipamientoAdapter
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Simple.SForm
+import com.ello.kotlinseguridad.Simple.SEquip
 
-class AdmFormFrag : Fragment() {
+class AdmEquipFrag : Fragment() {
 
-    private lateinit var vm: AdmFormVM
-    private lateinit var mAdapter: FormularioAdapter
+    private lateinit var vm: AdmEquipVM
+    private lateinit var mAdapter: EquipamientoAdapter
     private lateinit var mRecyclerView: RecyclerView
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        vm =
-            ViewModelProvider(requireActivity()).get(AdmFormVM::class.java)
-        val root = inflater.inflate(R.layout.frag_adm_form, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_gallery)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        vm = ViewModelProvider(requireActivity()).get(AdmEquipVM::class.java)
+        val root = inflater.inflate(R.layout.frag_adm_equip, container, false)
+
 
         InitRecycler(root)
 
-    vm._listado.observe(viewLifecycleOwner, Observer {
+        vm._listado.observe(viewLifecycleOwner, Observer {
                 Log.e("observer done","observerd done");
                 mAdapter.list=it
                 mAdapter.notifyDataSetChanged()
             })
         vm.Cargar()
 
-
-
-
         return root
     }
+
     public fun Cargar(){ vm.Cargar()}
 
 
@@ -55,17 +47,15 @@ class AdmFormFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter=
-                FormularioAdapter(root.context){startActivity(Intent(activity,
-                        SForm::class.java).putExtra("id",it))}
+        mAdapter= EquipamientoAdapter(root.context){startActivity(Intent(activity,
+                SEquip::class.java).putExtra("id",it))}
         mRecyclerView.adapter=mAdapter;
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(resultCode== Activity.RESULT_OK){
+        if(resultCode==Activity.RESULT_OK){
             vm.CargarDelServidor()
         }
         super.onActivityResult(requestCode, resultCode, data)
-
-
     }
 }

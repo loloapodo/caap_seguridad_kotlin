@@ -17,6 +17,8 @@ class SFormVM() : ViewModel() {
 
     lateinit var  nombre_formulario:String
     lateinit var id_formulario:String
+    lateinit var id_usuario:String
+
     var estado = MutableLiveData<Estado>()
 
     init {

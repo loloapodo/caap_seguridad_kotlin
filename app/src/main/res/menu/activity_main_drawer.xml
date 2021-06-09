@@ -19,5 +19,18 @@
             android:id="@+id/nav_actividads"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_str_actividades" />
+        <item
+
+            android:id="@+id/nav_equipamentos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_equipamietos" />
+
+        <item
+
+            android:id="@+id/nav_roles"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_roles" />
+
+
     </group>
 </menu>

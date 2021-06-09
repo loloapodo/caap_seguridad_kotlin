@@ -17,7 +17,10 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Init()
 
-
+        vm.estado.observe(this, Observer {
+            if (it==Estado.Idle){mBind.button.visibility=View.VISIBLE}
+            else{ mBind.button.visibility=View.INVISIBLE }
+        })
 
     }
 

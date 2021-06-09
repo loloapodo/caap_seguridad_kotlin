@@ -38,7 +38,7 @@ class SUsuario : AppCompatActivity() {
             //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
 
 
-            mBind.unaPersonaName.text=o.nom_apell
+            mBind.unaPersonaName.text=o.nom_apell+" "+o.apell
             mBind.unUsuarioNombreusuario.text=o.usuario
             mBind.unUsuarioContrasena.text=o.contrasena
             mBind.unUsuarioCedula.text=o.cedula
@@ -88,6 +88,7 @@ class SUsuario : AppCompatActivity() {
             lifecycleScope.launch {
                 val i = Intent(getThis(), EUsuario::class.java);
                 i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_usuario)
+
                 startActivity(i)
             }
             return@setOnMenuItemClickListener true;

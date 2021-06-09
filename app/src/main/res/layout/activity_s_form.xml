@@ -32,7 +32,8 @@
 
 
             </LinearLayout>
-            <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/spacing_xlarge" android:paddingRight="@dimen/spacing_xlarge" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_large">
+            <LinearLayout
+                android:orientation="vertical" android:paddingLeft="@dimen/spacing_xlarge" android:paddingRight="@dimen/spacing_xlarge" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_large">
                 <TextView
                     android:id="@+id/sform_adapctertitle"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"

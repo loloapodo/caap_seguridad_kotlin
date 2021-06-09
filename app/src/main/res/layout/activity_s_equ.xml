@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:background="@android:color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <com.google.android.material.appbar.AppBarLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/my_toolbar" android:id="@+id/included"> </include>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView  android:scrollbars="none" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scrollingCache="true" app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView
+
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xlarge"
+                    android:id="@+id/una_actividad_name"
+                    android:text="Nombre del Equipamiento"
+                    android:textAlignment="center"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    />
+
+
+
+
+                    <ImageView
+                        android:layout_marginTop="@dimen/spacing_mlarge"
+                        android:layout_width="130.0dip"
+                        android:layout_height="130.0dip"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/una_persona_image"
+                        android:src="@drawable/male"
+                        >
+
+                    </ImageView>
+
+
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/spacing_xlarge"
+                    android:layout_marginRight="@dimen/spacing_xlarge"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/MasInfo" />
+                <View
+                    android:layout_marginLeft="@dimen/spacing_xlarge"
+                    android:layout_marginRight="@dimen/spacing_xlarge"
+                    android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+
+
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/spacing_xlarge"
+                    android:layout_marginRight="@dimen/spacing_xlarge"
+                    android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/un_equipo_uso"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_equipamiento_uso" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView
+
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_equipamiento_uso" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/spacing_xlarge"
+                    android:layout_marginRight="@dimen/spacing_xlarge"
+                    android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/un_equipo_descripcion"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_equipamiento_descripcion" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_equipamiento_descripcion" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <Button
+                        android:layout_marginTop="@dimen/editarusuariomargin"
+                        android:layout_marginBottom="@dimen/editarusuariomargin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/atras"
+                        android:layout_gravity="center"
+                        android:onClick="CancelarClick"
+                        >
+                    </Button>
+
+                    <View
+
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"
+
+
+                        >
+                    </View>
+
+                    <Button
+
+                        android:layout_marginTop="@dimen/editarusuariomargin"
+                        android:layout_marginBottom="@dimen/editarusuariomargin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eliminarbut"
+                        android:layout_gravity="center"
+                        android:onClick="EliminarEquipClick"
+                        >
+                    </Button>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"
+                        >
+                    </View>
+
+                    <Button
+                        android:layout_marginTop="@dimen/editarusuariomargin"
+                        android:layout_marginBottom="@dimen/editarusuariomargin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editarbut"
+                        android:layout_gravity="center"
+                        android:onClick="EditarEquipClick"
+                        >
+                    </Button>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

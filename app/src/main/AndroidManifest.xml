@@ -43,6 +43,12 @@
             android:name=".Editar.EUsuario"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".Editar.EEquip"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Editar.ERol"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".Simple.SActiv"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
@@ -52,7 +58,18 @@
             android:name=".Simple.SUsuario"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".Simple.SEquip"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Simple.SRol"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".responder.RForm"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+        </activity>
+        <activity
+            android:name=".responder.RDone"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
         </activity>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:background="@android:color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.appbar.AppBarLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/my_toolbar" android:id="@+id/included"> </include>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView  android:scrollbars="none" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scrollingCache="true" app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xlarge"
+                    android:id="@+id/una_formulario_nombre"
+                    android:text="Nombre"
+                    android:textAlignment="center"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    />
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/spacing_xlarge" android:paddingRight="@dimen/spacing_xlarge" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_large">
+                <TextView
+                    android:id="@+id/sform_adapctertitle"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:text="@string/preguntas_respuesta" />
+                <View android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/i_ver_pre_del_form"
+                    android:id="@+id/recycler"
+                    tools:itemCount="2"
+
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+
+
+
+
+                <Button
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/atras"
+                    android:id="@+id/bu_atras"
+                    android:layout_gravity="center"
+                    android:onClick="AtrasClick"
+                    android:visibility="visible"
+                    >
+
+                </Button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <View android:layout_width="fill_parent" android:layout_height="@dimen/spacing_xxlarge" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

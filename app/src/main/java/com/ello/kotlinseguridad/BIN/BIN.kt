@@ -57,13 +57,17 @@ companion object{
 
 
 
+    val EMPTY_ROL: String="Asignar Rol"
     val STR_ENVIADO: String="LLENADO"
     val STR_POR_LLENAR: String="POR LLENAR"
     val STR_EXPIRADO: String="EXPIRADO"
 
     val REQUEST_MY_PERMISSIONS_LOCATION=22
     val REQ_LLENAR_FORMULARIO=10
+    val REQ_VER_RESPUESTAS_FORMULARIO=13
 
+    val REQ_EDITAR_EQUIP=400
+    val REQ_EDITAR_ROL=401
 
     val PIN_FORMULARIO_RESPONDIDOS="formulario_a_respondido"
      val PIN_FORMULARIO_SIN_RESPONDER="formulario_a_responder"
@@ -73,6 +77,7 @@ companion object{
     val EXTRA_SHOW_BOTON_RESPONDER="show_boton"
     val EXTRA_NOMBRE="name"
     val EXTRA_ID="id"
+    val EXTRA_USUARIO="us"
 
     val PIN_USUARIO_LOGUEADO="usuario_logueado"
 

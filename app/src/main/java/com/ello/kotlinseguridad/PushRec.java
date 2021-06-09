@@ -15,12 +15,9 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.ello.kotlinseguridad.Activ.Login.Login;
-import com.ello.kotlinseguridad.BIN.BIN;
-import com.ello.kotlinseguridad.BIN.Snippetk;
 import com.ello.kotlinseguridad.ParseObj.Usuario;
 import com.ello.twelveseconds.Formulario;
 import com.parse.ParsePushBroadcastReceiver;
-import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +43,7 @@ public class PushRec extends BroadcastReceiver {
         try {
             extras = new JSONObject(intent.getStringExtra(ParsePushBroadcastReceiver.KEY_PUSH_DATA));
 
-            String nombre = extras.getString(Usuario.Companion.getField_nom_apell());
+            String nombre = extras.getString(Usuario.Companion.getField_nom());
             String nombre_formul = extras.getString(Formulario.Companion.getField_nombre());
             CrearNotSimple(nombre,nombre_formul);
 

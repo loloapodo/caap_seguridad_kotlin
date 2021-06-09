@@ -65,10 +65,27 @@ class Snippetk {
             {
                 withContext(Dispatchers.Main){c.setImageDrawable(c.context.resources.getDrawable(R.drawable.male));Log.e("done", "PonerFotoCircular")}
             }
+        }
+        suspend fun PonerFoto(c:ImageView,parsefile:ParseFile?)
+        {
 
+            val parseFile: ParseFile? = parsefile
 
+            if (parseFile != null&&parseFile.data.size>300) {
+                try {
+                    val bitmap = BitmapFactory.decodeByteArray(parseFile.data, 0, parseFile.data.size)
+                    Log.e("PonerFoto","Parse file size="+parseFile.data.size.toString())
+                    Log.e("PonerFoto","Bitmap size: ${bitmap.height}x${bitmap.width}")
+                    withContext(Dispatchers.Main){c.setImageBitmap(bitmap);Log.e("done", "PonerFoto")}
 
-
+                } catch (e: Exception) {
+                    Log.e("ParseFile", "Error al convertir a bitmap")
+                    Log.e("ParseFile", e.message)
+                }
+            }else
+            {
+                withContext(Dispatchers.Main){c.setImageDrawable(c.context.resources.getDrawable(R.drawable.male));Log.e("done", "PonerFoto")}
+            }
         }
 
 

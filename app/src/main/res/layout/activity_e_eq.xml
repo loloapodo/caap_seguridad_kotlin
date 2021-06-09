@@ -61,57 +61,7 @@
                 android:id="@+id/editusuario_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_nombre"
-                android:textColorHint="@color/black"
-                >
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            android:layout_marginTop="@dimen/editarusuariomargin"
-            android:layout_marginBottom="@dimen/editarusuariomargin"
-            android:layout_marginEnd="@dimen/editarusuariomarginleft"
-            android:layout_marginStart="@dimen/editarusuariomarginleft"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:id="@+id/editusuario_apellidoL"
-            >
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editusuario_apellido"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_apellido"
-                android:textColorHint="@color/black"
-                >
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="@dimen/editarusuariomargin"
-            android:layout_marginBottom="@dimen/editarusuariomargin"
-            android:layout_marginEnd="@dimen/editarusuariomarginleft"
-            android:layout_marginStart="@dimen/editarusuariomarginleft"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:id="@+id/editusuario_usuarioL"
-            >
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editusuario_usuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_usuario"
+                android:hint="@string/hint_nombre_eq"
                 android:textColorHint="@color/black"
                 >
             </com.google.android.material.textfield.TextInputEditText>
@@ -119,32 +69,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="@dimen/editarusuariomargin"
-            android:layout_marginBottom="@dimen/editarusuariomargin"
-            android:layout_marginEnd="@dimen/editarusuariomarginleft"
-            android:layout_marginStart="@dimen/editarusuariomarginleft"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:id="@+id/editusuario_contraseL"
-            >
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editusuario_contrase"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_contrase"
-                android:textColorHint="@color/black"
-                >
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <com.google.android.material.textfield.TextInputLayout
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -155,39 +80,44 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:id="@+id/editusuario_cedulaL"
+            android:id="@+id/editusuario_usoL"
             >
 
-
             <com.google.android.material.textfield.TextInputEditText
-
-                android:id="@+id/editusuario_cedula"
+                android:id="@+id/editusuario_uso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_cedula"
+                android:hint="@string/hint_uso_eq"
                 android:textColorHint="@color/black"
                 >
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/editarusuario_spinner_roles"
+        <com.google.android.material.textfield.TextInputLayout
+
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
             android:layout_marginStart="@dimen/editarusuariomarginleft"
+
+
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/editusuario_descripcionL"
+            >
 
-        </Spinner>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editusuario_descripcion"
+                android:layout_width="match_parent"
 
-
-
-
-
-
-
-
+                android:hint="@string/hint_descr_eq"
+                android:layout_height="100dp"
+                android:textColorHint="@color/black"
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

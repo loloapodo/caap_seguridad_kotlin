@@ -2,7 +2,6 @@ package com.ello.kotlinseguridad.responder
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.hardware.usb.UsbInterface
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,6 @@ import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.ParseObj.Respuesta
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.twelveseconds.Formulario
-import com.parse.ParseObject
 import com.parse.ParsePush
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -133,7 +131,7 @@ return ""
 // Put data in the JSON object
 // Put data in the JSON object
         try {
-            data.put(Usuario.field_nom_apell, u.nom_apell)
+            data.put(Usuario.field_nom, u.nom_apell)
             data.put(Formulario.field_nombre, form.nombre)
         } catch (e: JSONException) {
             // should not happen
