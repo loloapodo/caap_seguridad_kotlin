@@ -56,9 +56,10 @@ class drawer1 : AppCompatActivity() {
             val intent=
              when(navController.currentDestination?.id)
              {
-            R.id.nav_usuarios -> Intent(this, EUsuario::class.java)
-            R.id.nav_actividads-> Intent(this, EActiv::class.java)
-            R.id.nav_formularios-> Intent(this, EForm::class.java)
+                 R.id.nav_empleados-> Intent(this, EUsuario::class.java)
+                 R.id.nav_usuarios -> Intent(this, EUsuario::class.java)
+                 R.id.nav_actividads-> Intent(this, EActiv::class.java)
+                 R.id.nav_formularios-> Intent(this, EForm::class.java)
                  R.id.nav_equipamentos-> Intent(this, EEquip::class.java)
                  R.id.nav_roles-> Intent(this, ERol::class.java)
 
@@ -82,7 +83,7 @@ class drawer1 : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_usuarios, R.id.nav_formularios, R.id.nav_actividads,R.id.nav_equipamentos,R.id.nav_roles
+                R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads,R.id.nav_usuarios,R.id.nav_roles
             ), drawerLayout
         )
 

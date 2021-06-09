@@ -3,34 +3,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_usuarios"
-            android:icon="@drawable/ic_menu_camera"
+    <group
+        android:id="@+id/idmenu1"
+        android:checkableBehavior="single">
 
-            android:title="@string/menu_str_usuario" />
         <item
-
-            android:id="@+id/nav_formularios"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_str_formularios" />
-        <item
-
-            android:id="@+id/nav_actividads"
+            android:id="@+id/nav_empleados"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_str_actividades" />
-        <item
-
-            android:id="@+id/nav_equipamentos"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_str_equipamietos" />
+            android:title="@string/menu_str_empleados" />
 
         <item
-
             android:id="@+id/nav_roles"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_str_roles" />
 
+        <item
+            android:id="@+id/nav_equipamentos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_equipamietos" />
 
     </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/idmenu2">
+
+
+    <item
+
+        android:id="@+id/nav_formularios"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="@string/menu_str_formularios" />
+
+
+    <item
+
+        android:id="@+id/nav_actividads"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="@string/menu_str_actividades" />
+
+</group>
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/idmenu3">
+
+        <item
+            android:id="@+id/nav_usuarios"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_str_usuario" />
+
+
+
+
+        <item
+            android:id="@+id/nav_cerrar_cuenta"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_salir" />
+
+        <item
+            android:id="@+id/nav_salir_app"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_salir_de_app" />
+
+
+    </group>
+
+
 </menu>

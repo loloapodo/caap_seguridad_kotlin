@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,9 +15,9 @@ import com.ello.kotlinseguridad.databinding.ActivitySUsBinding
 import kotlinx.coroutines.launch
 
 
-class SUsuario : AppCompatActivity() {
+class SEmpleado : AppCompatActivity() {
 
-    private  var vm: SUsuarioVM = SUsuarioVM()
+    private  var vm: SEmpleadoVM = SEmpleadoVM()
 
     private lateinit var mBind: ActivitySUsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,7 @@ class SUsuario : AppCompatActivity() {
 
 
          Init()
-        //CreateMyOptionMenu()
+        CreateMyOptionMenu()
         vm.CargarElUsuarioLocal({o->
 
 
@@ -43,7 +42,6 @@ class SUsuario : AppCompatActivity() {
             mBind.unUsuarioNombreusuario.text=o.usuario
             mBind.unUsuarioContrasena.text=o.contrasena
             mBind.unUsuarioCedula.text=o.cedula
-            mBind.unUsuarioRol.text=o.rol
 
             lifecycleScope.launch {
                 Snippetk.PonerFotoCircular(mBind.unaPersonaImage,o.foto)
@@ -66,21 +64,20 @@ class SUsuario : AppCompatActivity() {
         setContentView(mBind.root)
     }
 
-/*    private fun CreateMyOptionMenu() {
+    private fun CreateMyOptionMenu() {
 
         val menu=mBind.included.toolbar.menu
         menuInflater.inflate(R.menu.simpleusuariomenu, menu)
         val acercaItem: MenuItem? = menu?.findItem(R.id.menu_item_eliminar)
         acercaItem?.setOnMenuItemClickListener {
 
-    vm.BorrarUsuario({
-            Toast.makeText(getThis(),resources.getString(R.string.usuario_borrado),Toast.LENGTH_SHORT).show()
-            finish()
-        },{
 
-        });
+              vm.BorrarUsuario({
+                  Toast.makeText(getThis(),resources.getString(R.string.usuario_borrado),Toast.LENGTH_SHORT).show()
+                  finish()
+              },{
 
-
+              });
 
             return@setOnMenuItemClickListener false;
         }
@@ -88,43 +85,25 @@ class SUsuario : AppCompatActivity() {
         val editarItem: MenuItem? = menu?.findItem(R.id.menu_item_editar)
         editarItem?.setOnMenuItemClickListener {
 
+            lifecycleScope.launch {
+                val i = Intent(getThis(), EUsuario::class.java);
+                i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_usuario)
 
-   lifecycleScope.launch {
-        val i = Intent(getThis(), EUsuario::class.java);
-        i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_usuario)
-
-        startActivity(i)
-    }
-
+                startActivity(i)
+            }
             return@setOnMenuItemClickListener true;
         }
-    }
- */
 
+
+
+
+
+
+
+    }
 
     private fun getThis(): Context {
 return this;
-    }
-
-    fun EliminarUsuarioClick(view: View) {
-        vm.BorrarUsuario({
-            Toast.makeText(getThis(),resources.getString(R.string.usuario_borrado),Toast.LENGTH_SHORT).show()
-            finish()
-        },{
-
-        });
-    }
-
-    fun EditarUsuarioClick(view: View) {
-        lifecycleScope.launch {
-        val i = Intent(getThis(), EUsuario::class.java);
-        i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_usuario)
-
-        startActivity(i)
-    }}
-
-    fun CancelarClick(view: View) {
-        finish()
     }
 
 

@@ -136,6 +136,10 @@
     <string name="una_equipamiento_descripcion">Descripción</string>
     <string name="hint_descr_eq">Descripción</string>
     <string name="hint_uso_eq">Uso</string>
+    <string name="menu_str_empleados">Empleados</string>
+    <string name="menu_str_salir">Cerrar Sección</string>
+    <string name="menu_str_salir_de_app">Salir</string>
+    <string name="un_usuario_rol">Rol</string>
 
 
 </resources>

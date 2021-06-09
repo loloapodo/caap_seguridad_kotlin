@@ -33,5 +33,12 @@
         android:name="com.ello.kotlinseguridad.ui.adm_equip.AdmRolesFrag"
         android:label="@string/menu_str_roles"
         tools:layout="@layout/frag_adm_roles" />
+    <fragment
+        android:id="@+id/nav_empleados"
+        android:name="com.ello.kotlinseguridad.ui.adm_us.AdmEmFrag"
+        android:label="@string/menu_str_empleados"
+        tools:layout="@layout/frag_adm_empleados" />
+
+
 
 </navigation>

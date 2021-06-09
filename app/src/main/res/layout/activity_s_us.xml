@@ -253,6 +253,39 @@
 
 
 
+        <LinearLayout android:id="@+id/layout_rol" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+          <ImageView android:layout_width="@dimen/spacing_xmlarge"
+              android:layout_height="@dimen/spacing_xmlarge"
+              android:scaleType="centerCrop"
+              app:srcCompat="@drawable/ic_menu_camera"
+              />
+          <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+          <LinearLayout android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              >
+            <TextView
+                android:id="@+id/un_usuario_rol"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/un_usuario_rol" />
+            <LinearLayout android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small">
+
+              <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                  android:textColor="@color/grey_40"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/un_usuario_rol" />
+            </LinearLayout>
+          </LinearLayout>
+
+        </LinearLayout>
 
 
 
@@ -261,9 +294,69 @@
 
 
 
+        <LinearLayout
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+          <Button
+              android:layout_marginTop="@dimen/editarusuariomargin"
+              android:layout_marginBottom="@dimen/editarusuariomargin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/atras"
+              android:layout_gravity="center"
+              android:onClick="CancelarClick"
+              >
+          </Button>
+
+          <View
+
+              android:layout_width="10dp"
+              android:layout_height="1dp"
+
+
+              >
+          </View>
+
+          <Button
+              android:layout_marginTop="@dimen/editarusuariomargin"
+              android:layout_marginBottom="@dimen/editarusuariomargin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/eliminarbut"
+              android:layout_gravity="center"
+              android:onClick="EliminarUsuarioClick"
+              >
+          </Button>
+
+          <View
+              android:layout_width="10dp"
+              android:layout_height="1dp"
+              >
+          </View>
+
+          <Button
+              android:layout_marginTop="@dimen/editarusuariomargin"
+              android:layout_marginBottom="@dimen/editarusuariomargin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/editarbut"
+              android:layout_gravity="center"
+              android:onClick="EditarUsuarioClick"
+              >
+          </Button>
+
+
+        </LinearLayout>
 
     <View android:layout_width="fill_parent" android:layout_height="@dimen/spacing_xxlarge" />
   </LinearLayout>
+
+
    </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 

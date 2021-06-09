@@ -58,6 +58,9 @@
             android:name=".Simple.SUsuario"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".Simple.SEmpleado"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".Simple.SEquip"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
