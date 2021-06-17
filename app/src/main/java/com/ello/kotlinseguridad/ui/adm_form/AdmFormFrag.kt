@@ -56,9 +56,10 @@ class AdmFormFrag : Fragment() {
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
         mAdapter=
-                FormularioAdapter(root.context){startActivity(Intent(activity,
-                        SForm::class.java).putExtra("id",it))}
-        mRecyclerView.adapter=mAdapter;
+                FormularioAdapter(root.context){
+
+                    startActivity(Intent(activity, SForm::class.java).putExtra("id",it).putExtra(BIN.EXTRA_SOLO_ADMIN,true))}
+                    mRecyclerView.adapter=mAdapter;
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode== Activity.RESULT_OK){

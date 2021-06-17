@@ -12,8 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.FormularioAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SForm
+import com.ello.kotlinseguridad.Simple.SFormPlus
 
 class UsFormDoneFrag : Fragment() {
 
@@ -55,5 +57,16 @@ class UsFormDoneFrag : Fragment() {
                 FormularioAdapter(root.context){activity?.startActivity(Intent(activity,
                         SForm::class.java).putExtra("id",it).putExtra(SForm.EXTRA_RESUELTO,true))}
         mRecyclerView.adapter=mAdapter;
+
+        if (!BIN.ES_ADMIN()) {
+            BIN.PUEDE_FORMULARIOS {
+                mAdapter.iClick = { activity?.startActivity(Intent(activity, SFormPlus::class.java).putExtra("id", it).putExtra(SForm.EXTRA_RESUELTO,true)) }
+                Log.e("Actividades", "MODO ADMIN PARA LAS ACTIVIDADES")
+            }
+        }
+
+
+
+
     }
 }

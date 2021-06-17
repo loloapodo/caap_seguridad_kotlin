@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Adapter.UsuarioAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.Simple.SUsuario
 
 class AdmUsFrag : Fragment() {
@@ -33,6 +34,7 @@ class AdmUsFrag : Fragment() {
 
 
             vm._listado.observe(viewLifecycleOwner, Observer {
+
                 Log.e("observer done","observerd done");
                 mAdapter.list=it
                 mAdapter.notifyDataSetChanged()
@@ -57,8 +59,10 @@ class AdmUsFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= UsuarioAdapter(root.context) {startActivity(Intent(activity,
-                SUsuario::class.java).putExtra("id",it))}
+        mAdapter= UsuarioAdapter(root.context) {usu->
+            BIN.PinSelected(usu)
+            startActivity(Intent(activity,
+                SUsuario::class.java).putExtra("id",usu.objectId))}
         mRecyclerView.adapter=mAdapter;
 
     }

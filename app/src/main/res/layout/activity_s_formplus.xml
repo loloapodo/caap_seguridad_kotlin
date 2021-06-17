@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout android:background="@android:color/white"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
     <com.google.android.material.appbar.AppBarLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
         <include layout="@layout/my_toolbar" android:id="@+id/included"> </include>
     </com.google.android.material.appbar.AppBarLayout>
@@ -16,14 +15,13 @@
             android:orientation="vertical">
             <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
                 <TextView
-
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                     android:textColor="@color/grey_90"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_xlarge"
-                    android:id="@+id/una_actividad_name"
-                    android:text="Nombre del Equipamiento"
+                    android:id="@+id/una_formulario_nombre"
+                    android:text="Nombre"
                     android:textAlignment="center"
                     android:paddingRight="30dp"
                     android:paddingLeft="30dp"
@@ -32,16 +30,32 @@
 
 
 
-                    <ImageView
-                        android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:layout_width="130.0dip"
-                        android:layout_height="130.0dip"
-                        android:scaleType="centerCrop"
-                        android:id="@+id/una_persona_image"
-                        android:src="@drawable/male"
-                        >
 
-                    </ImageView>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical" android:paddingLeft="@dimen/spacing_xlarge" android:paddingRight="@dimen/spacing_xlarge" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_large">
+                <TextView
+                    android:id="@+id/sform_adapctertitle"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:text="@string/preguntas" />
+                <View android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/i_ver_pre_del_form"
+                    android:id="@+id/recycler"
+                    tools:itemCount="2"
+
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
 
 
 
@@ -51,22 +65,24 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:textStyle="bold"
                     android:textColor="@color/grey_90"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="@dimen/spacing_xlarge"
-                    android:layout_marginRight="@dimen/spacing_xlarge"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:text="@string/MasInfo" />
-                <View
-                    android:layout_marginLeft="@dimen/spacing_xlarge"
-                    android:layout_marginRight="@dimen/spacing_xlarge"
-                    android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+                <View android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
 
 
-                <LinearLayout
-                    android:layout_marginLeft="@dimen/spacing_xlarge"
-                    android:layout_marginRight="@dimen/spacing_xlarge"
-                    android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+
+
+
+
+
+
+
+
+
+
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
@@ -78,58 +94,12 @@
                         android:layout_height="wrap_content"
                         >
                         <TextView
-                            android:id="@+id/un_equipo_uso"
+                            android:id="@+id/un_formul_fecha"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                             android:textColor="@color/grey_90"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/una_equipamiento_uso" />
-                        <LinearLayout android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_small">
-
-                            <TextView
-
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/una_equipamiento_uso" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-
-
-
-
-
-
-
-
-                <LinearLayout
-                    android:layout_marginLeft="@dimen/spacing_xlarge"
-                    android:layout_marginRight="@dimen/spacing_xlarge"
-                    android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
-                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
-                        android:layout_height="@dimen/spacing_xmlarge"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
-                        />
-                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
-                    <LinearLayout android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-                        <TextView
-                            android:id="@+id/un_equipo_descripcion"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_90"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/una_equipamiento_descripcion" />
+                            android:text="@string/una_actividad_fecha" />
                         <LinearLayout android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
@@ -137,19 +107,127 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-
                                 android:textColor="@color/grey_40"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/una_equipamiento_descripcion" />
+                                android:text="@string/una_actividad_fecha" />
                         </LinearLayout>
                     </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/un_formul_hora"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_actividad_hora" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_actividad_hora" />
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+                <LinearLayout android:id="@+id/layout_persona_dob" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/un_formul_fecha_exp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fecha_exp" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fecha_exp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+<Button
+    android:layout_marginTop="@dimen/spacing_middle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/responder_boton"
+    android:id="@+id/bu_responder_o_verrespuestas"
+    android:layout_gravity="center"
+    android:onClick="Responder_O_VerRespuestaClick"
+    android:visibility="invisible"
+    >
+</Button>
+
+                <Button
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bu_ver_estados_del_formulario"
+                    android:id="@+id/bu_abrir_estado_de_envios_del_form"
+                    android:layout_gravity="center"
+                    android:onClick="MostrarEstadoEnvio_O_Preguntas"
+                    android:visibility="invisible"
+                    >
+
+                </Button>
 
                 <LinearLayout
                     android:layout_marginTop="@dimen/spacing_large"
@@ -179,34 +257,11 @@
                         >
                     </View>
 
-                    <Button
-
-                        android:layout_marginTop="@dimen/editarusuariomargin"
-                        android:layout_marginBottom="@dimen/editarusuariomargin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/eliminarbut"
-                        android:layout_gravity="center"
-                        android:onClick="EliminarClick"
-                        >
-                    </Button>
-
                     <View
                         android:layout_width="10dp"
                         android:layout_height="1dp"
                         >
                     </View>
-
-                    <Button
-                        android:layout_marginTop="@dimen/editarusuariomargin"
-                        android:layout_marginBottom="@dimen/editarusuariomargin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/editarbut"
-                        android:layout_gravity="center"
-                        android:onClick="EditarClick"
-                        >
-                    </Button>
 
 
                 </LinearLayout>
@@ -216,8 +271,27 @@
 
 
 
-            </LinearLayout>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <View android:layout_width="fill_parent" android:layout_height="@dimen/spacing_xxlarge" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

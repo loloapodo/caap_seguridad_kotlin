@@ -51,7 +51,11 @@
                             android:id="@+id/item_nombre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nombre"
+                            android:text="@string/lorenm_isum_large"
+                            android:ellipsize="end"
+
+
+
                             />
                         <TextView
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"

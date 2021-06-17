@@ -196,7 +196,103 @@
             </LinearLayout>
           </LinearLayout>
 
+
         </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <LinearLayout android:id="@+id/layout_persona_telefono" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+          <ImageView android:layout_width="@dimen/spacing_xmlarge"
+              android:layout_height="@dimen/spacing_xmlarge"
+              android:scaleType="centerCrop"
+              app:srcCompat="@drawable/ic_menu_camera"
+              />
+          <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+          <LinearLayout android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              >
+            <TextView
+                android:id="@+id/un_usuario_telefono"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/un_usuario_telefono" />
+            <LinearLayout android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small">
+
+              <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                  android:textColor="@color/grey_40"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/un_usuario_telefono" />
+            </LinearLayout>
+          </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+        <LinearLayout android:id="@+id/layout_persona_direccion" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+          <ImageView android:layout_width="@dimen/spacing_xmlarge"
+              android:layout_height="@dimen/spacing_xmlarge"
+              android:scaleType="centerCrop"
+              app:srcCompat="@drawable/ic_menu_camera"
+              />
+          <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+          <LinearLayout android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              >
+            <TextView
+                android:id="@+id/un_usuario_direccion"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey_90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@string/un_usuario_direccion" />
+            <LinearLayout android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small">
+
+              <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                  android:textColor="@color/grey_40"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/un_usuario_direccion" />
+            </LinearLayout>
+          </LinearLayout>
+
+
+        </LinearLayout>
+
+
 
 
 
@@ -329,7 +425,7 @@
               android:layout_height="wrap_content"
               android:text="@string/eliminarbut"
               android:layout_gravity="center"
-              android:onClick="EliminarUsuarioClick"
+              android:onClick="EliminarClick"
               >
           </Button>
 
@@ -346,7 +442,7 @@
               android:layout_height="wrap_content"
               android:text="@string/editarbut"
               android:layout_gravity="center"
-              android:onClick="EditarUsuarioClick"
+              android:onClick="EditarClick"
               >
           </Button>
 

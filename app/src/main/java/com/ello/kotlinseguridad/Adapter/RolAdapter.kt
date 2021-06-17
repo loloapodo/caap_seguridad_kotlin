@@ -15,7 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class RolAdapter(mContext: Context, val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RolAdapter(mContext: Context, val iClick:(r:Rol,str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater= LayoutInflater.from(mContext)
      var list: List<Rol> = mutableListOf()
@@ -38,7 +38,7 @@ class RolAdapter(mContext: Context, val iClick:(str:String)->Unit): RecyclerView
         with(list[position]){
 
             holder.nombre.text=nombre_rol
-            holder.itemView.setOnClickListener { iClick(list[position].objectId) }
+            holder.itemView.setOnClickListener { iClick(list[position],list[position].objectId) }
         }
 
 

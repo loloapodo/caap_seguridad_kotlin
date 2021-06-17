@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu0">
         <item
             android:id="@+id/nav2_act"
             android:icon="@drawable/ic_menu_camera"
-
-            android:title="@string/actividades" />
+            android:title="@string/misactividades" />
         <item
 
             android:id="@+id/nav2_form_done"
@@ -20,4 +20,62 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_str_formularios_por_entregar" />
     </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu1"
+        >
+
+        <item
+            android:id="@+id/nav_empleados"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_empleados" />
+
+        <item
+            android:id="@+id/nav_equipamentos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_equipamietos" />
+
+
+
+        <item
+
+            android:id="@+id/nav_formularios"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_str_formularios" />
+
+
+        <item
+
+            android:id="@+id/nav_actividads"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_actividades" />
+
+    </group>
+
+
+
+
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/idmenu3">
+
+        <item
+            android:onClick="DeslogearseClick"
+            android:id="@+id/nav_cerrar_cuenta"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_salir" />
+
+        <item
+            android:onClick="SalirClick"
+            android:id="@+id/nav_salir_app"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_salir_de_app" />
+
+
+    </group>
+
+
+
+
+
 </menu>

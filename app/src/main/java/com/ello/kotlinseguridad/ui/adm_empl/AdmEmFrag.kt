@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.EmpleadoAdapter
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Adapter.UsuarioAdapter
+import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.Simple.SUsuario
 
 class AdmEmFrag : Fragment() {
@@ -40,15 +42,6 @@ class AdmEmFrag : Fragment() {
             })
             vm.Cargar()
 
-
-
-
-
-
-
-
-
-
         return root
     }
     public fun Cargar(){ vm.Cargar()}
@@ -58,8 +51,11 @@ class AdmEmFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= EmpleadoAdapter(root.context) {startActivity(Intent(activity,
-                SUsuario::class.java).putExtra("id",it))}
+        mAdapter= EmpleadoAdapter(root.context) {
+
+            BIN.PinSelected(it)
+            startActivity(Intent(activity,
+                SUsuario::class.java).putExtra("id",it.objectId))}
         mRecyclerView.adapter=mAdapter;
 
     }

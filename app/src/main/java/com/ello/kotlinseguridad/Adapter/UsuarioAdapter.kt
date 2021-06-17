@@ -14,7 +14,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class UsuarioAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UsuarioAdapter(mContext: Context,val iClick:(usu:Usuario)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater= LayoutInflater.from(mContext)
      var list: List<Usuario> = mutableListOf()
@@ -43,7 +43,7 @@ class UsuarioAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerV
 
 
 
-            holder.itemView.setOnClickListener { iClick(list[position].objectId) }
+            holder.itemView.setOnClickListener { iClick(list[position]) }
 
 
             GlobalScope.launch {

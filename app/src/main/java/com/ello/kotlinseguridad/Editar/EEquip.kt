@@ -11,11 +11,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ello.kotlinseguridad.*
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.BIN.Snippets
 import com.ello.kotlinseguridad.databinding.ActivityEEqBinding
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 
@@ -43,12 +46,33 @@ class EEquip : AppCompatActivity() {
     private fun Init() {
         vm= EEquipVM()
         mBind= ActivityEEqBinding.inflate(layoutInflater)
-
         setContentView(mBind.root)
+
+
+        vm.estado.observe(this, Observer {
+
+        mBind.editusuarioNombre.setText(vm.nombre)
+        mBind.editusuarioUso.setText(vm.uso)
+        mBind.editusuarioDescripcion.setText(vm.descrip)
+
+            lifecycleScope.launch {
+                Snippetk.PonerFoto(mBind.imageView,vm.parsef_image)
+            }
+
+
+
+
+
+        })
+
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
 
         if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCequipamiento)}
-        else{ mBind.included.toolbar.title = resources.getString(R.string.titleEequipamiento) }
+        else{
+
+            vm.CargarObjeto()
+            mBind.included.toolbar.title = resources.getString(R.string.titleEequipamiento)
+        }
 
 
 

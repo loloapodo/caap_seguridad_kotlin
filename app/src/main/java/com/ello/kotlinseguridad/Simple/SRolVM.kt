@@ -2,6 +2,7 @@ package com.ello.kotlinseguridad.Simple
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.ParseObj.Equip
 import com.ello.kotlinseguridad.ParseObj.Rol
@@ -22,8 +23,8 @@ class SRolVM() : ViewModel() {
 
 
 
-    fun CargarElRol(fg:(activ: Rol) -> Unit, fb:() -> Unit) {
-        CRUD.CargarUnRol(id_rol,fg,fb)
+    fun CargarElRol(fg: (activ: Rol) -> Unit, fb:() -> Unit) {
+        CRUD.CargarUnRolPIN(BIN.PIN_ROL_SELECTED,fg,fb)
     }
 
 

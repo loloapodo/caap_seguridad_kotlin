@@ -11,7 +11,7 @@ import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.R
 import java.util.*
 
-class ActividadAdapter(mContext: Context,val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ActividadAdapter(mContext: Context, var iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater = LayoutInflater.from(mContext)
      var list: List<Actividad> = mutableListOf()

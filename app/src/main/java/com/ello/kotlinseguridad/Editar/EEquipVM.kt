@@ -1,13 +1,20 @@
 package com.ello.kotlinseguridad.Editar
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BIN.BIN
 
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Estado
+import com.ello.kotlinseguridad.ParseObj.Equip
+import com.ello.kotlinseguridad.ParseObj.Rol
 import com.google.android.material.textfield.TextInputEditText
+import com.parse.ParseException
+import com.parse.ParseFile
+import com.parse.ParseQuery
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,9 +25,9 @@ class EEquipVM() : ViewModel() {
 
 
     var nombre :String=""
-
-
-
+    var uso :String=""
+    var descrip :String=""
+    var parsef_image:ParseFile? = null
 
 
     init {
@@ -49,13 +56,21 @@ class EEquipVM() : ViewModel() {
         return  false
     }
 
+    fun CargarObjeto() {
+        estado.value=Estado.SearchLocat
 
 
-
-
-
-
-
-
+        CRUD.CargarUnEquiPIN(BIN.PIN_EQU_SELECTED,
+            {
+            nombre=it.nombre!!
+            uso=it.uso!!
+            descrip=it.descripcion!!
+            parsef_image=it.foto
+            estado.value=Estado.Idle
+            }
+            ,
+            {
+                estado.value=Estado.Idle;Log.e("EROLVM","Cargar Equip Pinned to edit pinname:${BIN.PIN_EQU_SELECTED}" )});
+        }
 
 }

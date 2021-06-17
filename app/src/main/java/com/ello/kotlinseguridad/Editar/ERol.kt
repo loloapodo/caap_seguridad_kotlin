@@ -1,12 +1,12 @@
 package com.ello.kotlinseguridad.Editar
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.ello.kotlinseguridad.*
 import com.ello.kotlinseguridad.databinding.ActivityERolBinding
 
@@ -35,12 +35,34 @@ class ERol : AppCompatActivity() {
     private fun Init() {
         vm= ERolVM()
         mBind= ActivityERolBinding.inflate(layoutInflater)
-
         setContentView(mBind.root)
+
+
+
+        vm.estado.observe(this, Observer {
+
+            mBind.editusuarioNombre.setText(vm.nombre)
+            mBind.radioAllowActividades.isChecked=vm.per_actividad
+            mBind.radioAllowFormularios.isChecked=vm.per_formulario
+            mBind.radioAllowEmpleado.isChecked=vm.per_empleado
+            mBind.radioAllowEquipamiento.isChecked=vm.per_equipamiento
+
+
+
+        })
+
+
+
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
 
         if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCRol)}
-        else{ mBind.included.toolbar.title = resources.getString(R.string.titleErol) }
+        else{
+
+            mBind.included.toolbar.title = resources.getString(R.string.titleErol)
+            vm.CargarObjeto()
+
+
+        }
 
 
 
@@ -66,7 +88,7 @@ class ERol : AppCompatActivity() {
                 if (mObjId_toEdit.isNullOrEmpty())//Crear
                 {
                 Log.e("Crear", "Crear")
-                    vm.CrearRol(mBind.editusuarioNombre.text.toString(),
+                    vm.CrearRol(mBind.editusuarioNombre.text.toString(),mBind.radioAllowActividades.isChecked,mBind.radioAllowEmpleado.isChecked,mBind.radioAllowEquipamiento.isChecked,mBind.radioAllowFormularios.isChecked,
                         {
                             Toast.makeText(
                                 getThis(),
@@ -89,7 +111,7 @@ class ERol : AppCompatActivity() {
             {
                 Log.e("Editar", "Editar")
                 vm.EditarRol(
-                    mObjId_toEdit!!,mBind.editusuarioNombre.text.toString(),
+                    mObjId_toEdit!!,mBind.editusuarioNombre.text.toString(),mBind.radioAllowActividades.isChecked,mBind.radioAllowEmpleado.isChecked,mBind.radioAllowEquipamiento.isChecked,mBind.radioAllowFormularios.isChecked,
                     {
                         Toast.makeText(
                             getThis(),

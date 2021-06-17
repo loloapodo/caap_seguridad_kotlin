@@ -2,6 +2,7 @@ package com.ello.kotlinseguridad.Simple
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.BIN.CRUD
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +21,8 @@ class SUsuarioVM() : ViewModel() {
 
 
 
-    fun CargarElUsuarioLocal(fg: (u:Usuario) -> Unit, fb: () -> Unit) {
-        viewModelScope.launch { withContext(Dispatchers.IO){ CRUD.CargarUnUsuario(id_usuario,fg,fb)} }
+    fun CargarElUsuario(fg: (u:Usuario) -> Unit, fb: () -> Unit) {
+        viewModelScope.launch { withContext(Dispatchers.IO){ CRUD.CargarUnUsuPIN(BIN.PIN_USU_SELECTED,fg,fb)} }
     }
 
 

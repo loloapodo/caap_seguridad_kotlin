@@ -5,6 +5,6 @@
         android:id="@+id/action_settings"
         android:title="@string/deslog"
         android:orderInCategory="100"
-        android:onClick="Deslogearse"
+        android:onClick="DeslogearseClick"
         app:showAsAction="never" />
 </menu>

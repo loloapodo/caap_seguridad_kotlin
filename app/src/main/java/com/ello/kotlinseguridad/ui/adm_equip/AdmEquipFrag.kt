@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.EquipamientoAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SEquip
 
@@ -47,8 +48,11 @@ class AdmEquipFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= EquipamientoAdapter(root.context){startActivity(Intent(activity,
-                SEquip::class.java).putExtra("id",it))}
+        mAdapter= EquipamientoAdapter(root.context){equ,id->
+            BIN.PinSelected(equ)
+            startActivity(Intent(activity, SEquip::class.java).putExtra("id",id))
+        }
+
         mRecyclerView.adapter=mAdapter;
     }
 

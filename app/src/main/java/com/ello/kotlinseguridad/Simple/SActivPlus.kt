@@ -19,16 +19,17 @@ import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Editar.EActiv
 import com.ello.kotlinseguridad.Editar.EUsuario
 import com.ello.kotlinseguridad.databinding.ActivitySActBinding
+import com.ello.kotlinseguridad.databinding.ActivitySActPlusBinding
 import com.google.android.material.navigation.NavigationView
 
 
 import kotlinx.coroutines.launch
 
-class SActiv : AppCompatActivity() {
+class SActivPlus : AppCompatActivity() {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: VerUsDeActAdapter
-    private lateinit var mBind: ActivitySActBinding
+    private lateinit var mBind: ActivitySActPlusBinding
     private  var vm: SActivVM = SActivVM()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +72,7 @@ class SActiv : AppCompatActivity() {
 
     private fun Init() {
 
-        mBind= ActivitySActBinding.inflate(layoutInflater)
+        mBind= ActivitySActPlusBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleactiv)
         setContentView(mBind.root)
         val id= intent.getStringExtra("id");

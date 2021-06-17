@@ -18,7 +18,7 @@ class CRUD()  {
     }
 
 companion object{
-    suspend fun CrearUsuario(str_usuario: String, str_contrasena: String, str_nom_apell: String,str_cedula: String, foto: Bitmap?, fg: () -> Unit, fb: () -> Unit)
+    suspend fun CrearUsuario(str_usuario: String, str_contrasena: String, str_nom_apell: String,str_apell: String,str_cedula: String,str_direcc: String,str_telefono: String,adm:Boolean, foto: Bitmap?, fg: () -> Unit, fb: () -> Unit)
     {
 
 
@@ -38,8 +38,11 @@ companion object{
         u.usuario=str_usuario
         u.contrasena=str_contrasena
         u.nom_apell=str_nom_apell
-        u.adm=false
+        u.apell=str_apell
+        u.adm=adm
         u.cedula=str_cedula
+        u.direccion=str_direcc
+        u.telefono=str_telefono
 
 
         if (foto != null) {
@@ -64,7 +67,7 @@ companion object{
 
     }
 
-     fun EditarUsuario(str_ObjectId: String,str_usuario: String, str_contrasena: String, str_nom_apell: String,str_cedula:String, foto: Bitmap?,fg: () -> Unit,fb: () -> Unit)
+     fun EditarUsuario(str_ObjectId: String,str_usuario: String, str_contrasena: String, str_nom_apell: String, str_apell: String,str_cedula:String,str_direcc:String,str_telef:String,adm:Boolean, foto: Bitmap?,fg: () -> Unit,fb: () -> Unit)
     {
 
         fun innerSave(u:Usuario,fg: () -> kotlin.Unit,fb: () -> Unit){
@@ -85,10 +88,13 @@ companion object{
             if (e == null) {
                 // Update the fields we want to
                 u.usuario=str_usuario
+                u.apell=str_apell
                 u.cedula=str_cedula
+                u.telefono=str_telef
+                u.direccion=str_direcc
                 u.contrasena=str_contrasena
                 u.nom_apell=str_nom_apell
-                u.adm=false
+                u.adm=adm
 
 
                 if (foto != null) {
@@ -626,6 +632,7 @@ companion object{
             GlobalScope.launch (Dispatchers.IO){
                 CargarTodosFormularios({todos->
                     val sinResponder= BIN.RESTAR_LISTAS(todos,respondidos)
+                    Log.e("CargarFormNoRespondidos","cantidad= ${sinResponder.size}")
                     ParseObject.unpinAll(BIN.PIN_FORMULARIO_RESPONDIDOS)
                     ParseObject.pinAll(BIN.PIN_FORMULARIO_SIN_RESPONDER,sinResponder)
                     fg(sinResponder)
@@ -895,10 +902,15 @@ companion object{
     }
 
 
-    fun CrearRol(nombre: String, fg: () -> Unit, fb: () -> Unit) {
+    fun CrearRol(nombre: String,p_act:Boolean,p_emp:Boolean,p_equ:Boolean,p_for:Boolean, fg: () -> Unit, fb: () -> Unit) {
 
         val u=Rol()
         u.nombre_rol=nombre
+        u.per_actividad=p_act
+        u.per_empleado=p_emp
+        u.per_equipamiento=p_equ
+        u.per_formulario=p_for
+
 
             u.saveInBackground { e2 ->
                 if (e2 == null) { fg(); } else { fb(); }
@@ -961,7 +973,7 @@ companion object{
             }
         })
     }
-    fun EditarRol(str_ObjectId: String,nombre:String,fg: () -> Unit,fb: () -> Unit)
+    fun EditarRol(str_ObjectId: String,nombre:String,p_act:Boolean,p_emp:Boolean,p_equ:Boolean,p_for:Boolean,fg: () -> Unit,fb: () -> Unit)
     {
 
         val query = ParseQuery.getQuery<Rol>(Rol.class_name)
@@ -971,6 +983,10 @@ companion object{
                 Log.e("Pasos","24")
                 // Update the fields we want to
                 u.nombre_rol=nombre
+                u.per_actividad=p_act
+                u.per_empleado=p_emp
+                u.per_equipamiento=p_equ
+                u.per_formulario=p_for
 
                 u.saveInBackground { e2 ->
                     if (e2 == null) {
@@ -1014,6 +1030,38 @@ companion object{
 
     }
 
+    fun CargarUnRolPIN(pin: String, fg: (Rol) -> Unit, fb: () -> Unit) {
+
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name).fromPin(pin)
+        try {
+            fg( query.first)
+        }catch (e:ParseException) {
+            fb()
+
+        }
+
+
+
+
+    }
+
+    fun CargarUnEquiPIN(pin: String, fg: (activ: Equip) -> Unit, fb: () -> Unit) {
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name).fromPin(pin)
+        try {
+            fg( query.first)
+        }catch (e:ParseException) {
+            fb()
+        }
+    }
+
+    fun CargarUnUsuPIN(pin: String, fg: (activ: Usuario) -> Unit, fb: () -> Unit) {
+        val query = ParseQuery.getQuery<Usuario>(Usuario.class_name).fromPin(pin)
+        try {
+            fg( query.first)
+        }catch (e:ParseException) {
+            fb()
+        }
+    }
 
 
 }

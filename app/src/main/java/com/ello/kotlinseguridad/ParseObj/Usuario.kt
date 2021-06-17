@@ -21,6 +21,8 @@ class Usuario : ParseObject() {
         var field_apell = "apell"
         var field_cedula = "cedula"
         var field_rol = "rol"
+        var field_direccion = "direccion"
+        var field_telefono = "telefono"
         var field_foto = "foto"
 
     }
@@ -48,6 +50,15 @@ class Usuario : ParseObject() {
     var rol: String?
         get() = getString(field_rol)
         set(arg) { put(field_rol, arg!!)}
+
+    var direccion: String?
+        get() = getString(field_direccion)
+        set(arg) { put(field_direccion, arg!!)}
+
+    var telefono: String?
+        get() = getString(field_telefono)
+        set(arg) { put(field_telefono, arg!!)}
+
 
     var adm: Boolean
         get() = getBoolean(field_adm)

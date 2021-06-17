@@ -23,8 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
-
     >
 
 
@@ -52,6 +50,70 @@
                 >
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            android:textColor="@color/grey_90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/permisos" />
+        <View
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+
+
+        <CheckBox
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Empleado"
+            android:id="@+id/radio_allow_empleado"
+            >
+        </CheckBox>
+        <CheckBox
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Equipamiento"
+            android:id="@+id/radio_allow_equipamiento"
+            >
+        </CheckBox>
+        <CheckBox
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Formularios"
+            android:id="@+id/radio_allow_formularios"
+            >
+        </CheckBox>
+        <CheckBox
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Actividades"
+            android:id="@+id/radio_allow_actividades"
+            >
+        </CheckBox>
+
+
+
+
+
+
 
 
         <LinearLayout

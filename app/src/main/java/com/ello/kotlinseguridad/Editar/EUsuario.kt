@@ -12,12 +12,16 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ello.kotlinseguridad.*
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.BIN.Snippets
 import com.ello.kotlinseguridad.databinding.ActivityEUsBinding
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 
@@ -47,12 +51,31 @@ class EUsuario : AppCompatActivity() {
         mBind= ActivityEUsBinding.inflate(layoutInflater)
 
         setContentView(mBind.root)
+
+        vm.estado.observe(this, Observer {
+
+            mBind.editusuarioNombre.setText(vm.nombre)
+            mBind.editusuarioApellido.setText(vm.apellido)
+            mBind.editusuarioCedula.setText(vm.cedula)
+            mBind.editusuarioDireccion.setText(vm.direccion)
+            mBind.editusuarioTelefono.setText(vm.telefono)
+            mBind.editusuarioUsuario.setText(vm.usuario)
+            mBind.editusuarioContrase.setText(vm.contrasena)
+
+
+
+
+//if (t6Spinner.selectedItem.toString().contains("Asignar")){return true}
+
+            lifecycleScope.launch {Snippetk.PonerFoto(mBind.imageView,vm.parseFileFoto)}
+        })
+
         if (intent.hasExtra(EXTRA_OBJ_ID)) { mObjId_toEdit=intent.getStringExtra(EXTRA_OBJ_ID) }
 
         if (mObjId_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCusuario)}
         else{
             mBind.included.toolbar.title = resources.getString(R.string.titleEusuario)
-            vm.CargarDatosUsuario(mObjId_toEdit!!)
+            vm.CargarDatosUsuario()
 
         }
 
@@ -65,16 +88,7 @@ class EUsuario : AppCompatActivity() {
             mBind.editarusuarioSpinnerRoles.adapter = adapter
         })
 
-        vm._cedula.observe(this, Observer {
 
-            mBind.editusuarioNombre.setText(vm.nombre)
-            mBind.editusuarioApellido.setText(vm.apellido)
-            mBind.editusuarioCedula.setText(vm._cedula.value)
-            mBind.editusuarioUsuario.setText(vm.usuario)
-            mBind.editusuarioContrase.setText(vm.contrasena)
-
-
-        })
 
 
 
@@ -97,6 +111,10 @@ class EUsuario : AppCompatActivity() {
                        editusuarioNombre,
                        editusuarioApellido,
                        editusuarioCedula,
+                               editusuarioDireccion,
+
+                               editusuarioTelefono,
+
                        editarusuarioSpinnerRoles
                    ))
                {
@@ -115,8 +133,13 @@ class EUsuario : AppCompatActivity() {
                     vm.CrearUsuario(
                         editusuarioUsuario.text.toString(),
                         editusuarioContrase.text.toString(),
-                        editusuarioNombre.text.toString() + " " + editusuarioApellido.text.toString(),
+                        editusuarioNombre.text.toString(),
+                        editusuarioApellido.text.toString(),
                         editusuarioCedula.text.toString(),
+                            editusuarioDireccion.text.toString(),
+                            editusuarioTelefono.text.toString(),
+                            editarusuarioAdmin.isChecked,
+
                         mFoto,
                         {
                             Toast.makeText(
@@ -143,8 +166,12 @@ class EUsuario : AppCompatActivity() {
                     mObjId_toEdit!!,
                     editusuarioUsuarioL.editText?.text.toString(),
                     editusuarioContraseL.editText?.text.toString(),
-                    editusuarioNombreL.editText?.text.toString() + " " + editusuarioApellidoL.editText?.text.toString(),
+                    editusuarioNombreL.editText?.text.toString(),
+                    editusuarioApellidoL.editText?.text.toString(),
                     editusuarioCedulaL.editText?.text.toString(),
+                        editusuarioDireccionL.editText?.text.toString(),
+                        editusuarioTelefonoL.editText?.text.toString(),
+                        editarusuarioAdmin.isChecked,
                     mFoto,
                     {
                         Toast.makeText(
@@ -215,5 +242,7 @@ class EUsuario : AppCompatActivity() {
         //TODO
         finish();
     }
+
+
 
 }

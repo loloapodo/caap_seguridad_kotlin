@@ -32,6 +32,89 @@
                     android:paddingLeft="30dp"
                     />
 
+
+
+                <TextView
+
+                    android:layout_gravity="left"
+                    android:layout_marginEnd="@dimen/editarusuariomarginleft"
+                    android:layout_marginStart="@dimen/editarusuariomarginleft"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="@string/permisos_simple" />
+                <View
+                    android:layout_marginEnd="@dimen/editarusuariomarginleft"
+                    android:layout_marginStart="@dimen/editarusuariomarginleft"
+                    android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+
+
+                <CheckBox
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:button="@null"
+                    android:layout_marginEnd="@dimen/spacing_xxlarge"
+                    android:layout_marginStart="@dimen/spacing_xxlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Empleado"
+                    android:id="@+id/radio_allow_empleado"
+                    >
+                </CheckBox>
+                <CheckBox
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:button="@null"
+                    android:layout_marginEnd="@dimen/spacing_xxlarge"
+                    android:layout_marginStart="@dimen/spacing_xxlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Equipamiento"
+                    android:id="@+id/radio_allow_equipamiento"
+                    >
+                </CheckBox>
+                <CheckBox
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:button="@null"
+                    android:layout_marginEnd="@dimen/spacing_xxlarge"
+                    android:layout_marginStart="@dimen/spacing_xxlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Formularios"
+                    android:id="@+id/radio_allow_formularios"
+                    >
+                </CheckBox>
+                <CheckBox
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:button="@null"
+                    android:layout_marginEnd="@dimen/spacing_xxlarge"
+                    android:layout_marginStart="@dimen/spacing_xxlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Actividades"
+                    android:id="@+id/radio_allow_actividades"
+                    >
+                </CheckBox>
+
+                <CheckBox
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:button="@null"
+                    android:layout_marginEnd="@dimen/spacing_xxlarge"
+                    android:layout_marginStart="@dimen/spacing_xxlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Ningún permiso"
+                    android:id="@+id/radio_nungun_permiso"
+                    >
+                </CheckBox>
+
+
+
+
+
+
+
                 <LinearLayout
                     android:layout_marginTop="@dimen/spacing_large"
                     android:layout_width="match_parent"
@@ -67,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/eliminarbut"
                         android:layout_gravity="center"
-                        android:onClick="EliminarRolClick"
+                        android:onClick="EliminarClick"
                         >
                     </Button>
 
@@ -84,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/editarbut"
                         android:layout_gravity="center"
-                        android:onClick="EditarRolClick"
+                        android:onClick="EditarClick"
                         >
                     </Button>
 

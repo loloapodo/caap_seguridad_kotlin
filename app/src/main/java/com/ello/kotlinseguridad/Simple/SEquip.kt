@@ -45,7 +45,7 @@ class SEquip : AppCompatActivity() {
             mBind.unEquipoUso.text=o.uso
             mBind.unEquipoDescripcion.text=o.descripcion
 
-            GlobalScope.launch {Snippetk.PonerFoto(mBind.unaPersonaImage,o.foto)}
+            lifecycleScope.launch {Snippetk.PonerFoto(mBind.unaPersonaImage,o.foto)}
 
 
 
@@ -83,13 +83,13 @@ class SEquip : AppCompatActivity() {
 
     }
 
-    fun EditarEquipClick(view: View) {
+    fun EditarClick(view: View) {
         val i=Intent(this, EEquip::class.java)
         i.putExtra(EEquip.EXTRA_OBJ_ID,vm.id_equip)
         startActivityForResult(i, BIN.REQ_EDITAR_EQUIP)
     }
 
-     fun EliminarEquipClick(view: View) {
+     fun EliminarClick(view: View) {
 
          lifecycleScope.launch {
              vm.BorrarEquipamiento(vm.id_equip,{

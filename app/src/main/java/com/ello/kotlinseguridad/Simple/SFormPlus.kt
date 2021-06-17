@@ -20,6 +20,7 @@ import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.databinding.ActivitySFormBinding
+import com.ello.kotlinseguridad.databinding.ActivitySFormplusBinding
 import com.ello.kotlinseguridad.responder.RDone
 import com.ello.kotlinseguridad.responder.RForm
 
@@ -31,7 +32,7 @@ import kotlinx.coroutines.launch
  * Si es admin puede ver las preguntas del formulario y el estado de envio para todos sus usuarios boton1
  * Si es user puede responder o ver el formulario respondido boton2
  */
-class SForm : AppCompatActivity() {
+class SFormPlus : AppCompatActivity() {
 
 
 
@@ -43,7 +44,7 @@ class SForm : AppCompatActivity() {
     private lateinit var mAdapterPreguntas: VerPreDelFormAdapter
     private lateinit var mAdapterEstados: VerEstDelFormAdapter
 
-    private  lateinit var mBind: ActivitySFormBinding
+    private  lateinit var mBind: ActivitySFormplusBinding
 
 
 
@@ -76,7 +77,7 @@ class SForm : AppCompatActivity() {
                 mAdapterPreguntas.setPreguntas(it)
                 mAdapterPreguntas.notifyDataSetChanged()
 
-                    if (BIN.ES_ADMIN()||intent.hasExtra(BIN.EXTRA_SOLO_ADMIN)){ mBind.buResponderOVerrespuestas.visibility=View.GONE;mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE}
+                    if (BIN.ES_ADMIN()){ mBind.buResponderOVerrespuestas.visibility=View.GONE;mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE}
                     else                {
 
                         mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE;mBind.buResponderOVerrespuestas.visibility=View.VISIBLE
@@ -115,7 +116,7 @@ class SForm : AppCompatActivity() {
     }
 
     private fun Init() {
-        mBind= ActivitySFormBinding.inflate(layoutInflater)
+        mBind= ActivitySFormplusBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleformulario)
         setContentView(mBind.root)
         vm= SFormVM()

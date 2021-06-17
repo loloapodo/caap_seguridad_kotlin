@@ -229,6 +229,64 @@
 
                 </Button>
 
+                <LinearLayout
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <Button
+                        android:layout_marginTop="@dimen/editarusuariomargin"
+                        android:layout_marginBottom="@dimen/editarusuariomargin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/atras"
+                        android:layout_gravity="center"
+                        android:onClick="CancelarClick"
+                        >
+                    </Button>
+
+                    <View
+
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"
+
+
+                        >
+                    </View>
+
+                    <Button
+                        android:layout_marginTop="@dimen/editarusuariomargin"
+                        android:layout_marginBottom="@dimen/editarusuariomargin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eliminarbut"
+                        android:layout_gravity="center"
+                        android:onClick="EliminarClick"
+                        >
+                    </Button>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"
+                        >
+                    </View>
+
+                    <Button
+                        android:layout_marginTop="@dimen/editarusuariomargin"
+                        android:layout_marginBottom="@dimen/editarusuariomargin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editarbut"
+                        android:layout_gravity="center"
+                        android:onClick="EditarClick"
+                        >
+                    </Button>
+
+
+                </LinearLayout>
 
 
 

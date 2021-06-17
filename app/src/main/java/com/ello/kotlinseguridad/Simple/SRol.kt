@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.*
 import com.ello.kotlinseguridad.Adapter.VerUsDeActAdapter
 import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.Editar.EEquip
 import com.ello.kotlinseguridad.Editar.ERol
 import com.ello.kotlinseguridad.databinding.ActivitySRolBinding
 import com.ello.kotlinseguridad.drawer1.Companion.RES_OK_CREAR_ROL
@@ -39,14 +39,39 @@ class SRol : AppCompatActivity() {
 
             //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
             //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
+            with(mBind){
+                unaActividadName.text = o.nombre_rol
 
-            mBind.unaActividadName.text=o.nombre_rol
+                if(!o.per_actividad!!)
+                {
+                    radioAllowActividades.visibility=View.GONE
+                }
+                if(!o.per_empleado!!)
+                {
+                    radioAllowEmpleado.visibility=View.GONE
+                }
+                if(!o.per_formulario!!)
+                {
+                    radioAllowFormularios.visibility=View.GONE
+                }
+                if(!o.per_equipamiento!!)
+                {
+                    radioAllowEquipamiento.visibility=View.GONE
+                }
+
+                if (!o.per_actividad!!&&!o.per_equipamiento!!&&!o.per_empleado!!&&!o.per_formulario!!) { radioNungunPermiso.visibility=View.VISIBLE }
+                else { radioNungunPermiso.visibility=View.GONE}
+
+            }
 
 
 
 
-        },{})
 
+
+
+
+        }) { Log.e("SRol","Error al cargar el Rol")}
 
     }
 
@@ -79,13 +104,13 @@ class SRol : AppCompatActivity() {
 
     }
 
-    fun EditarRolClick(view: View) {
+    fun EditarClick(view: View) {
         val i=Intent(this, ERol::class.java)
         i.putExtra(ERol.EXTRA_OBJ_ID,vm.id_rol)
         startActivityForResult(i, BIN.REQ_EDITAR_EQUIP)
     }
 
-     fun EliminarRolClick(view: View) {
+     fun EliminarClick(view: View) {
 
          lifecycleScope.launch {
              vm.BorrarRol(vm.id_rol,{

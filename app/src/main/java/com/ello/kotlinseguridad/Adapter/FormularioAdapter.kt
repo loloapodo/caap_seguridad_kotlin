@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.R
 import com.ello.twelveseconds.Formulario
 
-class FormularioAdapter( mContext: Context,val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FormularioAdapter(mContext: Context, var iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater= LayoutInflater.from(mContext)
      var list: List<Formulario> = mutableListOf()

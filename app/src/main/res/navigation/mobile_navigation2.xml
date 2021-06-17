@@ -22,4 +22,45 @@
         android:name="com.ello.kotlinseguridad.ui.us_form_undone.UsFormUndoneFrag"
         android:label="@string/menu_slideshow2"
         tools:layout="@layout/frag_us_encu" />
+    <fragment
+        android:id="@+id/nav_empleados"
+        android:name="com.ello.kotlinseguridad.ui.adm_us.AdmEmFrag"
+        android:label="@string/menu_str_empleados"
+        tools:layout="@layout/frag_adm_empleados" />
+
+
+
+
+
+
+
+    <fragment
+
+        android:id="@+id/nav_usuarios"
+        android:name="com.ello.kotlinseguridad.ui.adm_us.AdmUsFrag"
+        android:label="@string/menu_usuar"
+        tools:layout="@layout/frag_adm_us" />
+
+
+    <fragment
+        android:id="@+id/nav_formularios"
+        android:name="com.ello.kotlinseguridad.ui.adm_form.AdmFormFrag"
+        android:label="@string/menu_formul"
+        tools:layout="@layout/frag_adm_form" />
+
+    <fragment
+        android:id="@+id/nav_actividads"
+        android:name="com.ello.kotlinseguridad.ui.adm_act.AdmActFrag"
+        android:label="@string/menu_act"
+        tools:layout="@layout/frag_adm_act" />
+
+    <fragment
+        android:id="@+id/nav_equipamentos"
+        android:name="com.ello.kotlinseguridad.ui.adm_equip.AdmEquipFrag"
+        android:label="@string/menu_equip"
+        tools:layout="@layout/frag_adm_equip" />
+
+
+
+
 </navigation>

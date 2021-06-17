@@ -15,7 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class EmpleadoAdapter(mContext: Context, val iClick:(str:String)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EmpleadoAdapter(mContext: Context, val iClick:(str:Usuario)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater= LayoutInflater.from(mContext)
      var list: List<Usuario> = mutableListOf()
@@ -38,42 +38,18 @@ class EmpleadoAdapter(mContext: Context, val iClick:(str:String)->Unit): Recycle
         with(list[position]){
 
 
-            holder.nombre.text=nom_apell
+            holder.nombre.text=nom_apell+" "+apell
             if (rol.isNullOrEmpty() ||rol.equals(BIN.EMPTY_ROL)){holder.adm.visibility=View.GONE}
-            else{holder.adm.text=rol}
+            else{holder.adm.visibility=View.VISIBLE;holder.adm.text=rol}
 
 
-            holder.itemView.setOnClickListener { iClick(list[position].objectId) }
+            holder.itemView.setOnClickListener { iClick(list[position]) }
 
 
             GlobalScope.launch {
                 Snippetk.PonerFotoCircular(holder.image,list[position].foto)
             }
-
-
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

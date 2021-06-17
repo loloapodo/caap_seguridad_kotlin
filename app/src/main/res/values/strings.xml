@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Kotlin Seguridad</string>
-    <string name="boton_logearse">Login</string>
+    <string name="Registrarse">Login</string>
     <string name="logueado_seccion_adm">Sección de administrador</string>
     <string name="query_not_found">Usuario y o Contraseña incorrecto</string>
     <string name="error_loguin">Error</string>
@@ -66,13 +66,13 @@
     <string name="menu_equip">Equipamiento</string>
 
     <string name="menu_str_usuario">Usuarios</string>
-    <string name="menu_str_actividades">Actividades</string>
-    <string name="menu_str_formularios">Formularios</string>
 
 
-    <string name="menu_home2">Actividades</string>
-    <string name="menu_gallery2">Formularios Enviados</string>
-    <string name="menu_slideshow2">Pendiente</string>
+
+
+    <string name="menu_home2">Mis actividades</string>
+    <string name="menu_gallery2">Formularios enviados</string>
+    <string name="menu_slideshow2">Formularios pendientes</string>
 
 
     <string name="titleEactiv">Editar Actividad</string>
@@ -91,8 +91,8 @@
     <string name="title_activity_drawer2">drawer2</string>
     <string name="deslog">Salir</string>
     <string name="actividades">Actividades</string>
-    <string name="menu_str_formularios_entrgados">Formularios Enviados</string>
-    <string name="menu_str_formularios_por_entregar">Pendiente</string>
+    <string name="menu_str_formularios_entrgados">Formularios enviados</string>
+    <string name="menu_str_formularios_por_entregar">Formularios pendientes</string>
     <string name="responder_boton">Responder</string>
     <string name="hint_respuesta_de_acti">Respuesta…</string>
     <string name="enviar_boton">Enviar</string>
@@ -121,11 +121,11 @@
     <string name="hint_nombre_eq">Equipamiento</string>
     <string name="titleCequipamiento">Nuevo equipamiento</string>
     <string name="titleEequipamiento">Editar Equipamiento</string>
-    <string name="menu_str_equipamietos">Equipamientos</string>
+
     <string name="equipamiento_eliminado">Equipamiento Eliminado</string>
     <string name="equipamiento_error_eliminado">Error al eliminar</string>
     <string name="eliminarbut">Eliminar</string>
-    <string name="menu_str_roles">Roles</string>
+
     <string name="hint_nombre_rol">Rol</string>
     <string name="titlerol">Rol</string>
     <string name="titleErol">Editar rol</string>
@@ -136,10 +136,25 @@
     <string name="una_equipamiento_descripcion">Descripción</string>
     <string name="hint_descr_eq">Descripción</string>
     <string name="hint_uso_eq">Uso</string>
-    <string name="menu_str_empleados">Empleados</string>
+
     <string name="menu_str_salir">Cerrar Sección</string>
     <string name="menu_str_salir_de_app">Salir</string>
     <string name="un_usuario_rol">Rol</string>
+    <string name="lorenm_isum_large">Nombre1 Nombre2 Apellido1 Apellido2 Nombre Nombre Nombre Nombre Nombre8</string>
+    <string name="permisos">Seleccionar los permisos…</string>
+    <string name="permisos_simple">Permisos</string>
+    <string name="misactividades">Mis Actividades</string>
 
+    <string name="menu_str_empleados">Adm Empleados</string>
+    <string name="menu_str_equipamietos">Adm Equipamientos</string>
+    <string name="menu_str_formularios">Adm Formularios</string>
+    <string name="menu_str_actividades">Adm Actividades</string>
+    <string name="menu_str_roles">Adm Roles</string>
+    <string name="hint_direccion">Dirección</string>
+    <string name="hint_telefono">Teléfono</string>
+    <string name="un_usuario_telefono">Teléfono</string>
+    <string name="un_usuario_direccion">Dirección</string>
+    <string name="boton_logerarse">Registrarse</string>
+    <string name="check_cuenta_de_adm">Cuenta de Administrador</string>
 
 </resources>

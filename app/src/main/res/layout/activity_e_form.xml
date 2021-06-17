@@ -73,15 +73,30 @@
 
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar pregunta"
+        android:textSize="20sp"
+        >
 
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/imageVOtrapregunta"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/xml_expand_less"
-                >
-            </ImageView>
+    </TextView>
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/imageVOtrapregunta"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/xml_expand_less"
+        >
+    </ImageView>
+</LinearLayout>
+
 
         <LinearLayout
             android:layout_marginTop="@dimen/spacing_middle"

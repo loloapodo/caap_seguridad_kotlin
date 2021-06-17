@@ -49,13 +49,15 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_90"
                             android:id="@+id/item_nombre"
+                            android:lines="1"
+                            android:ellipsize="end"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nombre"
+                            android:text="@string/lorenm_isum_large"
                             />
                         <TextView
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/red_300"
+                            android:textColor="@color/grey_600"
                             android:id="@+id/item_admin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

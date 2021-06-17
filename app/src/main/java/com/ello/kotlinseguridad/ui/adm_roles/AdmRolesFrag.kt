@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.EquipamientoAdapter
 import com.ello.kotlinseguridad.Adapter.RolAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SEquip
 import com.ello.kotlinseguridad.Simple.SRol
+import com.parse.ParseObject
 
 class AdmRolesFrag : Fragment() {
 
@@ -49,8 +51,13 @@ class AdmRolesFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= RolAdapter(root.context){startActivity(Intent(activity,
-                SRol::class.java).putExtra("id",it))}
+        mAdapter= RolAdapter(root.context){r,id->
+
+            BIN.PinSelected(r);
+            startActivity(Intent(activity, SRol::class.java).putExtra("id",id))
+
+
+        }
         mRecyclerView.adapter=mAdapter;
     }
 

@@ -27,11 +27,11 @@ class UsFormUnDoneVM : ViewModel() {
             val usuario= BIN.CARGAR_USUARIO_LOGED()
             if (usuario==null){Log.e("Error","3330");return}
 
-        viewModelScope.launch(Dispatchers.Main) {
-            CRUD.CargarTodosFormulariosNoRespondidosLocal(usuario,{
-                _listado.value=it;Log.e("CargarTodosForm undone","local");},{})
-
-            delay(4000)
+        viewModelScope.launch() {
+            //CRUD.CargarTodosFormulariosNoRespondidosLocal(usuario,{
+            //    _listado.value=it;Log.e("CargarTodosForm undone","local");},{})
+            //
+            //delay(4000)
 
             withContext(Dispatchers.IO){
                 CRUD.CargarTodosFormulariosNoRespondidos(usuario,{

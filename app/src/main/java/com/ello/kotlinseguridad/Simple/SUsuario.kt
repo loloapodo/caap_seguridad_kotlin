@@ -29,12 +29,9 @@ class SUsuario : AppCompatActivity() {
 
          Init()
         //CreateMyOptionMenu()
-        vm.CargarElUsuarioLocal({o->
-
-
+        vm.CargarElUsuario({o->
 
             //mBind.included.toolbar.title = Snippetk.CortarTitle(o.nom_apell)
-
             //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
             //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
 
@@ -43,6 +40,8 @@ class SUsuario : AppCompatActivity() {
             mBind.unUsuarioNombreusuario.text=o.usuario
             mBind.unUsuarioContrasena.text=o.contrasena
             mBind.unUsuarioCedula.text=o.cedula
+            mBind.unUsuarioTelefono.text=o.telefono
+            mBind.unUsuarioDireccion.text=o.direccion
             mBind.unUsuarioRol.text=o.rol
 
             lifecycleScope.launch {
@@ -106,7 +105,7 @@ class SUsuario : AppCompatActivity() {
 return this;
     }
 
-    fun EliminarUsuarioClick(view: View) {
+    fun EliminarClick(view: View) {
         vm.BorrarUsuario({
             Toast.makeText(getThis(),resources.getString(R.string.usuario_borrado),Toast.LENGTH_SHORT).show()
             finish()
@@ -115,7 +114,7 @@ return this;
         });
     }
 
-    fun EditarUsuarioClick(view: View) {
+    fun EditarClick(view: View) {
         lifecycleScope.launch {
         val i = Intent(getThis(), EUsuario::class.java);
         i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_usuario)

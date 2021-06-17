@@ -2,6 +2,7 @@ package com.ello.kotlinseguridad.Simple
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.ParseObj.Equip
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class SEquipVM() : ViewModel() {
 
 
     fun CargarElEquipamiento(fg:(activ:Equip) -> Unit, fb:() -> Unit) {
-        CRUD.CargarUnEquipamiento(id_equip,fg,fb)
+        CRUD.CargarUnEquiPIN(BIN.PIN_EQU_SELECTED,fg,fb)
     }
 
 

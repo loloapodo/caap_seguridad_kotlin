@@ -1,5 +1,6 @@
 package com.ello.kotlinseguridad
 
+import android.app.TaskStackBuilder
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -53,20 +54,22 @@ class drawer1 : AppCompatActivity() {
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
 
-            val intent=
-             when(navController.currentDestination?.id)
-             {
-                 R.id.nav_empleados-> Intent(this, EUsuario::class.java)
-                 R.id.nav_usuarios -> Intent(this, EUsuario::class.java)
-                 R.id.nav_actividads-> Intent(this, EActiv::class.java)
-                 R.id.nav_formularios-> Intent(this, EForm::class.java)
-                 R.id.nav_equipamentos-> Intent(this, EEquip::class.java)
-                 R.id.nav_roles-> Intent(this, ERol::class.java)
 
-                 else->Intent(this, EUsuario::class.java)
 
-                 }
-            startActivityForResult(intent,REQ_CREAR_EDITAR)
+                val intent=
+                    when(navController.currentDestination?.id)
+                    {
+                        R.id.nav_empleados-> Intent(this, EUsuario::class.java)
+                        R.id.nav_usuarios -> Intent(this, EUsuario::class.java)
+                        R.id.nav_actividads-> Intent(this, EActiv::class.java)
+                        R.id.nav_formularios-> Intent(this, EForm::class.java)
+                        R.id.nav_equipamentos-> Intent(this, EEquip::class.java)
+                        R.id.nav_roles-> Intent(this, ERol::class.java)
+
+                        else->Intent(this, EUsuario::class.java)
+
+                    }
+                startActivityForResult(intent,REQ_CREAR_EDITAR)
         }
 
 
@@ -86,6 +89,10 @@ class drawer1 : AppCompatActivity() {
                 R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads,R.id.nav_usuarios,R.id.nav_roles
             ), drawerLayout
         )
+
+
+
+
 
 
 
@@ -119,13 +126,21 @@ class drawer1 : AppCompatActivity() {
     }
 
 
-    fun Deslogearse(item: MenuItem) {
+    fun DeslogearseClick(item: MenuItem) {
 
         BIN.BORRAR_USUARIO_LOGED()
         startActivity(Intent(this, Login::class.java))
         finish()
 
     }
+
+
+
+    fun SalirClick(item: MenuItem) {
+
+    finish()
+    }
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

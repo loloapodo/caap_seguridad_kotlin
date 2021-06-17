@@ -170,6 +170,63 @@
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/editusuario_direccionL"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/editusuario_direccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_direccion"
+                android:textColorHint="@color/black"
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/editusuario_telefonoL"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/editusuario_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_telefono"
+                android:textColorHint="@color/black"
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
         <Spinner
             android:id="@+id/editarusuario_spinner_roles"
             android:layout_marginTop="@dimen/editarusuariomargin"
@@ -178,8 +235,20 @@
             android:layout_marginStart="@dimen/editarusuariomarginleft"
             android:layout_width="match_parent"
             android:layout_height="50dp">
-
         </Spinner>
+
+
+        <CheckBox
+            android:id="@+id/editarusuario_admin"
+            android:text="@string/check_cuenta_de_adm"
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </CheckBox>
 
 
 
