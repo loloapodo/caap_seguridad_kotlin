@@ -39,6 +39,14 @@
         android:label="@string/menu_str_empleados"
         tools:layout="@layout/frag_adm_empleados" />
 
+    <fragment
+        android:id="@+id/nav_reportes"
+        android:name="com.ello.kotlinseguridad.ui.adm_rep.AdmRepFrag"
+        android:label="@string/menu_str_reportes"
+        tools:layout="@layout/activity_s_reportes"
+
+        />
+
 
 
 </navigation>

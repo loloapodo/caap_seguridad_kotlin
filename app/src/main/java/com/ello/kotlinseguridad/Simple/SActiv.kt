@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,11 @@ import com.ello.kotlinseguridad.*
 import com.ello.kotlinseguridad.Adapter.VerUsDeActAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
+import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.Editar.EActiv
 import com.ello.kotlinseguridad.Editar.EUsuario
 import com.ello.kotlinseguridad.databinding.ActivitySActBinding
+import com.ello.twelveseconds.Formulario
 import com.google.android.material.navigation.NavigationView
 
 
@@ -37,32 +40,48 @@ class SActiv : AppCompatActivity() {
 
         Init()
         InitRecycler()
+
         //CreateMyOptionMenu()
 
 
 
 
-        vm.CargarLaActividad({ o->
+        vm.CargarLaActividad({ o ->
 
+            BIN.PinSelected(o)
 
             //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
             //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
 
-            mBind.unaActividadName.text=o.nombre
-            mBind.unaActividadFecha.text=o.LeerFechaR()
-            mBind.unaActividadDescripci.text=o.desc
+            mBind.unaActividadName.text = o.nombre
+            mBind.unaActividadFecha.text = o.LeerFechaR()
+            mBind.unaActividadHora.text = Snippetk.LeerHoraR(o.fecha)
+            mBind.unaActividadDescripci.text = o.desc
+            mBind.unaActividadSitio.text = o.sitio
+            mBind.unaActividadLugar.text = o.ubicacion
+            val f = o.ref_formulario
+            if (f != null) {
+                val form = f.fetchIfNeeded<Formulario>()
 
-            vm.CargarTodosUsuariosdeActividad(o,
-                    {
-                        mAdapter.setLista(it);
-                        mAdapter.notifyDataSetChanged()
-                    },
-                    {
-                        Log.e("error", "Actividad sin usuarios")
-                    }
-            )
+                mBind.unaActividadFormularioNombre.text = form.nombre
+                mBind.unaActividadFormularioTipo.text = form.tipo
+            }
+
+
+
+
+            vm.CargarTodosUsuariosdeActividad(o);
+            vm._listado_act_del_usu.observe(this, Observer {
+                mAdapter.setLista(it);
+                mAdapter.notifyDataSetChanged()
+            })
 
         },{})
+
+
+
+
+
 
 
 
@@ -74,8 +93,28 @@ class SActiv : AppCompatActivity() {
         mBind= ActivitySActBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titleactiv)
         setContentView(mBind.root)
-        val id= intent.getStringExtra("id");
-        vm.id_actividad=id
+        vm.id_actividad=intent.getStringExtra(BIN.EXTRA_ID)
+
+
+        if (BIN.ES_ADMIN()){
+
+
+
+        }else{
+
+            mBind.buEliminar.visibility=View.GONE
+            mBind.buEditar.visibility=View.GONE
+
+        }
+
+
+
+
+
+
+
+
+
     }
 
     private fun InitRecycler() {
@@ -87,40 +126,7 @@ class SActiv : AppCompatActivity() {
         mRecyclerView.adapter=mAdapter;
     }
 
-    private fun CreateMyOptionMenu() {
 
-        val menu=mBind.included.toolbar.menu
-        menuInflater.inflate(R.menu.simpleusuariomenu, menu)
-        val elimiItem: MenuItem? = menu?.findItem(R.id.menu_item_eliminar)
-        elimiItem?.setOnMenuItemClickListener {
-
-            lifecycleScope.launch {
-                vm.BorrarActividad(vm.id_actividad!!, {
-                    Toast.makeText(
-                        getThis(),
-                        resources.getString(R.string.usuario_borrado),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    finish()
-                }, {
-
-                });
-            }
-            return@setOnMenuItemClickListener false;
-        }
-
-
-        val editarItem: MenuItem? = menu?.findItem(R.id.menu_item_editar)
-        editarItem?.setOnMenuItemClickListener {
-
-            lifecycleScope.launch {
-                val i =Intent(getThis(), EActiv::class.java);
-                i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_actividad)
-                startActivity(i)
-            }
-            return@setOnMenuItemClickListener true;
-        }
-    }
 
 
 
@@ -159,7 +165,51 @@ class SActiv : AppCompatActivity() {
 
     }
 
+    fun RevisarPreguntas(view: View) {
 
+
+            val form= BIN.getThisAct()?.ref_formulario!!.fetchIfNeeded<Formulario>()
+            if(!BIN.ES_ADMIN()){ BIN.PinSelected(BIN.CARGAR_USUARIO_LOGED()!!) }
+            startActivity(Intent(this, SForm::class.java).putExtra(BIN.EXTRA_ID,form.objectId).putExtra(BIN.EXTRA_TIENE_ACTIVIDAD_ASOCIADA,true))
+
+
+    }
+
+
+    private fun CreateMyOptionMenu() {
+
+        val menu=mBind.included.toolbar.menu
+        menuInflater.inflate(R.menu.simpleusuariomenu, menu)
+        val elimiItem: MenuItem? = menu?.findItem(R.id.menu_item_eliminar)
+        elimiItem?.setOnMenuItemClickListener {
+
+            lifecycleScope.launch {
+                vm.BorrarActividad(vm.id_actividad!!, {
+                    Toast.makeText(
+                        getThis(),
+                        resources.getString(R.string.usuario_borrado),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }, {
+
+                });
+            }
+            return@setOnMenuItemClickListener false;
+        }
+
+
+        val editarItem: MenuItem? = menu?.findItem(R.id.menu_item_editar)
+        editarItem?.setOnMenuItemClickListener {
+
+            lifecycleScope.launch {
+                val i =Intent(getThis(), EActiv::class.java);
+                i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_actividad)
+                startActivity(i)
+            }
+            return@setOnMenuItemClickListener true;
+        }
+    }
 }
 
 

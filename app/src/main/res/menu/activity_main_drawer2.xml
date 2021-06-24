@@ -14,11 +14,7 @@
             android:id="@+id/nav2_form_done"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_str_formularios_entrgados" />
-        <item
 
-            android:id="@+id/nav2_form"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_str_formularios_por_entregar" />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/menu1"

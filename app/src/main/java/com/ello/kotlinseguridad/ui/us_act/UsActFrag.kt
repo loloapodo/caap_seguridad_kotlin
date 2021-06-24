@@ -15,7 +15,7 @@ import com.ello.kotlinseguridad.Adapter.ActividadAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SActiv
-import com.ello.kotlinseguridad.Simple.SActivPlus
+
 
 class UsActFrag : Fragment() {
 
@@ -51,15 +51,13 @@ class UsActFrag : Fragment() {
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
 
-
-        mAdapter= ActividadAdapter(root.context){activity?.startActivity(Intent(activity,
-            SActiv::class.java).putExtra("id",it))}
+        mAdapter= ActividadAdapter(root.context){activity?.startActivity(Intent(activity, SActiv::class.java).putExtra("id",it))}
         mRecyclerView.adapter=mAdapter;
 
 
         if (!BIN.ES_ADMIN()){
-            BIN.PUEDE_ACTIVIDADES {
-                mAdapter.iClick={activity?.startActivity(Intent(activity, SActivPlus::class.java).putExtra("id",it))}
+            if (BIN.PUEDE_ACTIVIDADES()){
+                mAdapter.iClick={activity?.startActivity(Intent(activity, SActiv::class.java).putExtra("id",it))}
                 Log.e("Actividades","MODO ADMIN PARA LAS ACTIVIDADES")
             }
         }

@@ -1,26 +1,26 @@
 package com.ello.kotlinseguridad.Editar
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
-import android.widget.DatePicker
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.CheckAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityEActBinding
 import com.ello.kotlinseguridad.drawer1
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 class EActiv : AppCompatActivity() {
 
@@ -28,6 +28,8 @@ class EActiv : AppCompatActivity() {
     private lateinit var vm: EActivVM
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter:CheckAdapter
+
+
 
     var mObjId_toEdit:String? = ""
 
@@ -41,8 +43,69 @@ class EActiv : AppCompatActivity() {
 
 
         Init()
+        InitSpinner()
         InitRecycler()
         CargarUsuariosQueRealizanLaActividad();
+        vm.CargarFormulariosdelSpinner()
+
+
+
+        vm.formularioList.observe(this, androidx.lifecycle.Observer {
+
+            val nombres=ArrayList<String>()
+            nombres.add(BIN.EMPTY_SPINNER_ANEXAR_FORMULARIO)
+
+            Log.e("3333","333")
+            if (it != null) {
+                Log.e("3331","333")
+                for (i in it)
+                {  nombres.add(i.nombre!!);Log.e("3335","333")}
+
+
+            }
+
+
+            val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nombres)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            mBind.spinnerAnexarFormulario.adapter = adapter
+
+
+
+
+        })
+
+
+        mBind.spinnerAnexarFormulario.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View, position: Int, id: Long) {
+                Log.e("onItemSelected", "$position")
+                if (position>0){
+                    mBind.textviewTipoFormulario.text = vm.formularioList.value?.get(position-1)!!.tipo
+                    vm.ref_formulario_position=position-1
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                // your code here
+            }
+        }
+
+
+
+
+
+
+    }
+
+    private fun InitSpinner() {
+
+        val arr1= ArrayList<String>()
+        arr1.add(BIN.EMPTY_SPINNER_ANEXAR_FORMULARIO)
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr1)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mBind.spinnerAnexarFormulario.adapter = adapter
+
+
 
 
     }
@@ -74,7 +137,7 @@ class EActiv : AppCompatActivity() {
 
                 if (mObjId_toEdit.isNullOrEmpty())//Crear
                 {
-                    vm.CrearActividad(mAdapter.checked_list,editactivNombre.text.toString(),mBind.editactivDescrip.text.toString(),Calendar.getInstance().time.time,
+                    vm.CrearActividad(mAdapter.checked_list,editactivNombre.text.toString(),editactivDescrip.text.toString(),edittextSitio.text.toString(),edittextUbicacion.text.toString(),textviewTipoFormulario.toString(),Calendar.getInstance().time.time,
                         {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
                         {Toast.makeText(getThis(),resources.getString(R.string.crearActOk),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_ACTIVIDAD);finish()},
                         {Toast.makeText(getThis(),resources.getString(R.string.editarActNotOk),Toast.LENGTH_SHORT).show()}
@@ -85,7 +148,7 @@ class EActiv : AppCompatActivity() {
                 }else //Editar
                 {
                     Log.e("Editar","Editar")
-                    vm.EditarActividad(mObjId_toEdit!!,mAdapter.checked_list,editactivNombre.text.toString(),mBind.editactivDescrip.text.toString(),Calendar.getInstance().time.time,
+                    vm.EditarActividad(mObjId_toEdit!!,mAdapter.checked_list,editactivNombre.text.toString(),editactivDescrip.text.toString(),edittextSitio.text.toString(),edittextUbicacion.text.toString(),textviewTipoFormulario.toString(),Calendar.getInstance().time.time,
                         {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
                         {Toast.makeText(getThis(),resources.getString(R.string.editarActOk),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_ACTIVIDAD);finish()},
                         {Toast.makeText(getThis(),resources.getString(R.string.editarActNotOk),Toast.LENGTH_SHORT).show()}
@@ -119,6 +182,16 @@ class EActiv : AppCompatActivity() {
 
     }
 
+    fun MostrarTimePicker(view: View) {
+
+        val t= DatePickerFragment.TimePickerFragment()
+        t.textView=mBind.timePick
+        t.vm=vm
+        t.show(supportFragmentManager, "timePicker")
+
+    }
+
+
 
     class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
         lateinit var textView: TextView;
@@ -148,24 +221,38 @@ class EActiv : AppCompatActivity() {
 
 
         }
+        class  TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
+
+            lateinit var textView: TextView;
+            lateinit var vm: EActivVM
+
+
+
+            override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+                // Use the current time as the default values for the picker
+                val c = Calendar.getInstance()
+                val hour = c.get(Calendar.HOUR_OF_DAY)
+                val minute = c.get(Calendar.MINUTE)
+
+
+                Log.e("E", "onCreateDialog Time")
+                // Create a new instance of TimePickerDialog and return it
+                return TimePickerDialog(activity, this, hour, minute, DateFormat.is24HourFormat(activity))
+            }
+
+
+
+            override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
+                Log.e("E", "onTimeSet Date")
+                textView.text=String.format("%02d:%02d", hourOfDay, minute)
+                vm.hour=hourOfDay
+                vm.minutes=minute
+                // Do something with the time chosen by the user
+            }
+        }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    fun CancelarClick(view: View) {finish()}
 
 
 }

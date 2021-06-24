@@ -55,14 +55,21 @@ class AnadirPregAdapter(mContext: Context, val iClick:(str:String)->Unit): Recyc
 
     }
     fun addField(s:String){
-    list.add(s)
-    notifyItemInserted(itemCount)
+        list.add(s)
+        notifyDataSetChanged()
 }
+    fun clearField(){
+        list.clear()
+
+    }
+
+
+
+
+
     inner class AnadPregH(view: View) : RecyclerView.ViewHolder(view) {
         var preg: TextInputEditText = view.findViewById(R.id.item_nombre_pregunta)
         var No: TextView = view.findViewById(R.id.numero_preguntando)
-
-
     }
 
 

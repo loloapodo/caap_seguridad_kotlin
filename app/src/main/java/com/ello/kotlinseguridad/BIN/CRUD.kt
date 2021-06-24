@@ -128,22 +128,38 @@ companion object{
 
 
 
-    suspend fun CargarTodosUsuario(fg: (list:List<Usuario>) -> Unit,fb: () -> Unit){
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    suspend fun CargarTodosUsuario(orderByUsuario:Boolean,fg: (list:List<Usuario>) -> Unit,fb: () -> Unit){
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
-        query.orderByAscending(Usuario.field_nom)
+        if (orderByUsuario){query.orderByAscending(Usuario.field_usuario)}
+        else               {query.orderByAscending(Usuario.field_nom);}
        query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list);ParseObject.pinAll(list) }
-            else
-            { fb();Log.e("Error","Buscar All Users") }
+            if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_USU);ParseObject.pinAll(BIN.PIN_TODAS_USU,list) }
+            else { fb();Log.e("Error","Buscar All Users") }
         })
 
     }
 
-    suspend fun CargarTodosUsuarioLocal(fg: (list:List<Usuario>) -> Unit,fb: () -> Unit) {
+    suspend fun CargarTodosUsuarioLocal(orderByUsuario:Boolean,fg: (list:List<Usuario>) -> Unit,fb: () -> Unit) {
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
-        query.orderByAscending(Usuario.field_nom)
-        query.fromLocalDatastore()
+        if (orderByUsuario){query.orderByAscending(Usuario.field_usuario)}
+        else               {query.orderByAscending(Usuario.field_nom);}
+        query.fromPin(BIN.PIN_TODAS_USU)
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list) }
             else
@@ -151,6 +167,21 @@ companion object{
         })
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     suspend fun CargarUnUsuario(str_ObjectId: String,fg: (u:Usuario) -> Unit,fb: () -> Unit){
 
@@ -164,13 +195,17 @@ companion object{
     suspend fun CargarUnUsuarioLocal(str_ObjectId: String,fg: (u:Usuario) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
-        query.fromLocalDatastore()
+        query.fromPin(BIN.PIN_TODAS_USU)
         query.getInBackground(str_ObjectId, GetCallback { objeto, e ->
             if (e==null){fg(objeto) }
             else { fb();Log.e("Error","Buscar un usuario") }
         })
 
     }
+
+
+
+
 
      fun CargarUnActividad(act_ObjectId: String,fg: (a:Actividad) -> Unit,fb: () -> Unit){
 
@@ -188,7 +223,7 @@ companion object{
 
 
             val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
-            query.fromLocalDatastore()
+            query.fromPin(BIN.PIN_TODAS_ACT)
             query.getInBackground(act_ObjectId, GetCallback { objeto, e ->
                 if (e==null){fg(objeto) }
                 else { fb();Log.e("Error","Buscar un usuario") }
@@ -232,13 +267,14 @@ companion object{
      *  Crea el formulario
     2 llamadas a la api
      */
-    suspend fun CrearFormulario(str_nombre: String, long_fecha: Long,long_fecha_limite:Long,listPreg: List<String> ,fg: () -> Unit,fb: () -> Unit) {
+    suspend fun CrearFormulario(str_nombre: String,strTipo:String, long_fecha: Long,long_fecha_limite:Long,listPreg: List<String> ,fg: () -> Unit,fb: () -> Unit) {
 
         val f = Formulario()
         val pregs= mutableListOf<Pregunta>()
 
         f.nombre = str_nombre
         f.fecha = long_fecha
+        f.tipo=strTipo
         f.fecha_limite = long_fecha_limite
 
 
@@ -285,7 +321,7 @@ companion object{
      2 para borrar los objetos encontrados
      2 mas para crear el nuevo
      */
-    suspend fun EditarFormulario(str_ObjectId: String,str_nombre: String, str_fecha: Long,str_fecha_limite:Long,listPreg: List<String> ,fg: () -> Unit,fb: () -> Unit) {
+    suspend fun EditarFormulario(str_ObjectId: String,str_nombre: String,strTipo:String, str_fecha: Long,str_fecha_limite:Long,listPreg: List<String> ,fg: () -> Unit,fb: () -> Unit) {
         val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
         query.getInBackground(str_ObjectId, GetCallback { toDeleteFormulario, e1 ->
             if (e1==null){
@@ -298,7 +334,7 @@ companion object{
                             if (e3==null){
                                 ParseObject.deleteAllInBackground(toDeletePregunts, DeleteCallback {e4->
                                     if (e4==null){
-                                        GlobalScope.launch { CrearFormulario(str_nombre, str_fecha, str_fecha_limite, listPreg, fg, fb) }
+                                        GlobalScope.launch { CrearFormulario(str_nombre,strTipo, str_fecha, str_fecha_limite, listPreg, fg, fb) }
                                     }else {Log.e("Error","EF2224");fb()}
                                 })
                             }else {Log.e("Error","EF2223");fb()}
@@ -309,26 +345,43 @@ companion object{
             })
         }
 
-    suspend fun CargarTodosFormularios(fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    suspend fun CargarTodasFormularios(fg: (list:List<Formulario>) -> Unit, fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
         query.orderByDescending(Formulario.field_created)
         query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list);ParseObject.pinAll(list)}
-            else
-            { fb();Log.e("Error","Buscar All Formularios") }
+            if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_FOR);ParseObject.pinAll(BIN.PIN_TODAS_FOR,list);}
+            else { fb();Log.e("Error","Buscar All Formularios") }
         })
     }
 
-    suspend fun CargarTodosFormulariosLocal(fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
+    suspend fun CargarTodasFormulariosLocal(fg: (list:List<Formulario>) -> Unit, fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
         query.orderByDescending(Formulario.field_created)
-        query.fromLocalDatastore()
+        query.fromPin(BIN.PIN_TODAS_FOR)
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list);}
-            else
-            { fb();Log.e("Error","Buscar All Formularios") }
+            else { fb();Log.e("Error","Buscar All Formularios") }
         })
     }
 
@@ -341,6 +394,19 @@ companion object{
 
 
 
+
+
+
+
+    suspend fun CargarTodasPreguntas(fg: (list:List<Pregunta>) -> Unit,fb: () -> Unit){
+        val query = ParseQuery.getQuery<Pregunta>(Pregunta.class_name)
+        query.orderByDescending(Actividad.field_fecha)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_PRE);ParseObject.pinAll(BIN.PIN_TODAS_PRE,list)}
+            else
+            { fb();Log.e("Error","Buscar All Preguntas") }
+        })
+    }
 
 
 
@@ -358,6 +424,23 @@ companion object{
             { fb();Log.e("Error","Buscar All Preguntas") }
         })
     }
+
+    suspend fun CargarTodasPreguntasDelFormularioLocal(formulario: Formulario,fg: (list:List<Pregunta>) -> Unit,fb: () -> Unit){
+
+        val query = ParseQuery.getQuery<Pregunta>(Pregunta.class_name)
+        query.fromPin(BIN.PIN_TODAS_PRE)
+        query.orderByAscending(Pregunta.field_numero)
+        query.whereEqualTo(Pregunta.field_ref_formulario,formulario)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list)}
+            else
+            { fb();Log.e("Error","Buscar All Preguntas") }
+        })
+    }
+
+
+
+
 
 
 
@@ -392,14 +475,17 @@ companion object{
 
 
 
-    suspend fun CrearActividad(usuarios:List<Usuario> , str_nombre: String,str_desc: String,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit) {
+    suspend fun CrearActividad(usuarios:List<Usuario> , str_nombre: String,str_desc:String,str_sitio: String,str_ubicacion:String,str_ref_formulario:Formulario,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit) {
 
         val a= Actividad()
-
+//str_sitio,str_ubicacion,ref_formulario_id,fecha
         a.addUsuarios(usuarios)
         a.nombre=str_nombre
         a.desc=str_desc
         a.fecha = long_fecha
+        a.sitio=str_sitio
+        a.ubicacion=str_ubicacion
+        a.ref_formulario=str_ref_formulario
 
         a.saveInBackground { e ->
             if (e == null) {
@@ -414,17 +500,23 @@ companion object{
     }
 
 
-        suspend fun EditarActividad(str_ObjectId: String,usuarios:List<Usuario> , str_nombre: String,str_desc: String,str_fecha:Long ,fg: () -> Unit,fb: () -> Unit){
-            BorrarActividad(str_ObjectId, { GlobalScope.launch { CrearActividad(usuarios, str_nombre, str_desc, str_fecha, fg, fb) } }, {})
+        suspend fun EditarActividad(str_ObjectId: String,usuarios:List<Usuario> , str_nombre: String,str_desc: String,str_sitio: String,str_ubicacion:String,str_ref_formulario:Formulario,str_fecha:Long ,fg: () -> Unit,fb: () -> Unit){
+            BorrarActividad(str_ObjectId, { GlobalScope.launch { CrearActividad(usuarios, str_nombre, str_desc,str_sitio,str_ubicacion,str_ref_formulario, str_fecha, fg, fb) } }, {})
         }
 
 
 
+
+
+
+
+
+//TODAS ACTIVIDADES
     suspend fun CargarTodasActividades(fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
         query.orderByDescending(Actividad.field_fecha)
         query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list);ParseObject.pinAll(list)}
+            if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_ACT);ParseObject.pinAll(BIN.PIN_TODAS_ACT,list)}
             else
             { fb();Log.e("Error","Buscar All Actividades") }
         })
@@ -433,29 +525,60 @@ companion object{
     suspend fun CargarTodasActividadesLocal(fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
         query.orderByDescending(Actividad.field_fecha)
-        query.fromLocalDatastore()
+        query.fromPin(BIN.PIN_TODAS_ACT)
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list);}
             else
-            { fb();Log.e("Error","Buscar All Actividades") }
+            { fb();Log.e("Error","Buscar All Actividades LOCAL") }
         })
     }
+//TODAS ACTIVIDADES
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    suspend fun CargarTodosUsuariosdeActividadLocal(act: Actividad,fg: (list:List<Usuario>) -> Unit,fb: () -> Unit){
+        Log.e("Llamando","CargarTodosUsuariosdeActividadLocal")
+        val pin=act.objectId+BIN.PIN_SUFIJO_ACT_RELATION;
+        val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
+        query.fromPin(pin)
+        query.orderByAscending(Usuario.field_nom)
+        query.findInBackground(FindCallback { list, e ->
+            if (e == null) { fg(list); Log.e ("Local", "${list.size}");}
+            else { fb();Log.e("Error", "Buscar All Usuarios de actividad local");e.printStackTrace() }
+        })
+    }
     suspend fun CargarTodosUsuariosdeActividad(act: Actividad,fg: (list:List<Usuario>) -> Unit,fb: () -> Unit){
 
+        val pin=act.objectId+BIN.PIN_SUFIJO_ACT_RELATION;
         val query = act.getRelation<Usuario>(Actividad.field_rel_usuarios).query
         query.orderByAscending(Usuario.field_nom)
         query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Usuarios de actividad") }
+            if (e==null){fg(list);ParseObject.unpinAll(pin);ParseObject.pinAll(pin,list);}
+            else { fb();Log.e("Error","Buscar All Usuarios de actividad") }
         })
     }
+
+
+
+
+
+
 
     suspend fun CargarTodosUsuariosdeActividad(act_ObjectId: String,fg: (param:Actividad,list:List<Usuario>) -> Unit,fb: () -> Unit){
 
@@ -477,6 +600,22 @@ companion object{
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     suspend fun CargarTodasActividadesDelUsuario(U: Usuario,time_mls: Long,fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
@@ -485,20 +624,41 @@ companion object{
         query.whereGreaterThanOrEqualTo(Actividad.field_fecha,time_mls)
         query.findInBackground { list, e ->
             if (e==null){
-                ParseObject.unpinAll(BIN.PIN_ACTIVIDADES_USUARIO,list)
+                ParseObject.unpinAll(BIN.PIN_TODAS_MIS_ACT,list)
                 ParseObject.fetchAllIfNeeded(list)
-                ParseObject.pinAll(BIN.PIN_ACTIVIDADES_USUARIO,list);Log.e("Tamano lista",list.size.toString());fg(list) } else { fb();Log.e("Error","Buscar All Actividades") }
+                ParseObject.pinAll(BIN.PIN_TODAS_MIS_ACT,list);
+                Log.e("Tamano lista",list.size.toString());fg(list) } else { fb();Log.e("Error","Buscar All Actividades") }
         }
     }
 
     suspend fun CargarTodasActividadesDelUsuarioLocal(U: Usuario,time_mls:Long,fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
-        query.fromPin(BIN.PIN_ACTIVIDADES_USUARIO)
+        query.orderByDescending(Actividad.field_fecha)
+        query.fromPin(BIN.PIN_TODAS_MIS_ACT)
         query.findInBackground { list, e ->
             if (e==null){Log.e("Tamano lista local",list.size.toString());fg(list) } else { fb();Log.e("Error","Buscar All Actividades") }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     suspend fun CargarTodasActividadesDelUsuario(str_ObjectId: String,time_mls:Long,fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
         CargarUnUsuario(str_ObjectId,
@@ -525,11 +685,12 @@ companion object{
         }
 
 
-    suspend fun RegistrarRespuesta(U: Usuario,F:Formulario,P:Pregunta,R:Respuesta,foto: Bitmap?,fg: () -> Unit,fb: () -> Unit) {
+     fun RegistrarRespuesta(U: Usuario,F:Formulario,P:Pregunta,R:Respuesta,A:Actividad,foto: Bitmap?,fg: () -> Unit,fb: () -> Unit) {
 
         R.ref_pregunta=P
         R.ref_formulario=F
         R.ref_usuario=U
+        R.ref_actividad=A
 
 
 
@@ -582,17 +743,20 @@ companion object{
 
 
 
-   fun CargarTodosFormulariosRespondidos(u:Usuario,fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
+   fun CargarTodosFormulariosRespondidos(u:Usuario,fg: (list:List<Actividad>) -> Unit,fg2: (list:List<Formulario>) -> Unit,fb: () -> Unit){
        CargarTodasRespuestasDeUnUsuario(u, { respuestasDelUsuario ->
            val formRespondidos = mutableListOf<Formulario>()
+           val actividadesRespondidos = mutableListOf<Actividad>()
            for (r in respuestasDelUsuario) {
-               if (!formRespondidos.contains(r.ref_formulario)) {
+               if (!actividadesRespondidos.contains(r.ref_actividad)) {
+                    actividadesRespondidos.add(r.ref_actividad!!.fetchIfNeeded())
                    formRespondidos.add(r.ref_formulario!!.fetchIfNeeded())
                }
            }
-           ParseObject.unpinAll(BIN.PIN_FORMULARIO_RESPONDIDOS)
-           ParseObject.pinAll(BIN.PIN_FORMULARIO_RESPONDIDOS,formRespondidos)
-           fg(formRespondidos)
+           ParseObject.unpinAll(BIN.PIN_TODAS_MIS_FOR_RESP);ParseObject.unpinAll(BIN.PIN_TODAS_MIS_ACT_RESP)
+           ParseObject.pinAll(BIN.PIN_TODAS_MIS_FOR_RESP,formRespondidos);ParseObject.pinAll(BIN.PIN_TODAS_MIS_ACT_RESP,actividadesRespondidos)
+           fg(actividadesRespondidos)
+           fg2(formRespondidos)
 
        }, fb)
    }
@@ -600,17 +764,25 @@ companion object{
     fun CargarTodosFormulariosRespondidosLocal(u:Usuario,fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
-        query.fromPin(BIN.PIN_FORMULARIO_RESPONDIDOS)
-        try {
-            fg(query.find())
-        }
+        query.fromPin(BIN.PIN_TODAS_MIS_FOR_RESP)
+        try { fg(query.find()) }
         catch (e:ParseException){
-            e.printStackTrace()
+            fb();e.printStackTrace()
         }
-
-
-
     }
+
+    fun CargarTodasActividadesRespondidosLocal(u:Usuario,fg: (list:List<Actividad>) -> Unit,fb: () -> Unit){
+
+        val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
+        query.fromPin(BIN.PIN_TODAS_MIS_ACT_RESP)
+        try { fg(query.find()) }
+        catch (e:ParseException){
+            fb();e.printStackTrace()
+        }
+    }
+
+
+
 
 
 
@@ -628,13 +800,13 @@ companion object{
 
     fun CargarTodosFormulariosNoRespondidos(u:Usuario,fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
 
-        CargarTodosFormulariosRespondidos(u,{respondidos->
+        CargarTodosFormulariosRespondidos(u,{},{respondidos->
             GlobalScope.launch (Dispatchers.IO){
-                CargarTodosFormularios({todos->
+                CargarTodasFormularios({ todos->
                     val sinResponder= BIN.RESTAR_LISTAS(todos,respondidos)
                     Log.e("CargarFormNoRespondidos","cantidad= ${sinResponder.size}")
-                    ParseObject.unpinAll(BIN.PIN_FORMULARIO_RESPONDIDOS)
-                    ParseObject.pinAll(BIN.PIN_FORMULARIO_SIN_RESPONDER,sinResponder)
+                    ParseObject.unpinAll(BIN.PIN_TODAS_MIS_FOR_SIN_RESP)
+                    ParseObject.pinAll(BIN.PIN_TODAS_MIS_FOR_SIN_RESP,sinResponder)
                     fg(sinResponder)
                 }, fb)
             }
@@ -645,7 +817,7 @@ companion object{
     fun CargarTodosFormulariosNoRespondidosLocal(u:Usuario,fg: (list:List<Formulario>) -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
-        query.fromPin(BIN.PIN_FORMULARIO_SIN_RESPONDER)
+        query.fromPin(BIN.PIN_TODAS_MIS_FOR_SIN_RESP)
         try {
             fg(query.find())
         }catch (e:ParseException){
@@ -670,11 +842,31 @@ companion object{
    {
        val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
        query.findInBackground(FindCallback { list, e ->
-           if (e==null){fg(list) }
+           if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_RES);ParseObject.pinAll(BIN.PIN_TODAS_RES,list) }
            else
            { fb();Log.e("Error","Buscar All Respuestas") }
        })
    }
+    fun CargarTodasRespuestasLocal(fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
+    {
+        val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
+        query.fromPin(BIN.PIN_TODAS_RES)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list) }
+            else
+            { fb();Log.e("Error","Buscar All Respuestas") }
+        })
+    }
+
+
+
+
+
+
+
+
+
+
     fun CargarTodasRespuestas(u: Usuario,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
     {
         val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
@@ -685,10 +877,28 @@ companion object{
             { fb();Log.e("Error","Buscar All Respuestas2") }
         })
     }
-    fun CargarTodasRespuestas(u: Usuario,f:Formulario,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
+
+
+
+    fun CargarTodasRespuestas(u: Usuario,f:Formulario,a:Actividad,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
     {
         val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
         query.whereEqualTo(Respuesta.field_ref_usuario,u)
+        query.whereEqualTo(Respuesta.field_ref_actividad,a)
+        query.whereEqualTo(Respuesta.field_ref_formulario,f)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list);ParseObject.pinAll(BIN.PIN_TODAS_RES,list) }
+            else
+            { fb();Log.e("Error","Buscar All Respuestas3") }
+        })
+    }
+
+    fun CargarTodasRespuestasLocal(u: Usuario,f:Formulario,a:Actividad,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
+    {
+        val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
+        query.fromPin(BIN.PIN_TODAS_RES)
+        query.whereEqualTo(Respuesta.field_ref_usuario,u)
+        query.whereEqualTo(Respuesta.field_ref_actividad,a)
         query.whereEqualTo(Respuesta.field_ref_formulario,f)
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list) }
@@ -696,6 +906,8 @@ companion object{
             { fb();Log.e("Error","Buscar All Respuestas3") }
         })
     }
+
+
 
 
 
@@ -762,41 +974,89 @@ companion object{
     }
     fun CargarUnFormularioLocal(strObjid: String,fg: (f:Formulario) -> Unit,fb: () -> Unit) {
 
-        val query = ParseQuery.getQuery<Formulario>(Formulario.class_name).fromLocalDatastore()
+        val query = ParseQuery.getQuery<Formulario>(Formulario.class_name).fromPin(BIN.PIN_TODAS_FOR)
         query.getInBackground(strObjid, GetCallback { objeto, e ->
             if (e==null){fg(objeto) }
             else { fb();Log.e("Error","Buscar un usuario") }
         })
     }
 
-    fun CargarTodosRoles(fg: (r:List<Rol>) -> Unit,fb : () -> Unit) {
-        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
-        query.findInBackground { list_roles, e ->
-            if (e==null){fg(list_roles) }
-            else { fb();Log.e("Error","Buscar roles") }
-        }
+
+
+
+
+
+
+
+
+
+    fun CargarTodasRolLocal(fg: (list: List<Rol>) -> Unit, fb: () -> Unit) {
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name).fromPin(BIN.PIN_TODAS_ROL)
+        query.orderByAscending(Rol.field_rol)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list) }
+            else { fb();Log.e("Error","Buscar All roles") }
+        })
     }
+
+
+    fun CargarTodasRol(fg: (list: List<Rol>) -> Unit, fb: () -> Unit) {
+        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.orderByAscending(Rol.field_rol)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_ROL);ParseObject.pinAll(BIN.PIN_TODAS_ROL,list)}
+            else {fb();Log.e("Error","Buscar All ROL") }
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     fun CargarTodasEquipamiento(fg: (list: List<Equip>) -> Unit, fb: () -> Unit) {
-
         val query = ParseQuery.getQuery<Equip>(Equip.class_name)
+        query.orderByAscending(Equip.field_nombre)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list);ParseObject.unpinAll(BIN.PIN_TODAS_EQU);ParseObject.pinAll(BIN.PIN_TODAS_EQU,list) }
+            else { fb();Log.e("Error","Buscar All Equipamiento") }
+        })
+    }
+
+    fun CargarTodasEquipamientoLocal(fg: (list: List<Equip>) -> Unit, fb: () -> Unit){
+        val query = ParseQuery.getQuery<Equip>(Equip.class_name).fromPin(BIN.PIN_TODAS_EQU)
+        query.orderByAscending(Equip.field_nombre)
         query.findInBackground(FindCallback { list, e ->
             if (e==null){fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Equipamiento") }
+            else { fb();Log.e("Error","Buscar All Equipamiento") }
         })
-
     }
-    fun CargarTodasRol(fg: (list: List<Rol>) -> Unit, fb: () -> Unit) {
 
-        val query = ParseQuery.getQuery<Rol>(Rol.class_name)
-        query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Equipamiento") }
-        })
 
-    }
+
+
+
+
+
+
+
+
+
 
     fun CargarUnEquipamiento(idEquipa: String, fg: (activ: Equip) -> Unit, fb: () -> Unit) {
 
@@ -1008,27 +1268,25 @@ companion object{
 
     }
 
-    fun CargarTodasEquipamientoLocal(fg: (list: List<Equip>) -> Unit, fb: () -> Unit){
-        val query = ParseQuery.getQuery<Equip>(Equip.class_name).fromLocalDatastore()
-
-        query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Equipamiento") }
-        })
-    }
-
-    fun CargarTodasRolLocal(fg: (list: List<Rol>) -> Unit, fb: () -> Unit) {
-        val query = ParseQuery.getQuery<Rol>(Rol.class_name).fromLocalDatastore()
-
-        query.findInBackground(FindCallback { list, e ->
-            if (e==null){fg(list) }
-            else
-            { fb();Log.e("Error","Buscar All Equipamiento") }
-        })
 
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     fun CargarUnRolPIN(pin: String, fg: (Rol) -> Unit, fb: () -> Unit) {
 
@@ -1039,11 +1297,21 @@ companion object{
             fb()
 
         }
-
-
-
-
     }
+
+
+    fun CargarUnActividadPIN(pin: String, fg: (Actividad) -> Unit, fb: () -> Unit) {
+
+        val query = ParseQuery.getQuery<Actividad>(Actividad.class_name).fromPin(pin)
+        try {
+            fg( query.first)
+        }catch (e:ParseException) {
+            fb()
+
+        }
+    }
+
+
 
     fun CargarUnEquiPIN(pin: String, fg: (activ: Equip) -> Unit, fb: () -> Unit) {
         val query = ParseQuery.getQuery<Equip>(Equip.class_name).fromPin(pin)

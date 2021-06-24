@@ -212,7 +212,7 @@
     android:id="@+id/bu_responder_o_verrespuestas"
     android:layout_gravity="center"
     android:onClick="Responder_O_VerRespuestaClick"
-    android:visibility="invisible"
+    android:visibility="visible"
     >
 </Button>
 
@@ -224,7 +224,7 @@
                     android:id="@+id/bu_abrir_estado_de_envios_del_form"
                     android:layout_gravity="center"
                     android:onClick="MostrarEstadoEnvio_O_Preguntas"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     >
 
                 </Button>
@@ -258,6 +258,7 @@
                     </View>
 
                     <Button
+                        android:id="@+id/bu_eliminar"
                         android:layout_marginTop="@dimen/editarusuariomargin"
                         android:layout_marginBottom="@dimen/editarusuariomargin"
                         android:layout_width="wrap_content"
@@ -275,6 +276,7 @@
                     </View>
 
                     <Button
+                        android:id="@+id/bu_editar"
                         android:layout_marginTop="@dimen/editarusuariomargin"
                         android:layout_marginBottom="@dimen/editarusuariomargin"
                         android:layout_width="wrap_content"

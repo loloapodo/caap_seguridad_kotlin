@@ -1,33 +1,26 @@
 package com.ello.kotlinseguridad.Editar
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
-import android.widget.DatePicker
-import android.widget.TextView
-import android.widget.TimePicker
-import android.widget.Toast
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.AnadirPregAdapter
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityEFormBinding
 import com.ello.kotlinseguridad.drawer1
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
-import kotlin.math.min
+
 
 class EForm : AppCompatActivity() {
 
@@ -36,6 +29,7 @@ class EForm : AppCompatActivity() {
     private lateinit var vm: EFormVM
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AnadirPregAdapter
+
     private var mObjIdForm_toEdit:String? = ""
     companion object{
         var EXTRA_OBJ_ID="extra_editar"
@@ -45,10 +39,11 @@ class EForm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Init()
+        InitSpinners()
         InitRecycler()
 
-        mAdapter.addField("")
-        mBind.imageVOtrapregunta.setOnClickListener {mAdapter.addField("")}
+
+        //mBind.imageVOtrapregunta.setOnClickListener {mAdapter.addField("")}
 
 
 
@@ -64,6 +59,57 @@ class EForm : AppCompatActivity() {
 
     }
 
+    private fun InitSpinners() {
+
+        val arr1= ArrayList<String>()
+        arr1.add(BIN.TIPO_FORMULARIO0)
+        arr1.add(BIN.TIPO_FORMULARIO1)
+        arr1.add(BIN.TIPO_FORMULARIO2)
+        arr1.add(BIN.TIPO_FORMULARIO3)
+        arr1.add(BIN.TIPO_FORMULARIO4)
+
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr1)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mBind.spinnerTipoFormulario.adapter = adapter
+
+        val arr2= ArrayList<String>()
+        arr2.add("Cantidad de preguntas")
+        arr2.add("1")
+        arr2.add("2")
+        arr2.add("3")
+        arr2.add("4")
+        arr2.add("5")
+        arr2.add("6")
+        arr2.add("7")
+        arr2.add("8")
+        arr2.add("9")
+        //arr2.add("10")
+
+        val adapter2: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr2)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mBind.spinnerCantPreguntas.adapter = adapter2
+
+
+        mBind.spinnerCantPreguntas.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View, position: Int, id: Long) {
+                Log.e("Seleccionada la pos","$position")
+                mAdapter.clearField()
+                for(i in 0 until position){
+
+                    mAdapter.addField("")}
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                // your code here
+            }
+        }
+
+
+
+
+    }
+
 
     fun AcpetarClick(view: View) {
 
@@ -74,34 +120,36 @@ class EForm : AppCompatActivity() {
 
             if (vm.CamposEstanMal(editFormularNombre))
             {
-                Toast.makeText(getThis(),resources.getString(R.string.toast_campos_mal),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getThis(), resources.getString(R.string.toast_campos_mal), Toast.LENGTH_SHORT).show();
                 return
             }
 
 
                 if (mObjIdForm_toEdit.isNullOrEmpty())//Crear
                 {
-                    Log.e("Crear","Crear")
+                    Log.e("Crear", "Crear")
                    vm.CrearFormulario(
                            editFormularNombre.text.toString(),
-                           Calendar.getInstance().timeInMillis,Calendar.getInstance().timeInMillis,mAdapter.list,
-                           {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
-                           {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_FORMULARIO);finish()},
-                           {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado_error),Toast.LENGTH_SHORT).show()}
-                           )
+                           spinnerTipoFormulario.selectedItem.toString(),
+                           Calendar.getInstance().timeInMillis, mAdapter.list,
+                           { Toast.makeText(getThis(), it, Toast.LENGTH_SHORT).show(); },
+                           { Toast.makeText(getThis(), resources.getString(R.string.formulario_creado), Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_FORMULARIO);finish() },
+                           { Toast.makeText(getThis(), resources.getString(R.string.formulario_creado_error), Toast.LENGTH_SHORT).show() }
+                   )
 
 
 
                 }else //Editar
                 {
-                    Log.e("Editar","Editar")
+                    Log.e("Editar", "Editar")
                  vm.EditarFormulario(mObjIdForm_toEdit!!,
                          mBind.editFormularNombre.text.toString(),
-                         Calendar.getInstance().timeInMillis,Calendar.getInstance().timeInMillis,mAdapter.list,
-                         {Toast.makeText(getThis(),it,Toast.LENGTH_SHORT).show();},
-                         {Toast.makeText(getThis(),resources.getString(R.string.formulario_editado),Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_FORMULARIO);finish()},
-                         {Toast.makeText(getThis(),resources.getString(R.string.formulario_creado_error),Toast.LENGTH_SHORT).show()}
-                         )
+                        spinnerTipoFormulario.selectedItem.toString(),
+                         Calendar.getInstance().timeInMillis, mAdapter.list,
+                         { Toast.makeText(getThis(), it, Toast.LENGTH_SHORT).show(); },
+                         { Toast.makeText(getThis(), resources.getString(R.string.formulario_editado), Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_FORMULARIO);finish() },
+                         { Toast.makeText(getThis(), resources.getString(R.string.formulario_creado_error), Toast.LENGTH_SHORT).show() }
+                 )
 
                 }
 
@@ -118,6 +166,11 @@ class EForm : AppCompatActivity() {
         if (mObjIdForm_toEdit.isNullOrEmpty()){mBind.included.toolbar.title = resources.getString(R.string.titleCformulario)}
         else{ mBind.included.toolbar.title = resources.getString(R.string.titleEformulario) }
 
+
+
+
+
+
     }
 
     private fun InitRecycler() {
@@ -125,7 +178,7 @@ class EForm : AppCompatActivity() {
         val llm = LinearLayoutManager(this);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter= AnadirPregAdapter(this,{}) ;
+        mAdapter= AnadirPregAdapter(this, {}) ;
         mRecyclerView.adapter=mAdapter;
     }
     private fun getThis(): Context =this
@@ -147,7 +200,7 @@ class EForm : AppCompatActivity() {
     }
     fun MostrarTimePicker(view: View) {
 
-        val t:TimePickerFragment= TimePickerFragment()
+        val t= TimePickerFragment()
         t.textView=mBind.timePick
         t.vm=vm
         t.show(supportFragmentManager, "timePicker")
@@ -167,7 +220,7 @@ class EForm : AppCompatActivity() {
             val minute = c.get(Calendar.MINUTE)
 
 
-            Log.e("E","onCreateDialog Time")
+            Log.e("E", "onCreateDialog Time")
             // Create a new instance of TimePickerDialog and return it
             return TimePickerDialog(activity, this, hour, minute, DateFormat.is24HourFormat(activity))
         }
@@ -175,7 +228,7 @@ class EForm : AppCompatActivity() {
 
 
         override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-            Log.e("E","onTimeSet Date")
+            Log.e("E", "onTimeSet Date")
             textView.text=String.format("%02d:%02d", hourOfDay, minute)
             vm.hour=hourOfDay
             vm.minutes=minute
@@ -195,13 +248,13 @@ class EForm : AppCompatActivity() {
 
 
             // Create a new instance of DatePickerDialog and return it
-            Log.e("E","onCreateDialog Date")
+            Log.e("E", "onCreateDialog Date")
             return DatePickerDialog(requireActivity(), this, year, month, day)
         }
 
         override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
             // Do something with the date chosen by the user
-            Log.e("E","onDateSet Date")
+            Log.e("E", "onDateSet Date")
             textView.text=day.toString()+"/"+(month+1).toString()+"/"+year.toString()
             vm.year=year
             vm.month=month
@@ -212,7 +265,7 @@ class EForm : AppCompatActivity() {
         }
     }
 
-
+    fun CancelarClick(view: View) {finish()}
 
 
 }

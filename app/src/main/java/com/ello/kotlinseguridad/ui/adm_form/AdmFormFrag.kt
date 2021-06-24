@@ -35,16 +35,12 @@ class AdmFormFrag : Fragment() {
 
         InitRecycler(root)
 
-    vm._listado.observe(viewLifecycleOwner, Observer {
+                vm._listado.observe(viewLifecycleOwner, Observer {
                 Log.e("observer done","observerd done");
                 mAdapter.list=it
                 mAdapter.notifyDataSetChanged()
             })
         vm.Cargar()
-
-
-
-
         return root
     }
     public fun Cargar(){ vm.Cargar()}
@@ -58,7 +54,7 @@ class AdmFormFrag : Fragment() {
         mAdapter=
                 FormularioAdapter(root.context){
 
-                    startActivity(Intent(activity, SForm::class.java).putExtra("id",it).putExtra(BIN.EXTRA_SOLO_ADMIN,true))}
+                    startActivity(Intent(activity, SForm::class.java).putExtra("id",it).putExtra(BIN.EXTRA_TIENE_ACTIVIDAD_ASOCIADA,false))}
                     mRecyclerView.adapter=mAdapter;
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

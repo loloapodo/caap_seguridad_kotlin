@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.ello.kotlinseguridad.Adapter.VerEstDelFormAdapter
 import com.ello.kotlinseguridad.Adapter.VerPreDelFormAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.BIN.Companion.REQ_LLENAR_FORMULARIO
+import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Editar.EForm
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.BIN.Snippetk
@@ -36,7 +38,7 @@ class SForm : AppCompatActivity() {
 
 
 
-    companion object{ val EXTRA_RESUELTO="extra_resuelto"}
+    companion object{val EXTRA_RESUELTO="extra_resuelto"}
 
     private lateinit var vm: SFormVM
     private lateinit var mRecyclerView: RecyclerView
@@ -62,8 +64,8 @@ class SForm : AppCompatActivity() {
 
 
         vm.CargarElFormularioLocal({ form->
-
-
+            BIN.PinSelected(form)
+            vm.este_formulario=form
             mBind.unaFormularioNombre.text=form.nombre
             mBind.unFormulFecha.text= Snippetk.LeerFechaR(form.fecha)
             mBind.unFormulFechaExp.text= Snippetk.LeerFechaR(form.fecha_limite)
@@ -71,18 +73,51 @@ class SForm : AppCompatActivity() {
 
 
 
-                vm.CargarTodasPreguntasDelFormulario(form,{
+            vm.esta_resuelto.observe(this, Observer { if (it){mBind.buResponderOVerrespuestas.text=resources.getString(R.string.ver_mi_respuesta)} })
+            vm.CargarTodasPreguntasDelFormulario(form,{
 
                 mAdapterPreguntas.setPreguntas(it)
                 mAdapterPreguntas.notifyDataSetChanged()
 
-                    if (BIN.ES_ADMIN()||intent.hasExtra(BIN.EXTRA_SOLO_ADMIN)){ mBind.buResponderOVerrespuestas.visibility=View.GONE;mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE}
-                    else                {
-
-                        mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE;mBind.buResponderOVerrespuestas.visibility=View.VISIBLE
-                        if (intent.getBooleanExtra(EXTRA_RESUELTO,false)){
-                            mBind.buResponderOVerrespuestas.text=resources.getString(R.string.ver_mi_respuesta)
+                    if (BIN.ES_ADMIN())
+                    {
+                        mBind.buResponderOVerrespuestas.visibility=View.GONE;
+                        if (intent.getBooleanExtra(BIN.EXTRA_TIENE_ACTIVIDAD_ASOCIADA,true)){
+                            mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE
+                            Log.e("tiene asociada","tiene asociada")
+                        }else{mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE
+                            Log.e("NO tiene asociada","NO tiene asociada")
                         }
+
+
+
+                    }
+                    else {
+
+                        mBind.buEditar.visibility=View.GONE
+                        mBind.buEliminar.visibility=View.GONE
+                        mBind.buResponderOVerrespuestas.visibility=View.VISIBLE
+
+
+
+                        if (intent.getBooleanExtra(BIN.EXTRA_TIENE_ACTIVIDAD_ASOCIADA,true)){
+                            mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.VISIBLE
+                            Log.e("tiene asociada","tiene asociada")
+                        }else{
+
+                            mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE
+                            mBind.buResponderOVerrespuestas.visibility=View.GONE
+                            mBind.buEditar.visibility=View.VISIBLE
+                            mBind.buEliminar.visibility=View.VISIBLE
+                            Log.e("No tiene asociada","NO tiene asociada")
+                        }
+
+
+                        if (intent.getBooleanExtra(EXTRA_RESUELTO,false)){ vm.esta_resuelto.value=true }
+                        else{ vm.PreguntaSiFueResuelto(this) }
+
+
+
                     }
 
 
@@ -91,6 +126,10 @@ class SForm : AppCompatActivity() {
         }){
             finish()
         }
+
+
+
+
 
 
     }
@@ -105,6 +144,8 @@ class SForm : AppCompatActivity() {
             u,f->
 
             val i=Intent(this, RDone::class.java)
+            BIN.PinSelected(u)
+            BIN.PinSelected(f)
             i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
             i.putExtra(BIN.EXTRA_USUARIO,u.objectId)
             i.putExtra(BIN.EXTRA_NOMBRE,f.nombre)
@@ -119,7 +160,8 @@ class SForm : AppCompatActivity() {
         mBind.included.toolbar.title = resources.getString(R.string.titleformulario)
         setContentView(mBind.root)
         vm= SFormVM()
-        vm.id_formulario= intent.getStringExtra("id")!!
+
+        vm.id_formulario= intent.getStringExtra(BIN.EXTRA_ID)!!
 
 
 
@@ -127,33 +169,7 @@ class SForm : AppCompatActivity() {
 
     }
 
-    private fun CreateMyOptionMenu() {
 
-        val menu=mBind.included.toolbar.menu
-        menuInflater.inflate(R.menu.simpleusuariomenu, menu)
-        val elimiItem: MenuItem? = menu?.findItem(R.id.menu_item_eliminar)
-        elimiItem?.setOnMenuItemClickListener {
-
-            vm.BorrarFormulario(vm.id_formulario,{
-                Toast.makeText(getThis(),resources.getString(R.string.formulario_eliminado),Toast.LENGTH_SHORT).show();finish()
-            },{
-                Toast.makeText(getThis(),resources.getString(R.string.error_eliminar_form),Toast.LENGTH_SHORT).show();finish()
-            })
-            return@setOnMenuItemClickListener false;
-        }
-
-
-        val editarItem: MenuItem? = menu?.findItem(R.id.menu_item_editar)
-        editarItem?.setOnMenuItemClickListener {
-
-            lifecycleScope.launch {
-                val i = Intent(getThis(), EForm::class.java);
-                i.putExtra(EForm.EXTRA_OBJ_ID,vm.id_formulario)
-                startActivity(i)
-            }
-            return@setOnMenuItemClickListener true;
-        }
-    }
 
     private fun getThis(): Context =this
 
@@ -176,12 +192,14 @@ class SForm : AppCompatActivity() {
 
     fun Responder_O_VerRespuestaClick(view: View) {
 
-        if (intent.getBooleanExtra(EXTRA_RESUELTO,false))
+        if (vm.esta_resuelto.value!!)
         {
             val i=Intent(this, RDone::class.java)
             i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
             i.putExtra(BIN.EXTRA_USUARIO,BIN.CARGAR_USUARIO_LOGED()!!.objectId)
             i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
+
+
             startActivityForResult(i,BIN.REQ_VER_RESPUESTAS_FORMULARIO)
 
         }

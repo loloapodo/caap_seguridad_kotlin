@@ -25,7 +25,6 @@
         android:orientation="vertical"
         >
 
-
         <com.google.android.material.textfield.TextInputLayout
 
             android:layout_marginTop="@dimen/editarusuariomargin"
@@ -51,6 +50,31 @@
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Spinner
+            android:id="@+id/spinner_tipo_formulario"
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/spinner_cant_preguntas"
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </Spinner>
+
+
+
+
+
+
 
 
 
@@ -74,6 +98,7 @@
 
 
 <LinearLayout
+    android:visibility="gone"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -97,40 +122,6 @@
     </ImageView>
 </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/spacing_middle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="horizontal"
-            android:gravity="center"
-            >
-            <ImageView
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_width="@dimen/clock_size"
-                android:layout_height="@dimen/clock_size">
-
-            </ImageView>
-            <TextView
-                android:textColor="@color/grey_40"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-
-                android:id="@+id/time_pick"
-                android:layout_gravity="center"
-                android:text="@string/SeleccionaHoraLimite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="MostrarTimePicker"
-                >
-            </TextView>
-
-            <ImageView
-
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_width="@dimen/clock_size"
-                android:layout_height="@dimen/clock_size"> </ImageView>
-        </LinearLayout>
         <LinearLayout
             android:layout_marginTop="@dimen/spacing_middle"
             android:layout_width="match_parent"
@@ -164,30 +155,86 @@
 
             </ImageView>
         </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:layout_marginTop="@dimen/editarusuariomargin"
-            android:layout_marginBottom="@dimen/editarusuariomargin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/aceptar"
-            android:layout_gravity="center"
-            android:onClick="AcpetarClick"
+        <LinearLayout
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal"
+            android:gravity="center"
             >
+            <ImageView
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_width="@dimen/clock_size"
+                android:layout_height="@dimen/clock_size">
 
-        </Button>
+            </ImageView>
+            <TextView
+                android:textColor="@color/grey_40"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+
+                android:id="@+id/time_pick"
+                android:layout_gravity="center"
+                android:text="@string/SeleccionaHoraLimite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="MostrarTimePicker"
+                >
+            </TextView>
+
+            <ImageView
+
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_width="@dimen/clock_size"
+                android:layout_height="@dimen/clock_size"> </ImageView>
+        </LinearLayout>
+
+
+
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+
+    >
+
+    <Button
+        android:layout_marginTop="@dimen/editarusuariomargin"
+        android:layout_marginBottom="@dimen/editarusuariomargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelar"
+        android:layout_gravity="center"
+        android:onClick="CancelarClick"
+        >
+
+    </Button>
+    <Button
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/editarusuariomargin"
+        android:layout_marginBottom="@dimen/editarusuariomargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aceptar"
+        android:layout_gravity="center"
+        android:onClick="AcpetarClick"
+        >
+
+    </Button>
+
+</LinearLayout>
+
+
+
+
+
+
+
 
 
 

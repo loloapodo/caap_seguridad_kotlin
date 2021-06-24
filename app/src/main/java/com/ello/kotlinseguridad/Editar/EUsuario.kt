@@ -239,7 +239,7 @@ class EUsuario : AppCompatActivity() {
     }
 
     fun CancelarClick(view: View) {
-        //TODO
+
         finish();
     }
 

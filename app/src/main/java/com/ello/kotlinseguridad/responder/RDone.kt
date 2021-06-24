@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -17,6 +18,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ceylonlabs.imageviewpopup.ImagePopup
+import com.ello.kotlinseguridad.Adapter.EquipaCheckAdapter
+import com.ello.kotlinseguridad.Adapter.EvidenciaAdapter
 import com.ello.kotlinseguridad.Adapter.RespondidoAdapter
 import com.ello.kotlinseguridad.Adapter.RespuestaAdapter
 import com.ello.kotlinseguridad.BIN.BIN
@@ -25,7 +29,7 @@ import com.ello.kotlinseguridad.BIN.Snippets
 import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.databinding.ActRFormBinding
+
 import com.ello.kotlinseguridad.databinding.ActivityRDoneBinding
 import java.io.IOException
 
@@ -41,45 +45,78 @@ class RDone : AppCompatActivity() {
     private lateinit var mAdapter: RespondidoAdapter
     private lateinit var mRecyclerView: RecyclerView
 
+    private lateinit var mAdapterEvidencia: EvidenciaAdapter
+    private lateinit var mAdapterEquip: EquipaCheckAdapter
+    private lateinit var mRecyclerViewEvidencias: RecyclerView
+    private lateinit var mRecyclerViewEquipacheq: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Init()
         InitRecycler(mBind.root)
-
-
+        Titulo()
 
 
         vm.Cargar()
-        mBind.unaFormularioNombre.text = intent.getStringExtra(BIN.EXTRA_NOMBRE)
 
 
 
 
-        vm._listRES.observe(this, Observer {
-            if (it.isNotEmpty()) { mAdapter.SetPregResp(vm._listPRE.value!!,vm._listRES.value!!) }
+
+
+
+
+        vm._listRES.observe(this, Observer {respuestas->
+            if (respuestas.isNotEmpty()) {
+
+                mAdapter.SetPregResp(vm._listPRE.value!!,vm._listRES.value!!)
+
+        for (primera in respuestas){
+                if(primera.firs_of_list){
+
+
+
+                with(primera){
+
+
+                val cant_imag=contarImagenes();
+                    Log.e("cant de imagenes","$cant_imag")
+
+                for (i in 0 until cant_imag){ mAdapterEvidencia.addImages(getEvidencia(i)!!,false) }
+                if (cant_imag==0){mBind.layoutEvidencias.visibility=View.GONE}
+
+                if (equipos!=null){mAdapterEquip.addrawEq(equipos!!)}
+}
+        }
+        }
+            }
+            else{  Log.e("sin respuestas","sin respuestas")}
+
+
+
+
             mAdapter.notifyDataSetChanged()
+            mAdapterEvidencia.notifyDataSetChanged()
+            mAdapterEquip.notifyDataSetChanged()
         })
-
-        vm.usuar.observe(this, Observer {
-            mBind.unaFormularioNombre.text = "${intent.getStringExtra(BIN.EXTRA_NOMBRE)} (${it.nom_apell})"
-
-        })
-
-
-
-
-
     }
 
+    private fun Titulo() {
+        val u=BIN.getThisUser()
+        val f= BIN.getThisForm()
+        var str=f!!.tipo
+            str+=": "
+            str+= f.nombre
+        str+=" ("
+        str+=u!!.nom_apell
+        str+=")"
 
 
 
+        mBind.unaFormularioNombre.text=str
 
-
-
-
-
+    }
 
 
     fun LoadFoto(i:ImageView,p:Int) {
@@ -97,7 +134,9 @@ class RDone : AppCompatActivity() {
 
     private fun Init() {
         mBind = ActivityRDoneBinding.inflate(layoutInflater)
-        mBind.included.toolbar.title = resources.getString(R.string.titleformulario)
+
+
+        mBind.included.toolbar.title = BIN.getThisAct()!!.nombre
         setContentView(mBind.root)
         vm = RDoneVM()
 
@@ -118,6 +157,35 @@ class RDone : AppCompatActivity() {
         mRecyclerView.layoutManager = llm;
         mAdapter = RespondidoAdapter(root.context) { foto, pos -> /*TODO Agrandar foto al hacer click*/ }
         mRecyclerView.adapter = mAdapter;
+
+        mRecyclerViewEvidencias = root.findViewById(R.id.recycler_evidencias)
+        val llm2 = LinearLayoutManager(root.context);
+        //val gl = GridLayoutManager(getThis(), 2)
+        llm2.orientation = LinearLayoutManager.HORIZONTAL;
+
+        mRecyclerViewEvidencias.layoutManager = llm2;
+        mAdapterEvidencia = EvidenciaAdapter(root.context) { imageView, pos->
+
+            val imagePopup: ImagePopup
+            imagePopup= ImagePopup(imageView.getContext());
+            imagePopup.setBackgroundColor(Color.TRANSPARENT);  // Optional
+            imagePopup.setFullScreen(true); // Optional
+            //imagePopup.setHideCloseIcon(true);  // Optional
+            imagePopup.setImageOnClickClose(true);  // Optional
+            imagePopup.initiatePopup(imageView.getDrawable());
+            imagePopup.viewPopup();
+
+
+        }
+        mRecyclerViewEvidencias.adapter = mAdapterEvidencia;
+
+        mRecyclerViewEquipacheq = root.findViewById(R.id.recyclercheckequip)
+        val llm3 = LinearLayoutManager(root.context);
+        llm3.orientation = LinearLayoutManager.HORIZONTAL;
+        mRecyclerViewEquipacheq.layoutManager =llm3// GridLayoutManager(root.context, 2)
+        mAdapterEquip = EquipaCheckAdapter(root.context,true) { foto, pos-> }
+        mRecyclerViewEquipacheq.adapter = mAdapterEquip;
+
     }
 
     private fun getThis(): Context { return this }

@@ -41,7 +41,14 @@
         android:icon="@drawable/ic_menu_slideshow"
         android:title="@string/menu_str_actividades" />
 
-</group>
+        <item
+            android:onClick="ReportesClick"
+            android:id="@+id/nav_reportes"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_str_reportes" />
+
+
+    </group>
 
 
     <group android:checkableBehavior="single"

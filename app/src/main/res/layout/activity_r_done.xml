@@ -13,7 +13,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                     android:textColor="@color/grey_90"
@@ -32,7 +35,12 @@
 
 
             </LinearLayout>
-            <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/spacing_xlarge" android:paddingRight="@dimen/spacing_xlarge" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_large">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large"
+                android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_large">
                 <TextView
                     android:id="@+id/sform_adapctertitle"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
@@ -42,19 +50,128 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:text="@string/preguntas_respuesta" />
-                <View android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
+                <View android:background="@color/grey_5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dip"
+                    android:visibility="visible"/>
+
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/i_ver_pre_del_form"
+                    tools:listitem="@layout/i_respondiendo"
                     android:id="@+id/recycler"
                     tools:itemCount="2"
 
                     >
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/spacing_medium"
+
+                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_equipamiento"
+                    >
+                </TextView>
+
+
+                <View
+
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintTop_toBottomOf="@id/item_nombre_pregunta"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/grey_10" android:layout_width="fill_parent" android:layout_height="1.0dip"  />
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_margin="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/i_check_equipam"
+                    android:id="@+id/recyclercheckequip"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layout_evidencias"
+
+                    >
+
+                    <TextView
+
+
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_90"
+                        android:text="@string/str_evidencias"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+                    </TextView>
+
+                    <View
+
+                        android:id="@+id/separator"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        app:layout_constraintTop_toBottomOf="@id/item_nombre_pregunta"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:background="@color/grey_10" android:layout_width="fill_parent" android:layout_height="1.0dip"  />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_evidencias"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/i_evidencia"
+
+
+                        >
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+
+                <View
+
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintTop_toBottomOf="@id/item_nombre_pregunta"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/grey_10" android:layout_width="fill_parent" android:layout_height="1.0dip"  />
+
+
 
 
 

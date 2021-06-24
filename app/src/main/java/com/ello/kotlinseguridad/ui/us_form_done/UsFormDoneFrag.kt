@@ -15,7 +15,7 @@ import com.ello.kotlinseguridad.Adapter.FormularioAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.Simple.SForm
-import com.ello.kotlinseguridad.Simple.SFormPlus
+
 
 class UsFormDoneFrag : Fragment() {
 
@@ -59,8 +59,8 @@ class UsFormDoneFrag : Fragment() {
         mRecyclerView.adapter=mAdapter;
 
         if (!BIN.ES_ADMIN()) {
-            BIN.PUEDE_FORMULARIOS {
-                mAdapter.iClick = { activity?.startActivity(Intent(activity, SFormPlus::class.java).putExtra("id", it).putExtra(SForm.EXTRA_RESUELTO,true)) }
+            if(BIN.PUEDE_FORMULARIOS()){//Se actualiza el intent que se creara con el click
+                //mAdapter.iClick = { activity?.startActivity(Intent(activity, SForm::class.java).putExtra("id", it).putExtra(SForm.EXTRA_RESUELTO,true).putExtra(BIN.EXTRA_TIENE_ACTIVIDAD_ASOCIADA,false)) }
                 Log.e("Actividades", "MODO ADMIN PARA LAS ACTIVIDADES")
             }
         }

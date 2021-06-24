@@ -17,16 +17,19 @@
         android:label="@string/menu_gallery2"
         tools:layout="@layout/frag_us_encu_done" />
 
-    <fragment
-        android:id="@+id/nav2_form"
-        android:name="com.ello.kotlinseguridad.ui.us_form_undone.UsFormUndoneFrag"
-        android:label="@string/menu_slideshow2"
-        tools:layout="@layout/frag_us_encu" />
+
+
+
+
+
     <fragment
         android:id="@+id/nav_empleados"
         android:name="com.ello.kotlinseguridad.ui.adm_us.AdmEmFrag"
         android:label="@string/menu_str_empleados"
         tools:layout="@layout/frag_adm_empleados" />
+
+
+
 
 
 

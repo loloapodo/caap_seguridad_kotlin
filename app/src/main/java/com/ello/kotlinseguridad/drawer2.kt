@@ -24,6 +24,7 @@ import com.ello.kotlinseguridad.Activ.Login.Login
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Editar.*
+import com.ello.kotlinseguridad.Simple.SDescReportes
 import kotlinx.coroutines.*
 
 class drawer2 : AppCompatActivity() {
@@ -87,13 +88,12 @@ class drawer2 : AppCompatActivity() {
 
             lifecycleScope.launch {
 
-    while (!BIN.PUEDE_PEDIR_LISTO()){delay(900L)}
-                Log.e("YA PUEDE PEDIR","FINISH DELAY")
+                delay(900L)
 
-    BIN.PUEDE_FORMULARIOS   {nav_Menu.findItem(R.id.nav_formularios).isVisible = true}
-    BIN.PUEDE_EMPLEADOS     {nav_Menu.findItem(R.id.nav_empleados).isVisible = true}
-    BIN.PUEDE_ACTIVIDADES   {nav_Menu.findItem(R.id.nav_actividads).isVisible = true}
-    BIN.PUEDE_EQUIPAMIENTOS {nav_Menu.findItem(R.id.nav_equipamentos).isVisible = true}
+                if(BIN.PUEDE_FORMULARIOS())     {nav_Menu.findItem(R.id.nav_formularios).isVisible = true}
+                if (BIN.PUEDE_EMPLEADOS())     {nav_Menu.findItem(R.id.nav_empleados).isVisible = true}
+                if (BIN.PUEDE_ACTIVIDADES())   {nav_Menu.findItem(R.id.nav_actividads).isVisible = true}
+                if (BIN.PUEDE_EQUIPAMIENTOS()) {nav_Menu.findItem(R.id.nav_equipamentos).isVisible = true}
             }
 
 
@@ -119,7 +119,7 @@ class drawer2 : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav2_act, R.id.nav2_form_done, R.id.nav2_form,
+                R.id.nav2_act, R.id.nav2_form_done, //R.id.nav_reportes,
                 R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads
             ), drawerLayout
         )
@@ -162,6 +162,11 @@ class drawer2 : AppCompatActivity() {
         temp.text=u?.nom_apell
         temp=v.findViewById(R.id.nav_header_textv_usuario)
         temp.text=u?.usuario
+    }
+
+    fun ReportesClick(item: MenuItem) {
+
+        startActivity(Intent(this, SDescReportes::class.java))
     }
 
     //fun ClickItemUsuario(item: MenuItem) {mFragVisible=0}

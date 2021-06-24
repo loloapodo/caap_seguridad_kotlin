@@ -118,7 +118,77 @@
 
 
 
-                <LinearLayout android:id="@+id/layout_persona_dob" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/una_actividad_formulario_nombre"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_actividad_formulario_nombre" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_actividad_formulario_nombre" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/una_actividad_formulario_tipo"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_actividad_formulario_tipo" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_actividad_formulario_tipo" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
@@ -152,12 +222,129 @@
 
                 </LinearLayout>
 
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/una_actividad_hora"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_actividad_hora" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
 
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_actividad_hora" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/una_actividad_sitio"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_actividad_sitio" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_actividad_sitio" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout  android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_mlarge">
+                    <ImageView android:layout_width="@dimen/spacing_xmlarge"
+                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_menu_camera"
+                        />
+                    <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
+                    <LinearLayout android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/una_actividad_lugar"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/una_actividad_lugar" />
+                        <LinearLayout android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                            <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/una_actividad_lugar" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <Button
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:id="@+id/bu_revisar_preguntas"
+
+                    android:layout_marginBottom="@dimen/editarusuariomargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/revisar_preguntas"
+                    android:layout_gravity="center"
+                    android:onClick="RevisarPreguntas"
+                    >
+                </Button>
 
 
                 <LinearLayout
                     android:id="@+id/LinearAdminButtons"
-                    android:layout_marginTop="@dimen/spacing_large"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -165,6 +352,7 @@
                     >
 
                     <Button
+
                         android:layout_marginTop="@dimen/editarusuariomargin"
                         android:layout_marginBottom="@dimen/editarusuariomargin"
                         android:layout_width="wrap_content"
@@ -185,6 +373,7 @@
                     </View>
 
                     <Button
+                        android:id="@+id/bu_eliminar"
                         android:layout_marginTop="@dimen/editarusuariomargin"
                         android:layout_marginBottom="@dimen/editarusuariomargin"
                         android:layout_width="wrap_content"
@@ -202,6 +391,7 @@
                     </View>
 
                     <Button
+                        android:id="@+id/bu_editar"
                         android:layout_marginTop="@dimen/editarusuariomargin"
                         android:layout_marginBottom="@dimen/editarusuariomargin"
                         android:layout_width="wrap_content"
@@ -211,6 +401,12 @@
                         android:onClick="EditarClick"
                         >
                     </Button>
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"
+                        >
+                    </View>
+
 
 
                 </LinearLayout>

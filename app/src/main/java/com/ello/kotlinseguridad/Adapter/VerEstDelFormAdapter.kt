@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.Snippetk
+import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.ParseObj.Respuesta
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.kotlinseguridad.R
@@ -53,6 +54,7 @@ class VerEstDelFormAdapter(mContext: Context, val iClick:(usuario: Usuario,f: Fo
 
                val u= ref_usuario as Usuario
                val f= ref_formulario as Formulario
+
                 holder.Nombre.text=u.nom_apell
 
 

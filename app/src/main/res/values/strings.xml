@@ -32,10 +32,10 @@
     <string name="una_activiad_createdAt">Fecha de Creación</string>
     <string name="una_actividad_fecha">Fecha</string>
     <string name="una_actividad_fechaexpir">Fecha de expiración</string>
-    <string name="una_actividad_descripci">Descripción de la Actividad</string>
+    <string name="una_actividad_descripci">Descripción de la tarea </string>
     <string name="menu_eliminar">Eliminar</string>
     <string name="usuario_borrado">Eliminado</string>
-    <string name="hint_descripc">Descripción de Actividad</string>
+    <string name="hint_descripc">Tarea</string>
     <string name="hint_nombre_actividad">Nombre de Actividad</string>
 
     <string name="editarActNotOk">Error</string>
@@ -97,7 +97,7 @@
     <string name="hint_respuesta_de_acti">Respuesta…</string>
     <string name="enviar_boton">Enviar</string>
     <string name="respuesta_ok">Enviado</string>
-    <string name="respuesta_ko">Error</string>
+    <string name="respuesta_ko">Error al enviar</string>
     <string name="location_denied">Requiere permisos de Ubicación</string>
     <string name="nav_header_textv_nombre">Nombre Apellido</string>
     <string name="nav_header_textv_usuario">Usuario</string>
@@ -109,7 +109,7 @@
     <string name="bu_ver_preguntas_del_formulario">Volver a preguntas</string>
     <string name="fecha_imposible">Seleccione una fecha válida</string>
     <string name="una_actividad_hora">Hora</string>
-    <string name="ver_mi_respuesta">Revisar</string>
+    <string name="ver_mi_respuesta">Revisar mis respuestas</string>
     <string name="atras">Atrás</string>
     <string name="preguntas_respuesta">Preguntas contestadas</string>
     <string name="hint_rol">Rol asignado</string>
@@ -156,5 +156,24 @@
     <string name="un_usuario_direccion">Dirección</string>
     <string name="boton_logerarse">Registrarse</string>
     <string name="check_cuenta_de_adm">Cuenta de Administrador</string>
+    <string name="hint_nombre_sitio">Nombre del sitio</string>
+    <string name="hint_nombre_ubicacion">Ubicación</string>
+    <string name="SeleccionaHora">Seleccionar hora</string>
+    <string name="una_actividad_sitio">Sitio</string>
+    <string name="una_actividad_lugar">Ubicación</string>
+    <string name="una_actividad_formulario_nombre">Nombre del formulario</string>
+    <string name="una_actividad_formulario_tipo">Tipo de formulario</string>
+    <string name="enviar_informe">Enviar Informe</string>
+    <string name="revisar_preguntas">Preguntas de la Actividad</string>
+    <string name="bu_subir_evidencia">Agregar</string>
+    <string name="bu_quitar_evidencia">Quitar todas</string>
+    <string name="str_equipamiento">Equipamiento</string>
+    <string name="str_evidencias">Evidencias</string>
+    <string name="title_descargar_reportes">Reportes de Tareas</string>
+    <string name="bu_descargar">Descargar</string>
+    <string name="SeleccionarFecha">Seleccionar fecha</string>
+    <string name="menu_reportes">Reporte de tareas</string>
+    <string name="menu_str_reportes">Reportes de tareas</string>
+    <string name="sin_conexion_intern">Sin conexión a Internet</string>
 
 </resources>

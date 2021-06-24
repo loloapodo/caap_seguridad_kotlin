@@ -73,7 +73,7 @@ class EUsuarioVM(var cxt: Context) : ViewModel() {
 
     fun CargarTodosRoles() {
         viewModelScope.launch(Dispatchers.IO) {
-            CRUD.CargarTodosRoles({
+            CRUD.CargarTodasRol({
 
                 val temp = ArrayList<String>()
                 temp.add(BIN.EMPTY_ROL)

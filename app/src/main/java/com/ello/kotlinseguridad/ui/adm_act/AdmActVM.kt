@@ -9,6 +9,7 @@ import com.ello.kotlinseguridad.ParseObj.Actividad
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AdmActVM : ViewModel() {
 
@@ -20,18 +21,13 @@ class AdmActVM : ViewModel() {
     val text: LiveData<String> = _text
 
     init {
-        viewModelScope.launch(Dispatchers.Main) {
-            CRUD.CargarTodasActividadesLocal({ _listado.value = it }, {})
-        }
+
     }
 
     fun Cargar()
     {
-
-        viewModelScope.launch(Dispatchers.IO) {
-            CRUD.CargarTodasActividades({_listado.value=it},{})
-        }
-
+        viewModelScope.launch(Dispatchers.Main) {
+            CRUD.CargarTodasActividadesLocal({ _listado.value = it; CargarDelServidor()}, {CargarDelServidor()})}
     }
 
     fun CargarDelServidor() {

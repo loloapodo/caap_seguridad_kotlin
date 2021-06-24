@@ -22,20 +22,14 @@ class AdmRolesVM : ViewModel() {
     val text: LiveData<String> = _text
 
     init {
-        viewModelScope.launch(Dispatchers.Main) {
-            CRUD.CargarTodasRolLocal({ _listado.value = it }, {})
-        }
+
     }
 
     fun Cargar()
     {
-        Log.e("Cargar Equip","Cargar Equip")
-
-
-        viewModelScope.launch(Dispatchers.IO) {
-            CRUD.CargarTodasRol({_listado.value=it;Log.e("CargarTodosEquipos done","ss")},{})
+        viewModelScope.launch(Dispatchers.Main) {
+            CRUD.CargarTodasRolLocal({ _listado.value = it;CargarDelServidor()}, {CargarDelServidor()})
         }
-
     }
 
     fun CargarDelServidor() {

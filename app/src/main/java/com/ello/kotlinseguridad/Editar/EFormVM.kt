@@ -33,18 +33,18 @@ lateinit var id_formulario: String
 
 
 
-    fun CrearFormulario(str_nombre: String, str_fecha: Long,str_fecha_limite:Long,listPreg: ArrayList<String> ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
+    fun CrearFormulario(str_nombre: String,str_Tipo:String, str_fecha: Long,listPreg: ArrayList<String> ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
         val fecha_limite= getFechaLimite()
         if (!EstaListoParaCrear()){fvalidate(cxt.resources.getString(R.string.complete_fechas));return}
         if (!BIN.FechaEsCorrecta(fecha_limite)){fvalidate(cxt.resources.getString(R.string.fecha_imposible));return}
-        viewModelScope.launch(Dispatchers.IO){ CRUD.CrearFormulario(str_nombre,str_fecha,fecha_limite,listPreg,fg,fb)}
+        viewModelScope.launch(Dispatchers.IO){ CRUD.CrearFormulario(str_nombre,str_Tipo,str_fecha,fecha_limite,listPreg,fg,fb)}
     }
 
-    fun EditarFormulario(str_ObjectId: String,str_nombre: String, long_fecha: Long,long_fecha_limite:Long,listPreg: ArrayList<String> ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
+    fun EditarFormulario(str_ObjectId: String,str_nombre: String,str_Tipo:String, long_fecha: Long,listPreg: ArrayList<String> ,fvalidate: (str:String) -> Unit,fg: () -> Unit,fb: () -> Unit) {
         val fecha_limite= getFechaLimite()
         if (!EstaListoParaCrear()){fvalidate(cxt.resources.getString(R.string.complete_fechas));return}
         if (!BIN.FechaEsCorrecta(fecha_limite)){fvalidate(cxt.resources.getString(R.string.fecha_imposible));return}
-        viewModelScope.launch(Dispatchers.IO) { CRUD.EditarFormulario(str_ObjectId,str_nombre,long_fecha,fecha_limite,listPreg,fg,fb)}
+        viewModelScope.launch(Dispatchers.IO) { CRUD.EditarFormulario(str_ObjectId,str_nombre,str_Tipo,long_fecha,fecha_limite,listPreg,fg,fb)}
     }
 
 

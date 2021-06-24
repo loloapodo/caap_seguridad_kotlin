@@ -15,6 +15,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.ello.kotlinseguridad.Activ.Login.Login;
+import com.ello.kotlinseguridad.BIN.BIN;
 import com.ello.kotlinseguridad.ParseObj.Usuario;
 import com.ello.twelveseconds.Formulario;
 import com.parse.ParsePushBroadcastReceiver;
@@ -45,7 +46,9 @@ public class PushRec extends BroadcastReceiver {
 
             String nombre = extras.getString(Usuario.Companion.getField_nom());
             String nombre_formul = extras.getString(Formulario.Companion.getField_nombre());
-            CrearNotSimple(nombre,nombre_formul);
+            if(BIN.Companion.ES_ADMIN()){CrearNotSimple(nombre,nombre_formul);}
+            else{Log.e("Notificacion", "No enviada pq no eres administras");}
+
 
 
         } catch (JSONException e) {

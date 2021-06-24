@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ello.kotlinseguridad.Adapter.FormularioAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Simple.SActivPlus
 import com.ello.kotlinseguridad.Simple.SForm
-import com.ello.kotlinseguridad.Simple.SFormPlus
+
 
 class UsFormUndoneFrag : Fragment() {
 
@@ -53,12 +52,7 @@ class UsFormUndoneFrag : Fragment() {
                             BIN.REQ_LLENAR_FORMULARIO)}
         mRecyclerView.adapter=mAdapter;
 
-        if (!BIN.ES_ADMIN()){
-        BIN.PUEDE_FORMULARIOS {
-            mAdapter.iClick={activity?.startActivity(Intent(activity, SFormPlus::class.java).putExtra("id",it))}
-            Log.e("Actividades","MODO ADMIN PARA LAS ACTIVIDADES")
-        }
-        }
+
 
     }
 

@@ -13,9 +13,7 @@ class AdmEmVM : ViewModel() {
 
 
     init {
-        viewModelScope.launch (Dispatchers.Main) {
-            CRUD.CargarTodosUsuarioLocal({ _listado.value = it;Log.e("local", "usuario"); }, {})
-        }
+
     }
 
     private val _text = MutableLiveData<String>().apply {
@@ -26,16 +24,14 @@ class AdmEmVM : ViewModel() {
 
    fun Cargar()
    {
-       viewModelScope.launch (Dispatchers.IO){
-              CRUD.CargarTodosUsuario({_listado.value=it;Log.e("server","usuario");}, {})
-
+       viewModelScope.launch (Dispatchers.Main) {
+           CRUD.CargarTodosUsuarioLocal(false,{ _listado.value = it;CargarDelServidor()}, {CargarDelServidor()})
        }
-
    }
 
     fun CargarDelServidor() {
         viewModelScope.launch (Dispatchers.IO) {
-            CRUD.CargarTodosUsuario({ _listado.value = it;Log.e("server", "usuario"); }, {})
+            CRUD.CargarTodosUsuario(false,{ _listado.value = it;}, {})
         }
     }
 

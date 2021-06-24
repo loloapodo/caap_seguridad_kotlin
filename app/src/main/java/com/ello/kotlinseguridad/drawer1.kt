@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.ello.kotlinseguridad.Activ.Login.Login
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.Editar.*
+import com.ello.kotlinseguridad.Simple.SDescReportes
 import com.ello.kotlinseguridad.ui.adm_act.AdmActFrag
 import com.ello.kotlinseguridad.ui.adm_equip.AdmEquipFrag
 import com.ello.kotlinseguridad.ui.adm_equip.AdmRolesFrag
@@ -86,7 +87,8 @@ class drawer1 : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads,R.id.nav_usuarios,R.id.nav_roles
+                R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads,
+                R.id.nav_usuarios,R.id.nav_roles,R.id.nav_reportes
             ), drawerLayout
         )
 
@@ -145,7 +147,7 @@ class drawer1 : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        Log.e("onActivityResult:","Floatin butt ${resultCode.toString()}")
+        Log.e("onActivityResult:","Floatin butt ${resultCode.toString()}")//ojooooooo 12
 
         val navHostFragment= supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
 
@@ -182,6 +184,11 @@ class drawer1 : AppCompatActivity() {
 
 
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun ReportesClick(item: MenuItem) {
+
+        startActivity(Intent(this, SDescReportes::class.java))
     }
 
 

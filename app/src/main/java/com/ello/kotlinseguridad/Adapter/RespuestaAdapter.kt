@@ -2,10 +2,8 @@ package com.ello.kotlinseguridad.Adapter
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.CompoundButton
 import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
@@ -14,8 +12,6 @@ import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.ParseObj.Respuesta
 import com.ello.kotlinseguridad.databinding.IRespondiendoBinding
-
-import kotlinx.coroutines.withContext
 
 class RespuestaAdapter(mContext: Context, val LoadFotoClick:(image:ImageView,position:Int)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -52,9 +48,9 @@ class RespuestaAdapter(mContext: Context, val LoadFotoClick:(image:ImageView,pos
                 respuesta=it.toString()
                 holder.checkPreg.isChecked = it.toString().isNotEmpty()
             }
-            holder.imageV.setOnClickListener(View.OnClickListener {
-                LoadFotoClick(holder.imageV,position)
-            })
+            //holder.imageV.setOnClickListener(View.OnClickListener {
+              //  LoadFotoClick(holder.imageV,position)
+                    //})
 
 
         }
@@ -76,7 +72,7 @@ class RespuestaAdapter(mContext: Context, val LoadFotoClick:(image:ImageView,pos
             temp.checked=false
             temp.respuesta=""
             listResp.add(temp)
-            listFotos.add(BIN.EMPTY_BITMAP())
+            listFotos.add(BIN.GET_EMPTY_BITMAP())
         }
 
 
@@ -86,7 +82,7 @@ class RespuestaAdapter(mContext: Context, val LoadFotoClick:(image:ImageView,pos
     inner class RespH(mBind: IRespondiendoBinding) : RecyclerView.ViewHolder(mBind.root) {
 
         val checkPreg=mBind.itemNombrePregunta
-        val imageV=mBind.imageRes
+        //val imageV=mBind.imageRes
         val descrip=mBind.editactivDescrip
 
     }

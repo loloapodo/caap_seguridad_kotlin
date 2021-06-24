@@ -9,6 +9,7 @@ import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.BIN.Snippetk
 import com.ello.kotlinseguridad.ParseObj.Actividad
+import com.ello.kotlinseguridad.ParseObj.Usuario
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,13 +40,15 @@ class UsActVM : ViewModel() {
 
 
         viewModelScope.launch(Dispatchers.Main) {
-            CRUD.CargarTodasActividadesDelUsuarioLocal(usuario,starting_date,{_listado.value=it},{})
-            delay(4000)
-            withContext(Dispatchers.IO) { CRUD.CargarTodasActividadesDelUsuario(usuario, starting_date, { _listado.value = it }, {}) }
+            CRUD.CargarTodasActividadesDelUsuarioLocal(usuario,starting_date,{_listado.value=it;CargarServidor(usuario,starting_date)},{CargarServidor(usuario,starting_date)})
         }
 
     }
 
+
+    fun CargarServidor(u:Usuario,l:Long){
+        viewModelScope.launch(Dispatchers.IO){CRUD.CargarTodasActividadesDelUsuario(u, l, { _listado.value = it }, {})  }
+    }
 
 
 

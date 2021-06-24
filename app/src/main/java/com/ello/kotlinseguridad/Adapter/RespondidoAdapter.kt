@@ -51,11 +51,11 @@ class RespondidoAdapter(val mContext: Context, val LoadFotoClick:(image:ImageVie
         with(listResp[position]){
 
 
-            holder.imageV.setOnClickListener(View.OnClickListener {})
+            //holder.imageV.setOnClickListener(View.OnClickListener {})
             holder.descrip.setText(respuesta)
 
 
-            GlobalScope.launch { Snippetk.PonerFoto(holder.imageV,foto) }
+            //GlobalScope.launch { Snippetk.PonerFoto(holder.imageV,foto) }
 
 
 
@@ -80,7 +80,7 @@ class RespondidoAdapter(val mContext: Context, val LoadFotoClick:(image:ImageVie
     inner class RespH(mBind: IRDoneBinding) : RecyclerView.ViewHolder(mBind.root) {
 
         val checkPreg=mBind.itemNombrePregunta
-        val imageV=mBind.imageRes
+        //val imageV=mBind.imageRes
         val descrip=mBind.editactivDescrip
 
     }

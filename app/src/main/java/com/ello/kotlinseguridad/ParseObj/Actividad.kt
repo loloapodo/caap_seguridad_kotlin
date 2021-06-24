@@ -25,6 +25,10 @@ class Actividad : ParseObject() {
         var field_nombre = "nombre"
         var field_desc = "desc"
         var field_fecha = "fecha"
+        var field_ref_formulario = "ref_formulario"
+
+        var field_sitio = "sitio"
+        var field_ubicacion = "ubicacion"
 
         var field_rel_usuarios = "rel_usuarios"
     }
@@ -34,6 +38,14 @@ class Actividad : ParseObject() {
         get() = getString(field_nombre)
         set(arg) { put(field_nombre, arg!!) }
 
+    var sitio: String?
+        get() = getString(field_sitio)
+        set(arg) { put(field_sitio, arg!!) }
+
+    var ubicacion: String?
+        get() = getString(field_ubicacion)
+        set(arg) { put(field_ubicacion, arg!!) }
+
     var desc: String?
         get() = getString(field_desc)
         set(arg) { put(field_desc, arg!!) }
@@ -41,6 +53,11 @@ class Actividad : ParseObject() {
     var rel_usuarios: ParseRelation<Usuario>?
         get() = getRelation<Usuario>(field_rel_usuarios)
         set(arg) { put(field_rel_usuarios, arg!!)}
+
+
+    var ref_formulario: ParseObject?
+        get() = getParseObject(field_ref_formulario)
+        set(arg) { put(field_ref_formulario, arg!!) }
 
 
     fun addUsuarios(usuarios:List<Usuario>) {

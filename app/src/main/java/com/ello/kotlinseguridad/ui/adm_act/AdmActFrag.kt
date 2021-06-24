@@ -40,6 +40,7 @@ class AdmActFrag : Fragment() {
         return root
     }
 
+
     public fun Cargar(){ vm.Cargar()}
 
 

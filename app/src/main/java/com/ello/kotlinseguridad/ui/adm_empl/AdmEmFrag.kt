@@ -33,8 +33,6 @@ class AdmEmFrag : Fragment() {
         InitRecycler(root)
 
 
-
-
             vm._listado.observe(viewLifecycleOwner, Observer {
                 Log.e("observer done","observerd done");
                 mAdapter.list=it
@@ -54,14 +52,15 @@ class AdmEmFrag : Fragment() {
         mAdapter= EmpleadoAdapter(root.context) {
 
             BIN.PinSelected(it)
-            startActivity(Intent(activity,
-                SUsuario::class.java).putExtra("id",it.objectId))}
+            startActivity(Intent(activity, SUsuario::class.java).putExtra("id",it.objectId))
+        }
         mRecyclerView.adapter=mAdapter;
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode== Activity.RESULT_OK){
             vm.CargarDelServidor()
+            Log.e("ON ACTIVITY RESULT","Admin Empleado Frag")
         }
         super.onActivityResult(requestCode, resultCode, data)
 
