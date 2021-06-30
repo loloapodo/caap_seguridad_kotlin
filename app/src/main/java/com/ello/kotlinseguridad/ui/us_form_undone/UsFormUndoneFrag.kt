@@ -11,16 +11,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ello.kotlinseguridad.Adapter.ActividadAdapter
 import com.ello.kotlinseguridad.Adapter.FormularioAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
+import com.ello.kotlinseguridad.Simple.SActiv
 import com.ello.kotlinseguridad.Simple.SForm
 
 
 class UsFormUndoneFrag : Fragment() {
 
     private lateinit var vm: UsFormUnDoneVM
-    private lateinit var mAdapter: FormularioAdapter
+    private lateinit var mAdapter: ActividadAdapter
     private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,29 +47,21 @@ class UsFormUndoneFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter=
-                FormularioAdapter(root.context){
-                    startActivityForResult(
-                            Intent(activity, SForm::class.java).putExtra("id",it).putExtra(SForm.EXTRA_RESUELTO,false),
-                            BIN.REQ_LLENAR_FORMULARIO)}
+        mAdapter= ActividadAdapter(root.context){activity?.startActivity(Intent(activity, SActiv::class.java).putExtra("id",it))}
         mRecyclerView.adapter=mAdapter;
 
-
-
-    }
-
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode==BIN.REQ_LLENAR_FORMULARIO){
-
-            Log.e("REQ_LLENAR_FORMULARIO","SE VA REFRESCAR DEBIDO A QUE REQ_LLENAR_FORMULARIO HA FINALISADO CON RESULT $resultCode")
-            vm.Cargar()
-
+        if (!BIN.ES_ADMIN()){
+            if (BIN.PUEDE_ACTIVIDADES()){
+                mAdapter.iClick={activity?.startActivity(Intent(activity, SActiv::class.java).putExtra("id",it))}
+                Log.e("Actividades","MODO ADMIN PARA LAS ACTIVIDADES")
+            }
         }
-        super.onActivityResult(requestCode, resultCode, data)
+
 
     }
+
+
+
 
 
 

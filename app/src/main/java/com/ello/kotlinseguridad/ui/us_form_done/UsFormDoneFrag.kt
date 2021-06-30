@@ -11,16 +11,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ello.kotlinseguridad.Adapter.ActividadAdapter
 import com.ello.kotlinseguridad.Adapter.FormularioAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.R
+import com.ello.kotlinseguridad.Simple.SActiv
 import com.ello.kotlinseguridad.Simple.SForm
 
 
 class UsFormDoneFrag : Fragment() {
 
     private lateinit var vm: UsFormDoneVM
-    private lateinit var mAdapter: FormularioAdapter
+    private lateinit var mAdapter: ActividadAdapter
     private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreateView(
@@ -53,15 +55,13 @@ class UsFormDoneFrag : Fragment() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter=
-                FormularioAdapter(root.context){activity?.startActivity(Intent(activity,
-                        SForm::class.java).putExtra("id",it).putExtra(SForm.EXTRA_RESUELTO,true))}
+        mAdapter= ActividadAdapter(root.context){activity?.startActivity(Intent(activity, SActiv::class.java).putExtra("id",it))}
         mRecyclerView.adapter=mAdapter;
 
-        if (!BIN.ES_ADMIN()) {
-            if(BIN.PUEDE_FORMULARIOS()){//Se actualiza el intent que se creara con el click
-                //mAdapter.iClick = { activity?.startActivity(Intent(activity, SForm::class.java).putExtra("id", it).putExtra(SForm.EXTRA_RESUELTO,true).putExtra(BIN.EXTRA_TIENE_ACTIVIDAD_ASOCIADA,false)) }
-                Log.e("Actividades", "MODO ADMIN PARA LAS ACTIVIDADES")
+        if (!BIN.ES_ADMIN()){
+            if (BIN.PUEDE_ACTIVIDADES()){
+                mAdapter.iClick={activity?.startActivity(Intent(activity, SActiv::class.java).putExtra("id",it))}
+                Log.e("Actividades","MODO ADMIN PARA LAS ACTIVIDADES")
             }
         }
 

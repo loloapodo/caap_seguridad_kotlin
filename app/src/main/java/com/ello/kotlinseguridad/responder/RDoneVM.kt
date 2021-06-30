@@ -77,6 +77,7 @@ class RDoneVM : ViewModel() {
     }
 
     private fun CargarServidor(PREG:List<Pregunta>) {
+        Log.e("CargarServidor","CargarTodasRespuestas")
         CRUD.CargarTodasRespuestas(usuar.value!!,form,act, { RESP ->
             _listPRE.value = PREG
             _listRES.value = RESP

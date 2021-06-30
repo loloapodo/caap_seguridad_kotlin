@@ -1,39 +1,36 @@
 package com.ello.kotlinseguridad.Simple
 
 
+import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Context
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
-import android.graphics.pdf.PdfDocument.PageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.databinding.ActivitySReportesBinding
-import java.io.File
-import java.io.FileOutputStream
-import java.io.FileWriter
-import java.io.IOException
+import java.util.*
 
 
 class SDescReportes : AppCompatActivity() {
 
 
+
     private lateinit var mBind: ActivitySReportesBinding
-    private var vm: SDescReportesVM = SDescReportesVM()
+    private lateinit var vm: SDescReportesVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         Init()
 
-
-
-        vm.Cargar({}, {})
 
 
     }
@@ -46,7 +43,7 @@ class SDescReportes : AppCompatActivity() {
 
         actionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
-
+        vm = SDescReportesVM(this)
 
     }
 
@@ -66,7 +63,8 @@ class SDescReportes : AppCompatActivity() {
         if (BIN.TengoPermisoREAD(this))
         {
             Toast.makeText(this, "Descargando", Toast.LENGTH_SHORT).show()
-            strringtopdf2("El candado de las 7")
+
+            vm.Exportar(mBind.itemNombrePregunta.text.toString()) { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
         }
         else
         {
@@ -77,91 +75,63 @@ class SDescReportes : AppCompatActivity() {
 
     }
 
-    fun MostrarDatePickerdesde(view: View) {}
-    fun MostrarDatePickerhasta(view: View) {}
+    fun MostrarDatePickerdesde(view: View) {
+        val newFragment = DatePickerFragment(true,false,mBind.datePickDesde,vm)
+        newFragment.show(supportFragmentManager, "datePicker")
+    }
+    fun MostrarDatePickerhasta(view: View) {
+
+        val newFragment = DatePickerFragment(false,true,mBind.datePickHasta,vm)
+        newFragment.show(supportFragmentManager, "datePicker")
+    }
 
 
 
 
 
+    class DatePickerFragment(val desde: Boolean, val hasta: Boolean,val textView: TextView,val vm: SDescReportesVM) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
 
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            // Use the current date as the default date in the picker
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
 
+            // Create a new instance of DatePickerDialog and return it
+            Log.e("E", "onCreateDialog Date")
+            return DatePickerDialog(requireActivity(), this, year, month, day)
+        }
 
-
-
-
-
-
-    fun strringtopdf2(str: String){
-
-        try {
-            val root = File(Environment.getExternalStorageDirectory(), "Seguridad")
-            if (!root.exists()) {
-                root.mkdirs()
+        override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+            // Do something with the date chosen by the user
+            Log.e("E", "onDateSet Date")
+            textView.text = day.toString() + "/" + (month + 1).toString() + "/" + year.toString()
+            if (desde) {
+                vm.PonerDesde(day, month, year)
+            } else if (hasta) {
+                vm.PonerHasta(day, month, year)
             }
-            val gpxfile = File(root, "test.txt")
-            val writer = FileWriter(gpxfile)
-
-
-            writer.append("")
-
-
-
-
-
-
-
-
-
-            writer.flush()
-            writer.close()
-
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-
-
-
-    }
-
-
-    fun stringtopdf(data: String?) {
-
-        val extstoragedir: String = Environment.getExternalStorageDirectory().toString()
-        Log.e("download path", extstoragedir)
-        val fol = File(extstoragedir)
-
-        val path = File(fol, "Seguridad")
-        if (!path.exists()) {
-            val bool = path.mkdirs()
-            if (bool){Log.e("download path", "creado") }else{Log.e("download path", "no creado")}
-        }
-        try {
-            val file=File(path.toString() + "/jorgito.pdf")
-
-
-            Log.e("download path", file.absolutePath)
-            file.createNewFile()
-            val fOut = FileOutputStream(file)
-            val document = PdfDocument()
-            val pageInfo = PageInfo.Builder(100, 100, 1).create()
-            val page = document.startPage(pageInfo)
-            val canvas = page.canvas
-            val paint = Paint()
-            canvas.drawText(data!!, 10F, 10F, paint)
-            document.finishPage(page)
-            document.writeTo(fOut)
-            document.close()
-        } catch (e: IOException) {
-            Log.e("error", e.localizedMessage)
+            else
+            {
+                Log.e("date picker class", "Error al llamar crear esta clase necesita al menos una basndera true")
+            }
         }
 
     }
 
 
 
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+        if (requestCode ==BIN.REQUEST_MY_PERMISSIONS_READ){
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                vm.Exportar(mBind.itemNombrePregunta.text.toString()){ Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+            }
+        }
+    }
 
 
 

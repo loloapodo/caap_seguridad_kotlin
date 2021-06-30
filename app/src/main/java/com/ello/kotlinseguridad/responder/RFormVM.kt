@@ -43,19 +43,24 @@ class RFormVM : ViewModel() {
     {
 
         estado.value= Estado.Idle
-        CRUD.CargarUnFormularioLocal(id,{f ->
-            form=f
-            viewModelScope.launch(Dispatchers.IO){CRUD.CargarTodasPreguntasDelFormularioLocal(f, {_listado.value=it},{})}
-        },{})
-
-        CRUD.CargarUnActividadPIN(BIN.PIN_ACT_SELECTED,{act=it},{})
-
-
-        viewModelScope.launch(Dispatchers.Main) { CRUD.CargarTodasEquipamientoLocal({_equipamietos.value=it;CargarServidorEQ()},{CargarServidorEQ()}) }
-
-
+        form=BIN.getThisForm()!!
+        act=BIN.getThisAct()!!
+        CargarPreguntas(form)
+        CargarEquipam()
 
     }
+
+    private fun CargarEquipam() {
+        viewModelScope.launch(Dispatchers.Main) { CRUD.CargarTodasEquipamientoLocal({_equipamietos.value=it;CargarServidorEQ()},{CargarServidorEQ()}) }
+    }
+
+    fun CargarPreguntas(form:Formulario){
+        viewModelScope.launch(Dispatchers.Main){CRUD.CargarTodasPreguntasDelFormularioLocal(form, {_listado.value=it},
+                { viewModelScope.launch(Dispatchers.IO){CRUD.CargarTodasPreguntasDelFormulario(form,{_listado.value=it},{})} })}
+
+    }
+
+
 
     private fun CargarServidorEQ() {
         viewModelScope.launch (Dispatchers.IO){  CRUD.CargarTodasEquipamiento({_equipamietos.value=it},{})}
@@ -135,7 +140,7 @@ class RFormVM : ViewModel() {
         var bad= 0
 
 
-
+        Log.e("listPreg","tamaño ${listPreg.size}")
         Log.e("listResp","tamaño ${listResp.size}")
         for (i in 0 until size) {
 
@@ -146,7 +151,7 @@ class RFormVM : ViewModel() {
 
 
             Log.e("listResp","iteration ${i.toString()}")
-            CRUD.RegistrarRespuesta(u!!,form,listPreg[i],listResp[i],act,listBitm[i],
+            CRUD.RegistrarRespuesta(u,form,listPreg[i],listResp[i],act,
                     {
                         good++
                         Log.e("EnviarRespuesta","good->$good +  bad->$bad")
@@ -177,6 +182,7 @@ return ""
     }
 
     private fun EsperandoFinal(u:Usuario,good: Int, bad: Int, size:Int,fg: () -> Unit,fb: () -> Unit) {
+        Log.e("EsperandoFinal","EsperandoFinal")
         if (good+bad==size)
         {
             estado.value= Estado.Idle
@@ -193,7 +199,7 @@ return ""
 // Put data in the JSON object
         try {
             data.put(Usuario.field_nom, u.nom_apell)
-            data.put(Formulario.field_nombre, form.nombre)
+            data.put(Actividad.field_nombre, act.nombre)
         } catch (e: JSONException) {
             // should not happen
             throw IllegalArgumentException("unexpected parsing error", e)

@@ -15,6 +15,14 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_str_formularios_entrgados" />
 
+        <item
+
+            android:id="@+id/nav2_form_undone"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_str_formularios_por_entregar" />
+
+
+
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/menu1"

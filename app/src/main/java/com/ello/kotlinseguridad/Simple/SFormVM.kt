@@ -20,7 +20,8 @@ class SFormVM() : ViewModel() {
 
     lateinit var  nombre_formulario:String
     lateinit var id_formulario:String
-    lateinit var este_formulario:Formulario
+    lateinit var f:Formulario
+    lateinit var a: Actividad
 
     lateinit var id_usuario:String
 
@@ -35,17 +36,19 @@ class SFormVM() : ViewModel() {
     }
 
 
-    fun CargarElFormularioLocal(fg: (f:Formulario) -> Unit, fb: () -> Unit){
-        viewModelScope.launch { CRUD.CargarUnFormularioLocal(id_formulario,{
-            nombre_formulario=it.nombre!!;
-            fg(it)},fb)
+    fun CargarElFormulario(fg: (f:Formulario) -> Unit, fb: () -> Unit){
+        viewModelScope.launch {
+            CRUD.CargarUnFormularioLocal(id_formulario,{ nombre_formulario=it.nombre!!;fg(it)},{
+                CRUD.CargarUnFormulario(id_formulario,{nombre_formulario=it.nombre!!;fg(it)},fb)
+            })
         }
     }
 
 
      fun CargarTodasPreguntasDelFormulario(formulario: Formulario, fg: (list:List<Pregunta>) -> Unit, fb: () -> Unit){
 
-    viewModelScope.launch { CRUD.CargarTodasPreguntasDelFormularioLocal(formulario, fg, fb) }
+    viewModelScope.launch { CRUD.CargarTodasPreguntasDelFormularioLocal(formulario, fg,
+            {viewModelScope.launch {CRUD.CargarTodasPreguntasDelFormulario(formulario,fg,fb)}})}
 
     }
 
@@ -61,26 +64,27 @@ class SFormVM() : ViewModel() {
         estado.value=Estado.Network
         Log.e("DeterminarListadoEnvios","11")
 
-        val esta_actividad=BIN.getThisAct()
-        Log.e("DeterminarListadoEnvios","22")
-        viewModelScope.launch { CRUD.CargarUnFormularioLocal(id_formulario,{f ->
-            Log.e("DeterminarListadoEnvios","33")
-            viewModelScope.launch { CRUD.CargarTodosUsuarioLocal(false,{todosUsYAdm->
-                Log.e("DeterminarListadoEnvios","44")
-                viewModelScope.launch { CRUD.CargarTodasRespuestasLocal({todasResp->
-                    Log.e("DeterminarListadoEnvios","55")
-                    Determinar(todosUsYAdm,todasResp,f,esta_actividad,fg);
-                    CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,esta_actividad,fg); },{})//DEL SERVIDOR
-                },{CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,esta_actividad,fg); },{})}) }//DEL SERVIDOR
-            },{Log.e("DeterminarListadoEnvios","44 bad")})}
-        },{Log.e("DeterminarListadoEnvios","33 bad")})}
+        a=BIN.getThisAct()!!
+        f=BIN.getThisForm()!!;
+        val u=BIN.getThisUser()!!
 
 
+            Log.e("Before ","CargarTodosUsuariosdeActividadLocal")
+            viewModelScope.launch {
+
+                CRUD.CargarTodosUsuariosdeActividadLocal(a, {
+                    CargarRespuestas(it,fg)
+
+                }, {
+                    viewModelScope.launch {
+                        CRUD.CargarTodosUsuariosdeActividad(a, {
+                            CargarRespuestas(it,fg)
+                        }, {})
+                    }
+                })
 
 
-
-
-
+            }
 
 
 
@@ -92,18 +96,29 @@ class SFormVM() : ViewModel() {
 
     }
 
+    private fun CargarRespuestas(todosUsYAdm: List<Usuario>, fg: (listUnaRespPorFormu: ArrayList<Respuesta>) -> Unit) {
+        viewModelScope.launch { CRUD.CargarTodasRespuestas(a,{ todasResp->
+            Determinar(todosUsYAdm,todasResp,f,a,fg);//Local
+            CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,a,fg); },{})//DEL SERVIDOR
+        },{CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,a,fg); },{})}) }//DEL SERVIDOR
+
+
+    }
+
     private fun Determinar(todosUsYAdm: List<Usuario>, todasResp: List<Respuesta>,f:Formulario,esta_actividad:Actividad?,fg: (listUnaRespPorFormu:ArrayList<Respuesta>) -> Unit) {
         Log.e("Determinar","Called")
         val todosUs=PurgarAdmins(todosUsYAdm)
-        val retList= ArrayList<Respuesta>(todosUs.size)
-        for (u in todosUs.indices){
+
+
+        val retList= ArrayList<Respuesta>()
+        userloop@for (u in todosUs.indices){
             var added=false
             Log.e("Indice de Usuario",u.toString())
 
 
             resp_loop@for (r in todasResp){
-                Log.e("Buscando Respuesta",r.respuesta!!)
-                if (r.ref_formulario?.objectId==id_formulario&&r.ref_usuario?.objectId==todosUs[u].objectId&&r.ref_actividad==esta_actividad)
+                Log.e("Buscando Respuesta", "${r.respuesta!!}  ${r.objectId}")
+                if (r.ref_usuario!!.objectId==todosUs[u].objectId)
                 {
                     retList.add(r)
                     added=true
@@ -112,7 +127,7 @@ class SFormVM() : ViewModel() {
                 }
             }
             if (!added){
-                Log.e("Añadida","Usuario:${todosUs[u].nom_apell} NULL NULL NULL")
+                Log.e("Añadida","Usuario:${todosUs[u].nom_apell} ")
                 val emptyRes=Respuesta()
                 emptyRes.ref_usuario=todosUs[u]
                 emptyRes.ref_formulario=f
@@ -126,6 +141,8 @@ class SFormVM() : ViewModel() {
         estado.value=Estado.Idle
     }
 
+
+
     private fun PurgarAdmins(todos: List<Usuario>): ArrayList<Usuario> {
 
         val retList=ArrayList<Usuario>()
@@ -137,7 +154,7 @@ class SFormVM() : ViewModel() {
     }
 
     fun PreguntaSiFueResuelto(c:Context) {
-        BIN.ESTA_RESUELTO_EL_FORMULARIO_PARA_ESTE_USUARIO(c) { esta_resuelto.value = true }
+        BIN.ESTA_RESUELTO_LA_ACT_PARA_ESTE_USUARIO(c) { esta_resuelto.value = true }
     }
 
 

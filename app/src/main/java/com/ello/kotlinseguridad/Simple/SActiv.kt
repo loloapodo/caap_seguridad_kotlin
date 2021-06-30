@@ -44,11 +44,11 @@ class SActiv : AppCompatActivity() {
         //CreateMyOptionMenu()
 
 
+        vm._actividad.observe(this, Observer {o ->
 
-
-        vm.CargarLaActividad({ o ->
 
             BIN.PinSelected(o)
+
 
             //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
             //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
@@ -76,7 +76,13 @@ class SActiv : AppCompatActivity() {
                 mAdapter.notifyDataSetChanged()
             })
 
-        },{})
+
+
+
+
+        })
+
+        vm.CargarLaActividad()
 
 
 
@@ -167,6 +173,8 @@ class SActiv : AppCompatActivity() {
 
     fun RevisarPreguntas(view: View) {
 
+        if(!vm.PUEDE_REVISAR_PREGUNTAS()){Toast.makeText(getThis(),resources.getString(R.string.no_pudo_cargar),Toast.LENGTH_SHORT).show();return}
+
 
             val form= BIN.getThisAct()?.ref_formulario!!.fetchIfNeeded<Formulario>()
             if(!BIN.ES_ADMIN()){ BIN.PinSelected(BIN.CARGAR_USUARIO_LOGED()!!) }
@@ -176,40 +184,7 @@ class SActiv : AppCompatActivity() {
     }
 
 
-    private fun CreateMyOptionMenu() {
 
-        val menu=mBind.included.toolbar.menu
-        menuInflater.inflate(R.menu.simpleusuariomenu, menu)
-        val elimiItem: MenuItem? = menu?.findItem(R.id.menu_item_eliminar)
-        elimiItem?.setOnMenuItemClickListener {
-
-            lifecycleScope.launch {
-                vm.BorrarActividad(vm.id_actividad!!, {
-                    Toast.makeText(
-                        getThis(),
-                        resources.getString(R.string.usuario_borrado),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    finish()
-                }, {
-
-                });
-            }
-            return@setOnMenuItemClickListener false;
-        }
-
-
-        val editarItem: MenuItem? = menu?.findItem(R.id.menu_item_editar)
-        editarItem?.setOnMenuItemClickListener {
-
-            lifecycleScope.launch {
-                val i =Intent(getThis(), EActiv::class.java);
-                i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_actividad)
-                startActivity(i)
-            }
-            return@setOnMenuItemClickListener true;
-        }
-    }
 }
 
 

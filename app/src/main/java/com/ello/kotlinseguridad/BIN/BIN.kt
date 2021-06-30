@@ -97,8 +97,17 @@ companion object {
             }
         }
         return ret
+    }
+    fun RESTAR_LISTAS2(listado: List<Actividad>, respondidos: List<Actividad>): List<Actividad> {
 
+        val ret = mutableListOf<Actividad>()
 
+        for (i in listado) {
+            if (!respondidos.contains(i)) {
+                ret.add(i.fetchIfNeeded())
+            }
+        }
+        return ret
     }
 
 
@@ -151,6 +160,7 @@ companion object {
     val PIN_TODAS_RES = "PIN_TODAS_RES"
     val PIN_TODAS_MIS_ACT = "PIN_TODAS_MIS_ACT"
     val PIN_TODAS_MIS_FOR_RESP = "PIN_TODAS_MIS_FOR_RESP"
+
     val PIN_TODAS_MIS_ACT_RESP = "PIN_TODAS_MIS_ACT_RESP"
     val PIN_TODAS_MIS_FOR_SIN_RESP = "PIN_TODAS_MIS_FOR_SIN_RESP"
     val PIN_TODAS_MIS_ACT_SIN_RESP = "PIN_TODAS_MIS_FOR_SIN_RESP"
@@ -169,7 +179,7 @@ companion object {
 
 
     val SHAREDS="SHARED_ESTA_RESUELTO_PARA_UN_USUARIO"
-    val S_RESUELTO_UN_USUARIO="RESUELTO"
+
 
 
 
@@ -366,21 +376,39 @@ companion object {
         return false
     }
 
-    fun ESTA_RESUELTO_EL_FORMULARIO_PARA_ESTE_USUARIO(c: Context, FueResuelto: () -> Unit) {
+    fun ESTA_RESUELTO_LA_ACT_PARA_ESTE_USUARIO(c: Context, FueResuelto: () -> Unit) {
         val pref: SharedPreferences = c.getSharedPreferences(SHAREDS, Context.MODE_PRIVATE)
+        val esteUsuario=CARGAR_USUARIO_LOGED()!!
+        val estaActividad=getThisAct()!!
 
-        if (!pref.getBoolean(S_RESUELTO_UN_USUARIO, false)){
+        val SHARED=esteUsuario.objectId+estaActividad.objectId
 
-            CRUD.CargarTodosFormulariosRespondidos(CARGAR_USUARIO_LOGED()!!, {}, {
+
+        if (!pref.getBoolean(SHARED, false)){
+            Log.e("SIN SHARED RESUELTO","Obtenido mediante Shareds Preferences $SHARED")
+            CRUD.CargarTodosActYFormRespondidos(esteUsuario, {
+
                 for (f in it) {
-                    if (f.objectId == getThisForm()!!.objectId) {
+                    if (f.objectId == estaActividad.objectId) {
+                        GUARDAR_SHARED_RESUELTO(c,SHARED)
                         FueResuelto()
                     }
                 }
-            }, {})
-        }else{FueResuelto()}
+
+
+            }, {}, {})
+        }else{FueResuelto();Log.e("Resuelto","Obtenido mediante Shareds Preferences $SHARED")}
 
     }
+
+    private fun GUARDAR_SHARED_RESUELTO(c: Context, SHARED: String) {
+
+        val editor: SharedPreferences.Editor = c.applicationContext.getSharedPreferences(SHAREDS, Context.MODE_PRIVATE).edit()
+        editor.putBoolean(SHARED, true)
+        editor.commit()
+
+    }
+
     fun TengoInternet(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected

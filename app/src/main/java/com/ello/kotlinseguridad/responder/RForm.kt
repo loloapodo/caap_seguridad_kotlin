@@ -151,6 +151,10 @@ class RForm : AppCompatActivity() {
             } else {
                 Toast.makeText(getThis(), resources.getString(R.string.location_denied), Toast.LENGTH_SHORT).show()
             }
+        }else if (requestCode ==BIN.REQUEST_MY_PERMISSIONS_READ){
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                AgregarEvidencia()
+            }
         }
     }
 
@@ -172,47 +176,7 @@ class RForm : AppCompatActivity() {
         intent.type = "image/*"
         startActivityForResult(intent, BIN.REQUEST_SELECT_IMAGE)
     }
-/*
-    override  fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-          var mFoto: Bitmap?=null
-        Log.d("OnResultSeleccionar", "las fotos")
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == BIN.REQUEST_SELECT_IMAGE) {
-                val uri: Uri? = data?.data
-                try {
-                    mFoto = Snippets.ROTATEIMAGE.handleSamplingAndRotationBitmap(this, uri)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-                if (mFoto != null) {
-                    Log.d("Imagen no null", "de la galeria")
-
-                } else {
-                    Log.e("Error", "al tomar imagen")
-                }
-            } else if (requestCode == BIN.REQUEST_TAKE_PHOTO) {
-                Log.d("Tomada", " de la camara")
-                mFoto = data?.extras!!["data"] as Bitmap
-                if (mFoto != null) {
-                    Log.d("Imagen no null", "de la camara")
-
-                } else {
-                    Log.e("Error", " camara ")
-                }
-            }
-        }
-
-
-
-        if (mAdapter.listFotos.size>mPosition){
-            mAdapter.listFotos[mPosition]=mFoto
-            Snippetk.PonerFoto(mFoto, mOneImageAdapt)
-        }else{Log.e("Error", "00334 MImageposicion=${mPosition.toString()}")}
-
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-*/
 
 
 
@@ -283,6 +247,12 @@ class RForm : AppCompatActivity() {
 
 
         if (!BIN.TengoPermisoREAD(this)){BIN.PedirREADPermission(this);return}
+        AgregarEvidencia()
+
+
+
+    }
+    fun AgregarEvidencia() {
 
         if (Build.VERSION.SDK_INT < 19) {
             var intent = Intent()
@@ -301,6 +271,10 @@ class RForm : AppCompatActivity() {
         }
 
     }
+
+
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)

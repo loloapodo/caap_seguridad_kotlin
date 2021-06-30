@@ -14,7 +14,7 @@ class Respuesta : ParseObject() {
         var field_created = "createdAt"
         var field_updated = "updatedAt"
         var field_respuesta = "respuesta"
-        var field_foto = "foto"
+        //var field_foto = "foto"
         var field_checked="checked"
 		var field_ubicacion = "ubicacion"
 		var field_fecha = "fecha"
@@ -76,6 +76,7 @@ class Respuesta : ParseObject() {
          return 9
 
      }
+
 
     var e0: ParseFile?
         get() = getParseFile(field_e0)
@@ -143,9 +144,6 @@ class Respuesta : ParseObject() {
         set(arg) { put(field_checked, arg) }
 
 
-    var foto: ParseFile?
-        get() = getParseFile(field_foto)
-        set(arg) { put(field_foto, arg!!) }
 
 
 var ubicacion: ParseGeoPoint?

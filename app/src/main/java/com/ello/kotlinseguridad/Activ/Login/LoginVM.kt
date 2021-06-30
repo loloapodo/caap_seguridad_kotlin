@@ -5,14 +5,18 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 
 import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.ParseObj.Usuario
 
 import com.ello.kotlinseguridad.drawer1
 import com.ello.kotlinseguridad.drawer2
 import com.parse.ParseQuery
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class LoginVM(var cxt: Context) : ViewModel() {
@@ -55,12 +59,14 @@ class LoginVM(var cxt: Context) : ViewModel() {
     fun LogearseComoAdm(u:Usuario) {
 
         cxt.startActivity(Intent(cxt,drawer1::class.java))
+        viewModelScope.launch(Dispatchers.IO) {CRUD.CargarTodasPreguntas({},{})}
         BIN.SALVAR_USUARIO_LOGED(u)
     }
 
     fun LogearseComoUsuario(u:Usuario) {
 
         cxt.startActivity(Intent(cxt, drawer2::class.java))
+        viewModelScope.launch(Dispatchers.IO) {CRUD.CargarTodasPreguntas({},{})}
         BIN.SALVAR_USUARIO_LOGED(u)
 
     }

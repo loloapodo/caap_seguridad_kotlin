@@ -120,6 +120,24 @@ class Snippetk {
 
 
         }
+        fun LeerFechaYHoraR(lo: Long?): String? {
+
+
+            if (lo==null){return "null"}
+            val c=Calendar.getInstance()
+            c.timeInMillis=lo
+
+            val mYear = c[Calendar.YEAR]
+            val mMonth = c[Calendar.MONTH]+1
+            val mDay = c[Calendar.DAY_OF_MONTH]
+
+            val hour = c.get(Calendar.HOUR_OF_DAY)
+            val minute = c.get(Calendar.MINUTE)
+
+            return String.format("%02d:%02d", hour, minute) +"  $mDay/$mMonth/$mYear "
+
+
+        }
 
 
     }

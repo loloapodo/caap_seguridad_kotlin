@@ -175,5 +175,6 @@
     <string name="menu_reportes">Reporte de tareas</string>
     <string name="menu_str_reportes">Reportes de tareas</string>
     <string name="sin_conexion_intern">Sin conexión a Internet</string>
+    <string name="no_pudo_cargar">No se pudo abrir</string>
 
 </resources>

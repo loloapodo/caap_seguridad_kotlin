@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
+import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.ParseObj.Usuario
 import com.ello.twelveseconds.Formulario
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ class UsFormUnDoneVM : ViewModel() {
         value = "This is gallery Fragment"
     }
     val text: LiveData<String> = _text
-    val _listado = MutableLiveData<List<Formulario>>()
+    val _listado = MutableLiveData<List<Actividad>>()
 
 
     fun Cargar()
@@ -29,7 +30,7 @@ class UsFormUnDoneVM : ViewModel() {
             if (usuario==null){Log.e("Error","3330");return}
 
         viewModelScope.launch(Dispatchers.Main) {
-            CRUD.CargarTodosFormulariosNoRespondidosLocal(usuario,{
+            CRUD.CargarTodosActividadesNoRespondidosLocal(usuario,{
                 _listado.value=it;CargarServidor(usuario);},{})
         }
 
@@ -38,8 +39,8 @@ class UsFormUnDoneVM : ViewModel() {
     fun CargarServidor(u:Usuario){
 
         viewModelScope.launch(Dispatchers.IO){
-            CRUD.CargarTodosFormulariosNoRespondidos(u,{
-                _listado.value=it;Log.e("CargarTodosForm undone","red");},{})
+            CRUD.CargarTodosActividadesNoRespondidos(u,{
+                _listado.value=it;Log.e("CargarTodosACT undone","red");},{})
         CRUD.CargarTodasPreguntas({},{})
         }
 

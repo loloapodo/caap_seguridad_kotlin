@@ -153,28 +153,23 @@ class drawer1 : AppCompatActivity() {
 
 
         if (resultCode==RES_OK_CREAR_ACTIVIDAD) {
-            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmActFrag
-            I.Cargar()
+
                         }
         if (resultCode== RES_OK_CREAR_FORMULARIO) {
 
-            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmFormFrag
-            I.Cargar()
+
         }
         if (resultCode== RES_OK_CREAR_USUARIO) {
 
-            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmUsFrag
-            I.Cargar()
+
         }
         if (resultCode== RES_OK_CREAR_EQUIP) {
 
-            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmEquipFrag
-            I.Cargar()
+
         }
         if (resultCode== RES_OK_CREAR_ROL) {
 
-            val    I=navHostFragment?.childFragmentManager?.fragments?.get(0) as AdmRolesFrag
-            I.Cargar()
+
         }
 
 

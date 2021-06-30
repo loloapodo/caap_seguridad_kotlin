@@ -13,16 +13,24 @@ import kotlinx.coroutines.withContext
 
 class SActivVM() : ViewModel() {
 
+     var ya_cargo=false
     lateinit var id_actividad:String
-    public val _listado_act_del_usu = MutableLiveData<List<Usuario>>()
+     val _listado_act_del_usu = MutableLiveData<List<Usuario>>()
+    val _actividad = MutableLiveData<Actividad>()
 
     suspend fun BorrarActividad(str_ObjectId: String,fg: () -> Unit,fb: () -> Unit){
         viewModelScope.launch { withContext(Dispatchers.IO) { CRUD.BorrarActividad(str_ObjectId,fg,fb) }}
     }
 
-    fun CargarLaActividad(fg:(activ:Actividad) -> Unit, fb:() -> Unit) {
-        CRUD.CargarUnActividadLocal(id_actividad,fg,fb)
+    fun CargarLaActividad() {
+        CRUD.CargarUnActividadLocal(id_actividad,{_actividad.value=it;ya_cargo=true;CargarServidor()},{CargarServidor()})
+
     }
+    fun CargarServidor(){
+        CRUD.CargarUnActividad(id_actividad,{_actividad.value=it;ya_cargo=true},{})
+    }
+
+
 
     fun CargarTodosUsuariosdeActividad(act: Actividad) {
         viewModelScope.launch { withContext(Dispatchers.Main) {
@@ -33,7 +41,9 @@ class SActivVM() : ViewModel() {
         viewModelScope.launch { withContext(Dispatchers.IO) { CRUD.CargarTodosUsuariosdeActividad(a,{_listado_act_del_usu.value=it},{}) } }
     }
 
-
+    fun PUEDE_REVISAR_PREGUNTAS(): Boolean {
+        return ya_cargo
+    }
 
 
 }

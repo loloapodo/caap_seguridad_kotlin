@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -16,7 +15,6 @@ import com.ello.kotlinseguridad.Adapter.VerEstDelFormAdapter
 import com.ello.kotlinseguridad.Adapter.VerPreDelFormAdapter
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.BIN.Companion.REQ_LLENAR_FORMULARIO
-import com.ello.kotlinseguridad.BIN.CRUD
 import com.ello.kotlinseguridad.Editar.EForm
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.BIN.Snippetk
@@ -63,19 +61,21 @@ class SForm : AppCompatActivity() {
 
 
 
-        vm.CargarElFormularioLocal({ form->
+        vm.CargarElFormulario({ form->
             BIN.PinSelected(form)
-            vm.este_formulario=form
+            vm.f=form
             mBind.unaFormularioNombre.text=form.nombre
-            mBind.unFormulFecha.text= Snippetk.LeerFechaR(form.fecha)
+            //mBind.unFormulFecha.text= Snippetk.LeerFechaR(form.fecha)
             mBind.unFormulFechaExp.text= Snippetk.LeerFechaR(form.fecha_limite)
             mBind.unFormulHora.text= Snippetk.LeerHoraR(form.fecha_limite)
 
 
 
             vm.esta_resuelto.observe(this, Observer { if (it){mBind.buResponderOVerrespuestas.text=resources.getString(R.string.ver_mi_respuesta)} })
-            vm.CargarTodasPreguntasDelFormulario(form,{
 
+            Log.e("SFORM","vm.CargarTodasPreguntasDelFormulario")
+            vm.CargarTodasPreguntasDelFormulario(form,{
+                Log.e("SFORM","vm.CargarTodasPreguntasDelFormulario GOOD cantidad de preguntas ${it.size}")
                 mAdapterPreguntas.setPreguntas(it)
                 mAdapterPreguntas.notifyDataSetChanged()
 
@@ -122,9 +122,9 @@ class SForm : AppCompatActivity() {
 
 
 
-                },{finish()})
+                },{finish();Log.e("Error","Cargar todas preg del form    SForm")})
         }){
-            finish()
+            finish();Log.e("Error","Cargar el form    SForm")
         }
 
 
@@ -225,7 +225,7 @@ class SForm : AppCompatActivity() {
                 mBind.buAbrirEstadoDeEnviosDelForm.text=resources.getText(R.string.bu_ver_preguntas_del_formulario)
 
 
-            },{ Log.e("Error","MostrarEstadoEnvio_O_Preguntas")})
+            },{ Log.e("Error","DeterminarListadoEnvios")})
         }
         else
         {

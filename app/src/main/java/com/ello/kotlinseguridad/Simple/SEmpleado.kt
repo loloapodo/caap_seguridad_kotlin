@@ -2,11 +2,11 @@ package com.ello.kotlinseguridad.Simple
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.ello.kotlinseguridad.Editar.EUsuario
 import com.ello.kotlinseguridad.R
@@ -28,7 +28,7 @@ class SEmpleado : AppCompatActivity() {
 
          Init()
         CreateMyOptionMenu()
-        vm.CargarElUsuarioLocal({o->
+        vm._empleado.observe(this, Observer {o->
 
 
 
@@ -50,7 +50,9 @@ class SEmpleado : AppCompatActivity() {
 
 
 
-        },{})
+        })
+
+        vm.Cargar()
 
 
 

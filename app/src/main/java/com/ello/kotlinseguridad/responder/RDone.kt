@@ -81,6 +81,7 @@ class RDone : AppCompatActivity() {
 
 
                 val cant_imag=contarImagenes();
+                    mAdapterEvidencia.clearImages()
                     Log.e("cant de imagenes","$cant_imag")
 
                 for (i in 0 until cant_imag){ mAdapterEvidencia.addImages(getEvidencia(i)!!,false) }
