@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
+
 
     <group android:checkableBehavior="single"
         android:id="@+id/menu0">
+
+
         <item
+
             android:id="@+id/nav2_act"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/misactividades" />
+            android:icon="@drawable/ic_icon_drawer_usu_all"
+            android:title="@string/misactividades"
+
+            />
         <item
 
             android:id="@+id/nav2_form_done"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_icon_drawer_usu_done"
             android:title="@string/menu_str_formularios_entrgados" />
 
         <item
 
             android:id="@+id/nav2_form_undone"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_icon_drawer_usu_pending"
             android:title="@string/menu_str_formularios_por_entregar" />
 
 
@@ -30,12 +37,12 @@
 
         <item
             android:id="@+id/nav_empleados"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_adm_employee"
             android:title="@string/menu_str_empleados" />
 
         <item
             android:id="@+id/nav_equipamentos"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_adm_equip"
             android:title="@string/menu_str_equipamietos" />
 
 
@@ -43,14 +50,14 @@
         <item
 
             android:id="@+id/nav_formularios"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_icon_form_name"
             android:title="@string/menu_str_formularios" />
 
 
         <item
 
             android:id="@+id/nav_actividads"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_adm_act2"
             android:title="@string/menu_str_actividades" />
 
     </group>
@@ -64,15 +71,17 @@
         android:id="@+id/idmenu3">
 
         <item
+
             android:onClick="DeslogearseClick"
             android:id="@+id/nav_cerrar_cuenta"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_close_seccion"
             android:title="@string/menu_str_salir" />
 
         <item
+
             android:onClick="SalirClick"
             android:id="@+id/nav_salir_app"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_exit"
             android:title="@string/menu_str_salir_de_app" />
 
 

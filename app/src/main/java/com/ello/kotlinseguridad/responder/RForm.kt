@@ -23,6 +23,7 @@ import com.ello.kotlinseguridad.Adapter.EquipaCheckAdapter
 import com.ello.kotlinseguridad.Adapter.EvidenciaAdapter
 import com.ello.kotlinseguridad.Adapter.RespuestaAdapter
 import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityRFormBinding
@@ -95,6 +96,12 @@ class RForm : AppCompatActivity() {
         })
 
 
+        vm.estado.observe(this, Observer {
+            if(it==Estado.Idle){mBind.enviadorespLoadingbar.visibility=View.INVISIBLE}
+            else{mBind.enviadorespLoadingbar.visibility=View.VISIBLE}
+        })
+
+
 
 
 
@@ -107,7 +114,9 @@ class RForm : AppCompatActivity() {
         if (vm.isNotIdle()){Toast.makeText(view.context, resources.getString(R.string.en_progreso), Toast.LENGTH_SHORT).show();return}
 
         if (BIN.TengoPermisoLocalizacion(this)) {
-            EnviarRespuesta()
+                EnviarRespuesta()
+
+
         } else {
             BIN.PedirLocationAppPermission(this)
         }
@@ -116,23 +125,43 @@ class RForm : AppCompatActivity() {
     private fun EnviarRespuesta() {
 
 
-            if (BIN.TengoInternet(this)){
+            if (BIN.TengoInternet(this)) {
 
-            vm.EnviarRespuesta(this, mAdapter.listResp, mAdapter.listPreg, mAdapterEvidencia.get_Bitmaps(), mAdapterEquip.get_only_chequed(), {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            }, {
-                Toast.makeText(this, resources.getString(R.string.respuesta_ok), Toast.LENGTH_SHORT).show()
-                setResult(Activity.RESULT_OK)
-                finish()
-            }, {
-                Toast.makeText(this, resources.getString(R.string.respuesta_ko), Toast.LENGTH_SHORT).show()
-                setResult(Activity.RESULT_CANCELED)
-                finish()
-            })
+
+
+
+                    vm.EnviarRespuesta(
+                        this,
+                        mAdapter.listResp,
+                        mAdapter.listPreg,
+                        mAdapterEvidencia.get_Bitmaps(),
+                        mAdapterEquip.get_only_chequed(),
+                        {
+                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                        },
+                        {
+                            Toast.makeText(
+                                this,
+                                resources.getString(R.string.respuesta_ok),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            setResult(Activity.RESULT_OK)
+                            finish()
+                        },
+                        {
+                            Toast.makeText(
+                                this,
+                                resources.getString(R.string.respuesta_ko),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            setResult(Activity.RESULT_CANCELED)
+                            finish()
+                        })
+
 
             }
-        else{
 
+        else{
                 Toast.makeText(this, resources.getString(R.string.sin_conexion_intern), Toast.LENGTH_SHORT).show()
 
         }
@@ -184,7 +213,7 @@ class RForm : AppCompatActivity() {
 
     private fun Init() {
         mBind = ActivityRFormBinding.inflate(layoutInflater)
-        mBind.included.toolbar.title = resources.getString(R.string.titleformulario)
+        mBind.included.toolbar.title = resources.getString(R.string.titlerespondiendoformulario)
         setContentView(mBind.root)
         vm = RFormVM()
 

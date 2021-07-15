@@ -24,6 +24,7 @@
    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -31,7 +32,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:textColorHint="@color/seguridad_gris_iconos"
         android:layout_marginTop="@dimen/editarusuariomargin"
         android:layout_marginBottom="@dimen/editarusuariomargin"
         android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -50,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_nombre_actividad"
-            android:textColorHint="@color/black"
+
             >
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +59,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:textColorHint="@color/seguridad_gris_iconos"
         android:layout_marginTop="@dimen/editarusuariomargin"
         android:layout_marginBottom="@dimen/editarusuariomargin"
         android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -84,7 +85,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:textColorHint="@color/seguridad_gris_iconos"
         android:layout_marginTop="@dimen/editarusuariomargin"
         android:layout_marginBottom="@dimen/editarusuariomargin"
         android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -109,7 +110,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:textColorHint="@color/seguridad_gris_iconos"
         android:layout_marginTop="@dimen/editarusuariomargin"
         android:layout_marginBottom="@dimen/editarusuariomargin"
         android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -195,9 +196,16 @@
 
 
 
+    <ProgressBar
+        android:id="@+id/e_act_progressbar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
 
+    </ProgressBar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:overScrollMode="never"
         android:layout_marginTop="@dimen/editarusuariomargin"
         android:layout_marginBottom="@dimen/editarusuariomargin"
         android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -211,84 +219,111 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-
-
     <LinearLayout
-        android:layout_marginTop="@dimen/spacing_middle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:onClick="MostrarDatePicker"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center"
-        >
-        <ImageView
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
-            android:layout_width="@dimen/clock_size"
-            android:layout_height="@dimen/clock_size"> </ImageView>
-        <TextView
-            android:textColor="@color/grey_40"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
 
+        >
+
+        <ImageView
+
+            app:srcCompat="@drawable/ic_icon_date"
+            app:tint="@color/grey_90"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="20dp"
+
+            >
+        </ImageView>
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            android:textColor="@color/grey_90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Selecciona el día" />
+        <TextView
+            android:layout_marginStart="@dimen/spacing_large"
+            android:textColor="@color/seguridad_gris_iconos"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/date_pick"
-            android:layout_gravity="center"
-
-            android:text="@string/SeleccionaDiaActividad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="MostrarDatePicker"
+            android:text="   /   /  "
             >
         </TextView>
 
 
-        <ImageView
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
-            android:layout_width="@dimen/clock_size"
-            android:layout_height="@dimen/clock_size">
 
-        </ImageView>
     </LinearLayout>
+
+
+
+
+
 
     <LinearLayout
-        android:layout_marginTop="@dimen/spacing_middle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:onClick="MostrarTimePicker"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center"
+
         >
+
         <ImageView
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
-            android:layout_width="@dimen/clock_size"
-            android:layout_height="@dimen/clock_size"> </ImageView>
+
+            app:srcCompat="@drawable/ic_icon_time"
+            app:tint="@color/grey_90"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="20dp"
+
+            >
+        </ImageView>
         <TextView
-            android:textColor="@color/grey_40"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-
-            android:id="@+id/time_pick"
-            android:layout_gravity="center"
-
-            android:text="@string/SeleccionaHora"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            android:textColor="@color/grey_90"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="MostrarTimePicker"
+            android:text=" Selecciona la hora" />
+        <TextView
+            android:layout_marginStart="@dimen/spacing_large"
+            android:textColor="@color/seguridad_gris_iconos"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/time_pick"
+            android:text="   /   /  "
             >
         </TextView>
 
 
-        <ImageView
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
-            android:layout_width="@dimen/clock_size"
-            android:layout_height="@dimen/clock_size">
 
-        </ImageView>
     </LinearLayout>
+
+
+
+
+
+
+
 
 
 
 
 <LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -304,6 +339,7 @@
         android:text="@string/cancelar"
         android:layout_gravity="center"
         android:onClick="CancelarClick"
+        style="@style/botonesregulares"
         >
 
     </Button>

@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.Editar.EUsuario
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.BIN.Snippetk
@@ -106,6 +107,7 @@ return this;
     }
 
     fun EliminarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
         vm.BorrarUsuario({
             Toast.makeText(getThis(),resources.getString(R.string.usuario_borrado),Toast.LENGTH_SHORT).show()
             finish()
@@ -115,6 +117,7 @@ return this;
     }
 
     fun EditarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
         lifecycleScope.launch {
         val i = Intent(getThis(), EUsuario::class.java);
         i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_usuario)

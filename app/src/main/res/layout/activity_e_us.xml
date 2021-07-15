@@ -27,23 +27,45 @@
 
     >
 
-
-        <ImageView
-            android:visibility="visible"
-            android:onClick="LoadFoto"
-            android:id="@+id/imageView"
+        <RelativeLayout
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_gravity="center"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:src="@drawable/male"
-
+            android:onClick="LoadFoto"
             >
-        </ImageView>
+
+            <ImageView
+                android:visibility="visible"
+                android:id="@+id/imageView"
+
+                android:layout_gravity="center"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/male"
+                >
+            </ImageView>
+            <ImageView
+                android:id="@+id/ic_add_media"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_icon_add_media"
+                >
+
+            </ImageView>
+
+
+
+        </RelativeLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
-
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -70,7 +92,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -94,6 +116,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -119,6 +142,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -145,6 +169,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -172,6 +197,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -199,6 +225,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -273,6 +300,7 @@
                 android:text="@string/cancelar"
                 android:layout_gravity="center"
                 android:onClick="CancelarClick"
+                style="@style/botonesregulares"
                 >
             </Button>
 

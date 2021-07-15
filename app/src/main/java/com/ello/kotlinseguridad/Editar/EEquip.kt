@@ -171,6 +171,7 @@ class EEquip : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 if (mFoto != null) {
+                    mBind.icAddMedia.visibility=View.GONE
                     Log.d("Imagen no null", "de la galeria")
 
                 } else {

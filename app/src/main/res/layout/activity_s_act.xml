@@ -66,6 +66,7 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:overScrollMode="never"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:itemCount="2"
@@ -122,7 +123,7 @@
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
+                        app:srcCompat="@drawable/ic_icon_form_name"
                         />
                     <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
                     <LinearLayout android:orientation="vertical"
@@ -143,7 +144,7 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
+                                android:textColor="@color/seguridad_gris_iconos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/una_actividad_formulario_nombre" />
@@ -156,7 +157,7 @@
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
+                        app:srcCompat="@drawable/ic_icon_form_kind"
                         />
                     <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
                     <LinearLayout android:orientation="vertical"
@@ -177,7 +178,7 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
+                                android:textColor="@color/seguridad_gris_iconos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/una_actividad_formulario_tipo" />
@@ -192,7 +193,7 @@
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
+                        app:srcCompat="@drawable/ic_icon_date2"
                         />
                     <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
                     <LinearLayout android:orientation="vertical"
@@ -213,7 +214,7 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
+                                android:textColor="@color/seguridad_gris_iconos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/una_actividad_fecha" />
@@ -226,7 +227,7 @@
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
+                        app:srcCompat="@drawable/ic_icon_time2"
                         />
                     <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
                     <LinearLayout android:orientation="vertical"
@@ -247,7 +248,7 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
+                                android:textColor="@color/seguridad_gris_iconos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/una_actividad_hora" />
@@ -261,7 +262,7 @@
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
+                        app:srcCompat="@drawable/ic_icon_act_site"
                         />
                     <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
                     <LinearLayout android:orientation="vertical"
@@ -282,7 +283,7 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
+                                android:textColor="@color/seguridad_gris_iconos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/una_actividad_sitio" />
@@ -296,7 +297,7 @@
                     <ImageView android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_menu_camera"
+                        app:srcCompat="@drawable/ic_icon_act_location"
                         />
                     <View android:layout_width="@dimen/spacing_middle" android:layout_height="0.0dip" />
                     <LinearLayout android:orientation="vertical"
@@ -317,7 +318,7 @@
                             android:layout_marginTop="@dimen/spacing_small">
 
                             <TextView android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40"
+                                android:textColor="@color/seguridad_gris_iconos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/una_actividad_lugar" />
@@ -338,6 +339,8 @@
                     android:text="@string/revisar_preguntas"
                     android:layout_gravity="center"
                     android:onClick="RevisarPreguntas"
+                    android:textColor="@color/white"
+                    android:background="@drawable/buttom_background"
                     >
                 </Button>
 
@@ -360,6 +363,7 @@
                         android:text="@string/atras"
                         android:layout_gravity="center"
                         android:onClick="CancelarClick"
+                        style="@style/botonesregulares"
                         >
                     </Button>
 
@@ -391,6 +395,7 @@
                     </View>
 
                     <Button
+                        android:visibility="gone"
                         android:id="@+id/bu_editar"
                         android:layout_marginTop="@dimen/editarusuariomargin"
                         android:layout_marginBottom="@dimen/editarusuariomargin"

@@ -28,35 +28,41 @@
     android:gravity="center_vertical"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-
+    android:onClick="MostrarDatePickerdesde"
     >
 
+    <ImageView
+
+        app:srcCompat="@drawable/ic_icon_date"
+        app:tint="@color/grey_90"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+
+        >
+    </ImageView>
             <TextView
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textStyle="bold"
                 android:textColor="@color/grey_90"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="Desde:" />
+                android:text=" Desde:" />
     <TextView
+
         android:layout_marginStart="@dimen/spacing_large"
-        android:textColor="@color/grey_40"
+        android:textColor="@color/seguridad_gris_iconos"
         android:id="@+id/date_pick_desde"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="@string/SeleccionarFecha"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="MostrarDatePickerdesde"
+        android:layout_height="match_parent"
+
+
         >
     </TextView>
-    <ImageView
-        android:onClick="MostrarDatePickerdesde"
-        android:layout_marginStart="20dp"
-        android:layout_width="18dp"
-        android:layout_height="18dp">
 
-    </ImageView>
 
 
 </LinearLayout>
@@ -70,8 +76,18 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:onClick="MostrarDatePickerhasta"
                 >
 
+                <ImageView
+
+                    android:layout_marginStart="20dp"
+                    app:srcCompat="@drawable/ic_icon_date"
+                    app:tint="@color/grey_90"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    >
+                </ImageView>
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:textStyle="bold"
@@ -79,32 +95,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="Hasta:" />
+                    android:text=" Hasta:" />
                 <TextView
                     android:layout_marginStart="@dimen/spacing_large"
-                    android:textColor="@color/grey_40"
+                    android:textColor="@color/seguridad_gris_iconos"
                     android:id="@+id/date_pick_hasta"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="@string/SeleccionarFecha"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="MostrarDatePickerhasta"
+                    android:layout_height="match_parent"
                     >
                 </TextView>
-                <ImageView
 
-                    android:onClick="MostrarDatePickerhasta"
-                    android:layout_marginStart="20dp"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp">
-
-                </ImageView>
 
 
             </LinearLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:textColorHint="@color/seguridad_gris_iconos"
                 android:id="@+id/textinputlay"
                 app:layout_constraintTop_toBottomOf="@id/linerar2hasta"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -128,7 +138,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <ProgressBar
+                android:id="@+id/reportes_progressbar"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                app:layout_constraintTop_toBottomOf="@id/textinputlay"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
 
+            </ProgressBar>
 
             <Button
                 android:id="@+id/boton_descargar"
@@ -156,6 +177,7 @@
             android:text="@string/atras"
             android:layout_gravity="center"
             android:onClick="CancelarClick"
+                style="@style/botonesregulares"
             >
         </Button>
 

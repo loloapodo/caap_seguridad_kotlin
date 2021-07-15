@@ -22,9 +22,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+
         android:supportsRtl="true"
-        android:theme="@style/Theme.KotlinSeguridad"
+        android:theme="@style/Theme.KotlinSeguridad.NoActionBar"
         >
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -40,54 +40,54 @@
         <activity
             android:name=".drawer2"
             android:label="@string/title_activity_drawer2"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            >
 
         </activity>
         <activity
             android:name=".Editar.EForm"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+             />
         <activity
             android:name=".Editar.EActiv"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+             />
         <activity
             android:name=".Editar.EUsuario"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Editar.EEquip"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Editar.ERol"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Simple.SActiv"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
 
         <activity
             android:name=".Simple.SForm"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Simple.SDescReportes"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Simple.SUsuario"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Simple.SEmpleado"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+             />
         <activity
             android:name=".Simple.SEquip"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".Simple.SRol"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            />
         <activity
             android:name=".responder.RForm"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
             >
         </activity>
         <activity
             android:name=".responder.RDone"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
             >
         </activity>
 
@@ -95,10 +95,10 @@
         <activity
             android:name=".drawer1"
             android:label="@string/title_activity_drawer1"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+             />
 
         <activity android:name=".Activ.Login.Login"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

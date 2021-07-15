@@ -67,8 +67,8 @@ public class PushRec extends BroadcastReceiver {
 
         int notificationId = 0;
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.ic_launcher_round))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.ic_launcher))
                 .setContentTitle(mTitle)
                 .setContentText(mText)
                 .setAutoCancel(true)

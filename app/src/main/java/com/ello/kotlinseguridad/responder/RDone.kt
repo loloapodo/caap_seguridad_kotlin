@@ -71,6 +71,8 @@ class RDone : AppCompatActivity() {
             if (respuestas.isNotEmpty()) {
 
                 mAdapter.SetPregResp(vm._listPRE.value!!,vm._listRES.value!!)
+                mBind.rdoneProgressbar1.visibility=View.GONE
+                mAdapter.notifyDataSetChanged()
 
         for (primera in respuestas){
                 if(primera.firs_of_list){
@@ -97,7 +99,7 @@ class RDone : AppCompatActivity() {
 
 
 
-            mAdapter.notifyDataSetChanged()
+            mBind.rdoneProgressbar2.visibility=View.GONE
             mAdapterEvidencia.notifyDataSetChanged()
             mAdapterEquip.notifyDataSetChanged()
         })

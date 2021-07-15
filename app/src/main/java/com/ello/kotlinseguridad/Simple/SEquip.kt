@@ -84,13 +84,14 @@ class SEquip : AppCompatActivity() {
     }
 
     fun EditarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
         val i=Intent(this, EEquip::class.java)
         i.putExtra(EEquip.EXTRA_OBJ_ID,vm.id_equip)
         startActivityForResult(i, BIN.REQ_EDITAR_EQUIP)
     }
 
      fun EliminarClick(view: View) {
-
+         if(!BIN.TengoInternet(getThis(),true)){return}
          lifecycleScope.launch {
              vm.BorrarEquipamiento(vm.id_equip,{
                  Toast.makeText(getThis(),resources.getString(R.string.equipamiento_eliminado), Toast.LENGTH_SHORT).show();finish()

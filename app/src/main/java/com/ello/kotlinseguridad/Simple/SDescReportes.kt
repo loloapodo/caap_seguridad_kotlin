@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,12 +15,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.Estado
+import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivitySReportesBinding
 import java.util.*
 
 
 class SDescReportes : AppCompatActivity() {
-
 
 
     private lateinit var mBind: ActivitySReportesBinding
@@ -32,22 +34,25 @@ class SDescReportes : AppCompatActivity() {
         Init()
 
 
-
     }
 
     private fun Init() {
 
         mBind = ActivitySReportesBinding.inflate(layoutInflater)
-        mBind.included.toolbar.title ="Reporte de Tareas"
+        mBind.included.toolbar.title = "Reporte de Tareas"
         setContentView(mBind.root)
 
         actionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         vm = SDescReportesVM(this)
 
+        vm.estado.observe(this, androidx.lifecycle.Observer {
+            if (it==Estado.Idle){mBind.botonDescargar.visibility=View.VISIBLE;mBind.reportesProgressbar.visibility=View.GONE}
+            else{mBind.botonDescargar.visibility=View.INVISIBLE;mBind.reportesProgressbar.visibility=View.VISIBLE}
+        })
+
+
     }
-
-
 
 
     private fun getThis(): Context {
@@ -60,36 +65,39 @@ class SDescReportes : AppCompatActivity() {
 
     fun DescargarClick(view: View) {
 
-        if (BIN.TengoPermisoREAD(this))
-        {
-            Toast.makeText(this, "Descargando", Toast.LENGTH_SHORT).show()
-
-            vm.Exportar(mBind.itemNombrePregunta.text.toString()) { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+        if (vm.estado.value != Estado.Idle) {
+            Toast.makeText(this, "Espere por favor ...", Toast.LENGTH_SHORT).show()
+            return
         }
-        else
-        {
+
+        if (!BIN.TengoInternet(this)) {
+            Toast.makeText(view.context, resources.getString(R.string.sin_conexion_intern), Toast.LENGTH_SHORT).show();return
+        }
+
+
+        if (BIN.TengoPermisoREAD(this)) {
+            Toast.makeText(this, "Descargando ...", Toast.LENGTH_SHORT).show()
+            mBind
+            vm.Exportar(mBind.itemNombrePregunta.text.toString(), { Toast.makeText(this, "Guardado: $it", Toast.LENGTH_LONG).show() }, { Toast.makeText(this, it, Toast.LENGTH_LONG).show() })
+        } else {
             BIN.PedirREADPermission(this)
         }
-
-
 
     }
 
     fun MostrarDatePickerdesde(view: View) {
-        val newFragment = DatePickerFragment(true,false,mBind.datePickDesde,vm)
+        val newFragment = DatePickerFragment(true, false, mBind.datePickDesde, vm)
         newFragment.show(supportFragmentManager, "datePicker")
     }
+
     fun MostrarDatePickerhasta(view: View) {
 
-        val newFragment = DatePickerFragment(false,true,mBind.datePickHasta,vm)
+        val newFragment = DatePickerFragment(false, true, mBind.datePickHasta, vm)
         newFragment.show(supportFragmentManager, "datePicker")
     }
 
 
-
-
-
-    class DatePickerFragment(val desde: Boolean, val hasta: Boolean,val textView: TextView,val vm: SDescReportesVM) : DialogFragment(), DatePickerDialog.OnDateSetListener {
+    class DatePickerFragment(val desde: Boolean, val hasta: Boolean, val textView: TextView, val vm: SDescReportesVM) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
 
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -112,9 +120,7 @@ class SDescReportes : AppCompatActivity() {
                 vm.PonerDesde(day, month, year)
             } else if (hasta) {
                 vm.PonerHasta(day, month, year)
-            }
-            else
-            {
+            } else {
                 Log.e("date picker class", "Error al llamar crear esta clase necesita al menos una basndera true")
             }
         }
@@ -128,7 +134,8 @@ class SDescReportes : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
         if (requestCode ==BIN.REQUEST_MY_PERMISSIONS_READ){
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                vm.Exportar(mBind.itemNombrePregunta.text.toString()){ Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+                Toast.makeText(this, "Descargando ...", Toast.LENGTH_SHORT).show()
+                vm.Exportar(mBind.itemNombrePregunta.text.toString(),{ Toast.makeText(this, "Guardado: $it", Toast.LENGTH_LONG).show() },{ Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
             }
         }
     }

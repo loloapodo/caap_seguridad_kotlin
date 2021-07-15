@@ -145,6 +145,8 @@ class SActiv : AppCompatActivity() {
     fun CancelarClick(view: View) {finish()}
     fun EliminarClick(view: View) {
 
+        if(!BIN.TengoInternet(getThis(),true)){return}
+
         lifecycleScope.launch {
             vm.BorrarActividad(vm.id_actividad!!, {
                 Toast.makeText(
@@ -161,15 +163,7 @@ class SActiv : AppCompatActivity() {
 
     }
 
-    fun EditarClick(view: View) {
 
-        lifecycleScope.launch {
-            val i =Intent(getThis(), EActiv::class.java);
-            i.putExtra(EUsuario.EXTRA_OBJ_ID,vm.id_actividad)
-            startActivity(i)
-        }
-
-    }
 
     fun RevisarPreguntas(view: View) {
 

@@ -124,6 +124,7 @@ class EActiv : AppCompatActivity() {
     private fun CargarUsuariosQueRealizanLaActividad() {
         vm.CargarTodosUsuariosLocal({
             mAdapter.setListado(it)
+            mBind.eActProgressbar1.visibility=View.GONE
         },{});
     }
 
@@ -133,7 +134,7 @@ class EActiv : AppCompatActivity() {
 
             with(mBind){
 
-
+            if (mBind.spinnerAnexarFormulario.selectedItemPosition==0){Toast.makeText(getThis(),"Falta anexar Formulario",Toast.LENGTH_SHORT).show();setResult(drawer1.RES_OK_CREAR_ACTIVIDAD);return}
 
                 if (mObjId_toEdit.isNullOrEmpty())//Crear
                 {

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="1-"
         android:id="@+id/numero_preguntando"
-        android:textColor="@color/grey_40"
+        android:textColor="@color/seguridad_gris_iconos"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_margin="@dimen/spacing_medium"
 
@@ -26,7 +26,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-
+                android:textColorHint="@color/seguridad_gris_iconos"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

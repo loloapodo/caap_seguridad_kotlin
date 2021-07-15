@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group
@@ -9,17 +10,20 @@
 
         <item
             android:id="@+id/nav_empleados"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_adm_employee"
+
             android:title="@string/menu_str_empleados" />
 
         <item
             android:id="@+id/nav_roles"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_user_rol"
+
             android:title="@string/menu_str_roles" />
 
         <item
             android:id="@+id/nav_equipamentos"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_adm_equip"
+
             android:title="@string/menu_str_equipamietos" />
 
     </group>
@@ -31,20 +35,23 @@
     <item
 
         android:id="@+id/nav_formularios"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_icon_form_name"
+
         android:title="@string/menu_str_formularios" />
 
 
     <item
 
         android:id="@+id/nav_actividads"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:icon="@drawable/ic_icon_drawer_adm_act2"
+
         android:title="@string/menu_str_actividades" />
 
         <item
             android:onClick="ReportesClick"
             android:id="@+id/nav_reportes"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_reports"
+
             android:title="@string/menu_str_reportes" />
 
 
@@ -56,7 +63,8 @@
 
         <item
             android:id="@+id/nav_usuarios"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_icon_drawer_adm_users"
+
             android:title="@string/menu_str_usuario" />
 
 
@@ -65,13 +73,16 @@
         <item
             android:onClick="DeslogearseClick"
             android:id="@+id/nav_cerrar_cuenta"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_close_seccion"
+
             android:title="@string/menu_str_salir" />
 
         <item
+
             android:onClick="SalirClick"
             android:id="@+id/nav_salir_app"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_icon_drawer_exit"
+
             android:title="@string/menu_str_salir_de_app" />
 
 

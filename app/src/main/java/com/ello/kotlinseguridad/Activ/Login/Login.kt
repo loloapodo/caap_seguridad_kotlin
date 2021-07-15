@@ -18,8 +18,8 @@ class Login : AppCompatActivity() {
         Init()
 
         vm.estado.observe(this, Observer {
-            if (it==Estado.Idle){mBind.button.visibility=View.VISIBLE}
-            else{ mBind.button.visibility=View.INVISIBLE }
+            if (it==Estado.Idle){mBind.button.visibility=View.VISIBLE;mBind.loginProgressbar.visibility=View.GONE}
+            else{ mBind.button.visibility=View.GONE;mBind.loginProgressbar.visibility=View.VISIBLE}
         })
 
     }

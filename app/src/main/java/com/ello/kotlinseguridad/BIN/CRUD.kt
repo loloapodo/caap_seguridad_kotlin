@@ -8,6 +8,7 @@ import com.ello.twelveseconds.Formulario
 import com.parse.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -19,7 +20,7 @@ class CRUD()  {
     }
 
 companion object{
-    suspend fun CrearUsuario(str_usuario: String, str_contrasena: String, str_nom_apell: String,str_apell: String,str_cedula: String,str_direcc: String,str_telefono: String,adm:Boolean, foto: Bitmap?, fg: () -> Unit, fb: () -> Unit)
+    suspend fun CrearUsuario(str_usuario: String, str_contrasena: String, str_nom_apell: String,str_apell: String,str_cedula: String,str_direcc: String,str_telefono: String,adm:Boolean,strRol:String, foto: Bitmap?, fg: () -> Unit, fb: () -> Unit)
     {
 
 
@@ -44,6 +45,7 @@ companion object{
         u.cedula=str_cedula
         u.direccion=str_direcc
         u.telefono=str_telefono
+        u.rol=strRol
 
 
         if (foto != null) {
@@ -68,7 +70,7 @@ companion object{
 
     }
 
-     fun EditarUsuario(str_ObjectId: String,str_usuario: String, str_contrasena: String, str_nom_apell: String, str_apell: String,str_cedula:String,str_direcc:String,str_telef:String,adm:Boolean, foto: Bitmap?,fg: () -> Unit,fb: () -> Unit)
+     fun EditarUsuario(str_ObjectId: String,str_usuario: String, str_contrasena: String, str_nom_apell: String, str_apell: String,str_cedula:String,str_direcc:String,str_telef:String,adm:Boolean,strRol:String, foto: Bitmap?,fg: () -> Unit,fb: () -> Unit)
     {
 
         fun innerSave(u:Usuario,fg: () -> kotlin.Unit,fb: () -> Unit){
@@ -96,7 +98,7 @@ companion object{
                 u.contrasena=str_contrasena
                 u.nom_apell=str_nom_apell
                 u.adm=adm
-
+                u.rol=strRol
 
                 if (foto != null) {
                    val file= Snippetk.BitmapToParseFile(foto);
@@ -477,6 +479,7 @@ companion object{
 
 
 
+
     suspend fun CrearActividad(usuarios:List<Usuario> , str_nombre: String,str_desc:String,str_sitio: String,str_ubicacion:String,str_ref_formulario:Formulario,long_fecha:Long ,fg: () -> Unit,fb: () -> Unit) {
 
         val a= Actividad()
@@ -518,6 +521,7 @@ companion object{
         h.time= hasta
 
         query.orderByAscending(Respuesta.field_created)
+
         query.whereGreaterThan(Respuesta.field_created,d)
         query.whereLessThan(Respuesta.field_created,h)
         query.findInBackground(FindCallback { list, e ->
@@ -644,9 +648,11 @@ companion object{
         query.findInBackground { list, e ->
             if (e==null){
                 ParseObject.unpinAll(BIN.PIN_TODAS_MIS_ACT,list)
-                ParseObject.fetchAllIfNeeded(list)
-                ParseObject.pinAll(BIN.PIN_TODAS_MIS_ACT,list);
-                Log.e("Tamano lista",list.size.toString());fg(list) } else { fb();Log.e("Error","Buscar All Actividades") }
+                ParseObject.fetchAllIfNeededInBackground(list, FindCallback { a, e ->
+                    ParseObject.pinAll(BIN.PIN_TODAS_MIS_ACT,list);
+                    Log.e("Tamano lista",list.size.toString());fg(list)
+                })
+                 } else { fb();Log.e("Error","Buscar All Actividades") }
         }
     }
 
@@ -692,14 +698,17 @@ companion object{
 
 
         suspend fun BorrarActividad(str_ObjectId: String,fg: () -> Unit,fb: () -> Unit){
+
             val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
             query.getInBackground(str_ObjectId, GetCallback { act, e ->
-                if (e==null)     {
                     act.deleteInBackground {e2->
-                        if(e2==null){ Log.e("Done","Actividad borrada");fg() }
+                        if(e2==null){
+                            Log.e("Done","Actividad borrada");fg()
+
+                        }
                         else{Log.e("Error","BorrarActividad");fb()}
                     }
-                } else{Log.e("Error","Encontrar Actividad");fb()}
+
             })
         }
 

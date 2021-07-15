@@ -26,7 +26,8 @@
                 app:civ_border="false"
                 android:layout_marginRight="@dimen/spacing_large"
                 android:layout_gravity="center"
-                android:src="@drawable/male"
+                app:srcCompat="@drawable/ic_icon_user_rol"
+                android:tint="@color/seguridad_gris_iconos"
 
                  />
 
@@ -46,12 +47,15 @@
                         >
 
                         <TextView
+                            android:lines="1"
+                            android:ellipsize="end"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_90"
                             android:id="@+id/item_nombre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Nombre"
+
                             />
                         <TextView
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"

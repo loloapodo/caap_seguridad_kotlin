@@ -8,12 +8,14 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.ello.kotlinseguridad.ParseObj.Actividad
 import com.ello.kotlinseguridad.ParseObj.Equip
 import com.ello.kotlinseguridad.ParseObj.Rol
 import com.ello.kotlinseguridad.ParseObj.Usuario
+import com.ello.kotlinseguridad.R
 import com.ello.twelveseconds.Formulario
 import com.parse.ParseException
 import com.parse.ParseGeoPoint
@@ -412,6 +414,14 @@ companion object {
     fun TengoInternet(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
+    }
+    fun TengoInternet(context: Context,mostrarToast:Boolean): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val b= connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
+
+        if (!b){ Toast.makeText(context, R.string.sin_conexion_intern,Toast.LENGTH_SHORT).show() }
+        return b
+
     }
 }
 

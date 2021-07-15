@@ -16,7 +16,7 @@ import com.ello.twelveseconds.Formulario
 import java.util.*
 import kotlin.collections.ArrayList
 
-class VerEstDelFormAdapter(mContext: Context, val iClick:(usuario: Usuario,f: Formulario)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class VerEstDelFormAdapter(val mContext: Context, val iClick:(usuario: Usuario,f: Formulario)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
      val layoutInflater: LayoutInflater = LayoutInflater.from(mContext)
      var list: ArrayList<Respuesta> = ArrayList()
@@ -64,12 +64,13 @@ class VerEstDelFormAdapter(mContext: Context, val iClick:(usuario: Usuario,f: Fo
                     else               {holder.EstadoEnvio.text= BIN.STR_EXPIRADO}
                     holder.Fecha_Entrega.text=""
                     holder.HoraEntrega.text=""
+                    holder.DoneUndone.setImageResource(R.drawable.ic_icon_undone)
                     holder.itemView.setOnClickListener {}
 
                 }
                 else{
 
-
+                    holder.DoneUndone.setImageResource(R.drawable.ic_icon_done)
                     holder.Fecha_Entrega.text=Snippetk.LeerFechaR(fecha)
                     holder.HoraEntrega.text=Snippetk.LeerHoraR(fecha)
                     holder.itemView.setOnClickListener {
@@ -116,6 +117,7 @@ class VerEstDelFormAdapter(mContext: Context, val iClick:(usuario: Usuario,f: Fo
         val Fecha_Entrega=view.itemFecha
         val EstadoEnvio=view.itemEstado
         val HoraEntrega=view.itemHora
+        val DoneUndone=view.itemDoneUndoneIcon
 
     }
 

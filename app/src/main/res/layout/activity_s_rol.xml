@@ -52,59 +52,70 @@
                     android:background="@color/grey_5" android:layout_width="fill_parent" android:layout_height="1.0dip" android:visibility="visible"/>
 
 
+
+    <CheckBox
+        style="@style/CheckBoxAlwaysGreen"
+        android:text="   Administrar empleados"
+        android:layout_marginEnd="@dimen/spacing_xxlarge"
+        android:layout_marginStart="@dimen/spacing_xxlarge"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:button="@drawable/ic_icon_done"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/radio_allow_empleado"
+        >
+    </CheckBox>
+
+
+
+
                 <CheckBox
+                    style="@style/CheckBoxAlwaysGreen"
                     android:layout_marginTop="@dimen/spacing_large"
-                    android:button="@null"
+                    android:button="@drawable/ic_icon_done"
                     android:layout_marginEnd="@dimen/spacing_xxlarge"
                     android:layout_marginStart="@dimen/spacing_xxlarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Empleado"
-                    android:id="@+id/radio_allow_empleado"
-                    >
-                </CheckBox>
-                <CheckBox
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:button="@null"
-                    android:layout_marginEnd="@dimen/spacing_xxlarge"
-                    android:layout_marginStart="@dimen/spacing_xxlarge"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Equipamiento"
+                    android:text="   Administrar equipamientos"
                     android:id="@+id/radio_allow_equipamiento"
                     >
                 </CheckBox>
                 <CheckBox
+                    style="@style/CheckBoxAlwaysGreen"
                     android:layout_marginTop="@dimen/spacing_large"
-                    android:button="@null"
+                    android:button="@drawable/ic_icon_done"
                     android:layout_marginEnd="@dimen/spacing_xxlarge"
                     android:layout_marginStart="@dimen/spacing_xxlarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Formularios"
+                    android:text="   Administrar formularios"
                     android:id="@+id/radio_allow_formularios"
                     >
                 </CheckBox>
                 <CheckBox
+                    style="@style/CheckBoxAlwaysGreen"
+                    android:button="@drawable/ic_icon_done"
                     android:layout_marginTop="@dimen/spacing_large"
-                    android:button="@null"
                     android:layout_marginEnd="@dimen/spacing_xxlarge"
                     android:layout_marginStart="@dimen/spacing_xxlarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Actividades"
+                    android:text="   Administrar actividades"
                     android:id="@+id/radio_allow_actividades"
                     >
                 </CheckBox>
 
                 <CheckBox
+
+                    style="@style/CheckBoxAlwaysRed"
+                    android:button="@drawable/ic_icon_undone"
                     android:layout_marginTop="@dimen/spacing_large"
-                    android:button="@null"
                     android:layout_marginEnd="@dimen/spacing_xxlarge"
                     android:layout_marginStart="@dimen/spacing_xxlarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Ningún permiso"
+                    android:text="   Ningún permiso"
                     android:id="@+id/radio_nungun_permiso"
                     >
                 </CheckBox>
@@ -131,6 +142,7 @@
                         android:text="@string/atras"
                         android:layout_gravity="center"
                         android:onClick="CancelarClick"
+                        style="@style/botonesregulares"
                         >
                     </Button>
 

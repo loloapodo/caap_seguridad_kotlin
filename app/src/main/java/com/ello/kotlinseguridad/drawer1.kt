@@ -1,6 +1,7 @@
 package com.ello.kotlinseguridad
 
 import android.app.TaskStackBuilder
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -44,6 +46,7 @@ class drawer1 : AppCompatActivity() {
 
     }
 
+    fun getThis():Context{return this}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawer1)
@@ -55,6 +58,8 @@ class drawer1 : AppCompatActivity() {
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
 
+            if(!BIN.TengoInternet(getThis(),true)){return@setOnClickListener}
+                
 
 
                 val intent=

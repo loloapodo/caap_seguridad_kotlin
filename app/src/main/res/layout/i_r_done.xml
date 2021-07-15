@@ -70,6 +70,7 @@
                     >
                 </ImageView>
             <com.google.android.material.textfield.TextInputLayout
+                android:textColorHint="@color/seguridad_gris_iconos"
 
 
                 android:layout_width="match_parent"

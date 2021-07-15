@@ -105,13 +105,14 @@ class SRol : AppCompatActivity() {
     }
 
     fun EditarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
         val i=Intent(this, ERol::class.java)
         i.putExtra(ERol.EXTRA_OBJ_ID,vm.id_rol)
         startActivityForResult(i, BIN.REQ_EDITAR_EQUIP)
     }
 
      fun EliminarClick(view: View) {
-
+         if(!BIN.TengoInternet(getThis(),true)){return}
          lifecycleScope.launch {
              vm.BorrarRol(vm.id_rol,{
                  Toast.makeText(getThis(),resources.getString(R.string.rol_eliminado), Toast.LENGTH_SHORT).show();finish()

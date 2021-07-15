@@ -54,8 +54,8 @@
     <string name="error_eliminar_form">Error</string>
     <string name="formulario_editado">Editado</string>
     <string name="Personas">Personal</string>
-    <string name="SeleccionaFecha">Seleccionar Fecha Entrega</string>
-    <string name="SeleccionaHoraLimite">Seleccionar Hora Límite  </string>
+
+    <string name="SeleccionaHoraLimite">         Hora Límite</string>
     <string name="complete_fechas">Complete la fecha de entrega</string>
     <string name="SeleccionaDiaActividad">Selecciona el día</string>
 
@@ -70,9 +70,9 @@
 
 
 
-    <string name="menu_home2">Mis actividades</string>
-    <string name="menu_gallery2">Formularios enviados</string>
-    <string name="menu_slideshow2">Formularios pendientes</string>
+    <string name="menu_misactividades">Mis actividades</string>
+    <string name="menu_actividadesrealizadas">Actividades realizadas</string>
+    <string name="menu_actividadespendientes">Actividades pendientes</string>
 
 
     <string name="titleEactiv">Editar Actividad</string>
@@ -91,8 +91,10 @@
     <string name="title_activity_drawer2">drawer2</string>
     <string name="deslog">Salir</string>
     <string name="actividades">Actividades</string>
-    <string name="menu_str_formularios_entrgados">Formularios enviados</string>
-    <string name="menu_str_formularios_por_entregar">Formularios pendientes</string>
+
+    <string name="menu_str_formularios_entrgados">Actividades realizadas</string>
+    <string name="menu_str_formularios_por_entregar">Actividades pendientes</string>
+
     <string name="responder_boton">Responder</string>
     <string name="hint_respuesta_de_acti">Respuesta…</string>
     <string name="enviar_boton">Enviar</string>
@@ -143,7 +145,7 @@
     <string name="lorenm_isum_large">Nombre1 Nombre2 Apellido1 Apellido2 Nombre Nombre Nombre Nombre Nombre8</string>
     <string name="permisos">Seleccionar los permisos…</string>
     <string name="permisos_simple">Permisos</string>
-    <string name="misactividades">Mis Actividades</string>
+    <string name="misactividades">Mis actividades</string>
 
     <string name="menu_str_empleados">Adm Empleados</string>
     <string name="menu_str_equipamietos">Adm Equipamientos</string>
@@ -176,5 +178,6 @@
     <string name="menu_str_reportes">Reportes de tareas</string>
     <string name="sin_conexion_intern">Sin conexión a Internet</string>
     <string name="no_pudo_cargar">No se pudo abrir</string>
+    <string name="titlerespondiendoformulario">Enviar reporte</string>
 
 </resources>

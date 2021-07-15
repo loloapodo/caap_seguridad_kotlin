@@ -2,26 +2,67 @@
     <!-- Base application theme. -->
     <style name="Theme.KotlinSeguridad" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorNuevo1</item>
-        <item name="colorPrimaryVariant">@color/ColorNuevo2</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/seguridad_up_bar</item>
+        <item name="colorPrimary">@color/seguridad_down_bar</item>
+        <item name="colorPrimaryVariant">@color/seguridad_down_bar</item>
+        <item name="colorPrimaryDark">@color/seguridad_down_bar</item>
+
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/seguridad_down_bar</item>
+        <item name="colorSecondaryVariant">@color/seguridad_down_bar</item>
+        <item name="colorOnSecondary">@color/white</item>
+
         <!-- Customize your theme here. -->
+        <item name="android:actionMenuTextColor">@color/yellow_700</item>
+        <item name="android:buttonStyle">@style/botonesregulares</item>
+
+
     </style>
 
     <style name="Theme.KotlinSeguridad.NoActionBar">
+        <item name="android:actionMenuTextColor">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.KotlinSeguridad.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.KotlinSeguridad.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.AppCompat.Light.NoActionBar.Seguridad">
+
+    </style>
+
+
+
+    <style name="myCustomMenuTextAppearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:actionMenuTextColor">@color/blue_700</item>
+    </style>
+
+
+    <style name="botonesregulares" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="background">@drawable/buttom_background</item>
+
+    </style>
+
+
+
+
+
+    <style name="CheckBoxAlwaysGreen" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/seguridad_done</item>
+        <item name="colorSwitchThumbNormal">@color/seguridad_done</item>
+    </style>
+    <style name="CheckBoxAlwaysRed" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/seguridad_undone</item>
+        <item name="colorSwitchThumbNormal">@color/seguridad_undone</item>
+    </style>
+
 
 
 </resources>

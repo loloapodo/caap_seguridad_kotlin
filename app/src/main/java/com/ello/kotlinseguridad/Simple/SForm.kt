@@ -94,7 +94,7 @@ class SForm : AppCompatActivity() {
                     }
                     else {
 
-                        mBind.buEditar.visibility=View.GONE
+                        //mBind.buEditar.visibility=View.GONE
                         mBind.buEliminar.visibility=View.GONE
                         mBind.buResponderOVerrespuestas.visibility=View.VISIBLE
 
@@ -107,7 +107,7 @@ class SForm : AppCompatActivity() {
 
                             mBind.buAbrirEstadoDeEnviosDelForm.visibility=View.GONE
                             mBind.buResponderOVerrespuestas.visibility=View.GONE
-                            mBind.buEditar.visibility=View.VISIBLE
+                            //mBind.buEditar.visibility=View.VISIBLE
                             mBind.buEliminar.visibility=View.VISIBLE
                             Log.e("No tiene asociada","NO tiene asociada")
                         }
@@ -204,10 +204,14 @@ class SForm : AppCompatActivity() {
 
         }
         else{
-            val i=Intent(this, RForm::class.java)
-            i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
-            i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
-            startActivityForResult(i,REQ_LLENAR_FORMULARIO)
+            if (BIN.TengoInternet(this)){
+                val i=Intent(this, RForm::class.java)
+                i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
+                i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
+                startActivityForResult(i,REQ_LLENAR_FORMULARIO)
+            }else{Toast.makeText(getThis(),resources.getString(R.string.sin_conexion_intern),Toast.LENGTH_SHORT).show()}
+
+
         }
 
     }
@@ -217,15 +221,20 @@ class SForm : AppCompatActivity() {
 
         if (mRecyclerView.adapter==mAdapterPreguntas&&vm.estado.value==Estado.Idle){
 
-            vm.DeterminarListadoEnvios({list ->
-                mRecyclerView.adapter=mAdapterEstados
-                mAdapterEstados.setRespuestas(list)
-                mAdapterEstados.notifyDataSetChanged()
-                mBind.sformAdapctertitle.text=resources.getText(R.string.estado_formularios)
-                mBind.buAbrirEstadoDeEnviosDelForm.text=resources.getText(R.string.bu_ver_preguntas_del_formulario)
+            if (BIN.TengoInternet(this)){
+                vm.DeterminarListadoEnvios({list ->
+                    mRecyclerView.adapter=mAdapterEstados
+                    mAdapterEstados.setRespuestas(list)
+                    mAdapterEstados.notifyDataSetChanged()
+                    mBind.sformAdapctertitle.text=resources.getText(R.string.estado_formularios)
+                    mBind.buAbrirEstadoDeEnviosDelForm.text=resources.getText(R.string.bu_ver_preguntas_del_formulario)
+                },{ Log.e("Error","DeterminarListadoEnvios")})
+            }else
+            {
+                Toast.makeText(this,resources.getString(R.string.sin_conexion_intern),Toast.LENGTH_SHORT).show()
+            }
 
 
-            },{ Log.e("Error","DeterminarListadoEnvios")})
         }
         else
         {
@@ -243,6 +252,8 @@ class SForm : AppCompatActivity() {
 
     fun CancelarClick(view: View) {finish()}
     fun EliminarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
+
         vm.BorrarFormulario(vm.id_formulario,{
             Toast.makeText(getThis(),resources.getString(R.string.formulario_eliminado),Toast.LENGTH_SHORT).show();finish()
         },{
@@ -250,6 +261,7 @@ class SForm : AppCompatActivity() {
         })
     }
     fun EditarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
         lifecycleScope.launch {
         val i = Intent(getThis(), EForm::class.java);
         i.putExtra(EForm.EXTRA_OBJ_ID,vm.id_formulario)

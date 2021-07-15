@@ -27,7 +27,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-
+            android:textColorHint="@color/seguridad_gris_iconos"
             android:layout_marginTop="@dimen/editarusuariomargin"
             android:layout_marginBottom="@dimen/editarusuariomargin"
             android:layout_marginEnd="@dimen/editarusuariomarginleft"
@@ -131,6 +131,7 @@
                 android:text="@string/cancelar"
                 android:layout_gravity="center"
                 android:onClick="CancelarClick"
+                style="@style/botonesregulares"
                 >
             </Button>
 

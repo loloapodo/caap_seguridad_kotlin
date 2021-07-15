@@ -7,7 +7,6 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfDocument.PageInfo
-import android.os.Environment
 import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +14,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ello.kotlinseguridad.BIN.BIN
 import com.ello.kotlinseguridad.BIN.CRUD
+import com.ello.kotlinseguridad.BIN.PDF_Maker
 import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.ParseObj.Respuesta
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.ParseException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -30,7 +31,7 @@ class SDescReportesVM(val context: Context) : ViewModel() {
 
      var fecha_desde:Long?=null
     var fecha_hasta:Long?=null
-     lateinit var maker:PDF_Maker
+     lateinit var maker: PDF_Maker
     var estado = MutableLiveData<Estado>()
 
     init {
@@ -42,13 +43,14 @@ class SDescReportesVM(val context: Context) : ViewModel() {
 
     }
 
-     fun Exportar(nombre: String, fb: (s:String) -> Unit) {
+     fun Exportar(n: String, fg_ruta_descarga: (s:String) -> Unit,fb: (s:String) -> Unit) {
 
 
-        if (nombre.isNullOrEmpty()){
+        if (n.isNullOrEmpty()||n.length>14){
             fb("Falta nombre del archivo")
             return
         }
+
         if(fecha_desde==null||fecha_hasta==null|| fecha_desde!! >fecha_hasta!!){
 
             fb("Rectifique las fechas")
@@ -61,9 +63,14 @@ class SDescReportesVM(val context: Context) : ViewModel() {
         }
 
          estado.value= Estado.CompilingPDF
+         var nombre=n
+         if (nombre.endsWith(".pdf")){nombre=n.substring(0,n.length-4)}
 
 
-        maker=PDF_Maker(context,nombre)
+        maker= PDF_Maker(context,nombre)
+
+
+         try {
 
         viewModelScope.launch (Dispatchers.IO){
             CRUD.CargarTodasRespuestasRangeFechas(fecha_desde!!,fecha_hasta!!,{respuestas->
@@ -72,6 +79,7 @@ class SDescReportesVM(val context: Context) : ViewModel() {
                 Log.e("RespuestasRangeFechas","Total de respuestas:${respuestas.size}")
 
                 if (respuestas.isNullOrEmpty()) {
+                    estado.value=Estado.Idle
                     fb("No se encontraron reportes para esas fechas")
                 }
                 else{
@@ -96,6 +104,8 @@ class SDescReportesVM(val context: Context) : ViewModel() {
                     maker.ImprimirPagina(respuestas_un_informe)
                     maker.SalvarPDF()
                     maker.AbrirPDF()
+                    fg_ruta_descarga(maker.path_name)
+                    estado.value=Estado.Idle
 
 
 
@@ -107,7 +117,7 @@ class SDescReportesVM(val context: Context) : ViewModel() {
 
             },{})
         }
-
+         }catch (e:ParseException){fb(e.toString())}
 
 
 

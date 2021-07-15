@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
@@ -139,7 +140,7 @@ class EUsuario : AppCompatActivity() {
                             editusuarioDireccion.text.toString(),
                             editusuarioTelefono.text.toString(),
                             editarusuarioAdmin.isChecked,
-
+                        editarusuarioSpinnerRoles.selectedItem.toString(),
                         mFoto,
                         {
                             Toast.makeText(
@@ -172,6 +173,7 @@ class EUsuario : AppCompatActivity() {
                         editusuarioDireccionL.editText?.text.toString(),
                         editusuarioTelefonoL.editText?.text.toString(),
                         editarusuarioAdmin.isChecked,
+                        editarusuarioSpinnerRoles.selectedItem.toString(),
                     mFoto,
                     {
                         Toast.makeText(
@@ -206,11 +208,7 @@ class EUsuario : AppCompatActivity() {
         intent.type = "image/*"
         startActivityForResult(intent, BIN.REQUEST_SELECT_IMAGE)
     }
-    override  fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
+    override  fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         Log.d("OnResultSeleccionar", "las fotos")
         if (resultCode == Activity.RESULT_OK) {
@@ -222,6 +220,8 @@ class EUsuario : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 if (mFoto != null) {
+
+                    mBind.icAddMedia.visibility=View.GONE
                     Log.d("Imagen no null", "de la galeria")
 
                 } else {

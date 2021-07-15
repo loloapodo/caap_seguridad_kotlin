@@ -43,7 +43,7 @@ class AdmRolesFrag : Fragment() {
         return root
     }
 
-    public fun Cargar(){ vm.Cargar()}
+     fun Cargar(){ vm.Cargar()}
 
 
     private fun InitRecycler(root:View) {

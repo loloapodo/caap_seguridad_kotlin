@@ -41,9 +41,6 @@ class Formulario : ParseObject() {
         get() = getString(field_tipo)
         set(arg) { put(field_tipo, arg!!) }
 
-    var fecha: Long?
-        get() = getLong(field_fecha)
-        set(arg) { put(field_fecha, arg!!) }
 
         var fecha_limite: Long?
         get() = getLong(field_fecha_limite)

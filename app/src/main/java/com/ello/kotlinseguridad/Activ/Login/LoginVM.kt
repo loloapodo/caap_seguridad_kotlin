@@ -35,20 +35,23 @@ class LoginVM(var cxt: Context) : ViewModel() {
             query.whereEqualTo(Usuario.field_usuario, str_usuario.toLowerCase(Locale.ROOT))
             query.whereEqualTo(Usuario.field_contrasena,str_contrasena)
             query.getFirstInBackground {usuario, e ->
-                estado.value=Estado.Idle
+
                 if (e==null){
-                    if (usuario==null){Log.e("Error","TODO notificar al usuario");return@getFirstInBackground;}
+
+                    if (usuario==null){Log.e("Error","TODO notificar al usuario");estado.value=Estado.Idle;return@getFirstInBackground;}
 
                         if(usuario.adm){ LogearseComoAdm(usuario);fgadm() }
                         else                 {LogearseComoUsuario(usuario);fgusuario()}
 
                 }else if (e.message.equals("no results found for query"))
                 {
+                    estado.value=Estado.Idle
                     fbqueryNotFound()
                     Log.e("Error log","Decir que la cuenta no existe")
                 }
 
                 else {
+                    estado.value=Estado.Idle
                     fb()
                     Log.e("Error login",e.message)
                 }
