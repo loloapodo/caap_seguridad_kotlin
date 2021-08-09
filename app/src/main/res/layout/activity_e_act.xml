@@ -122,9 +122,11 @@
         android:orientation="horizontal"
         android:gravity="center"
 
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:editable="false"
             android:id="@+id/edittext_ubicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,6 +135,22 @@
             >
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buscarenmapabutom"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/editarusuariomargin"
+        android:layout_marginBottom="@dimen/editarusuariomargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buscarenmapa"
+        android:layout_gravity="center"
+        android:onClick="BuscarenMapaClick"
+        style="@style/botonesregulares"
+        android:visibility="gone"
+        >
+    </Button>
+
 
 
     <Spinner
@@ -341,7 +359,6 @@
         android:onClick="CancelarClick"
         style="@style/botonesregulares"
         >
-
     </Button>
 
     <Button

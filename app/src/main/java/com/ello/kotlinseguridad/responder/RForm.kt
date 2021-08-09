@@ -12,6 +12,8 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +29,6 @@ import com.ello.kotlinseguridad.Estado
 import com.ello.kotlinseguridad.ParseObj.Pregunta
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityRFormBinding
-import com.ello.kotlinseguridad.databinding.ActivityRDoneBinding
 
 
 class RForm : AppCompatActivity() {
@@ -52,6 +53,7 @@ class RForm : AppCompatActivity() {
     var PICK_IMAGE_MULTIPLE = 1
     lateinit var imagePath: String
     var imagesPathList: MutableList<String> = arrayListOf()
+    lateinit var blinking: Animation
 
 
 
@@ -74,8 +76,10 @@ class RForm : AppCompatActivity() {
         vm._listado.observe(this, Observer {
 
             if (it.isNotEmpty()) {
-                val arrayList =ArrayList<Pregunta>()
-                for(i in it){arrayList.add(i)}
+                val arrayList = ArrayList<Pregunta>()
+                for (i in it) {
+                    arrayList.add(i)
+                }
                 mAdapter.SetPreguntas(arrayList)
                 mAdapter.notifyDataSetChanged()
 
@@ -97,8 +101,11 @@ class RForm : AppCompatActivity() {
 
 
         vm.estado.observe(this, Observer {
-            if(it==Estado.Idle){mBind.enviadorespLoadingbar.visibility=View.INVISIBLE}
-            else{mBind.enviadorespLoadingbar.visibility=View.VISIBLE}
+            if (it == Estado.Idle) {
+                mBind.enviadorespLoadingbar.visibility = View.INVISIBLE
+            } else {
+                mBind.enviadorespLoadingbar.visibility = View.VISIBLE
+            }
         })
 
 
@@ -111,15 +118,25 @@ class RForm : AppCompatActivity() {
 
     fun EnviarRespuestaClick(view: View) {
 
-        if (vm.isNotIdle()){Toast.makeText(view.context, resources.getString(R.string.en_progreso), Toast.LENGTH_SHORT).show();return}
+        if (vm.isNotIdle()){Toast.makeText(
+            view.context,
+            resources.getString(R.string.en_progreso),
+            Toast.LENGTH_SHORT
+        ).show();return}
 
         if (BIN.TengoPermisoLocalizacion(this)) {
+            if(mAdapterEvidencia.itemCount==0){
+                Toast.makeText(this,getString(R.string.sin_evidencias),Toast.LENGTH_LONG).show()
+            }else{
                 EnviarRespuesta()
-
-
+            }
         } else {
             BIN.PedirLocationAppPermission(this)
         }
+
+
+
+
     }
 
     private fun EnviarRespuesta() {
@@ -162,7 +179,11 @@ class RForm : AppCompatActivity() {
             }
 
         else{
-                Toast.makeText(this, resources.getString(R.string.sin_conexion_intern), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.sin_conexion_intern),
+                    Toast.LENGTH_SHORT
+                ).show()
 
         }
 
@@ -173,12 +194,20 @@ class RForm : AppCompatActivity() {
 
 
 
-   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+   override fun onRequestPermissionsResult(
+       requestCode: Int,
+       permissions: Array<String?>,
+       grantResults: IntArray
+   ) {
         if (requestCode == BIN.REQUEST_MY_PERMISSIONS_LOCATION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 EnviarRespuesta()
             } else {
-                Toast.makeText(getThis(), resources.getString(R.string.location_denied), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    getThis(),
+                    resources.getString(R.string.location_denied),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }else if (requestCode ==BIN.REQUEST_MY_PERMISSIONS_READ){
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -199,8 +228,8 @@ class RForm : AppCompatActivity() {
 
         //todo sacar de la camara tambien
         val intent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.INTERNAL_CONTENT_URI
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.INTERNAL_CONTENT_URI
         ).setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION and Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         intent.type = "image/*"
         startActivityForResult(intent, BIN.REQUEST_SELECT_IMAGE)
@@ -216,10 +245,14 @@ class RForm : AppCompatActivity() {
         mBind.included.toolbar.title = resources.getString(R.string.titlerespondiendoformulario)
         setContentView(mBind.root)
         vm = RFormVM()
-
-
         vm.id = intent.getStringExtra(BIN.EXTRA_ID)!!
 
+        blinking = AlphaAnimation(0.0f, 1.0f)
+        blinking.duration = 900 //You can manage the blinking time with this parameter
+        blinking.startOffset = 20
+        blinking.repeatMode = Animation.REVERSE
+        blinking.repeatCount = Animation.INFINITE
+        mBind.buSubirEvidencia.startAnimation(blinking)
 
     }
 
@@ -239,7 +272,7 @@ class RForm : AppCompatActivity() {
         llm2.orientation = LinearLayoutManager.HORIZONTAL;
 
         mRecyclerViewEvidencias.layoutManager = llm2;
-        mAdapterEvidencia = EvidenciaAdapter(root.context) {imageView , pos->
+        mAdapterEvidencia = EvidenciaAdapter(root.context) { imageView, pos->
 
             val imagePopup: ImagePopup
             imagePopup= ImagePopup(imageView.getContext());
@@ -274,12 +307,8 @@ class RForm : AppCompatActivity() {
 
     fun AgregarEvidenciaClick(view: View) {
 
-
         if (!BIN.TengoPermisoREAD(this)){BIN.PedirREADPermission(this);return}
         AgregarEvidencia()
-
-
-
     }
     fun AgregarEvidencia() {
 
@@ -289,7 +318,7 @@ class RForm : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(
-                    Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE
+                Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE
             )
         } else {
             var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -323,6 +352,14 @@ class RForm : AppCompatActivity() {
             }
         }
         mAdapterEvidencia.notifyDataSetChanged()
+
+        if (mAdapterEvidencia.itemCount==0){mBind.buSubirEvidencia.startAnimation(blinking)}
+        else{mBind.buSubirEvidencia.animation=null}
+
+
+
+
+
     }
 
     private fun getPathFromURI(uri: Uri) {
@@ -342,14 +379,14 @@ class RForm : AppCompatActivity() {
         }
         try {
             val projection = arrayOf(
-                    MediaStore.Images.Media.DATA,
-                    MediaStore.Images.Media._ID,
-                    MediaStore.Images.Media.ORIENTATION,
-                    MediaStore.Images.Media.DATE_TAKEN
+                MediaStore.Images.Media.DATA,
+                MediaStore.Images.Media._ID,
+                MediaStore.Images.Media.ORIENTATION,
+                MediaStore.Images.Media.DATE_TAKEN
             ) // some example data you can query
             val cursor = contentResolver.query(
-                    databaseUri,
-                    projection, selection, selectionArgs, null
+                databaseUri,
+                projection, selection, selectionArgs, null
             )
             if (cursor!!.moveToFirst()) {
                 val columnIndex = cursor.getColumnIndex(projection[0])
@@ -363,7 +400,11 @@ class RForm : AppCompatActivity() {
         }
     }
 
-    fun QuitarEvidenciaClick(view: View) {mAdapterEvidencia.clearImages();mAdapterEvidencia.notifyDataSetChanged()}
+    fun QuitarEvidenciaClick(view: View) {
+        mAdapterEvidencia.clearImages();
+        mAdapterEvidencia.notifyDataSetChanged();
+        mBind.buSubirEvidencia.animation=blinking
+    }
     fun CancelarClick(view: View) {finish()}
 
 

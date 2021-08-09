@@ -42,7 +42,7 @@
         android:id="@+id/imageView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:src="@drawable/male"
+        android:src="@drawable/upload_image"
         >
     </ImageView>
     <ImageView

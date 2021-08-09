@@ -48,8 +48,6 @@ class VerEstDelFormAdapter(val mContext: Context, val iClick:(usuario: Usuario,f
 
 
 
-
-
             with(list[position]){
 
                val u= ref_usuario as Usuario

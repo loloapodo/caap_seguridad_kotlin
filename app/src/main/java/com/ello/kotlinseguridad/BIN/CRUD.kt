@@ -644,7 +644,6 @@ companion object{
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
         query.orderByDescending(Actividad.field_fecha)
         query.whereEqualTo(Actividad.field_rel_usuarios,U)
-        query.whereGreaterThanOrEqualTo(Actividad.field_fecha,time_mls)
         query.findInBackground { list, e ->
             if (e==null){
                 ParseObject.unpinAll(BIN.PIN_TODAS_MIS_ACT,list)
@@ -936,6 +935,22 @@ companion object{
             { fb();Log.e("Error","Buscar All Respuestas3") }
         })
     }
+
+    fun CargarTodasRespuestas(a:Actividad,f:Formulario, fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
+    {
+        val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
+        query.whereEqualTo(Respuesta.field_ref_actividad,a)
+        query.whereEqualTo(Respuesta.field_ref_formulario,f)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list);ParseObject.pinAll(BIN.PIN_TODAS_RES,list) }
+            else
+            { fb();Log.e("Error","Buscar All Respuestas3") }
+        })
+    }
+
+
+
+
     fun CargarTodasRespuestasLocal(a:Actividad,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
     {
         val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)

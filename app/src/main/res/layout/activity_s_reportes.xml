@@ -131,7 +131,7 @@
                     android:id="@+id/item_nombre_pregunta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre del Plan"
+                    android:hint="Guardar como (nombre del archivo PDF)"
                     android:textColorHint="@color/black"
                     >
                 </com.google.android.material.textfield.TextInputEditText>

@@ -135,7 +135,8 @@ class SDescReportes : AppCompatActivity() {
         if (requestCode ==BIN.REQUEST_MY_PERMISSIONS_READ){
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Descargando ...", Toast.LENGTH_SHORT).show()
-                vm.Exportar(mBind.itemNombrePregunta.text.toString(),{ Toast.makeText(this, "Guardado: $it", Toast.LENGTH_LONG).show() },{ Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
+                vm.Exportar(mBind.itemNombrePregunta.text.toString(),{ Toast.makeText(this, "Seleccionar aplicación para abrir el PDF", Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(this, "Guardado: $it", Toast.LENGTH_LONG).show()*/ },{ Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
             }
         }
     }

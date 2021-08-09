@@ -249,9 +249,14 @@ companion object {
 
 
         //NO PIDO PERMISO DE LOCALIZACION AQUI PORQUE LA ACTIVIDAD QUE LO LLAMA YA LO PIDIO
+
+
+
         SingleShotLocationProvider.requestSingleUpdate(
                 context,
                 SingleShotLocationProvider.LocationCallback { location ->
+
+
                     if (location.latitude > 90.0 || location.latitude < -90.0) {
                         return@LocationCallback
                     }
@@ -265,6 +270,7 @@ companion object {
                     geoP.latitude = location.latitude.toDouble()
                     done_Callback(geoP)
                 })
+
 
 
     }
@@ -301,18 +307,22 @@ companion object {
        }
 
     fun getThisAct(): Actividad? {
+        Log.e("getThisAct","BIN")
         val query = ParseQuery.getQuery<Actividad>(Actividad.class_name)
         return  query.fromPin(PIN_ACT_SELECTED).first
     }
     fun getThisForm(): Formulario? {
+        Log.e("getThisForm","BIN")
         val query = ParseQuery.getQuery<Formulario>(Formulario.class_name)
         return  query.fromPin(PIN_FOR_SELECTED).first
     }
     fun getThisUser(): Usuario? {
+        Log.e("getThisUser","BIN")
         val query = ParseQuery.getQuery<Usuario>(Usuario.class_name)
         return  query.fromPin(PIN_USU_SELECTED).first
     }
     fun getThisEquip(): Equip? {
+        Log.e("getThisEquip","BIN")
         val query = ParseQuery.getQuery<Equip>(Equip.class_name)
         return  query.fromPin(PIN_EQU_SELECTED).first
     }

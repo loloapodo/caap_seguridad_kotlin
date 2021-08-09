@@ -124,7 +124,11 @@ class SForm : AppCompatActivity() {
 
                 },{finish();Log.e("Error","Cargar todas preg del form    SForm")})
         }){
-            finish();Log.e("Error","Cargar el form    SForm")
+            Log.e("Error","Cargar el form SForm")
+            //
+            Toast.makeText(this,getString(R.string.noexisteformulario),Toast.LENGTH_LONG).show()
+            finish();
+
         }
 
 

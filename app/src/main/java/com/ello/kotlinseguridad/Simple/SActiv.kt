@@ -49,7 +49,6 @@ class SActiv : AppCompatActivity() {
 
             BIN.PinSelected(o)
 
-
             //mBind.included.toolbar.setTitleTextColor(Color.BLACK)
             //mBind.included.toolbar.setSubtitleTextColor(Color.BLACK)
 

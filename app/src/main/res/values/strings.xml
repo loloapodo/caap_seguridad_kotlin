@@ -179,5 +179,8 @@
     <string name="sin_conexion_intern">Sin conexión a Internet</string>
     <string name="no_pudo_cargar">No se pudo abrir</string>
     <string name="titlerespondiendoformulario">Enviar reporte</string>
+    <string name="noexisteformulario">Actividad no tiene formulario asignado</string>
+    <string name="buscarenmapa">Ver en mapa</string>
+    <string name="sin_evidencias">Falta subir evidencias</string>
 
 </resources>

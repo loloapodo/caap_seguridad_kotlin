@@ -62,11 +62,11 @@ class SFormVM() : ViewModel() {
 
     fun DeterminarListadoEnvios(fg: (listUnaRespPorFormu:ArrayList<Respuesta>)-> Unit,fb: () -> Unit) {
         estado.value=Estado.Network
-        Log.e("DeterminarListadoEnvios","11")
+        Log.e("DeterminarListadoEnvios","SFormVM")
 
         a=BIN.getThisAct()!!
         f=BIN.getThisForm()!!;
-        val u=BIN.getThisUser()!!
+
 
 
             Log.e("Before ","CargarTodosUsuariosdeActividadLocal")
@@ -96,11 +96,13 @@ class SFormVM() : ViewModel() {
 
     }
 
+    //2222222222222222222222222222222222222222222222222222222
     private fun CargarRespuestas(todosUsYAdm: List<Usuario>, fg: (listUnaRespPorFormu: ArrayList<Respuesta>) -> Unit) {
-        viewModelScope.launch { CRUD.CargarTodasRespuestas(a,{ todasResp->
-            Determinar(todosUsYAdm,todasResp,f,a,fg);//Local
-            CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,a,fg); },{})//DEL SERVIDOR
-        },{CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,a,fg); },{})}) }//DEL SERVIDOR
+        viewModelScope.launch { CRUD.CargarTodasRespuestas(a,f,{ todasResp_delActForm->
+            Determinar(todosUsYAdm,todasResp_delActForm,f,a,fg);//Local
+            CRUD.CargarTodasRespuestas(a,f,{t->Determinar(todosUsYAdm,t,f,a,fg); },{})//DEL SERVIDOR
+        },{CRUD.CargarTodasRespuestas({t->Determinar(todosUsYAdm,t,f,a,fg); },{})})
+        }//DEL SERVIDOR
 
 
     }

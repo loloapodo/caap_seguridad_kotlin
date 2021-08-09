@@ -85,7 +85,7 @@ class SDescReportesVM(val context: Context) : ViewModel() {
                 else{
 
                     var code=""//Codigo formado IDusuario + IDactividad
-                    var respuestas_un_informe=ArrayList<Respuesta>()
+                    val respuestas_un_informe=ArrayList<Respuesta>()
 
                     for (r in respuestas){
                         val co=r.ref_usuario!!.objectId+r.ref_actividad!!.objectId
