@@ -28,6 +28,11 @@
             android:icon="@drawable/ic_icon_drawer_usu_pending"
             android:title="@string/menu_str_formularios_por_entregar" />
 
+        <item
+            android:onClick="ReportesClick"
+            android:id="@+id/nav_incid"
+            android:icon="@drawable/ic_inciden"
+            android:title="@string/menu_str_inc" />
 
 
     </group>

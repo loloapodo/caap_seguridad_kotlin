@@ -1,9 +1,7 @@
 package com.ello.kotlinseguridad
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,11 +18,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import com.ello.kotlinseguridad.Activ.Login.Login
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.BIN.CRUD
-import com.ello.kotlinseguridad.Editar.*
-import com.ello.kotlinseguridad.Simple.SDescReportes
+import com.ello.kotlinseguridad.loginn.Login
+import com.ello.kotlinseguridad.bin.BIN
+import com.ello.kotlinseguridad.editar.*
+import com.ello.kotlinseguridad.simple.SDescReportes
 import kotlinx.coroutines.*
 
 class drawer2 : AppCompatActivity() {
@@ -61,6 +58,7 @@ class drawer2 : AppCompatActivity() {
                         R.id.nav_formularios-> Intent(this, EForm::class.java)
                         R.id.nav_equipamentos-> Intent(this, EEquip::class.java)
                         R.id.nav_roles-> Intent(this, ERol::class.java)
+                        R.id.nav_incid-> Intent(this, EInci::class.java)
 
                         else->Intent(this, EUsuario::class.java)
 
@@ -109,6 +107,7 @@ class drawer2 : AppCompatActivity() {
         if (destination.id== R.id.nav_empleados||
                 destination.id== R.id.nav_equipamentos||
                 destination.id== R.id.nav_formularios||
+                destination.id== R.id.nav_incid||
                 destination.id== R.id.nav_actividads){
             fab.visibility=View.VISIBLE
         }
@@ -120,7 +119,7 @@ class drawer2 : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav2_act, R.id.nav2_form_done,R.id.nav2_form_undone, //R.id.nav_reportes,
-                R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads
+                R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads,R.id.nav_incid
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -51,8 +51,16 @@
             android:onClick="ReportesClick"
             android:id="@+id/nav_reportes"
             android:icon="@drawable/ic_icon_drawer_reports"
-
             android:title="@string/menu_str_reportes" />
+
+        <item
+            android:onClick="ReportesClick"
+            android:id="@+id/nav_incid"
+            android:icon="@drawable/ic_inciden"
+            android:title="@string/menu_str_inc" />
+
+
+
 
 
     </group>

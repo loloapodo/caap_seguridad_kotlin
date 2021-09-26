@@ -5,15 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.BIN.CRUD
-import com.ello.kotlinseguridad.BIN.Snippetk
-import com.ello.kotlinseguridad.ParseObj.Actividad
-import com.ello.kotlinseguridad.ParseObj.Usuario
+import com.ello.kotlinseguridad.BuildConfig
+import com.ello.kotlinseguridad.bin.BIN
+import com.ello.kotlinseguridad.bin.CRUD
+import com.ello.kotlinseguridad.bin.Snippetk
+import com.ello.kotlinseguridad.parseobj.Actividad
+import com.ello.kotlinseguridad.parseobj.Usuario
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 class UsActVM : ViewModel() {
@@ -47,6 +46,7 @@ class UsActVM : ViewModel() {
 
 
     fun CargarServidor(u:Usuario,l:Long){
+
         viewModelScope.launch(Dispatchers.IO){CRUD.CargarTodasActividadesDelUsuario(u, l, { _listado.value = it }, {})  }
     }
 

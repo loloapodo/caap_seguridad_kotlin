@@ -1,6 +1,5 @@
 package com.ello.kotlinseguridad
 
-import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -21,15 +19,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
-import com.ello.kotlinseguridad.Activ.Login.Login
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.Editar.*
-import com.ello.kotlinseguridad.Simple.SDescReportes
-import com.ello.kotlinseguridad.ui.adm_act.AdmActFrag
-import com.ello.kotlinseguridad.ui.adm_equip.AdmEquipFrag
-import com.ello.kotlinseguridad.ui.adm_equip.AdmRolesFrag
-import com.ello.kotlinseguridad.ui.adm_form.AdmFormFrag
-import com.ello.kotlinseguridad.ui.adm_us.AdmUsFrag
+import com.ello.kotlinseguridad.loginn.Login
+import com.ello.kotlinseguridad.bin.BIN
+import com.ello.kotlinseguridad.editar.*
+import com.ello.kotlinseguridad.simple.SDescReportes
 
 class drawer1 : AppCompatActivity() {
 
@@ -43,6 +36,7 @@ class drawer1 : AppCompatActivity() {
         val RES_OK_CREAR_USUARIO=12
         val RES_OK_CREAR_EQUIP=13
         val RES_OK_CREAR_ROL=14
+        val RES_OK_CREAR_INC=15
 
     }
 
@@ -71,6 +65,7 @@ class drawer1 : AppCompatActivity() {
                         R.id.nav_formularios-> Intent(this, EForm::class.java)
                         R.id.nav_equipamentos-> Intent(this, EEquip::class.java)
                         R.id.nav_roles-> Intent(this, ERol::class.java)
+                        R.id.nav_incid-> Intent(this, EInci::class.java)
 
                         else->Intent(this, EUsuario::class.java)
 
@@ -93,7 +88,7 @@ class drawer1 : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_empleados,R.id.nav_equipamentos,R.id.nav_formularios, R.id.nav_actividads,
-                R.id.nav_usuarios,R.id.nav_roles,R.id.nav_reportes
+                R.id.nav_usuarios,R.id.nav_roles,R.id.nav_incid,R.id.nav_reportes
             ), drawerLayout
         )
 
@@ -173,6 +168,10 @@ class drawer1 : AppCompatActivity() {
 
         }
         if (resultCode== RES_OK_CREAR_ROL) {
+
+
+        }
+        if (resultCode== RES_OK_CREAR_INC) {
 
 
         }

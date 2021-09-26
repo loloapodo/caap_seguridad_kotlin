@@ -12,10 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ello.kotlinseguridad.Adapter.ActividadAdapter
-import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.adapter.ActividadAdapter
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Simple.SActiv
+import com.ello.kotlinseguridad.simple.SActiv
 
 class AdmActFrag : Fragment() {
 

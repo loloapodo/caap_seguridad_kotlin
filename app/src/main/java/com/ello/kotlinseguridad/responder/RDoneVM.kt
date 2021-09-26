@@ -1,29 +1,18 @@
 package com.ello.kotlinseguridad.responder
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.hardware.usb.UsbInterface
 import android.util.Log
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.BIN.CRUD
+import com.ello.kotlinseguridad.bin.BIN
+import com.ello.kotlinseguridad.bin.CRUD
 import com.ello.kotlinseguridad.Estado
-import com.ello.kotlinseguridad.ParseObj.Actividad
-import com.ello.kotlinseguridad.ParseObj.Pregunta
-import com.ello.kotlinseguridad.ParseObj.Respuesta
-import com.ello.kotlinseguridad.ParseObj.Usuario
+import com.ello.kotlinseguridad.parseobj.Actividad
+import com.ello.kotlinseguridad.parseobj.Pregunta
+import com.ello.kotlinseguridad.parseobj.Respuesta
+import com.ello.kotlinseguridad.parseobj.Usuario
 import com.ello.twelveseconds.Formulario
-import com.parse.ParseObject
-import com.parse.ParsePush
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.json.JSONException
-import org.json.JSONObject
-import java.util.*
 
 
 class RDoneVM : ViewModel() {

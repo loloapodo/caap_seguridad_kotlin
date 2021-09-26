@@ -14,9 +14,9 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
-import com.ello.kotlinseguridad.Activ.Login.Login;
-import com.ello.kotlinseguridad.BIN.BIN;
-import com.ello.kotlinseguridad.ParseObj.Usuario;
+import com.ello.kotlinseguridad.loginn.Login;
+import com.ello.kotlinseguridad.bin.BIN;
+import com.ello.kotlinseguridad.parseobj.Usuario;
 import com.ello.twelveseconds.Formulario;
 import com.parse.ParsePushBroadcastReceiver;
 

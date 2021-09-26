@@ -156,7 +156,7 @@
                     android:textColor="@color/grey_90"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Fecha de entrega:" />
+                    android:text=" Caducidad del formulario:" />
                 <TextView
                     android:layout_marginStart="@dimen/spacing_large"
                     android:textColor="@color/seguridad_gris_iconos"
@@ -173,49 +173,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:background="?android:selectableItemBackground"
-                android:onClick="MostrarTimePicker"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
 
-                >
-
-                <ImageView
-
-                    app:srcCompat="@drawable/ic_icon_time"
-                    app:tint="@color/grey_90"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="20dp"
-
-                    >
-                </ImageView>
-                <TextView
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_90"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Hora límite" />
-                <TextView
-                    android:layout_marginStart="@dimen/spacing_large"
-                    android:textColor="@color/seguridad_gris_iconos"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@id/time_pick"
-                    android:text="                /   /  "
-                    >
-                </TextView>
-
-
-
-            </LinearLayout>
 
 
 
@@ -232,6 +190,7 @@
 
 
 <LinearLayout
+    android:layout_marginTop="@dimen/spacing_large"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"

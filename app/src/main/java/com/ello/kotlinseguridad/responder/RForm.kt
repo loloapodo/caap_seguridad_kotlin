@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
@@ -21,14 +21,19 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ceylonlabs.imageviewpopup.ImagePopup
-import com.ello.kotlinseguridad.Adapter.EquipaCheckAdapter
-import com.ello.kotlinseguridad.Adapter.EvidenciaAdapter
-import com.ello.kotlinseguridad.Adapter.RespuestaAdapter
-import com.ello.kotlinseguridad.BIN.BIN
+import com.ello.kotlinseguridad.adapter.EquipaCheckAdapter
+import com.ello.kotlinseguridad.adapter.EvidenciaAdapter
+import com.ello.kotlinseguridad.adapter.RespuestaAdapter
+import com.ello.kotlinseguridad.bin.BIN
 import com.ello.kotlinseguridad.Estado
-import com.ello.kotlinseguridad.ParseObj.Pregunta
+import com.ello.kotlinseguridad.parseobj.Pregunta
 import com.ello.kotlinseguridad.R
 import com.ello.kotlinseguridad.databinding.ActivityRFormBinding
+import java.io.File
+import android.graphics.Bitmap
+
+
+
 
 
 class RForm : AppCompatActivity() {
@@ -52,7 +57,6 @@ class RForm : AppCompatActivity() {
     private var context: Context? = null
     var PICK_IMAGE_MULTIPLE = 1
     lateinit var imagePath: String
-    var imagesPathList: MutableList<String> = arrayListOf()
     lateinit var blinking: Animation
 
 
@@ -220,26 +224,6 @@ class RForm : AppCompatActivity() {
 
 
 
-    //Actualmente no usado
-    fun LoadFoto(i: ImageView, p: Int) {
-
-        mOneImageAdapt=i
-        mPosition=p
-
-        //todo sacar de la camara tambien
-        val intent = Intent(
-            Intent.ACTION_PICK,
-            MediaStore.Images.Media.INTERNAL_CONTENT_URI
-        ).setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION and Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        intent.type = "image/*"
-        startActivityForResult(intent, BIN.REQUEST_SELECT_IMAGE)
-    }
-
-
-
-
-
-
     private fun Init() {
         mBind = ActivityRFormBinding.inflate(layoutInflater)
         mBind.included.toolbar.title = resources.getString(R.string.titlerespondiendoformulario)
@@ -262,7 +246,7 @@ class RForm : AppCompatActivity() {
         val llm = LinearLayoutManager(root.context);
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
-        mAdapter = RespuestaAdapter(root.context) { foto, pos -> LoadFoto(foto, pos) }
+        mAdapter = RespuestaAdapter(root.context) { foto, pos -> /*LoadFoto(foto, pos)  LA FUNCION LoadFoto está comentada */ }
         mRecyclerView.adapter = mAdapter;
 
 
@@ -274,13 +258,12 @@ class RForm : AppCompatActivity() {
         mRecyclerViewEvidencias.layoutManager = llm2;
         mAdapterEvidencia = EvidenciaAdapter(root.context) { imageView, pos->
 
-            val imagePopup: ImagePopup
-            imagePopup= ImagePopup(imageView.getContext());
-            imagePopup.setBackgroundColor(Color.TRANSPARENT);  // Optional
-            imagePopup.setFullScreen(true); // Optional
+            val imagePopup: ImagePopup = ImagePopup(imageView.context);
+            imagePopup.backgroundColor = Color.TRANSPARENT;  // Optional
+            imagePopup.isFullScreen = true; // Optional
             //imagePopup.setHideCloseIcon(true);  // Optional
-            imagePopup.setImageOnClickClose(true);  // Optional
-            imagePopup.initiatePopup(imageView.getDrawable());
+            imagePopup.isImageOnClickClose = true;  // Optional
+            imagePopup.initiatePopup(imageView.drawable);
             imagePopup.viewPopup();
 
         }
@@ -312,67 +295,88 @@ class RForm : AppCompatActivity() {
     }
     fun AgregarEvidencia() {
 
-        if (Build.VERSION.SDK_INT < 19) {
-            var intent = Intent()
+            val intent = Intent()
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE
-            )
-        } else {
-            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            intent.type = "image/*"
-            startActivityForResult(intent, PICK_IMAGE_MULTIPLE);
-        }
+            intent.action = Intent.ACTION_GET_CONTENT;
+            startActivityForResult(Intent.createChooser(intent, "Seleccionar"), PICK_IMAGE_MULTIPLE);
+
 
     }
 
 
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
         // When an Image is picked
-        if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
-                && null != data
-        ) {
-            if (data.getClipData() != null) {
-                var count = data.clipData!!.itemCount
-                for (i in 0..count - 1) {
-                    var imageUri: Uri = data!!.clipData!!.getItemAt(i).uri
-                    getPathFromURI(imageUri)
-                }
-            } else if (data.getData() != null) {
-                var imageU: Uri = data.data!!
-                getPathFromURI(imageU)
-            }
-        }
-        mAdapterEvidencia.notifyDataSetChanged()
 
+        if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK
+                && null != intent
+        ) {
+            if (intent.clipData != null) {
+                val count = intent.clipData!!.itemCount
+                for (i in 0 until count) {
+                    getPathFromURI(intent.clipData!!.getItemAt(i).uri)
+                }
+            } else if (intent.data != null) {
+                getPathFromURI(intent.data!!)
+            }
+            else{p("ERROR DATA and CLIPDATA NULL")}
+        }else if(requestCode == PICK_IMAGE_MULTIPLE && resultCode != Activity.RESULT_OK){p("RESULT = $resultCode (NO OK)" )}
+        else if(requestCode == PICK_IMAGE_MULTIPLE && intent ==null){p("DATA = NULL")}
+
+
+
+
+
+
+        //AQUI SE PROBARA OTRA FUNCION SI FUE MAL
+        Log.e("Metodo2","Metodo2")
+        if(mAdapterEvidencia.itemCount==0 &&requestCode == PICK_IMAGE_MULTIPLE && resultCode == Activity.RESULT_OK && null != intent)
+        {
+
+            if (intent.clipData != null) {
+                val count = intent.clipData!!.itemCount
+                for (i in 0 until count) {
+                    mAdapterEvidencia.addImages(MediaStore.Images.Media.getBitmap(this.contentResolver, intent.clipData!!.getItemAt(i).uri),true)
+                }
+            } else if (intent.data != null) {
+                mAdapterEvidencia.addImages(MediaStore.Images.Media.getBitmap(this.contentResolver, intent.data),true)
+            }
+
+        }else if (mAdapterEvidencia.itemCount!=0){Log.e("Metodo2","No necesita ejecutarse")}
+
+
+
+
+        mAdapterEvidencia.notifyDataSetChanged()
         if (mAdapterEvidencia.itemCount==0){mBind.buSubirEvidencia.startAnimation(blinking)}
         else{mBind.buSubirEvidencia.animation=null}
 
 
+    }
 
-
-
+    private fun p(str: String) {
+        Toast.makeText(this,str,Toast.LENGTH_LONG).show()
     }
 
     private fun getPathFromURI(uri: Uri) {
-        var path: String = uri.path!! // uri = any content Uri
+
+        var log_path=0
+        val path: String = uri.path!! // uri = any content Uri
+        Log.e("uri.path",path)
 
         val databaseUri: Uri
         val selection: String?
         val selectionArgs: Array<String>?
         if (path.contains("/document/image:")) { // files selected from "Documents"
+            log_path=1
             databaseUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             selection = "_id=?"
             selectionArgs = arrayOf(DocumentsContract.getDocumentId(uri).split(":")[1])
         } else { // files selected from all other sources, especially on Samsung devices
+            log_path=2
             databaseUri = uri
             selection = null
             selectionArgs = null
@@ -391,14 +395,27 @@ class RForm : AppCompatActivity() {
             if (cursor!!.moveToFirst()) {
                 val columnIndex = cursor.getColumnIndex(projection[0])
                 imagePath = cursor.getString(columnIndex)
-                imagesPathList.add(imagePath)
-                mAdapterEvidencia.addImages(imagePath, true)
+
+
+                val imgFile = File(imagePath)
+                if (imgFile.exists()) {
+                    val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                    if (myBitmap!=null){ mAdapterEvidencia.addImages(myBitmap, true)}
+                    else{p("Decoded Bitmap Null")}
+                }else {p("Archivo no Existe")}
+
+
+            }else{
+                p("$log_path .Cursor don't have first")
             }
             cursor.close()
         } catch (e: Exception) {
+            p("$log_path .Catch ${e.message}")
             Log.e("image", e.message, e)
         }
     }
+
+
 
     fun QuitarEvidenciaClick(view: View) {
         mAdapterEvidencia.clearImages();
@@ -406,6 +423,22 @@ class RForm : AppCompatActivity() {
         mBind.buSubirEvidencia.animation=blinking
     }
     fun CancelarClick(view: View) {finish()}
+
+
+
+
+
+    fun LoadFoto(i: ImageView, p: Int) {//  Actualmente no usado
+        mOneImageAdapt=i
+        mPosition=p
+        //todo sacar de la camara tambien
+        val intent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.INTERNAL_CONTENT_URI
+        ).setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION and Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        intent.type = "image/*"
+        startActivityForResult(intent, BIN.REQUEST_SELECT_IMAGE)
+    }
 
 
 }

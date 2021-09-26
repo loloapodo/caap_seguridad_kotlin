@@ -48,7 +48,7 @@
     <string name="hint_preguntaNo">Pregunta ..</string>
     <string name="formulario_creado">Formulario Creado</string>
     <string name="formulario_creado_error">Error</string>
-    <string name="fecha_exp">Fecha límite</string>
+    <string name="fecha_exp">Caducidad del formulario</string>
     <string name="preguntas">Preguntas</string>
     <string name="formulario_eliminado">Formulario eliminado</string>
     <string name="error_eliminar_form">Error</string>
@@ -83,9 +83,12 @@
     <string name="titleCusuario">Crear Usuario</string>
     <string name="titleCformulario">Crear Formulario</string>
 
+
     <string name="titleactiv">Actividad </string>
+    <string name="titleinci">Evento no deseado </string>
     <string name="titleusuario">Usuario</string>
     <string name="titleformulario">Formulario</string>
+
     <string name="administrador">Administrador</string>
     <string name="toast_campos_mal">Rectifique los campos</string>
     <string name="title_activity_drawer2">drawer2</string>
@@ -182,5 +185,13 @@
     <string name="noexisteformulario">Actividad no tiene formulario asignado</string>
     <string name="buscarenmapa">Ver en mapa</string>
     <string name="sin_evidencias">Falta subir evidencias</string>
+    <string name="no_pudo_cargarelform_deactividad">No existe formulario para esta actividad</string>
+    <string name="toast_anadelaspreguntas">Necesita añadir preguntas</string>
+    <string name="toast_preguntas_sin_llenar">Faltan preguntas por llenar</string>
+    <string name="toast_seleccione_tipo_formulario">Falta el Tipo de Formulario</string>
+    <string name="str_incidentname">Nombre del Incidente</string>
+    <string name="str_descr_incidente">Descripción del Incidente</string>
+    <string name="strIncidente">Incidentes</string>
+    <string name="menu_str_inc">Eventos no deseados</string>
 
 </resources>

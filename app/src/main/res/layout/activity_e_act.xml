@@ -126,7 +126,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:editable="false"
+
             android:id="@+id/edittext_ubicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -36,6 +36,15 @@
         android:label="@string/menu_str_roles"
         tools:layout="@layout/frag_adm_roles" />
     <fragment
+        android:id="@+id/nav_incid"
+        android:name="com.ello.kotlinseguridad.ui.adm_equip.AdmRolesFrag"
+        android:label="@string/menu_str_inc"
+        tools:layout="@layout/frag_incide" />
+
+
+
+
+    <fragment
         android:id="@+id/nav_empleados"
         android:name="com.ello.kotlinseguridad.ui.adm_us.AdmEmFrag"
         android:label="@string/menu_str_empleados"

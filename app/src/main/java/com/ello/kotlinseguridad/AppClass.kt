@@ -2,7 +2,7 @@ package com.ello.kotlinseguridad
 
 import android.app.Application
 import android.util.Log
-import com.ello.kotlinseguridad.ParseObj.*
+import com.ello.kotlinseguridad.parseobj.*
 import com.ello.twelveseconds.Formulario
 import com.parse.*
 
@@ -14,6 +14,7 @@ class AppClass : Application() {
         ParseObject.registerSubclass(Respuesta::class.java)
         ParseObject.registerSubclass(Formulario::class.java)
         ParseObject.registerSubclass(Actividad::class.java)
+        ParseObject.registerSubclass(Incidente::class.java)
         ParseObject.registerSubclass(Rol::class.java)
         ParseObject.registerSubclass(Equip::class.java)
 

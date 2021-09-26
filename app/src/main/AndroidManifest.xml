@@ -49,63 +49,74 @@
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Editar.EForm"
+            android:name=".editar.EForm"
+             />
+
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".editar.EInci"
+            />
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".simple.SInci"
+            />
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".editar.EActiv"
              />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Editar.EActiv"
-             />
-        <activity
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"
-            android:name=".Editar.EUsuario"
+            android:name=".editar.EUsuario"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Editar.EEquip"
+            android:name=".editar.EEquip"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Editar.ERol"
+            android:name=".editar.ERol"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SActiv"
+            android:name=".simple.SActiv"
             />
 
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SForm"
+            android:name=".simple.SForm"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SDescReportes"
+            android:name=".simple.SDescReportes"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SUsuario"
+            android:name=".simple.SUsuario"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SEmpleado"
+            android:name=".simple.SEmpleado"
              />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SEquip"
+            android:name=".simple.SEquip"
             />
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.SRol"
+            android:name=".simple.SRol"
             />
         <activity
             android:screenOrientation="portrait"
@@ -133,7 +144,7 @@
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Activ.Login.Login"
+            android:name=".loginn.Login"
 
             >
             <intent-filter>
@@ -145,7 +156,7 @@
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".Simple.Splash" />
+            android:name=".simple.Splash" />
 
 
 

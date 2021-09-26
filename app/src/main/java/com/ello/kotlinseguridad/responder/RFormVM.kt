@@ -6,11 +6,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.BIN.CRUD
-import com.ello.kotlinseguridad.BIN.Snippetk
+import com.ello.kotlinseguridad.bin.BIN
+import com.ello.kotlinseguridad.bin.CRUD
+import com.ello.kotlinseguridad.bin.Snippetk
 import com.ello.kotlinseguridad.Estado
-import com.ello.kotlinseguridad.ParseObj.*
+import com.ello.kotlinseguridad.parseobj.*
 import com.ello.twelveseconds.Formulario
 import com.parse.*
 import kotlinx.coroutines.Dispatchers

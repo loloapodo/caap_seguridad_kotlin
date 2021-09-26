@@ -12,12 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ello.kotlinseguridad.Adapter.EmpleadoAdapter
+import com.ello.kotlinseguridad.adapter.EmpleadoAdapter
 import com.ello.kotlinseguridad.R
-import com.ello.kotlinseguridad.Adapter.UsuarioAdapter
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.ParseObj.Usuario
-import com.ello.kotlinseguridad.Simple.SUsuario
+import com.ello.kotlinseguridad.bin.BIN
+import com.ello.kotlinseguridad.simple.SUsuario
 
 class AdmEmFrag : Fragment() {
 

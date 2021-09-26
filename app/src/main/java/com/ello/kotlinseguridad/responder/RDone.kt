@@ -1,37 +1,23 @@
 package com.ello.kotlinseguridad.responder
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ceylonlabs.imageviewpopup.ImagePopup
-import com.ello.kotlinseguridad.Adapter.EquipaCheckAdapter
-import com.ello.kotlinseguridad.Adapter.EvidenciaAdapter
-import com.ello.kotlinseguridad.Adapter.RespondidoAdapter
-import com.ello.kotlinseguridad.Adapter.RespuestaAdapter
-import com.ello.kotlinseguridad.BIN.BIN
-import com.ello.kotlinseguridad.BIN.Snippetk
-import com.ello.kotlinseguridad.BIN.Snippets
-import com.ello.kotlinseguridad.Estado
-import com.ello.kotlinseguridad.ParseObj.Pregunta
+import com.ello.kotlinseguridad.adapter.EquipaCheckAdapter
+import com.ello.kotlinseguridad.adapter.EvidenciaAdapter
+import com.ello.kotlinseguridad.adapter.RespondidoAdapter
+import com.ello.kotlinseguridad.bin.BIN
 import com.ello.kotlinseguridad.R
 
 import com.ello.kotlinseguridad.databinding.ActivityRDoneBinding
-import java.io.IOException
 
 
 class RDone : AppCompatActivity() {
