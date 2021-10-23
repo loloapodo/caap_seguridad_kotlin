@@ -54,9 +54,9 @@
             android:title="@string/menu_str_reportes" />
 
         <item
-            android:onClick="ReportesClick"
+
             android:id="@+id/nav_incid"
-            android:icon="@drawable/ic_inciden"
+            android:icon="@drawable/ic_warning"
             android:title="@string/menu_str_inc" />
 
 

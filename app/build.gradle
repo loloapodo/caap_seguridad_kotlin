@@ -95,4 +95,8 @@ dependencies {
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
 
 
+    implementation 'commons-codec:commons-codec:1.13'
+    implementation 'com.github.SUPERCILEX.poi-android:poi:3.17'
+    compileOnly 'org.apache.poi:poi-ooxml:4.0.0'
+
 }

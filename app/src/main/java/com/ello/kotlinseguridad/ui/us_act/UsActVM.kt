@@ -46,7 +46,7 @@ class UsActVM : ViewModel() {
 
 
     fun CargarServidor(u:Usuario,l:Long){
-
+        if (BuildConfig.DEBUG){return}
         viewModelScope.launch(Dispatchers.IO){CRUD.CargarTodasActividadesDelUsuario(u, l, { _listado.value = it }, {})  }
     }
 

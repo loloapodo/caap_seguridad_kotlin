@@ -4,6 +4,7 @@ package com.ello.kotlinseguridad.simple
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -49,8 +50,6 @@ class SDescReportes : AppCompatActivity() {
             if (it==Estado.Idle){mBind.botonDescargar.visibility=View.VISIBLE;mBind.reportesProgressbar.visibility=View.GONE}
             else{mBind.botonDescargar.visibility=View.INVISIBLE;mBind.reportesProgressbar.visibility=View.VISIBLE}
         })
-
-
     }
 
 
@@ -64,10 +63,7 @@ class SDescReportes : AppCompatActivity() {
 
     fun DescargarClick(view: View) {
 
-        if (vm.estado.value != Estado.Idle) {
-            Toast.makeText(this, "Espere por favor ...", Toast.LENGTH_SHORT).show()
-            return
-        }
+
 
         if (!BIN.TengoInternet(this)) {
             Toast.makeText(view.context, resources.getString(R.string.sin_conexion_intern), Toast.LENGTH_SHORT).show();return
@@ -76,11 +72,40 @@ class SDescReportes : AppCompatActivity() {
 
         if (BIN.TengoPermisoREAD(this)) {
             Toast.makeText(this, "Descargando ...", Toast.LENGTH_SHORT).show()
-            mBind
-            vm.Exportar(mBind.itemNombrePregunta.text.toString(), { Toast.makeText(this, "Guardado: $it", Toast.LENGTH_LONG).show() }, { Toast.makeText(this, it, Toast.LENGTH_LONG).show() })
+            AbrirRespuestasPorFecha()
+
         } else {
             BIN.PedirREADPermission(this)
         }
+
+    }
+
+    private fun AbrirRespuestasPorFecha() {
+
+        if(vm.fecha_desde==null||vm.fecha_hasta==null|| vm.fecha_desde!! >vm.fecha_hasta!!){
+
+            Toast.makeText(this,"Rectifique las fechas",Toast.LENGTH_SHORT).show()
+            return
+        }
+        else
+        {
+
+            val i=Intent(this,RespuestasPorFecha::class.java)
+
+            i.putExtra(RespuestasPorFecha.STARTDATE,vm.fecha_desde)
+            i.putExtra(RespuestasPorFecha.ENDDATE,vm.fecha_hasta)
+            if (mBind.itemNombrePregunta.text.isNullOrEmpty())
+            {i.putExtra(RespuestasPorFecha.FILTRO_BUSQ,mBind.itemNombrePregunta.text.toString())}
+
+            startActivity(i)
+
+
+
+        }
+
+
+
+
 
     }
 
@@ -134,8 +159,8 @@ class SDescReportes : AppCompatActivity() {
         if (requestCode ==BIN.REQUEST_MY_PERMISSIONS_READ){
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Descargando ...", Toast.LENGTH_SHORT).show()
-                vm.Exportar(mBind.itemNombrePregunta.text.toString(),{ Toast.makeText(this, "Seleccionar aplicación para abrir el PDF", Toast.LENGTH_LONG).show();
-                    /*Toast.makeText(this, "Guardado: $it", Toast.LENGTH_LONG).show()*/ },{ Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
+                AbrirRespuestasPorFecha()
+
             }
         }
     }

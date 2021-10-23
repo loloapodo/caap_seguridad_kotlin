@@ -49,6 +49,15 @@
         <activity
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
+            android:name=".simple.RespuestasPorFecha"
+            >
+
+        </activity>
+
+
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:name=".editar.EForm"
              />
 

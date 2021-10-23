@@ -44,7 +44,6 @@ class EvidenciaAdapter(mContext: Context, val LoadFotoClick: (image: ImageView, 
                 holder.image.setOnClickListener { LoadFotoClick(holder.image,position) }
 
 
-
         }
 
 
@@ -59,6 +58,29 @@ class EvidenciaAdapter(mContext: Context, val LoadFotoClick: (image: ImageView, 
         Log.e("added to adapter","evidencia")
         listBitmaps.add(bitmap)
         notifyDataSetChanged()
+
+
+
+
+        //todo Resize the image
+        /*
+        public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+
+            float bitmapRatio = (float)width / (float) height;
+            if (bitmapRatio > 1) {
+                width = maxSize;
+                height = (int) (width / bitmapRatio);
+            } else {
+                height = maxSize;
+                width = (int) (height * bitmapRatio);
+            }
+            return Bitmap.createScaledBitmap(image, width, height, true);
+        }
+        */
+
+
     }
 
 

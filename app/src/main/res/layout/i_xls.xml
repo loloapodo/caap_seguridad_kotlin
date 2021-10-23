@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="?selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<LinearLayout android:orientation="horizontal"
+    android:id="@+id/lyt_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/spacing_large"
+    android:layout_marginBottom="@dimen/spacing_large"
+    >
+
+
+    <View
+        android:layout_width="20.0dip"
+        android:layout_height="90.0dip">
+
+    </View>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_toLeftOf="@id/add_fav_butt"
+                        >
+
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_90"
+                            android:id="@+id/item_nombre_act_respuesta"
+                            android:lines="1"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Actividad"
+                            />
+
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_600"
+                            android:id="@+id/item_nombre_usuario_respuesta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre"
+                            android:visibility="visible"
+                            />
+
+
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_600"
+                            android:id="@+id/item_fecha_respuesta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fecha"
+                            android:visibility="visible"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/add_fav_butt"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginEnd="@dimen/spacing_large"
+                        app:srcCompat="@drawable/xml_expand_less"
+                        android:visibility="visible"
+
+                        >
+                    </ImageView>
+                </RelativeLayout>
+        </LinearLayout>
+
+</LinearLayout>
+
+

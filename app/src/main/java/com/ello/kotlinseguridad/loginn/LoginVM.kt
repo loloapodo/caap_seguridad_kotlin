@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BuildConfig
 
 
 import com.ello.kotlinseguridad.bin.BIN
@@ -37,8 +38,29 @@ class LoginVM(var cxt: Context) : ViewModel() {
 
 
 
+        if (!BuildConfig.DEBUG){//Aqui y en las actividades q siempre
 
-        //if (!BuildConfig.DEBUG){
+
+            val queryIncide = ParseQuery.getQuery<Incidente>(Incidente.class_name)
+            queryIncide.findInBackground { incidententes, e ->
+                if(e==null){
+                    Log.e("Ok","TraerDatosTOAlmacLocal Incidente")
+                    ParseObject.unpinAll(BIN.PIN_TODAS_INC)
+                    ParseObject.pinAll(BIN.PIN_TODAS_INC,incidententes)
+                    for (i in incidententes){
+                        if (!BuildConfig.DEBUG){
+                            i.e0?.dataInBackground
+                            i.e1?.dataInBackground
+                            i.e2?.dataInBackground
+                            i.e3?.dataInBackground
+                        }
+
+                    }
+                }else{
+                    Log.e("Error","TraerDatosTOAlmacLocal Incidente")
+                }
+            }
+
 
 
             val queryForm = ParseQuery.getQuery<Formulario>(Formulario.class_name)
@@ -52,16 +74,7 @@ class LoginVM(var cxt: Context) : ViewModel() {
                 }
             }
 
-        val queryIncide = ParseQuery.getQuery<Incidente>(Incidente.class_name)
-        queryIncide.findInBackground { incidententes, e ->
-            if(e==null){
-                Log.e("Ok","TraerDatosTOAlmacLocal Incidente")
-                ParseObject.unpinAll(BIN.PIN_TODAS_INC)
-                ParseObject.pinAll(BIN.PIN_TODAS_INC,incidententes)
-            }else{
-                Log.e("Error","TraerDatosTOAlmacLocal Incidente")
-            }
-        }
+
 
 
         val queryActiv = ParseQuery.getQuery<Actividad>(Actividad.class_name)
@@ -130,7 +143,7 @@ class LoginVM(var cxt: Context) : ViewModel() {
 
 
 
-//}
+}
     }
 
 

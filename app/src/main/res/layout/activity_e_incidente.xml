@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:background="@android:color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.appbar.AppBarLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/my_toolbar" android:id="@+id/included"> </include>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+
+    >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/editincident_nombreL"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editincidente_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:textColorHint="@color/black"
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/seguridad_gris_iconos"
+            android:layout_marginTop="@dimen/editarusuariomargin"
+            android:layout_marginBottom="@dimen/editarusuariomargin"
+            android:layout_marginEnd="@dimen/editarusuariomarginleft"
+            android:layout_marginStart="@dimen/editarusuariomarginleft"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/editincidente_descripcionL"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editincident_descripcion"
+                android:layout_width="match_parent"
+                android:hint="@string/hint_descr_eq"
+                android:layout_height="100dp"
+                android:textColorHint="@color/black"
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <TextView
+
+
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textColor="@color/grey_90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Evidencias"
+            android:textAlignment="center"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp">
+        </TextView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="ifContentScrolls"
+            android:id="@+id/recycler_evidencias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:itemCount="1"
+            tools:listitem="@layout/i_evidencia"
+
+
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <Button
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bu_quitar_evidencia"
+                android:layout_gravity="center"
+                android:onClick="QuitarEvidenciaClick"
+                android:layout_marginRight="@dimen/spacing_large"
+
+                >
+            </Button>
+
+
+            <Button
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bu_subir_foto"
+                android:id="@+id/bu_subir_evidencia"
+                android:layout_gravity="center"
+                android:onClick="AgregarEvidenciaClick"
+                >
+            </Button>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintTop_toBottomOf="@id/item_nombre_pregunta"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/grey_10" android:layout_width="fill_parent" android:layout_height="1.0dip"  />
+        <LinearLayout
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <Button
+                android:layout_marginTop="@dimen/editarusuariomargin"
+                android:layout_marginBottom="@dimen/editarusuariomargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancelar"
+                android:layout_gravity="center"
+                android:onClick="CancelarClick"
+
+                >
+            </Button>
+
+            <View
+
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+
+
+                >
+            </View>
+
+            <Button
+                android:layout_marginTop="@dimen/editarusuariomargin"
+                android:layout_marginBottom="@dimen/editarusuariomargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/aceptar"
+                android:layout_gravity="center"
+                android:onClick="AcpetarClick"
+                >
+            </Button>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

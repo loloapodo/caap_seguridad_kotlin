@@ -70,6 +70,12 @@
         android:label="@string/menu_equip"
         tools:layout="@layout/frag_adm_equip" />
 
+    <fragment
+        android:id="@+id/nav_incid"
+        android:name="com.ello.kotlinseguridad.ui.incidencias.IncidFrag"
+        android:label="@string/menu_str_inc"
+        tools:layout="@layout/frag_incide" />
+
 
 
 

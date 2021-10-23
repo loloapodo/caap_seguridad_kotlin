@@ -527,6 +527,8 @@ companion object{
         d.time= desde
         h.time= hasta
 
+        Log.d("Buscando desde","($desde  == ${Snippetk.LeerFechaR(desde)} ) ")
+        Log.d("Buscando desde","($hasta  == ${Snippetk.LeerFechaR(hasta)} ) ")
         query.orderByAscending(Respuesta.field_created)
 
         query.whereGreaterThan(Respuesta.field_created,d)
@@ -749,9 +751,23 @@ suspend fun CargarTodasIncidentes(fg: (list:List<Incidente>) -> Unit,fb: () -> U
                 }
             }
 
+    }
+
+    fun CrearIncidente(i: Incidente,fg: () -> Unit,fb: () -> Unit) {
 
 
 
+        i.saveInBackground { e2 ->
+            if (e2 == null) {
+                fg();Log.e(" "," incidente subido ")
+
+            } else {
+                fb();
+                Log.e("Error","No subido incidente")
+                Log.e("Error",e2.message!!)
+                e2.printStackTrace()
+            }
+        }
 
     }
 
@@ -991,6 +1007,18 @@ suspend fun CargarTodasIncidentes(fg: (list:List<Incidente>) -> Unit,fb: () -> U
             { fb();Log.e("Error","Buscar All Respuestas3") }
         })
     }
+    fun CargarTodasRespuestas(u: ParseObject,f:ParseObject,a:ParseObject,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
+    {
+        val query = ParseQuery.getQuery<Respuesta>(Respuesta.class_name)
+        query.whereEqualTo(Respuesta.field_ref_usuario,u)
+        query.whereEqualTo(Respuesta.field_ref_actividad,a)
+        query.whereEqualTo(Respuesta.field_ref_formulario,f)
+        query.findInBackground(FindCallback { list, e ->
+            if (e==null){fg(list);ParseObject.pinAll(BIN.PIN_TODAS_RES,list) }
+            else
+            { fb();Log.e("Error","Buscar All Respuestas3") }
+        })
+    }
 
     fun CargarTodasRespuestasLocal(u: Usuario,f:Formulario,a:Actividad,fg: (list: List<Respuesta>) -> Unit,fb: () -> Unit)
     {
@@ -1200,6 +1228,28 @@ suspend fun CargarTodasIncidentes(fg: (list:List<Incidente>) -> Unit,fb: () -> U
     suspend fun BorrarRol(str_ObjectId: String,fg: () -> Unit,fb: () -> Unit){
 
         val query = ParseQuery.getQuery<Rol>(Rol.class_name)
+        query.getInBackground(str_ObjectId, GetCallback { u, e ->
+
+            if (e == null) {
+                u.deleteInBackground() { e2 ->
+                    if (e2 == null) {
+                        fg();Log.e("Borrado del serv","Borrado del Serv")
+                    } else {
+                        Log.e("Error","Al borrar del servidior")
+                        fb();
+                    }
+                }
+            } else {
+                fb()
+                Log.e("Error borrar","Al buscar en el servidior")
+            }
+        })
+
+    }
+
+    suspend fun BorrarIncidente(str_ObjectId: String,fg: () -> Unit,fb: () -> Unit){
+
+        val query = ParseQuery.getQuery<Incidente>(Incidente.class_name)
         query.getInBackground(str_ObjectId, GetCallback { u, e ->
 
             if (e == null) {

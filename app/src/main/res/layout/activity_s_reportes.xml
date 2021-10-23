@@ -114,6 +114,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:visibility="gone"
                 android:textColorHint="@color/seguridad_gris_iconos"
                 android:id="@+id/textinputlay"
                 app:layout_constraintTop_toBottomOf="@id/linerar2hasta"
@@ -128,10 +129,11 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
+
                     android:id="@+id/item_nombre_pregunta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Guardar como (nombre del archivo PDF)"
+                    android:hint="Filtrar búsqueda"
                     android:textColorHint="@color/black"
                     >
                 </com.google.android.material.textfield.TextInputEditText>

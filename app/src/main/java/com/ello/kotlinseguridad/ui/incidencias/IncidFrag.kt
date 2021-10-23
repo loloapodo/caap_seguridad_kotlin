@@ -51,7 +51,7 @@ class IncidFrag : Fragment() {
         llm.orientation = LinearLayoutManager.VERTICAL;
         mRecyclerView.layoutManager = llm;
         mAdapter= IncidAdapter(root.context){startActivity(Intent(activity,
-                SInci::class.java).putExtra("id",it))}
+                SInci::class.java).putExtra("id",it.objectId))}
         mRecyclerView.adapter=mAdapter;
     }
 

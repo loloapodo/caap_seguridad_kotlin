@@ -175,7 +175,7 @@
     <string name="str_equipamiento">Equipamiento</string>
     <string name="str_evidencias">Evidencias</string>
     <string name="title_descargar_reportes">Reportes de Tareas</string>
-    <string name="bu_descargar">Descargar</string>
+    <string name="bu_descargar">Buscar</string>
     <string name="SeleccionarFecha">Seleccionar fecha</string>
     <string name="menu_reportes">Reporte de tareas</string>
     <string name="menu_str_reportes">Reportes de tareas</string>
@@ -191,7 +191,12 @@
     <string name="toast_seleccione_tipo_formulario">Falta el Tipo de Formulario</string>
     <string name="str_incidentname">Nombre del Incidente</string>
     <string name="str_descr_incidente">Descripción del Incidente</string>
-    <string name="strIncidente">Incidentes</string>
+    <string name="strIncidente">Pruebas del Incidente </string>
     <string name="menu_str_inc">Eventos no deseados</string>
+    <string name="eventonodes_error_eliminado">Error</string>
+    <string name="eventonodes_eliminado">Eliminado</string>
+    <string name="bu_subir_foto">Subir Foto</string>
+    <string name="incidencia_enviada">Subida</string>
+    <string name="informes">Reportes</string>
 
 </resources>

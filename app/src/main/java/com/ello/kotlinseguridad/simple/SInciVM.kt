@@ -33,8 +33,10 @@ class SInciVM() : ViewModel() {
         CRUD.CargarUnIncidente(id_incidente,{_incidente.value=it;ya_cargo_actividad=true},{})
     }
 
+    fun BorrarIncidente(idIncidente: String, fg: () -> Unit, fb: () -> Unit) {
+        viewModelScope.launch { withContext(Dispatchers.IO) { CRUD.BorrarIncidente(idIncidente,fg,fb) }}
 
-
+    }
 
 
 }

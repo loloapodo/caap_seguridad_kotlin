@@ -57,7 +57,7 @@ class RForm : AppCompatActivity() {
     private var context: Context? = null
     var PICK_IMAGE_MULTIPLE = 1
     lateinit var imagePath: String
-    lateinit var blinking: Animation
+    //lateinit var blinking: Animation
 
 
 
@@ -231,12 +231,12 @@ class RForm : AppCompatActivity() {
         vm = RFormVM()
         vm.id = intent.getStringExtra(BIN.EXTRA_ID)!!
 
-        blinking = AlphaAnimation(0.0f, 1.0f)
-        blinking.duration = 900 //You can manage the blinking time with this parameter
-        blinking.startOffset = 20
-        blinking.repeatMode = Animation.REVERSE
-        blinking.repeatCount = Animation.INFINITE
-        mBind.buSubirEvidencia.startAnimation(blinking)
+       // blinking = AlphaAnimation(0.0f, 1.0f)
+        //blinking.duration = 900 //You can manage the blinking time with this parameter
+        //blinking.startOffset = 20
+        //blinking.repeatMode = Animation.REVERSE
+        //blinking.repeatCount = Animation.INFINITE
+        //mBind.buSubirEvidencia.startAnimation(blinking)
 
     }
 
@@ -301,10 +301,7 @@ class RForm : AppCompatActivity() {
             intent.action = Intent.ACTION_GET_CONTENT;
             startActivityForResult(Intent.createChooser(intent, "Seleccionar"), PICK_IMAGE_MULTIPLE);
 
-
     }
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
@@ -351,14 +348,10 @@ class RForm : AppCompatActivity() {
 
 
         mAdapterEvidencia.notifyDataSetChanged()
-        if (mAdapterEvidencia.itemCount==0){mBind.buSubirEvidencia.startAnimation(blinking)}
-        else{mBind.buSubirEvidencia.animation=null}
+        //if (mAdapterEvidencia.itemCount==0){mBind.buSubirEvidencia.startAnimation(blinking)}
+        //else{mBind.buSubirEvidencia.animation=null}
 
 
-    }
-
-    private fun p(str: String) {
-        Toast.makeText(this,str,Toast.LENGTH_LONG).show()
     }
 
     private fun getPathFromURI(uri: Uri) {
@@ -415,14 +408,20 @@ class RForm : AppCompatActivity() {
         }
     }
 
-
-
     fun QuitarEvidenciaClick(view: View) {
         mAdapterEvidencia.clearImages();
         mAdapterEvidencia.notifyDataSetChanged();
-        mBind.buSubirEvidencia.animation=blinking
+        //mBind.buSubirEvidencia.animation=blinking
     }
+
+
+
     fun CancelarClick(view: View) {finish()}
+
+
+    private fun p(str: String) {
+        Toast.makeText(this,str,Toast.LENGTH_LONG).show()
+    }
 
 
 

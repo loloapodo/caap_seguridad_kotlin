@@ -126,7 +126,10 @@ public class Snippets {
 
         try {
             return BitmapFactory.decodeByteArray(foto.getData(), 0, foto.getData().length);
-        }catch (Exception e){return null;}
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

@@ -12,13 +12,17 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ello.kotlinseguridad.bin.BIN
-import com.ello.kotlinseguridad.bin.CRUD
-import com.ello.kotlinseguridad.bin.PDF_Maker
 import com.ello.kotlinseguridad.Estado
+import com.ello.kotlinseguridad.bin.*
+import com.ello.kotlinseguridad.parseobj.Actividad
+import com.ello.kotlinseguridad.parseobj.Pregunta
 import com.ello.kotlinseguridad.parseobj.Respuesta
+import com.ello.kotlinseguridad.parseobj.Usuario
+import com.ello.twelveseconds.Formulario
+import com.parse.ParseObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.apache.poi.ss.formula.Formula
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -43,6 +47,141 @@ class SDescReportesVM(val context: Context) : ViewModel() {
 
     }
 
+/*
+     fun Llenar(n: String, fg_ruta_descarga: (s:String) -> Unit,fb: (s:String) -> Unit){
+
+         if(fecha_desde==null||fecha_hasta==null|| fecha_desde!! >fecha_hasta!!){
+
+             fb("Rectifique las fechas")
+             return
+         }
+
+         if(!BIN.TengoInternet(context)){
+             fb("Necesita Internet")
+             return
+         }
+         estado.value= Estado.CompilingPDF
+         val plantilla= PlantillaReporte("idcualquiera")
+
+         viewModelScope.launch (Dispatchers.IO){
+             val tempU=ParseObject.createWithoutData(Usuario.class_name,"h6dN0O1Zro") as Usuario
+             val tempF=ParseObject.createWithoutData(Formulario.class_name,"QBplsdoBML") as Formulario
+             val tempA=ParseObject.createWithoutData(Actividad.class_name,"vpuZHngpxv") as Actividad
+
+
+             CRUD.CargarTodasRespuestas(tempU,tempF,tempA,{
+                     respuestas->
+
+                 Log.e("Respuestas","Se cargaron las respuestas ${respuestas.size}" )
+
+
+                 for (r in respuestas){
+
+
+                     //Añadir preguntas respuestas
+                     val pregunta:Pregunta= r.ref_pregunta as Pregunta
+                     var num=1
+                     pregunta.numero?.let { num=it+1 }
+                     val str_preg= num.toString() + "- " + pregunta.nombre
+                     r.respuesta?.let { plantilla.addPregResp(str_preg, it,r.checked) }
+                     //Añadir preguntas respuestas
+
+
+                     if (r.firs_of_list){
+
+                    val esta_act= r.ref_actividad?.fetch() as Actividad
+                    val esta_form=r.ref_formulario?.fetch() as Formulario
+                    val esta_usu=r.ref_usuario?.fetch() as Usuario
+
+
+
+
+
+                     plantilla.setDocId(r.objectId)
+                     plantilla.setUpdt(Snippetk.LeerFechaR(r.fecha))
+
+
+                         esta_act.nombre?.let { plantilla.setActName(it) }
+                         esta_act.desc?.let { plantilla.setActDesc(it) }
+                       plantilla.setActDate(Snippetk.LeerFechaR(esta_act.fecha))
+                         esta_form.nombre?.let { plantilla.setFormName(it) }
+                         esta_form.tipo?.let { plantilla.setFormType(it) }
+
+                         esta_act.sitio?.let { plantilla.setActSitio(it) }
+                         esta_act.ubicacion?.let {
+
+                             if(it.length>34){
+                                 val pos1=it.indexOf("Lat:",0,true)
+                                 val pos2=it.indexOf("Lon:",5,true)
+                                 plantilla.setActUbicac(it.substring(pos1+4,pos1+4+7)+"; "+it.substring(pos2+4,pos2+4+7))
+                                 Log.e("pos1 y pos2","$pos1 y $pos2")
+                                 Log.e("substr1 y substr2","${it.substring(pos1,pos1+13)} y ${it.substring(pos2,pos2+13)}")
+                             }
+                             else
+                             {
+                                 plantilla.setActUbicac(it)
+                             }
+
+
+
+
+                         }
+                     plantilla.setFormCantPreg(respuestas.size.toString())
+
+                         if(esta_usu.nom_apell!=null&&esta_usu.apell!=null){plantilla.setPersName(esta_usu.nom_apell+" "+esta_usu.apell)}
+                        else{esta_usu.nom_apell?.let { plantilla.setPersName(it) }}
+
+                         esta_usu.cedula?.let { plantilla.setPersCedul(it) }
+                         esta_usu.direccion?.let { plantilla.setPersDirecc(it) }
+                         esta_usu.telefono?.let { plantilla.setPersTelef(it) }
+
+                         r.equipos?.let {
+                             var str=it.replace("*",", ")
+                             if (str[str.length-2] ==','){
+                                 Log.e("Equipos","Al final existe una coma");
+                                 str=str.substring(0,str.length-2)
+                             }
+                             plantilla.setEquipami(str)}
+
+                         plantilla.addImage(r.e0)
+                         plantilla.addImage(r.e1)
+                         plantilla.addImage(r.e2)
+                         plantilla.addImage(r.e3)
+                         plantilla.addImage(r.e4)
+                         plantilla.addImage(r.e5)
+                         plantilla.addImage(r.e6)
+                         plantilla.addImage(r.e7)
+                         plantilla.addImage(r.e8)
+
+
+                     }
+                 }
+
+                 plantilla.PoblarArchivo(context.filesDir,context.resources)
+                 val ruta=plantilla.ObtenerRutaPlantillaSalida()
+
+                 if (ruta==null){
+                     fb("Ha ocurrido un error")
+                 }else
+                 {
+                     plantilla.AbrirXLS(context)
+                     fg_ruta_descarga(ruta)
+                 }
+
+
+
+
+
+             },{})//Dandole usuario formulario y activida
+
+
+         }
+
+
+
+     }
+*/
+    /*
      fun Exportar(n: String, fg_ruta_descarga: (s:String) -> Unit,fb: (s:String) -> Unit) {
 
 
@@ -68,6 +207,7 @@ class SDescReportesVM(val context: Context) : ViewModel() {
 
 
         maker= PDF_Maker(context,nombre)
+
 
 
          try {
@@ -123,10 +263,10 @@ class SDescReportesVM(val context: Context) : ViewModel() {
 
 
     }
+*/
 
 
-
-
+/*
     fun createpdf(path_name: String, titulo: String, subtitulo: String, ciudad: String, lugar: String) {
         val bounds = Rect()
         val pageWidth = 300;
@@ -210,18 +350,16 @@ class SDescReportesVM(val context: Context) : ViewModel() {
     }
 
 
-    fun viewPdfFile(file: File) {
 
-        val intent = Intent(Intent.ACTION_VIEW)
-        val u= FileProvider.getUriForFile(context, context.applicationContext.packageName.toString() + ".provider", file)
-        intent.setDataAndType(u, "application/pdf")
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        context.startActivity(intent)
-    }
+*/
+fun viewPdfFile(file: File) {
 
-
-
-
+    val intent = Intent(Intent.ACTION_VIEW)
+    val u= FileProvider.getUriForFile(context, context.applicationContext.packageName.toString() + ".provider", file)
+    intent.setDataAndType(u, "application/pdf")
+    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    context.startActivity(intent)
+}
 
 
 

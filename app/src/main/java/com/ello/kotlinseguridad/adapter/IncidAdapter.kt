@@ -27,7 +27,7 @@ class IncidAdapter(mContext: Context, val iClick:(str:Incidente)->Unit): Recycle
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = layoutInflater.inflate(R.layout.i_empleado, parent, false)
+        val view = layoutInflater.inflate(R.layout.i_incidente, parent, false)
         return IncidenteH(view)
     }
 
@@ -40,11 +40,13 @@ class IncidAdapter(mContext: Context, val iClick:(str:Incidente)->Unit): Recycle
         with(list[position]){
 
 
-            //holder.itemView.setOnClickListener { iClick(list[position]) }
+            holder.itemView.setOnClickListener { iClick(list[position]) }
+            if(name!=null){holder.nombre.text=desc}
+            if(desc!=null){holder.desc.text=desc}
 
-            GlobalScope.launch {
-            //    Snippetk.PonerFotoCircular(holder.image,list[position].foto,"empleado adapter")
-            }
+
+
+
         }
 
 
@@ -60,8 +62,8 @@ class IncidAdapter(mContext: Context, val iClick:(str:Incidente)->Unit): Recycle
     }
 
     inner class IncidenteH(view: View) : RecyclerView.ViewHolder(view) {
-     //   var nombre:TextView = view.findViewById(R.id.item_nombre)
-     //  var adm:TextView = view.findViewById(R.id.item_admin)
+        var nombre:TextView = view.findViewById(R.id.item_nombre_incidente)
+       var desc:TextView = view.findViewById(R.id.item_desc_incidente)
      //   var image:CircularImageView=view.findViewById(R.id.item_imageusuario)
     }
 

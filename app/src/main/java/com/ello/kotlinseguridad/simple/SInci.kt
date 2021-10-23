@@ -49,12 +49,23 @@ class SInci : AppCompatActivity() {
             if (o.name!=null){mBind.unaIncidenteName.text=o.name}
             if(o.desc!=null){mBind.unaIncidenteDescripci.text=o.desc}
 
-            if (o.e0!=null){mAdapter.addImages(o.e0!!,false)}
-            if (o.e1!=null){mAdapter.addImages(o.e1!!,false)}
-            if (o.e2!=null){mAdapter.addImages(o.e2!!,false)}
-            if (o.e3!=null){mAdapter.addImages(o.e3!!,false)}
-            if (mAdapter.itemCount>0){mAdapter.notifyDataSetChanged()}
+            if (mAdapter.itemCount==0){
+                if (o.e0!=null){mAdapter.addImages(o.e0!!,false)}
+                if (o.e1!=null){mAdapter.addImages(o.e1!!,false)}
+                if (o.e2!=null){mAdapter.addImages(o.e2!!,false)}
+                if (o.e3!=null){mAdapter.addImages(o.e3!!,false)}
+                if (mAdapter.itemCount>0){mAdapter.notifyDataSetChanged()}
+            }
 
+            if(mAdapter.itemCount==0){
+                mBind.linearfotosincidentes.visibility=View.GONE
+            }
+
+
+
+            if (BIN.ES_ADMIN()){mBind.buEliminar.visibility=View.VISIBLE;
+                mBind.buEliminarHelper.visibility=View.VISIBLE
+            }
 
         })
 
@@ -90,6 +101,19 @@ class SInci : AppCompatActivity() {
 
     private fun getThis(): Context { return this; }
     fun CancelarClick(view: View) {finish()}
+
+    fun EliminarClick(view: View) {
+        if(!BIN.TengoInternet(getThis(),true)){return}
+        lifecycleScope.launch {
+            vm.BorrarIncidente(vm.id_incidente,{
+                Toast.makeText(getThis(),resources.getString(R.string.eventonodes_eliminado), Toast.LENGTH_SHORT).show();finish()
+            },{
+                Toast.makeText(getThis(),resources.getString(R.string.eventonodes_error_eliminado), Toast.LENGTH_SHORT).show();finish()
+            })
+        }
+
+
+    }
 
 
 

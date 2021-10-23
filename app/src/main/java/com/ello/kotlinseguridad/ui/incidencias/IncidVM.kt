@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ello.kotlinseguridad.BuildConfig
 import com.ello.kotlinseguridad.bin.CRUD
 import com.ello.kotlinseguridad.parseobj.Incidente
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,7 @@ class IncidVM : ViewModel() {
     }
 
     fun CargarDelServidor() {
-
+if(BuildConfig.DEBUG){return}
         viewModelScope.launch(Dispatchers.IO) {
         CRUD.CargarTodasIncidentes({_listado.value=it},{})
         }
