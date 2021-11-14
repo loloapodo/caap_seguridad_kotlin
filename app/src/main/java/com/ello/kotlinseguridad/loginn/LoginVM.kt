@@ -103,7 +103,7 @@ class LoginVM(var cxt: Context) : ViewModel() {
 
         val queryUsua = ParseQuery.getQuery<Usuario>(Usuario.class_name)
         queryUsua.findInBackground { usuarios, e ->
-            if(e==null){
+            if(e==null && usuarios.isNotEmpty()){
                 Log.e("Ok","TraerDatosTOAlmacLocal USUARIOS-EMPLEADOS")
                 for (i in usuarios){i.foto?.dataInBackground}
                 ParseObject.unpinAll(BIN.PIN_TODAS_USU)

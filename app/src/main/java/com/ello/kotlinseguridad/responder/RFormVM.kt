@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
+import kotlin.coroutines.coroutineContext
 
 
 class RFormVM : ViewModel() {
@@ -87,17 +88,22 @@ class RFormVM : ViewModel() {
 
             Log.e("EnviarRespuesta","before global scope")
 
-            GlobalScope.launch(Dispatchers.IO) {
+
 
 
 
                 listResp[0].firs_of_list=true
                 listResp[0].equipos=equipamientos
 
-                if (listBitm.size>0){
+
+                if (BIN.TengoInternet(c)){
+                    GlobalScope.launch(Dispatchers.IO) {
+                Log.e("Enviando Con Internet","Enviando Con Internet")
+
+                if (listBitm.size==0){ Continuar(listResp,size,fecha,geopoint,u!!,listPreg,listBitm,fg, fb)}
+               else if (listBitm.size>0){
 
                 var C=listBitm.size
-
 
                 if (listBitm.size>0){val f0= Snippetk.BitmapToParseFile(listBitm[0]);f0.saveInBackground { e: ParseException? ->       if (e==null){C--;Log.e("contador","$C");listResp[0].e0=f0;if (C==0){Continuar(listResp,size,fecha,geopoint,u!!,listPreg,listBitm,fg, fb)}}else {Log.e("error","33w3")}
                     if (listBitm.size>1){val f1= Snippetk.BitmapToParseFile(listBitm[1]);f1.saveInBackground { e: ParseException? ->     if (e==null){C--;Log.e("contador","$C");listResp[0].e1=f1;if (C==0){Continuar(listResp,size,fecha,geopoint,u!!,listPreg,listBitm,fg, fb)}}else {Log.e("error","33w3")}
@@ -118,23 +124,27 @@ class RFormVM : ViewModel() {
                     }}
                 }}
                 }
-                else{
 
-                    Continuar(listResp,size,fecha,geopoint,u!!,listPreg,listBitm,fg, fb)
+                    }
+                }else{
+                    Log.e("Enviando SIN Internet","Enviando SIN Internet")
+                    Continuar2(listResp,size,fecha,geopoint,u!!,listPreg,listBitm,fg, fb)
+
                 }
 
 
 
 
 
-            }
         }
 
 
     }
 
-    private  fun Continuar(listResp:List<Respuesta>, size: Int, fecha:Long, geopoint:ParseGeoPoint, u: Usuario, listPreg: ArrayList<Pregunta>, listBitm: ArrayList<Bitmap>, fg: () -> Unit, fb: () -> Unit) {
 
+
+
+    private  fun Continuar(listResp:List<Respuesta>, size: Int, fecha:Long, geopoint:ParseGeoPoint, u: Usuario, listPreg: ArrayList<Pregunta>, listBitm: ArrayList<Bitmap>, fg: () -> Unit, fb: () -> Unit) {
 
         var good =0
         var bad= 0
@@ -150,7 +160,6 @@ class RFormVM : ViewModel() {
 
 
 
-            Log.e("listResp","iteration ${i.toString()}")
             CRUD.RegistrarRespuesta(u,form,listPreg[i],listResp[i],act,
                     {
                         good++
@@ -165,8 +174,90 @@ class RFormVM : ViewModel() {
         }
     }
 
-    private fun Validar(listResp: ArrayList<Respuesta>):String {
+    private  fun Continuar2(listResp:List<Respuesta>, size: Int, fecha:Long, geopoint:ParseGeoPoint, u: Usuario, listPreg: ArrayList<Pregunta>, listBitm: ArrayList<Bitmap>, fg: () -> Unit, fb: () -> Unit) {
 
+        for (i in 0 until size) {
+            listResp[i].fecha=fecha
+            listResp[i].ubicacion=geopoint
+            listResp[i].ref_pregunta=listPreg[i]
+            listResp[i].ref_formulario=form
+            listResp[i].ref_usuario=u
+            listResp[i].ref_actividad=act
+
+
+
+            listResp[i].saveEventually {
+                    e->
+                if(e==null){
+
+
+                    if (listResp[i].firs_of_list){
+                        EnviarNotificacion(u);Log.e("ok","se envia la notificacion")}
+                        Log.e("ok eventually",listResp[i].respuesta!!)
+
+
+                    if (listBitm.size>0){
+
+                        var C=listBitm.size
+
+                        if (listBitm.size>0){val f0= Snippetk.BitmapToParseFile(listBitm[0]);f0.saveInBackground { e: ParseException? ->       if (e==null){C--;Log.e("contador","$C");listResp[0].e0=f0;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                            if (listBitm.size>1){val f1= Snippetk.BitmapToParseFile(listBitm[1]);f1.saveInBackground { e: ParseException? ->     if (e==null){C--;Log.e("contador","$C");listResp[0].e1=f1;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                if (listBitm.size>2){val f2= Snippetk.BitmapToParseFile(listBitm[2]);f2.saveInBackground { e: ParseException? ->   if (e==null){C--;Log.e("contador","$C");listResp[0].e2=f2;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                    if (listBitm.size>3){val f3= Snippetk.BitmapToParseFile(listBitm[3]);f3.saveInBackground { e: ParseException? ->   if (e==null){C--;Log.e("contador","$C");listResp[0].e3=f3;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                        if (listBitm.size>4){val f4= Snippetk.BitmapToParseFile(listBitm[4]);f4.saveInBackground { e: ParseException? ->    if (e==null){C--;Log.e("contador","$C");listResp[0].e4=f4;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                            if (listBitm.size>5){val f5= Snippetk.BitmapToParseFile(listBitm[5]);f5.saveInBackground { e: ParseException? ->  if (e==null){C--;Log.e("contador","$C");listResp[0].e5=f5;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                                if (listBitm.size>6){val f6= Snippetk.BitmapToParseFile(listBitm[6]);f6.saveInBackground { e: ParseException? -> if (e==null){C--;Log.e("contador","$C");listResp[0].e6=f6;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                                    if (listBitm.size>7){val f7= Snippetk.BitmapToParseFile(listBitm[7]);f7.saveInBackground { e: ParseException? -> if (e==null){C--;Log.e("contador","$C");listResp[0].e7=f7;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                                        if (listBitm.size>8){val f8= Snippetk.BitmapToParseFile(listBitm[8]);f8.saveInBackground { e: ParseException? -> if (e==null){C--;Log.e("contador","$C");listResp[0].e8=f8;if (C==0){Editar(listResp[i])}}else {Log.e("error","33w3")}
+                                                        }}
+                                                    }}
+                                                }}
+                                            }}
+                                        }}
+                                    }}
+                                }}
+                            }}
+                        }}
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                }
+                else {
+                    Log.e("error eventually","save eventually")
+                    e.printStackTrace()
+                }
+            }
+        }
+        EsperandoFinal2(u,fg)
+
+
+
+
+
+    }
+
+    private fun Editar(respuesta: Respuesta) {
+
+        Log.e("Llego a editar","Llego a editar")
+        respuesta.saveInBackground { e->
+            if (e==null){Log.e("Se salvo imagenes","Se salvo imagenes")}
+            else{Log.e("No salvo imagenes","No salvo imagenes")}
+            }
+        }
+
+
+
+
+    private fun Validar(listResp: ArrayList<Respuesta>):String {
 
         if (!listResp.isNullOrEmpty())
         {
@@ -189,6 +280,14 @@ return ""
         if (good>bad){fg();EnviarNotificacion(u)}
         else {fb()}
         }
+    }
+    private fun EsperandoFinal2(u:Usuario,fg: () -> Unit) {
+
+            estado.value= Estado.Idle
+            fg();
+            EnviarNotificacion(u)
+
+
     }
 
     private fun EnviarNotificacion(u:Usuario) {

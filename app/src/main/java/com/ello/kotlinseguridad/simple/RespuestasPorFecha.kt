@@ -82,13 +82,10 @@ class RespuestasPorFecha : AppCompatActivity() {
 
             Log.e("EL id respuesta es ", i)
 
-            Toast.makeText(getThis(),"Descargando datos ... ",Toast.LENGTH_LONG).show()
-            vm.BuscaroLLenarPlantilla(i,{},{Toast.makeText(this,it,Toast.LENGTH_SHORT).show()})
-
-
-
-
-
+            Toast.makeText(getThis(),"Descargando datos ... ",Toast.LENGTH_SHORT).show()
+            vm.BuscaroLLenarPlantilla(i,
+                {Toast.makeText(getThis(),"Guardado en Descargas",Toast.LENGTH_SHORT).show()},
+                {Toast.makeText(this,it,Toast.LENGTH_SHORT).show()})
 
 
 

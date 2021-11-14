@@ -18,7 +18,7 @@ class Snippetk {
     companion object{
 
 
-        fun LeerFechaR(lo:Long?):String{
+        fun LeerFechaR(lo:Long?,divisor:String="/"):String{
 
 
             if (lo==null){return "null"}
@@ -28,7 +28,7 @@ class Snippetk {
             val mYear = calendar[Calendar.YEAR]
             val mMonth = calendar[Calendar.MONTH]+1
             val mDay = calendar[Calendar.DAY_OF_MONTH]
-            return "$mDay/$mMonth/$mYear"
+            return "$mDay$divisor$mMonth$divisor$mYear"
         }
 
 

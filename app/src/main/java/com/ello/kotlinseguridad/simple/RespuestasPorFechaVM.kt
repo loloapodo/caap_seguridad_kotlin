@@ -74,7 +74,7 @@ class RespuestasPorFechaVM(val filesdir: File, val resourcesss:Resources,val con
 
 
 
-    viewModelScope.launch  { withContext(Dispatchers.IO){
+    viewModelScope.launch  {
 
 
 
@@ -84,7 +84,7 @@ class RespuestasPorFechaVM(val filesdir: File, val resourcesss:Resources,val con
                     respTrue.ref_usuario==it.ref_usuario
         }
 
-        val plantilla= PlantillaReporte(respTrue.objectId)
+        val plantilla= PlantillaReporte(Snippetk.LeerFechaR(respTrue.fecha,"-")+" "+respTrue.objectId)
 
         for (r in respuestasElegidas){
             Log.d("analizando", r.objectId)
@@ -206,10 +206,6 @@ class RespuestasPorFechaVM(val filesdir: File, val resourcesss:Resources,val con
             fg()
         }
 
-
-
-
-    }
     }
 
 

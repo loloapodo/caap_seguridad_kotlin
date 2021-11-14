@@ -208,12 +208,12 @@ class SForm : AppCompatActivity() {
 
         }
         else{
-            if (BIN.TengoInternet(this)){
+
                 val i=Intent(this, RForm::class.java)
                 i.putExtra(BIN.EXTRA_ID,vm.id_formulario)
                 i.putExtra(BIN.EXTRA_NOMBRE,vm.nombre_formulario)
                 startActivityForResult(i,REQ_LLENAR_FORMULARIO)
-            }else{Toast.makeText(getThis(),resources.getString(R.string.sin_conexion_intern),Toast.LENGTH_SHORT).show()}
+
 
 
         }

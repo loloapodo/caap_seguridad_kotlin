@@ -18,6 +18,7 @@ import com.parse.ParseException
 import com.parse.ParseGeoPoint
 import com.parse.ParseObject
 import com.parse.ParseQuery
+import org.apache.poi.ss.formula.Formula
 import java.util.*
 
 
@@ -91,9 +92,12 @@ companion object {
         val ret = mutableListOf<Formulario>()
 
         for (i in listado) {
-            if (!respondidos.contains(i)) {
-                ret.add(i.fetchIfNeeded())
-            }
+            try {
+                val itemp=i.fetchIfNeeded<Formulario>()
+                if (!respondidos.contains(i)) {
+                    ret.add(itemp)
+                }
+            }catch (e:ParseException){e.printStackTrace()}
         }
         return ret
     }
@@ -247,6 +251,14 @@ companion object {
 
     fun getMyParseGeoLocation(context: Context, done_Callback: (g: ParseGeoPoint) -> Unit) {
 
+
+        if(!TengoInternet(context)){
+            val geoP = ParseGeoPoint()
+            geoP.longitude = 0.0
+            geoP.latitude = 0.0
+            done_Callback(geoP)
+            return
+        }
 
         //NO PIDO PERMISO DE LOCALIZACION AQUI PORQUE LA ACTIVIDAD QUE LO LLAMA YA LO PIDIO
 

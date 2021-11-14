@@ -145,27 +145,17 @@ class RForm : AppCompatActivity() {
 
     private fun EnviarRespuesta() {
 
-
-            if (BIN.TengoInternet(this)) {
-
-
-
-
                     vm.EnviarRespuesta(
                         this,
                         mAdapter.listResp,
                         mAdapter.listPreg,
                         mAdapterEvidencia.get_Bitmaps(),
                         mAdapterEquip.get_only_chequed(),
+                        { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() },
                         {
-                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                        },
-                        {
-                            Toast.makeText(
-                                this,
-                                resources.getString(R.string.respuesta_ok),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            if (BIN.TengoInternet(this)){Toast.makeText(this, "Enviado", Toast.LENGTH_SHORT).show()}
+                            else{Toast.makeText(this, "Se enviará cuando exista conexión a Internet", Toast.LENGTH_SHORT).show()}
+
                             setResult(Activity.RESULT_OK)
                             finish()
                         },
@@ -180,16 +170,7 @@ class RForm : AppCompatActivity() {
                         })
 
 
-            }
 
-        else{
-                Toast.makeText(
-                    this,
-                    resources.getString(R.string.sin_conexion_intern),
-                    Toast.LENGTH_SHORT
-                ).show()
-
-        }
 
 
 
@@ -420,7 +401,7 @@ class RForm : AppCompatActivity() {
 
 
     private fun p(str: String) {
-        Toast.makeText(this,str,Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,str,Toast.LENGTH_LONG).show()
     }
 
 

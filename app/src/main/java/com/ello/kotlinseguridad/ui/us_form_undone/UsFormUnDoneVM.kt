@@ -38,7 +38,7 @@ class UsFormUnDoneVM : ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
             CRUD.CargarTodosActividadesNoRespondidos(u,{
                 _listado.value=it;Log.e("CargarTodosACT undone","red");},{})
-        CRUD.CargarTodasPreguntas({},{})
+
         }
 
 

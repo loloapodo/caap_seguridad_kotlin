@@ -33,7 +33,7 @@ class UsFormDoneVM : ViewModel() {
     fun CargarServidor(u:Usuario){
         viewModelScope.launch(Dispatchers.IO) {
             CRUD.CargarTodosActYFormRespondidos(u,{_listado.value=it},{;Log.e("CargarTodosForm done","red");},{})
-            CRUD.CargarTodasPreguntas({},{})
+
         }
     }
 
